@@ -43,7 +43,7 @@ async function renderMovieList(params) {
             <a href="#/all" class="btn btn-sm btn-outline">← Back to Categories</a>
           </div>
           
-          <div class="movie-grid stagger">
+          <div class="movie-grid stagger" id="movie-grid-container">
             ${movies.map(m => renderMovieCard(m)).join('')}
           </div>
           
@@ -173,7 +173,7 @@ async function loadMoreMovies() {
     }
 
     if (newMovies.length > 0) {
-      const grid = document.querySelector('.movie-grid');
+      const grid = document.getElementById('movie-grid-container');
       if (grid) {
         grid.insertAdjacentHTML('beforeend', newMovies.map(m => renderMovieCard(m)).join(''));
       }
