@@ -203,7 +203,16 @@ function getRecommendations(userUid, allMovies, count = 8, userProfile = null) {
     // Get user ratings for preference awareness
     const userRatings = stmts.getUserRatings.all(userUid);
     const ratedMovies = new Set(userRatings.map(r => r.movie_id));
-    const positiveRatedMovies = userRatings.filter(r => r.rating >= 4).map(r => r.movie_id);
+
+    // Pre-fetch details for positive rated movies for fast comparison
+    const positiveRatedIds = userRatings.filter(r => r.rating >= 4).map(r => r.movie_id);
+    const positiveRatedDetails = positiveRatedIds.map(id => {
+        const m = stmts.getMovieById.get(id);
+        if (m && typeof m.genre === 'string') {
+            try { m.genre = JSON.parse(m.genre); } catch (e) { }
+        }
+        return m;
+    }).filter(Boolean);
 
     // Get interaction history to detect patterns
     const interactionCounts = stmts.getMovieInteractionCounts.all(userUid);
@@ -250,10 +259,9 @@ function getRecommendations(userUid, allMovies, count = 8, userProfile = null) {
         }
 
         // 3. Collaborative signal from similar rated movies
-        if (positiveRatedMovies.length > 0) {
-            const similarToRated = positiveRatedMovies.some(ratedId => {
-                const rated = allMovies.find(m => m.movie_id === ratedId);
-                if (!rated) return false;
+        if (positiveRatedDetails.length > 0) {
+            const similarToRated = positiveRatedDetails.some(rated => {
+                if (!movie.genre) return false;
                 return rated.genre.some(g => movie.genre.includes(g)) &&
                     rated.experience_type === movie.experience_type;
             });

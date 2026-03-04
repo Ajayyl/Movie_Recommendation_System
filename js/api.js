@@ -139,6 +139,25 @@ const API = {
     },
 
     // ──────────────────────────────────
+    // MOVIES CATALOG ENDPOINTS
+    // ──────────────────────────────────
+    async getMovies(params = {}) {
+        const query = new URLSearchParams(params).toString();
+        const res = await this.get(`/api/movies?${query}`);
+        return res.ok ? res.data : { data: [], totalPages: 1, page: 1 };
+    },
+
+    async getMovieById(id) {
+        const res = await this.get(`/api/movies/${id}`);
+        return res.ok ? res.data.data : null;
+    },
+
+    async getSimilarMovies(id, limit = 4) {
+        const res = await this.get(`/api/movies/${id}/similar?limit=${limit}`);
+        return res.ok ? res.data.data : [];
+    },
+
+    // ──────────────────────────────────
     // TRACKING ENDPOINTS
     // ──────────────────────────────────
     async trackInteraction(movieId, eventType, eventValue, context) {

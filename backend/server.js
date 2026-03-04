@@ -158,15 +158,24 @@ app.get('/api/rate/:movieId', auth.authMiddleware, (req, res) => {
 // RL RECOMMENDATION ROUTES
 // ──────────────────────────────────
 
-// Load movies data for server-side processing
-const MOVIES = require('../data/movieData');
+// Load movies from database instead of memory
+// (Data is too large for memory)
 
 // Get personalized RL recommendations
 app.get('/api/recommendations', auth.authMiddleware, (req, res) => {
     const count = parseInt(req.query.count) || 8;
+    const userAge = req.user ? (req.user.age || 99) : 99;
+
+    // Fetch a sample of recent/popular candidates instead of all 700k to save memory
+    let candidates = stmts.getMovieCandidates.all(userAge, 500).map(r => ({
+        ...r,
+        genre: JSON.parse(r.genre || '[]'),
+        tags: JSON.parse(r.tags || '[]')
+    }));
+
     const recommendations = rlEngine.getRecommendations(
         req.userUid,
-        MOVIES,
+        candidates,
         count,
         req.user
     );
@@ -174,8 +183,7 @@ app.get('/api/recommendations', auth.authMiddleware, (req, res) => {
     res.json({
         success: true,
         recommendations: recommendations.map(r => ({
-            movie_id: r.movie.movie_id,
-            title: r.movie.title,
+            movie: r.movie,
             score: Math.round(r.score * 100) / 100,
             reason: r.reason,
             source: r.source,
@@ -240,11 +248,15 @@ app.get('/api/dashboard', auth.authMiddleware, (req, res) => {
         .sort(([, a], [, b]) => b.maxQ - a.maxQ)
         .slice(0, 15)
         .map(([movieId, data]) => {
-            const movie = MOVIES.find(m => m.movie_id === parseInt(movieId));
+            let movie = stmts.getMovieById.get(parseInt(movieId));
+            let parsedGenre = [];
+            if (movie && movie.genre) {
+                try { parsedGenre = JSON.parse(movie.genre); } catch (e) { }
+            }
             return {
                 movie_id: parseInt(movieId),
                 title: movie ? movie.title : `Movie #${movieId}`,
-                genre: movie ? movie.genre : [],
+                genre: parsedGenre,
                 avgQ: Math.round((data.totalQ / data.count) * 100) / 100,
                 maxQ: Math.round(data.maxQ * 100) / 100,
                 stateCount: data.count,
@@ -258,7 +270,8 @@ app.get('/api/dashboard', auth.authMiddleware, (req, res) => {
     ratings.forEach(r => { if (r.rating >= 1 && r.rating <= 5) ratingDist[r.rating - 1]++; });
 
     // 8. Exploration vs exploitation stats
-    const recommendations = rlEngine.getRecommendations(uid, MOVIES, 20, req.user);
+    // We pass a dummy empty array since we just need the history metrics, not generating real recs
+    const recommendations = rlEngine.getRecommendations(uid, [], 20, req.user);
     const sourceBreakdown = {};
     recommendations.forEach(r => {
         sourceBreakdown[r.source] = (sourceBreakdown[r.source] || 0) + 1;
@@ -357,14 +370,22 @@ function buildTimeline(interactions) {
 app.get('/api/history', auth.authMiddleware, (req, res) => {
     const limit = parseInt(req.query.limit) || 50;
     const interactions = stmts.getUserInteractions.all(req.userUid, limit);
-    res.json({ success: true, interactions });
+    const populated = interactions.map(i => {
+        const m = stmts.getMovieById.get(i.movie_id);
+        return { ...i, movie_title: m ? m.title : `Movie #${i.movie_id}` };
+    });
+    res.json({ success: true, interactions: populated });
 });
 
 // Get search history
 app.get('/api/history/searches', auth.authMiddleware, (req, res) => {
     const limit = parseInt(req.query.limit) || 20;
     const searches = stmts.getUserSearches.all(req.userUid, limit);
-    res.json({ success: true, searches });
+    const populated = searches.map(s => {
+        const m = s.selected_movie_id ? stmts.getMovieById.get(s.selected_movie_id) : null;
+        return { ...s, selected_movie_title: m ? m.title : null };
+    });
+    res.json({ success: true, searches: populated });
 });
 
 // Get all ratings
@@ -372,6 +393,129 @@ app.get('/api/ratings', auth.authMiddleware, (req, res) => {
     const ratings = stmts.getUserRatings.all(req.userUid);
     res.json({ success: true, ratings });
 });
+
+// ──────────────────────────────────
+// MOVIES CATALOG API (NEW SCALABLE ROUTES)
+// ──────────────────────────────────
+
+app.get('/api/movies', (req, res) => {
+    const { db } = require('./database');
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = (page - 1) * limit;
+
+    const genre = req.query.genre;
+    const search = req.query.search;
+    const experience = req.query.experience;
+    const tag = req.query.tag;
+    const platform = req.query.platform;
+    const order = req.query.order || 'popularity';
+    const minAge = parseInt(req.query.minAge) || 0;
+
+    let query = 'SELECT * FROM movies WHERE age_limit <= ?';
+    const params = [minAge];
+
+    if (genre) {
+        query += ' AND genre LIKE ?';
+        params.push('%"' + genre + '"%');
+    }
+    if (experience) {
+        query += ' AND experience_type = ?';
+        params.push(experience);
+    }
+    if (tag) {
+        query += ' AND tags LIKE ?';
+        params.push('%"' + tag + '"%');
+    }
+    if (platform) {
+        query += ' AND ottPlatforms LIKE ?';
+        params.push('%"name":"' + platform + '"%');
+    }
+    if (search) {
+        query += ' AND title LIKE ?';
+        params.push('%' + search + '%');
+    }
+
+    if (order === 'popularity') query += ' ORDER BY popularity_score DESC';
+    else if (order === 'recent') query += ' ORDER BY year DESC';
+    else if (order === 'random') query += ' ORDER BY RANDOM()';
+
+    query += ' LIMIT ? OFFSET ?';
+    params.push(limit, offset);
+
+    try {
+        const rows = db.prepare(query).all(...params);
+        res.json({
+            success: true,
+            page,
+            limit,
+            data: rows.map(r => ({
+                ...r,
+                genre: JSON.parse(r.genre),
+                tags: JSON.parse(r.tags),
+                ottPlatforms: JSON.parse(r.ottPlatforms)
+            }))
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+app.get('/api/movies/:id', (req, res) => {
+    const row = stmts.getMovieById.get(parseInt(req.params.id));
+    if (!row) return res.status(404).json({ success: false, error: 'Not found' });
+
+    res.json({
+        success: true,
+        data: {
+            ...row,
+            genre: JSON.parse(row.genre),
+            tags: JSON.parse(row.tags),
+            ottPlatforms: JSON.parse(row.ottPlatforms)
+        }
+    });
+});
+
+// Get similar movies
+app.get('/api/movies/:id/similar', (req, res) => {
+    const { db } = require('./database');
+    const source = stmts.getMovieById.get(parseInt(req.params.id));
+    if (!source) return res.status(404).json({ success: false, error: 'Not found' });
+
+    const count = parseInt(req.query.limit) || 4;
+
+    // Simplistic DB-based similarity query (could be improved, but sufficient for now)
+    // Matches on same experience vibe, prioritizes popularity
+    const rows = db.prepare(`
+        SELECT * FROM movies
+        WHERE movie_id != ? AND experience_type = ?
+        ORDER BY popularity_score DESC
+        LIMIT 50
+    `).all(source.movie_id, source.experience_type);
+
+    // Sort these 50 candidates in Node by how many genres match
+    let sourceGenres = [];
+    try { sourceGenres = JSON.parse(source.genre); } catch (e) { }
+
+    const candidates = rows.map(r => {
+        let currentGenres = [];
+        try { currentGenres = JSON.parse(r.genre); } catch (e) { }
+        const matchCount = currentGenres.filter(g => sourceGenres.includes(g)).length;
+        return {
+            ...r,
+            genre: currentGenres,
+            tags: JSON.parse(r.tags || '[]'),
+            ottPlatforms: JSON.parse(r.ottPlatforms || '[]'),
+            matchCount
+        };
+    }).sort((a, b) => b.matchCount - a.matchCount);
+
+    res.json({
+        success: true,
+        data: candidates.slice(0, count)
+    });
+});
+
 
 // ──────────────────────────────────
 // HEALTH CHECK

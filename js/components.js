@@ -9,8 +9,8 @@ function renderMovieCard(movie) {
   const placeholderUrl = generatePlaceholderUrl(movie.title);
 
   return `
-    <div class="movie-card fade-in-up" onclick="trackMovieClick(${movie.movie_id}, MOVIES.find(m=>m.movie_id===${movie.movie_id})); Router.navigate('/movie/${movie.movie_id}')">
-      <div class="poster-wrap">
+    <div class="movie-card fade-in-up" onclick="trackMovieClick(${movie.movie_id}, false); Router.navigate('/movie/${movie.movie_id}')">
+      <div class="card-image-wrapper">
         <img
           src="${movie.poster}"
           alt="${movie.title}"
@@ -107,10 +107,60 @@ function generatePlaceholderUrl(title) {
 }
 
 /**
+ * Render a skeleton grid for loading states.
+ */
+function renderSkeletonGrid(count = 10) {
+  let cards = '';
+  for (let i = 0; i < count; i++) {
+    cards += renderSkeletonCard();
+  }
+  return `
+    <div class="movie-grid skeleton-grid fade-in-up">
+      ${cards}
+    </div>
+  `;
+}
+
+/**
+ * Render a skeleton row for loading states.
+ */
+function renderSkeletonRow(count = 5) {
+  let cards = '';
+  for (let i = 0; i < count; i++) {
+    cards += renderSkeletonCard();
+  }
+  return `
+    <div class="movie-row skeleton-row fade-in-up" style="display: flex; gap: 24px; overflow-x: auto;">
+      ${cards}
+    </div>
+  `;
+}
+
+/**
+ * Render a single skeleton card.
+ */
+function renderSkeletonCard() {
+  return `
+    <div class="movie-card skeleton-card">
+      <div class="poster-wrap">
+        <div class="skeleton-img"></div>
+      </div>
+      <div class="card-info">
+        <div class="skeleton-text" style="width: 80%; margin-bottom: 8px;"></div>
+        <div class="card-meta">
+          <div class="skeleton-badge"></div>
+          <div class="skeleton-badge" style="width: 50px;"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/**
  * Render the analysis loading state.
  */
 function renderAnalysisLoader() {
-  return `
+  return \`
     <div class="analysis-loader" id="analysis-loader">
       <div class="loader-content">
         <div class="loader-icon">

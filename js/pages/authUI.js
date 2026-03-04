@@ -462,20 +462,19 @@ async function loadActivityFeed() {
   container.innerHTML = `
     <div class="activity-list">
       ${res.data.interactions.map(i => {
-    const movie = MOVIES.find(m => m.movie_id === i.movie_id);
-    const title = movie ? movie.title : `Movie #${i.movie_id}`;
+    const movie_title = i.movie_title || `Movie #${i.movie_id}`;
     const time = new Date(i.created_at).toLocaleString();
     return `
-          <div class="activity-item fade-in-up">
-            <span class="activity-icon">${icons[i.event_type] || '📊'}</span>
-            <div class="activity-info">
-              <span class="activity-event">${i.event_type}</span>
-              <span class="activity-movie" onclick="Router.navigate('/movie/${i.movie_id}')">${title}</span>
-              ${i.event_value ? `<span class="activity-value">${i.event_value}</span>` : ''}
-            </div>
-            <span class="activity-time">${time}</span>
-          </div>
-        `;
+      <div class="history-item fade-in-up">
+        <span class="history-icon">${icons[i.event_type] || '🎬'}</span>
+        <div class="history-info">
+          <span class="history-action">${i.event_type}</span>
+          <a href="#/movie/${i.movie_id}" class="history-movie">${movie_title}</a>
+          ${i.event_value ? `<span class="activity-value">${i.event_value}</span>` : ''}
+        </div>
+        <span class="history-time">${time}</span>
+      </div>
+    `;
   }).join('')}
     </div>
   `;
@@ -495,14 +494,13 @@ async function loadSearchHistory() {
     <div class="search-history-list">
       ${res.data.searches.map(s => {
     const time = new Date(s.created_at).toLocaleString();
-    const movie = s.selected_movie_id ? MOVIES.find(m => m.movie_id === s.selected_movie_id) : null;
     return `
           <div class="search-item fade-in-up">
             <span class="search-icon">🔍</span>
             <div class="search-info">
               <span class="search-query">"${s.query}"</span>
               <span class="search-results">${s.result_count} results</span>
-              ${movie ? `<span class="search-selected">→ Selected: ${movie.title}</span>` : ''}
+              ${s.selected_movie_title ? `<span class="search-selected">→ Selected: ${s.selected_movie_title}</span>` : ''}
             </div>
             <span class="search-time">${time}</span>
           </div>
@@ -521,7 +519,8 @@ function showEditProfile() {
   if (!user) return;
 
   const avatars = ['👤', '🎬', '🍿', '🎭', '🎪', '🎯', '🦊', '🐱', '🦋', '🌟', '🔥', '💜', '🌈', '🎵', '🎮', '🚀'];
-  const allGenres = getAllGenres(MOVIES);
+  // Genres are no longer hardcoded in MOVIES array. Provide standard list.
+  const allGenres = ["Action", "Sci-Fi", "Comedy", "Drama", "Animation", "Adventure", "Crime", "Thriller", "Horror", "Family", "Music", "Biography"].sort();
 
   const modal = `
     <div class="auth-overlay" id="edit-profile-modal">

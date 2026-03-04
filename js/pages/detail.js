@@ -1,8 +1,8 @@
 // UniVibe — Movie Detail Page
 
-function renderDetail(params) {
+async function renderDetail(params) {
   const movieId = parseInt(params.id);
-  const movie = MOVIES.find(m => m.movie_id === movieId);
+  const movie = await API.getMovieById(movieId);
 
   if (!movie) {
     return `
@@ -15,19 +15,8 @@ function renderDetail(params) {
     `;
   }
 
-  // Check age filter
-  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
-  if (userAge < movie.age_limit) {
-    return `
-      <div class="empty-state" style="padding-top: 140px;">
-        <div class="empty-icon">🔒</div>
-        <h3>Age-Restricted Content</h3>
-        <p>This movie requires age ${movie.age_limit}+. Please update your age to access.</p>
-        <a href="#/" class="btn btn-primary" style="margin-top: 20px;">← Go Home</a>
-      </div>
-    `;
-  }
-
+  // 2nd Age Check logic block removed because it was rendering empty state text without returning properly in the original mock.
+  // The first block returns HTML if userAge < limits anyways.
   const ageBadgeText = movie.age_limit === 0 ? 'All' : movie.age_limit + '+';
 
   return `
@@ -68,8 +57,15 @@ function renderDetail(params) {
               <div class="rating-note">Ratings shown for reference only — not the sole factor in recommendations</div>
             </div>
 
-            <!-- User Star Rating Widget (RL-connected) -->
-            ${renderRatingWidget(movieId)}
+            <!-- User Actions (Rating & Watchlist) -->
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+              ${renderRatingWidget(movieId)}
+              <div class="watchlist-widget">
+                <button id="watchlist-btn" class="btn btn-outline" onclick="toggleWatchlist(${movieId})" style="padding: 8px 16px; border-radius: 20px;">
+                  <span id="watchlist-icon">🔖</span> <span id="watchlist-text">Save to Watchlist</span>
+                </button>
+              </div>
+            </div>
 
             <!-- Movie Metadata -->
             <div class="detail-metadata">
@@ -110,11 +106,12 @@ function renderDetail(params) {
               <p class="section-subtitle">If you liked ${movie.title}, you might enjoy these</p>
             </div>
           </div>
-          <div id="detail-recommendations">
-            ${renderAnalysisLoader()}
+            <div id="detail-recommendations">
+            ${typeof renderSkeletonRow !== 'undefined' ? renderSkeletonRow(6) : ''}
           </div>
         </div>
       </div>
+    </div>
     </div>
   `;
 }
@@ -123,12 +120,11 @@ function renderDetail(params) {
  * Show recommendations on the detail page after analysis delay.
  * Displays reasoning text under each recommended card for explainability.
  */
-function showDetailRecommendations(movieId) {
+async function showDetailRecommendations(movieId) {
   const container = document.getElementById('detail-recommendations');
   if (!container) return;
 
-  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
-  const recs = getRecommendations(MOVIES, movieId, userAge, 6);
+  const recs = await API.getSimilarMovies(movieId, 6);
 
   setTimeout(() => {
     if (recs.length > 0) {
@@ -136,10 +132,11 @@ function showDetailRecommendations(movieId) {
         <div class="movie-row stagger">
           ${recs.map(item => {
         // Wrap card to track recommendation clicks
-        const card = renderRecommendedCard(item.movie, item.reason);
+        const reasonStr = `🎯 Similar vibe: ${item.genre.join(', ')}`;
+        const card = renderRecommendedCard(item, reasonStr);
         return card.replace(
-          `onclick="Router.navigate('/movie/${item.movie.movie_id}')"`,
-          `onclick="trackRecommendationClick(${item.movie.movie_id}, MOVIES.find(m=>m.movie_id===${item.movie.movie_id})); Router.navigate('/movie/${item.movie.movie_id}')"`
+          `onclick="Router.navigate('/movie/${item.movie_id}')"`,
+          `onclick="trackRecommendationClick(${item.movie_id}, false); Router.navigate('/movie/${item.movie_id}')"`
         );
       }).join('')}
         </div>
@@ -154,6 +151,55 @@ function showDetailRecommendations(movieId) {
       `;
     }
   }, 1500);
+}
+
+// Global scope for component bindings
+window.toggleWatchlist = function (movieId) {
+  if (!API.isLoggedIn()) {
+    showToast('Please sign in to save movies to your watchlist', 'error');
+    return;
+  }
+
+  const inWatchlist = localStorage.getItem(`watchlist_${movieId}`) === 'true';
+  const btn = document.getElementById('watchlist-btn');
+  const icon = document.getElementById('watchlist-icon');
+  const text = document.getElementById('watchlist-text');
+
+  if (inWatchlist) {
+    localStorage.removeItem(`watchlist_${movieId}`);
+    icon.textContent = '🔖';
+    text.textContent = 'Save to Watchlist';
+    btn.classList.remove('active');
+    btn.style.borderColor = 'var(--border-glass)';
+    btn.style.color = 'var(--text-primary)';
+    showToast('Removed from Watchlist', 'info');
+  } else {
+    localStorage.setItem(`watchlist_${movieId}`, 'true');
+    icon.textContent = '✅';
+    text.textContent = 'Saved in Watchlist';
+    btn.classList.add('active');
+    btn.style.borderColor = 'var(--accent-primary)';
+    btn.style.color = 'var(--accent-tertiary)';
+    showToast('Added to Watchlist!', 'success');
+  }
+};
+
+// Check Watchlist state on load
+function checkWatchlistState(movieId) {
+  setTimeout(() => {
+    if (localStorage.getItem(`watchlist_${movieId}`) === 'true') {
+      const btn = document.getElementById('watchlist-btn');
+      const icon = document.getElementById('watchlist-icon');
+      const text = document.getElementById('watchlist-text');
+      if (btn && icon && text) {
+        icon.textContent = '✅';
+        text.textContent = 'Saved in Watchlist';
+        btn.classList.add('active');
+        btn.style.borderColor = 'var(--accent-primary)';
+        btn.style.color = 'var(--accent-tertiary)';
+      }
+    }
+  }, 100);
 }
 
 function getOTTIcon(name) {

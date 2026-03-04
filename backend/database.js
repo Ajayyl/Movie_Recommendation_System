@@ -112,80 +112,89 @@ db.exec(`
 // ──────────────────────────────────
 
 const stmts = {
-    // Users
-    createUser: db.prepare(`
+  // Users
+  createUser: db.prepare(`
     INSERT INTO users (user_uid, username, email, password_hash, display_name, age, avatar_emoji)
     VALUES (@user_uid, @username, @email, @password_hash, @display_name, @age, @avatar_emoji)
   `),
-    getUserByUsername: db.prepare('SELECT * FROM users WHERE username = ?'),
-    getUserByEmail: db.prepare('SELECT * FROM users WHERE email = ?'),
-    getUserByUid: db.prepare('SELECT * FROM users WHERE user_uid = ?'),
-    updateUserProfile: db.prepare(`
+  getUserByUsername: db.prepare('SELECT * FROM users WHERE username = ?'),
+  getUserByEmail: db.prepare('SELECT * FROM users WHERE email = ?'),
+  getUserByUid: db.prepare('SELECT * FROM users WHERE user_uid = ?'),
+  updateUserProfile: db.prepare(`
     UPDATE users SET display_name = @display_name, age = @age, preferred_genres = @preferred_genres,
     preferred_experience = @preferred_experience, avatar_emoji = @avatar_emoji, updated_at = CURRENT_TIMESTAMP
     WHERE user_uid = @user_uid
   `),
 
-    // Interactions
-    logInteraction: db.prepare(`
+  // Interactions
+  logInteraction: db.prepare(`
     INSERT INTO interactions (user_uid, movie_id, event_type, event_value, context_genre, context_experience, context_source, duration_ms)
     VALUES (@user_uid, @movie_id, @event_type, @event_value, @context_genre, @context_experience, @context_source, @duration_ms)
   `),
-    getUserInteractions: db.prepare(`
+  getUserInteractions: db.prepare(`
     SELECT * FROM interactions WHERE user_uid = ? ORDER BY created_at DESC LIMIT ?
   `),
-    getMovieInteractionCounts: db.prepare(`
+  getMovieInteractionCounts: db.prepare(`
     SELECT movie_id, event_type, COUNT(*) as count FROM interactions
     WHERE user_uid = ? GROUP BY movie_id, event_type
   `),
 
-    // Search History
-    logSearch: db.prepare(`
+  // Search History
+  logSearch: db.prepare(`
     INSERT INTO search_history (user_uid, query, result_count, selected_movie_id)
     VALUES (@user_uid, @query, @result_count, @selected_movie_id)
   `),
-    getUserSearches: db.prepare(`
+  getUserSearches: db.prepare(`
     SELECT * FROM search_history WHERE user_uid = ? ORDER BY created_at DESC LIMIT ?
   `),
 
-    // Ratings
-    upsertRating: db.prepare(`
+  // Ratings
+  upsertRating: db.prepare(`
     INSERT INTO ratings (user_uid, movie_id, rating)
     VALUES (@user_uid, @movie_id, @rating)
     ON CONFLICT(user_uid, movie_id) DO UPDATE SET rating = @rating, updated_at = CURRENT_TIMESTAMP
   `),
-    getUserRatings: db.prepare('SELECT * FROM ratings WHERE user_uid = ?'),
-    getMovieRating: db.prepare('SELECT * FROM ratings WHERE user_uid = ? AND movie_id = ?'),
+  getUserRatings: db.prepare('SELECT * FROM ratings WHERE user_uid = ?'),
+  getMovieRating: db.prepare('SELECT * FROM ratings WHERE user_uid = ? AND movie_id = ?'),
 
-    // RL Q-Table
-    getQValue: db.prepare('SELECT * FROM rl_qtable WHERE user_uid = ? AND state_key = ? AND movie_id = ?'),
-    upsertQValue: db.prepare(`
+  // RL Q-Table
+  getQValue: db.prepare('SELECT * FROM rl_qtable WHERE user_uid = ? AND state_key = ? AND movie_id = ?'),
+  upsertQValue: db.prepare(`
     INSERT INTO rl_qtable (user_uid, state_key, movie_id, q_value, visit_count, last_reward)
     VALUES (@user_uid, @state_key, @movie_id, @q_value, @visit_count, @last_reward)
     ON CONFLICT(user_uid, state_key, movie_id)
     DO UPDATE SET q_value = @q_value, visit_count = @visit_count, last_reward = @last_reward, updated_at = CURRENT_TIMESTAMP
   `),
-    getTopQValues: db.prepare(`
+  getTopQValues: db.prepare(`
     SELECT * FROM rl_qtable WHERE user_uid = ? AND state_key = ?
     ORDER BY q_value DESC LIMIT ?
   `),
-    getAllUserQValues: db.prepare('SELECT * FROM rl_qtable WHERE user_uid = ?'),
+  getAllUserQValues: db.prepare('SELECT * FROM rl_qtable WHERE user_uid = ?'),
 
-    // Analytics
-    getUserTopGenres: db.prepare(`
+  // Analytics
+  getUserTopGenres: db.prepare(`
     SELECT context_genre, COUNT(*) as cnt FROM interactions
     WHERE user_uid = ? AND context_genre != '' AND event_type IN ('view', 'click', 'rating')
     GROUP BY context_genre ORDER BY cnt DESC LIMIT 5
   `),
-    getUserTopMovies: db.prepare(`
+  getUserTopMovies: db.prepare(`
     SELECT movie_id, COUNT(*) as cnt FROM interactions
     WHERE user_uid = ? AND event_type IN ('view', 'click')
     GROUP BY movie_id ORDER BY cnt DESC LIMIT 10
   `),
-    getUserActivityStats: db.prepare(`
+  getUserActivityStats: db.prepare(`
     SELECT event_type, COUNT(*) as cnt FROM interactions
     WHERE user_uid = ? GROUP BY event_type
   `),
+
+  // Movies API
+  getMovieById: db.prepare('SELECT * FROM movies WHERE movie_id = ?'),
+  getMovieCandidates: db.prepare(`
+        SELECT * FROM movies 
+        WHERE age_limit <= ? 
+        ORDER BY popularity_score DESC 
+        LIMIT ?
+    `)
 };
 
 module.exports = { db, stmts };

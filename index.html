@@ -8,9 +8,12 @@
   <meta name="description"
     content="Discover movies that match your vibe. Powered by a Reinforcement Learning engine that learns your taste — then stream on your favourite platform." />
 
-  <!-- Favicon (inline SVG) -->
+  <!-- PWA Manifest & Favicons -->
+  <link rel="manifest" href="manifest.json" />
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <meta name="theme-color" content="#7c3aed" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
@@ -39,6 +42,10 @@
         <div class="logo-text">UniVibe</div>
       </a>
       <div class="navbar-links" id="nav-links">
+        <div class="nav-search-container">
+          <input type="text" id="nav-search-input" class="nav-search-input" placeholder="Search..." autocomplete="off">
+          <div id="nav-search-results" class="nav-search-results"></div>
+        </div>
         <a class="nav-link" href="#/" data-route="/">Home</a>
         <a class="nav-link" href="#/movies" data-route="/movies">Discover</a>
         <a class="nav-link" href="#/all" data-route="/all">Library</a>
@@ -84,12 +91,19 @@
         updateActiveNav();
       }
 
+      function showAppLoading() {
+        app.innerHTML = '<div class="container section" style="padding-top: 100px;">' + renderSkeletonGrid(15) + '</div>';
+      }
+
       // Register routes
-      Router.on('/', function () {
-        renderPage(renderHome());
-        // Trigger recommendation loading after render
-        const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
-        const safeMovies = applyAgeFilter(MOVIES, userAge);
+      Router.on('/', async function () {
+        showAppLoading();
+        // Fetch front-page limited subset (e.g. 200 items sorted by popularity)
+        const ageLimit = parseInt(localStorage.getItem('univibe_age')) || 99;
+        const res = await API.getMovies({ minAge: ageLimit, limit: 100, order: 'popularity' });
+        const safeMovies = res.data;
+        const html = await renderHome(safeMovies);
+        renderPage(html);
         const trending = getTrending(safeMovies);
         const featured = trending.length > 0
           ? trending[Math.floor(Math.random() * Math.min(trending.length, 5))]
@@ -99,37 +113,45 @@
         }
       });
 
-      Router.on('/movies', function () {
-        renderPage(renderCatalogue());
+      Router.on('/movies', async function () {
+        showAppLoading();
+        const html = await renderCatalogue();
+        renderPage(html);
         // Apply pre-set filters after DOM is ready
         setTimeout(applyCatalogueFilters, 0);
       });
 
-      Router.on('/all', function () {
-        renderPage(renderMovieList());
+      Router.on('/all', async function () {
+        showAppLoading();
+        renderPage(await renderMovieList());
       });
 
       // Filtered view (Latest, Popular, etc.)
-      Router.on('/section/:filter', function (params) {
-        renderPage(renderMovieList(params));
+      Router.on('/section/:filter', async function (params) {
+        showAppLoading();
+        renderPage(await renderMovieList(params));
+        setTimeout(() => setupInfiniteScroll(params.filter), 100);
       });
 
-      Router.on('/movie/:id', function (params) {
-        renderPage(renderDetail(params));
+      Router.on('/movie/:id', async function (params) {
+        showAppLoading();
+        const html = await renderDetail(params);
+        renderPage(html);
         // Animate rating bar and load recommendations after render
         setTimeout(animateRatingBar, 0);
         setTimeout(() => showDetailRecommendations(parseInt(params.id)), 0);
-        // Track view & load existing rating
+        // Track view, load existing rating, & check watchlist
         const movieId = parseInt(params.id);
-        const movie = MOVIES.find(m => m.movie_id === movieId);
         setTimeout(() => {
-          trackMovieView(movieId, movie);
+          trackMovieView(movieId, null); // Movie details tracked internally on server
           loadExistingRating(movieId);
+          checkWatchlistState(movieId);
         }, 100);
       });
 
-      Router.on('/platform/:name', function (params) {
-        renderPage(renderPlatform(params));
+      Router.on('/platform/:name', async function (params) {
+        showAppLoading();
+        renderPage(await renderPlatform(params));
       });
 
       // Profile route
@@ -182,11 +204,74 @@
         });
       }
 
-      // Listen for hash changes to update nav
-      window.addEventListener('hashchange', updateActiveNav);
-    })();
-  </script>
+      // -----------------------------
+      // Smart Search Logic (Debounced)
+      // -----------------------------
+      const searchInput = document.getElementById('nav-search-input');
+      const searchResults = document.getElementById('nav-search-results');
+      let searchTimeout = null;
 
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.trim();
+          clearTimeout(searchTimeout);
+
+          if (query.length < 2) {
+            searchResults.classList.remove('active');
+            return;
+          }
+
+          searchTimeout = setTimeout(async () => {
+            try {
+              const ageLimit = parseInt(localStorage.getItem('univibe_age')) || 99;
+              const res = await API.getMovies({ search: query, limit: 5, minAge: ageLimit });
+
+              if (res.data && res.data.length > 0) {
+                searchResults.innerHTML = res.data.map(movie => {
+                  const placeholderUrl = typeof generatePlaceholderUrl === 'function' ? generatePlaceholderUrl(movie.title) : '';
+                  return `
+                    <div class="search-result-item" onclick="document.getElementById('nav-search-input').value=''; document.getElementById('nav-search-results').classList.remove('active'); Router.navigate('/movie/${movie.movie_id}')">
+                      <img src="${movie.poster}" class="search-result-poster" onerror="this.onerror=null; this.src='${placeholderUrl}'" />
+                      <div class="search-result-info">
+                        <div class="search-result-title">${movie.title}</div>
+                        <div class="search-result-meta">${movie.year} • ${movie.genre[0] || 'Unknown'}</div>
+                      </div>
+                    </div>
+                  `;
+                }).join('');
+              } else {
+                searchResults.innerHTML = '<div style="padding: 12px 16px; color: var(--text-muted); font-size: 13px;">No movies found.</div>';
+              }
+              searchResults.classList.add('active');
+            } catch (err) {
+              console.error('Search error:', err);
+            }
+          }, 300);
+        });
+
+        // Close search when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.nav-search-container')) {
+            searchResults.classList.remove('active');
+          }
+        });
+      }
+
+      // Listen for hash changes to update nav
+      window.addEventListener('hashchange', router);
+      // Run the initial router parse
+      router();
+    })();
+
+    // Initialize Service Worker for Offline PWA Capabilities
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          console.log('UniVibe PWA Service Worker Registered', reg);
+        }).catch(err => console.log('PWA SW Fail:', err));
+      });
+    }
+  </script>
 </body>
 
 </html>
