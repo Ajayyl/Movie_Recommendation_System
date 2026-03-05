@@ -7,7 +7,7 @@ async function renderCatalogue(params) {
   const res = await API.getMovies({ minAge: userAge, order: 'popularity', limit: 100 });
   const sampleMovies = res.data || [];
 
-  const genres = ["Action", "Sci-Fi", "Comedy", "Drama", "Animation", "Adventure", "Crime", "Thriller", "Horror", "Family", "Music", "Biography"].sort();
+  const genres = await API.getGenres();
 
   // Prepare options for movie selector
   const movieOptions = sampleMovies
@@ -130,7 +130,7 @@ async function runRecommendationEngine() {
 
   emptyState.style.display = 'none';
   resultsArea.style.display = 'block';
-  grid.innerHTML = renderSkeletonGrid(8);
+  grid.innerHTML = renderAnalysisLoader();
 
   // Fetch results based on criteria from backend
   let queryParams = { minAge: effectiveAge, order: 'popularity', limit: 12 };

@@ -2,7 +2,7 @@
 // Handles all HTTP requests to the backend, including auth token management
 
 const API = {
-    BASE_URL: window.location.origin,
+    BASE_URL: window.location.protocol === 'file:' ? 'http://localhost:3000' : window.location.origin,
     TOKEN_KEY: 'univibe_auth_token',
     USER_KEY: 'univibe_user',
 
@@ -150,6 +150,11 @@ const API = {
     async getMovieById(id) {
         const res = await this.get(`/api/movies/${id}`);
         return res.ok ? res.data.data : null;
+    },
+
+    async getGenres() {
+        const res = await this.get('/api/genres');
+        return res.ok && res.data ? res.data.genres : ["Action", "Sci-Fi", "Comedy", "Drama", "Animation", "Adventure", "Crime", "Thriller", "Horror", "Family", "Music", "Biography"];
     },
 
     async getSimilarMovies(id, limit = 4) {

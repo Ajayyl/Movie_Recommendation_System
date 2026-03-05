@@ -431,11 +431,11 @@ async function loadRLRecommendations() {
 
   const recs = res.data.recommendations;
 
-  // Map recommendation data back to full movie objects
+  // Use movie object from API response (MOVIES array is empty — data is served from API)
   container.innerHTML = `
     <div class="movie-row stagger">
       ${recs.map(rec => {
-    const movie = MOVIES.find(m => m.movie_id === rec.movie_id);
+    const movie = rec.movie;
     if (!movie) return '';
     return renderRecommendedCard(movie, rec.reason);
   }).join('')}
@@ -519,10 +519,15 @@ function showEditProfile() {
   if (!user) return;
 
   const avatars = ['👤', '🎬', '🍿', '🎭', '🎪', '🎯', '🦊', '🐱', '🦋', '🌟', '🔥', '💜', '🌈', '🎵', '🎮', '🚀'];
-  // Genres are no longer hardcoded in MOVIES array. Provide standard list.
-  const allGenres = ["Action", "Sci-Fi", "Comedy", "Drama", "Animation", "Adventure", "Crime", "Thriller", "Horror", "Family", "Music", "Biography"].sort();
 
-  const modal = `
+  // Show a temporary loading state if genres take a moment to fetch
+  const tempModalId = 'temp-loading-modal';
+  document.body.insertAdjacentHTML('beforeend', `<div class="auth-overlay" id="${tempModalId}"><div class="mini-spinner" style="width: 40px; height: 40px;"></div></div>`);
+
+  API.getGenres().then(allGenres => {
+    document.getElementById(tempModalId)?.remove();
+
+    const modal = `
     <div class="auth-overlay" id="edit-profile-modal">
       <div class="auth-card" style="max-width:520px;">
         <button class="auth-close" onclick="document.getElementById('edit-profile-modal').remove()">✕</button>
@@ -560,10 +565,10 @@ function showEditProfile() {
             <label>Preferred Genres (select up to 3)</label>
             <div class="genre-picker" id="genre-picker">
               ${allGenres.map(g => {
-    const preferred = JSON.parse(user.preferred_genres || '[]');
-    return `<button type="button" class="genre-pick-btn ${preferred.includes(g) ? 'active' : ''}" 
+      const preferred = JSON.parse(user.preferred_genres || '[]');
+      return `<button type="button" class="genre-pick-btn ${preferred.includes(g) ? 'active' : ''}" 
                           onclick="toggleGenrePick(this, '${g}')">${g}</button>`;
-  }).join('')}
+    }).join('')}
             </div>
           </div>
           <div class="auth-field">
@@ -582,7 +587,11 @@ function showEditProfile() {
     </div>
   `;
 
-  document.body.insertAdjacentHTML('beforeend', modal);
+    document.body.insertAdjacentHTML('beforeend', modal);
+  }).catch(e => {
+    console.error("Failed to load genres", e);
+    document.getElementById(tempModalId)?.remove();
+  });
 }
 
 function selectAvatar(btn, emoji) {
@@ -774,9 +783,10 @@ function renderRatingWidget(movieId) {
   return `
     <div class="rating-widget" id="rating-widget">
       <div class="rating-prompt">Rate this movie</div>
-      <div class="star-rating" id="star-rating" data-movie-id="${movieId}">
+      <div class="star-rating" id="star-rating" data-movie-id="${movieId}" role="group" aria-label="Rate from 1 to 5 stars">
         ${[1, 2, 3, 4, 5].map(i => `
-          <button class="star-btn" data-value="${i}" onclick="submitRating(${movieId}, ${i})" 
+          <button class="star-btn" data-value="${i}" aria-label="Rate ${i} star${i > 1 ? 's' : ''}" 
+                  onclick="submitRating(${movieId}, ${i})" 
                   onmouseenter="highlightStars(${i})" onmouseleave="resetStarHighlight(${movieId})">
             ★
           </button>

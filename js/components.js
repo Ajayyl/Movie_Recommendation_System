@@ -10,7 +10,7 @@ function renderMovieCard(movie) {
 
   return `
     <div class="movie-card fade-in-up" onclick="trackMovieClick(${movie.movie_id}, false); Router.navigate('/movie/${movie.movie_id}')">
-      <div class="card-image-wrapper">
+      <div class="poster-wrap">
         <img
           src="${movie.poster}"
           alt="${movie.title}"
@@ -95,7 +95,7 @@ function generatePlaceholderUrl(title) {
       </defs>
       <rect width="100%" height="100%" fill="url(#grad)" />
       <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" dominant-baseline="middle" dy="-10">
-        ${title.substring(0, 15)}${title.length > 15 ? '...' : ''}
+        ${encodeURIComponent(title)}
       </text>
       <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" text-anchor="middle" dominant-baseline="middle" dy="20">
         Poster Unavailable
@@ -103,64 +103,39 @@ function generatePlaceholderUrl(title) {
     </svg>
   `;
 
-  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg.trim());
-}
+  // We need to properly encode the SVG string since we injected unescaped text that could break the URI
+  // However, encodeURIComponent on the whole string is safe. Let's make sure the title isn't URI encoded inside the SVG text visually.
+  // Wait, if it's encodeURIComponent(title), it will show as %20. We just need to replace unsafe XML chars.
+  const safeTitle = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-/**
- * Render a skeleton grid for loading states.
- */
-function renderSkeletonGrid(count = 10) {
-  let cards = '';
-  for (let i = 0; i < count; i++) {
-    cards += renderSkeletonCard();
-  }
-  return `
-    <div class="movie-grid skeleton-grid fade-in-up">
-      ${cards}
-    </div>
-  `;
-}
-
-/**
- * Render a skeleton row for loading states.
- */
-function renderSkeletonRow(count = 5) {
-  let cards = '';
-  for (let i = 0; i < count; i++) {
-    cards += renderSkeletonCard();
-  }
-  return `
-    <div class="movie-row skeleton-row fade-in-up" style="display: flex; gap: 24px; overflow-x: auto;">
-      ${cards}
-    </div>
-  `;
-}
-
-/**
- * Render a single skeleton card.
- */
-function renderSkeletonCard() {
-  return `
-    <div class="movie-card skeleton-card">
-      <div class="poster-wrap">
-        <div class="skeleton-img"></div>
-      </div>
-      <div class="card-info">
-        <div class="skeleton-text" style="width: 80%; margin-bottom: 8px;"></div>
-        <div class="card-meta">
-          <div class="skeleton-badge"></div>
-          <div class="skeleton-badge" style="width: 50px;"></div>
+  const finalSvg = `
+    <svg width="200" height="300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:${color1};stop-opacity:1" />
+          <stop offset="100%" style="stop-color:${color2};stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grad)" />
+      
+      <!-- Wrap text using foreignObject for better multi-line display -->
+      <foreignObject x="10" y="10" width="180" height="280">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%; text-align: center; color: white; font-family: Inter, Arial, sans-serif;">
+          <strong style="font-size: 18px; line-height: 1.3;">${safeTitle}</strong>
+          <span style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 10px;">Poster Unavailable</span>
         </div>
-      </div>
-    </div>
+      </foreignObject>
+    </svg>
   `;
+
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(finalSvg.trim());
 }
 
 /**
  * Render the analysis loading state.
  */
 function renderAnalysisLoader() {
-  return \`
+  return `
     <div class="analysis-loader" id="analysis-loader">
       <div class="loader-content">
         <div class="loader-icon">
@@ -183,12 +158,41 @@ function renderAnalysisLoader() {
 function renderFooter() {
   return `
     <footer class="footer">
-      <div class="footer-text">
-        Made with 💜 by <a href="#">UniVibe</a> · ${new Date().getFullYear()}
+      <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1200px; margin: 0 auto; gap: 40px; text-align: left; padding: 20px 0;">
+        <div class="footer-col" style="flex: 1; min-width: 250px;">
+          <h3 style="color: var(--text-primary); margin-bottom: 16px; font-size: 20px;">UniVibe</h3>
+          <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+            The next generation of AI movie discovery.<br>
+            Explore our catalogue of 700K+ movies powered by Machine Learning.
+          </p>
+        </div>
+        
+        <div class="footer-col" style="flex: 1; min-width: 150px;">
+          <h4 style="color: var(--text-primary); margin-bottom: 16px; font-size: 16px;">Explore</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
+            <li><a href="#/movies" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Discover</a></li>
+            <li><a href="#/all" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Library</a></li>
+            <li><a href="#/dashboard" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">RL Dashboard</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" style="flex: 1; min-width: 150px;">
+          <h4 style="color: var(--text-primary); margin-bottom: 16px; font-size: 16px;">Connect</h4>
+          <div style="display: flex; gap: 15px; font-size: 20px;">
+            <a href="#" aria-label="Twitter" style="color: var(--text-muted); text-decoration: none;">𝕏</a>
+            <a href="#" aria-label="GitHub" style="color: var(--text-muted); text-decoration: none;">🐙</a>
+            <a href="#" aria-label="Discord" style="color: var(--text-muted); text-decoration: none;">💬</a>
+          </div>
+        </div>
       </div>
-      <div class="footer-disclaimer">
-        UniVibe is a movie discovery platform. We do not stream or host any content.
-        All streaming links redirect to official external platforms.
+      
+      <div class="footer-bottom" style="border-top: 1px solid var(--border-glass); margin-top: 20px; padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; max-width: 1200px; margin-inline: auto;">
+        <div class="footer-text" style="margin: 0; font-size: 14px;">
+          Made with 💜 by <a href="#/" aria-label="UniVibe Home">UniVibe</a> · ${new Date().getFullYear()}
+        </div>
+        <div class="footer-disclaimer" style="margin: 0; font-size: 12px; max-width: 500px; text-align: right;">
+          UniVibe is a movie discovery platform. We do not stream or host any content. All streaming links redirect to official external platforms.
+        </div>
       </div>
     </footer>
   `;

@@ -91,7 +91,7 @@ async function renderHome(safeMovies) {
           <a href="#/dashboard" class="btn btn-sm btn-outline">View AI Dashboard →</a>
         </div>
         <div id="home-rl-recommendations">
-          ${renderSkeletonRow(6)}
+          ${renderAnalysisLoader()}
         </div>
       </div>
     </section>
@@ -108,7 +108,7 @@ async function renderHome(safeMovies) {
           </div>
         </div>
         <div id="home-recommendations">
-          ${renderSkeletonRow(6)}
+          ${renderAnalysisLoader()}
         </div>
       </div>
     </section>
@@ -192,7 +192,7 @@ async function showHomeRecommendations(featuredId) {
         </div>
       `;
     }
-  }, 1500);
+  }, 400);
 
   // Also load RL recommendations if logged in
   if (API.isLoggedIn()) {
@@ -234,5 +234,5 @@ async function loadHomeRLRecommendations() {
         </div>
       `;
     }
-  }, 800);
+  }, 300);
 }

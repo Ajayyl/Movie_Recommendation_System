@@ -18,6 +18,7 @@ async function renderDetail(params) {
   // 2nd Age Check logic block removed because it was rendering empty state text without returning properly in the original mock.
   // The first block returns HTML if userAge < limits anyways.
   const ageBadgeText = movie.age_limit === 0 ? 'All' : movie.age_limit + '+';
+  if (typeof setPageTitle === 'function') setPageTitle(movie.title);
 
   return `
     <div class="detail-page">
@@ -30,7 +31,7 @@ async function renderDetail(params) {
             <img
               src="${movie.poster}"
               alt="${movie.title}"
-              onerror="this.src='https://via.placeholder.com/300x450/1a1a2e/7c3aed?text=${encodeURIComponent(movie.title)}'"
+              onerror="this.onerror=null; this.src='${generatePlaceholderUrl(movie.title)}'"
             />
           </div>
 
@@ -57,15 +58,8 @@ async function renderDetail(params) {
               <div class="rating-note">Ratings shown for reference only — not the sole factor in recommendations</div>
             </div>
 
-            <!-- User Actions (Rating & Watchlist) -->
-            <div style="display: flex; gap: 20px; align-items: flex-start;">
-              ${renderRatingWidget(movieId)}
-              <div class="watchlist-widget">
-                <button id="watchlist-btn" class="btn btn-outline" onclick="toggleWatchlist(${movieId})" style="padding: 8px 16px; border-radius: 20px;">
-                  <span id="watchlist-icon">🔖</span> <span id="watchlist-text">Save to Watchlist</span>
-                </button>
-              </div>
-            </div>
+            <!-- User Star Rating Widget (RL-connected) -->
+            ${renderRatingWidget(movieId)}
 
             <!-- Movie Metadata -->
             <div class="detail-metadata">
@@ -95,13 +89,6 @@ async function renderDetail(params) {
                 `).join('')}
               </div>
             </div>
-
-            <!-- YouTube Trailer Action -->
-            <div class="trailer-section" style="margin-top: 24px;">
-              <button class="btn btn-primary" onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title + ' ' + movie.year + ' official trailer')}', '_blank')">
-                ▶ Watch Trailer
-              </button>
-            </div>
           </div>
         </div>
 
@@ -113,12 +100,11 @@ async function renderDetail(params) {
               <p class="section-subtitle">If you liked ${movie.title}, you might enjoy these</p>
             </div>
           </div>
-            <div id="detail-recommendations">
-            ${typeof renderSkeletonRow !== 'undefined' ? renderSkeletonRow(6) : ''}
+          <div id="detail-recommendations">
+            ${renderAnalysisLoader()}
           </div>
         </div>
       </div>
-    </div>
     </div>
   `;
 }
@@ -157,56 +143,7 @@ async function showDetailRecommendations(movieId) {
         </div>
       `;
     }
-  }, 1500);
-}
-
-// Global scope for component bindings
-window.toggleWatchlist = function (movieId) {
-  if (!API.isLoggedIn()) {
-    showToast('Please sign in to save movies to your watchlist', 'error');
-    return;
-  }
-
-  const inWatchlist = localStorage.getItem(`watchlist_${movieId}`) === 'true';
-  const btn = document.getElementById('watchlist-btn');
-  const icon = document.getElementById('watchlist-icon');
-  const text = document.getElementById('watchlist-text');
-
-  if (inWatchlist) {
-    localStorage.removeItem(`watchlist_${movieId}`);
-    icon.textContent = '🔖';
-    text.textContent = 'Save to Watchlist';
-    btn.classList.remove('active');
-    btn.style.borderColor = 'var(--border-glass)';
-    btn.style.color = 'var(--text-primary)';
-    showToast('Removed from Watchlist', 'info');
-  } else {
-    localStorage.setItem(`watchlist_${movieId}`, 'true');
-    icon.textContent = '✅';
-    text.textContent = 'Saved in Watchlist';
-    btn.classList.add('active');
-    btn.style.borderColor = 'var(--accent-primary)';
-    btn.style.color = 'var(--accent-tertiary)';
-    showToast('Added to Watchlist!', 'success');
-  }
-};
-
-// Check Watchlist state on load
-function checkWatchlistState(movieId) {
-  setTimeout(() => {
-    if (localStorage.getItem(`watchlist_${movieId}`) === 'true') {
-      const btn = document.getElementById('watchlist-btn');
-      const icon = document.getElementById('watchlist-icon');
-      const text = document.getElementById('watchlist-text');
-      if (btn && icon && text) {
-        icon.textContent = '✅';
-        text.textContent = 'Saved in Watchlist';
-        btn.classList.add('active');
-        btn.style.borderColor = 'var(--accent-primary)';
-        btn.style.color = 'var(--accent-tertiary)';
-      }
-    }
-  }, 100);
+  }, 400);
 }
 
 function getOTTIcon(name) {

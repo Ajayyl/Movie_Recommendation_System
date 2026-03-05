@@ -9,27 +9,36 @@ async function renderMovieList(params) {
     let title = "Movies";
     let subtitle = "Explore our collection";
     let movies = [];
+    let order = 'popularity';
 
     switch (params.filter) {
       case 'latest':
         title = "🆕 Latest Movies";
         subtitle = "Newest additions to our catalogue";
-        movies = (await API.getMovies({ minAge: userAge, order: 'recent', limit: 30 })).data || [];
+        order = 'recent';
+        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
         break;
       case 'popular':
         title = "🔥 Popular Movies";
         subtitle = "Trending right now";
-        movies = (await API.getMovies({ minAge: userAge, order: 'popularity', limit: 30 })).data || [];
+        order = 'popularity';
+        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
         break;
       case 'top-rated':
         title = "⭐ Top Rated Movies";
         subtitle = "Highest rated by critics and audiences";
-        movies = (await API.getMovies({ minAge: userAge, order: 'rating', limit: 30 })).data || [];
+        order = 'rating';
+        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
         break;
       default:
-        title = "All Movies";
-        movies = (await API.getMovies({ minAge: userAge, limit: 30 })).data || [];
+        title = "📚 All Movies";
+        subtitle = "Browse our massive catalogue";
+        order = 'popularity';
+        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
     }
+
+    // Set global state for Load More pagination
+    window.univibeListState = { page: 1, filter: params.filter, userAge, order };
 
     // Render Grid View for Specific Filter
     return `
@@ -43,16 +52,15 @@ async function renderMovieList(params) {
             <a href="#/all" class="btn btn-sm btn-outline">← Back to Categories</a>
           </div>
           
-          <div class="movie-grid stagger" id="movie-grid-container">
+          <div class="movie-grid stagger">
             ${movies.map(m => renderMovieCard(m)).join('')}
           </div>
           
-          ${movies.length === 0 ? `<p>No movies found for your age rating.</p>` : ''}
-          
-          <div id="infinite-scroll-trigger"></div>
-          <div id="infinite-scroll-loading" style="display:none; margin-top:20px;">
-            ${typeof renderSkeletonGrid !== 'undefined' ? renderSkeletonGrid(10) : ''}
-          </div>
+          ${movies.length === 0 ? `<p>No movies found for your age rating.</p>` : `
+            <div style="text-align: center; margin-top: 40px;">
+              <button id="load-more-btn" class="btn btn-primary" onclick="loadMoreMovies()">Load More Movies</button>
+            </div>
+          `}
         </div>
       </section>
     `;
@@ -86,8 +94,13 @@ async function renderMovieList(params) {
     <section class="section" style="padding-top: 100px; padding-bottom: 50px;">
       <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Movie Library</h2>
-            <p class="section-subtitle">Discover movies by mood, theme, and genre.</p>
+            <div>
+              <h2 class="section-title">Movie Library</h2>
+              <p class="section-subtitle">Discover movies by mood, theme, and genre.</p>
+            </div>
+            <a href="#/section/all" class="btn btn-primary" style="display: flex; align-items: center; gap: 8px;">
+              <span>📚</span> Browse Entire Catalogue
+            </a>
         </div>
 
         ${categories.map(cat => `
@@ -114,74 +127,47 @@ async function renderMovieList(params) {
           </div>
         `).join('')}
 
-        ${categories.length === 0 ? `<p>No movies found for your age rating.</p>` : ''}
       </div>
     </section>
   `;
 }
 
-// --- Infinite Scroll Logic ---
-let isMovieListLoading = false;
-let movieListCurrentPage = 1;
-let movieListCurrentFilter = '';
-let movieListHasMore = true;
+// Global handler for loading next pages in the grid view
+window.loadMoreMovies = async function () {
+  const state = window.univibeListState;
+  if (!state) return;
 
-window.setupInfiniteScroll = function (filter) {
-  movieListCurrentFilter = filter;
-  movieListCurrentPage = 1;
-  isMovieListLoading = false;
-  movieListHasMore = true;
+  const btn = document.getElementById('load-more-btn');
+  if (btn) {
+    btn.innerHTML = 'Loading...';
+    btn.disabled = true;
+  }
 
-  const trigger = document.getElementById('infinite-scroll-trigger');
-  if (!trigger) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && !isMovieListLoading && movieListHasMore) {
-      loadMoreMovies();
-    }
-  }, { rootMargin: '200px' });
-
-  observer.observe(trigger);
-};
-
-async function loadMoreMovies() {
-  if (isMovieListLoading || !movieListHasMore) return;
-  isMovieListLoading = true;
-  movieListCurrentPage++;
-
-  const loadingIndicator = document.getElementById('infinite-scroll-loading');
-  if (loadingIndicator) loadingIndicator.style.display = 'block';
-
-  let order = 'popularity';
-  if (movieListCurrentFilter === 'latest') order = 'recent';
-  if (movieListCurrentFilter === 'top-rated') order = 'rating';
-
-  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  state.page += 1;
 
   try {
-    const res = await API.getMovies({
-      minAge: userAge,
-      order: order,
-      limit: 30,
-      page: movieListCurrentPage
-    });
-
+    const res = await API.getMovies({ minAge: state.userAge, order: state.order, limit: 42, page: state.page });
     const newMovies = res.data || [];
 
-    if (newMovies.length === 0 || newMovies.length < 30) {
-      movieListHasMore = false;
-    }
-
     if (newMovies.length > 0) {
-      const grid = document.getElementById('movie-grid-container');
+      const grid = document.querySelector('.movie-grid');
       if (grid) {
         grid.insertAdjacentHTML('beforeend', newMovies.map(m => renderMovieCard(m)).join(''));
       }
+      if (btn) {
+        btn.innerHTML = 'Load More Movies';
+        btn.disabled = false;
+      }
+    } else {
+      if (btn) {
+        btn.innerHTML = 'End of Catalogue';
+      }
     }
   } catch (err) {
-    console.error('Failed to load more movies:', err);
-  } finally {
-    isMovieListLoading = false;
-    if (loadingIndicator) loadingIndicator.style.display = 'none';
+    console.error("Failed to load more movies", err);
+    if (btn) {
+      btn.innerHTML = 'Error loading. Try again.';
+      btn.disabled = false;
+    }
   }
 }

@@ -15,8 +15,37 @@ const PORT = process.env.PORT || 3000;
 // ──────────────────────────────────
 // MIDDLEWARE
 // ──────────────────────────────────
-app.use(cors());
+// Setup CORS to only allow the frontend origin in production
+const corsOptions = {
+    origin: process.env.NODE_ENV === 'production'
+        ? ['https://univibe.example.com'] // Replace with actual production domain
+        : '*',
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
+
+// Setup API Rate Limiting
+const rateLimit = require('express-rate-limit');
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+    standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+    message: { error: 'Too many requests from this IP, please try again after 15 minutes' }
+});
+
+// Apply rate limiting to all /api/ routes
+app.use('/api/', apiLimiter);
+
+// Disable caching during development
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    next();
+});
+
 app.use(express.static(path.join(__dirname, '..'))); // Serve frontend files
 
 // ──────────────────────────────────
@@ -398,6 +427,22 @@ app.get('/api/ratings', auth.authMiddleware, (req, res) => {
 // MOVIES CATALOG API (NEW SCALABLE ROUTES)
 // ──────────────────────────────────
 
+// Get unique genres dynamically
+let cachedGenres = null;
+app.get('/api/genres', (req, res) => {
+    if (cachedGenres) return res.json({ ok: true, data: { genres: cachedGenres } });
+    const { db } = require('./database');
+    try {
+        const rows = db.prepare("SELECT DISTINCT json_each.value AS genre FROM movies, json_each(genre)").all();
+        cachedGenres = rows.map(r => r.genre).filter(Boolean).sort();
+        res.json({ ok: true, data: { genres: cachedGenres } });
+    } catch (e) {
+        // Fallback generic list if JSON functions fail or db is old
+        cachedGenres = ["Action", "Sci-Fi", "Comedy", "Drama", "Animation", "Adventure", "Crime", "Thriller", "Horror", "Family", "Music", "Biography"].sort();
+        res.json({ ok: true, data: { genres: cachedGenres } });
+    }
+});
+
 app.get('/api/movies', (req, res) => {
     const { db } = require('./database');
     const page = parseInt(req.query.page) || 1;
@@ -438,7 +483,9 @@ app.get('/api/movies', (req, res) => {
 
     if (order === 'popularity') query += ' ORDER BY popularity_score DESC';
     else if (order === 'recent') query += ' ORDER BY year DESC';
+    else if (order === 'rating') query += ' ORDER BY rating_percent DESC';
     else if (order === 'random') query += ' ORDER BY RANDOM()';
+    // 'none' — no ORDER BY, allows SQLite to short-circuit on LIMIT for speed
 
     query += ' LIMIT ? OFFSET ?';
     params.push(limit, offset);
