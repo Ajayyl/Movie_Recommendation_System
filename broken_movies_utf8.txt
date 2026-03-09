@@ -1,0 +1,38 @@
+﻿Checking 51 movies...
+...................................................
+
+--- BROKEN MOVIES ---
+ID: 6 | Title: My Neighbor Totoro | URL: https://upload.wikimedia.org/wikipedia/en/0/02/My_Neighbor_Totoro_-_Tonari_no_Totoro_%28Movie_Poster%29.jpg
+ID: 7 | Title: Pulp Fiction | URL: https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg
+ID: 9 | Title: Drive | URL: https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg
+ID: 11 | Title: Interstellar | URL: https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg
+ID: 12 | Title: Spirited Away | URL: https://upload.wikimedia.org/wikipedia/en/d/db/Spirited_Away_Japanese_poster.png
+ID: 13 | Title: The Wolf of Wall Street | URL: https://upload.wikimedia.org/wikipedia/en/d/d8/The_Wolf_of_Wall_Street_%282013%29.png
+ID: 14 | Title: Up | URL: https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg
+ID: 17 | Title: Lost in Translation | URL: https://upload.wikimedia.org/wikipedia/en/4/4c/Lost_in_Translation_poster.jpg
+ID: 18 | Title: Mad Max: Fury Road | URL: https://upload.wikimedia.org/wikipedia/en/6/6e/Mad_Max_Fury_Road.jpg
+ID: 19 | Title: The Truman Show | URL: https://upload.wikimedia.org/wikipedia/en/c/cd/Trumanshow.jpg
+ID: 20 | Title: Am├⌐lie | URL: https://upload.wikimedia.org/wikipedia/en/5/53/Amelie_poster.jpg
+ID: 21 | Title: Fight Club | URL: https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg
+ID: 25 | Title: Her | URL: https://upload.wikimedia.org/wikipedia/en/4/44/Her2013Poster.jpg
+ID: 28 | Title: Eternal Sunshine of the Spotless Mind | URL: https://upload.wikimedia.org/wikipedia/en/a/a4/Eternal_Sunshine_of_the_Spotless_Mind.png
+ID: 29 | Title: John Wick | URL: https://upload.wikimedia.org/wikipedia/en/9/98/John_Wick_TeaserPoster.jpg
+ID: 30 | Title: Ratatouille | URL: https://upload.wikimedia.org/wikipedia/en/5/50/RatatouillePoster.jpg
+ID: 31 | Title: The Departed | URL: https://upload.wikimedia.org/wikipedia/en/5/50/Departed23.jpg
+ID: 32 | Title: Howl's Moving Castle | URL: https://upload.wikimedia.org/wikipedia/en/a/a0/Howls-moving-castleposter.jpg
+ID: 33 | Title: Parasite | URL: https://upload.wikimedia.org/wikipedia/en/5/53/Parasite_%282019_film%29.png
+ID: 34 | Title: Before Sunrise | URL: https://upload.wikimedia.org/wikipedia/en/d/da/Before_Sunrise_poster.jpg
+ID: 35 | Title: Whiplash | URL: https://upload.wikimedia.org/wikipedia/en/0/01/Whiplash_poster.jpg
+ID: 38 | Title: The Princess Bride | URL: https://upload.wikimedia.org/wikipedia/en/d/db/Princess_bride.jpg
+ID: 39 | Title: A Quiet Place | URL: https://upload.wikimedia.org/wikipedia/en/a/a0/A_Quiet_Place_film_poster.png
+ID: 40 | Title: The Lion King | URL: https://upload.wikimedia.org/wikipedia/en/3/3d/The_Lion_King_poster.jpg
+ID: 41 | Title: Dune | URL: https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg
+ID: 42 | Title: Everything Everywhere All at Once | URL: https://upload.wikimedia.org/wikipedia/en/1/1e/Everything_Everywhere_All_at_Once.jpg
+ID: 46 | Title: Spider-Man: Into the Spider-Verse | URL: https://image.tmdb.org/t/p/w600_and_h900_bestv2/iiZZdoQBEYBv6id8su7ImL0oRbC.jpg
+ID: 47 | Title: Knives Out | URL: https://image.tmdb.org/t/p/w600_and_h900_bestv2/pThyQovXQrw2m0s9OBJk5Qk24Y.jpg
+ID: 48 | Title: Gladiator | URL: https://upload.wikimedia.org/wikipedia/en/f/fb/Gladiator_%282000_film_poster%29.png
+ID: 49 | Title: Arrival | URL: https://upload.wikimedia.org/wikipedia/en/d/df/Arrival%2C_Movie_Poster.jpg
+ID: 50 | Title: Ex Machina | URL: https://upload.wikimedia.org/wikipedia/en/b/b9/Ex-machina-uk-poster.jpg
+ID: 51 | Title: Joker | URL: https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg
+
+Total broken: 32

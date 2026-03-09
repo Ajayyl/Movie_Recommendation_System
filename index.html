@@ -8,9 +8,16 @@
   <meta name="description"
     content="Discover movies that match your vibe. Powered by a Reinforcement Learning engine that learns your taste — then stream on your favourite platform." />
 
-  <!-- Favicon (inline SVG) -->
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <!-- Favicon -->
+  <link rel="icon" href="assets/logo/v2.png" type="image/png" />
+
+  <!-- PWA Support -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#7c3aed" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="UniVibe" />
+  <link rel="apple-touch-icon" href="assets/logo/v2.png" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
@@ -35,7 +42,7 @@
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
       <a class="navbar-brand" href="#/">
-        <div class="logo-icon">U</div>
+        <img src="assets/logo/v2.png" alt="UniVibe" class="logo-img" />
         <div class="logo-text">UniVibe</div>
       </a>
       <div class="nav-search-container">
@@ -101,6 +108,10 @@
           : safeMovies[0];
         if (featured) {
           setTimeout(() => showHomeRecommendations(featured.movie_id), 0);
+        }
+        // Load RL-powered AI recommendations for logged-in users
+        if (API.isLoggedIn()) {
+          setTimeout(() => loadHomeRLRecommendations(), 0);
         }
       });
 
@@ -204,6 +215,15 @@
 
       // Listen for hash changes to update nav
       window.addEventListener('hashchange', updateActiveNav);
+
+      // Register Service Worker for Offline/PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('[SW] Service worker registered on scope:', reg.scope))
+            .catch(err => console.warn('[SW] Service worker registration failed:', err));
+        });
+      }
     })();
   </script>
 

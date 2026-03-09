@@ -388,9 +388,10 @@ app.get('/api/health', (req, res) => {
 // ──────────────────────────────────
 // START SERVER
 // ──────────────────────────────────
-app.listen(PORT, () => {
+(async () => {
+    const server = await app.listen(PORT);
     console.log(`\n🎬 UniVibe ML Server running at http://localhost:${PORT}`);
     console.log(`📊 RL Engine: Contextual Multi-Armed Bandit (ε-greedy)`);
     console.log(`🗄️  Database: SQLite @ backend/data/univibe.db`);
     console.log(`🔐 Auth: JWT + bcrypt\n`);
-});
+})();

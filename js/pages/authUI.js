@@ -15,7 +15,7 @@ function renderAuthModal(mode = 'login') {
         
         <div class="auth-header">
           <div class="auth-logo">
-            <div class="logo-icon" style="width:48px;height:48px;font-size:22px;">U</div>
+            <img src="assets/logo/v2.png" alt="UniVibe" class="logo-img" style="width:54px; height:54px;" />
           </div>
           <h2 class="auth-title">${isLogin ? 'Welcome Back' : 'Join UniVibe'}</h2>
           <p class="auth-subtitle">${isLogin ? 'Sign in to get personalized ML recommendations' : 'Create your account for AI-powered movie picks'}</p>

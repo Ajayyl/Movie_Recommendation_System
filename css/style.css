@@ -193,26 +193,27 @@ select {
   cursor: pointer;
 }
 
-.navbar-brand .logo-icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 18px;
-  color: #fff;
+.navbar-brand .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  transition: transform 0.3s var(--ease);
+}
+
+.navbar-brand:hover .logo-img {
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .navbar-brand .logo-text {
-  font-size: 22px;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-tertiary), #fff);
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, var(--accent-tertiary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -0.5px;
 }
 
 .navbar-links {
@@ -479,6 +480,7 @@ select {
   color: var(--text-secondary);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -655,6 +657,7 @@ select {
 
 .age-inline-input {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* ---- Detail Page Metadata ---- */
@@ -1220,6 +1223,7 @@ select {
 
 .age-gate-card input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* ---- Profile Selection (Login) ---- */
