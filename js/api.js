@@ -119,5 +119,16 @@ const API = {
     async getLearningStats() {
         const history = LocalRL.db.getInteractions();
         return { ok: true, data: { stats: { totalInteractions: history.length, modelMaturity: 'mature', topGenres: [] } } };
+    },
+
+    // ── Generic GET (for legacy calls) ──
+    async get(url) {
+        if (url.includes('/api/dashboard')) {
+            const dashboard = LocalRL.getUserLearningStats();
+            return { ok: true, data: { dashboard } };
+        }
+        if (url.includes('/api/watchlist')) return this.getWatchlist();
+        if (url.includes('/api/history')) return this.getHistory();
+        return { ok: false, error: 'Route not found locally' };
     }
 };

@@ -130,5 +130,56 @@ const LocalRL = {
         }
 
         return scored.sort((a, b) => b.score - a.score).slice(0, count).map(s => s.movie);
+    },
+
+    getUserLearningStats() {
+        const interactions = this.db.getInteractions();
+        const qTable = this.db.getQTable();
+        const ratings = JSON.parse(localStorage.getItem('univibe_ratings') || '[]');
+        const watchlist = JSON.parse(localStorage.getItem('univibe_watchlist') || '[]');
+
+        const qValues = Object.values(qTable).map(v => v.q);
+        const totalInteractions = interactions.length;
+        const avgQValue = qValues.length > 0 ? qValues.reduce((a, b) => a + b, 0) / qValues.length : 0;
+        const maxQValue = qValues.length > 0 ? Math.max(...qValues) : 0;
+
+        // Activity breakdown
+        const activity = { view: 0, click: 0, rating: 0, recommend_click: 0, watchlist: 0 };
+        interactions.forEach(i => { if (activity[i.event_type] !== undefined) activity[i.event_type]++; });
+
+        // Genre heatmap simulation (simplified)
+        const genreHeatmap = {};
+        interactions.forEach(i => {
+            if (!i.genre) return;
+            if (!genreHeatmap[i.genre]) genreHeatmap[i.genre] = { view: 0, click: 0, rating: 0, recommend_click: 0 };
+            if (genreHeatmap[i.genre][i.event_type] !== undefined) genreHeatmap[i.genre][i.event_type]++;
+        });
+
+        // State radar simulation
+        const states = {};
+        Object.keys(qTable).forEach(k => {
+            const state = k.split('|')[0];
+            states[state] = (states[state] || 0) + 1;
+        });
+
+        return {
+            summary: {
+                totalInteractions,
+                totalQEntries: qValues.length,
+                uniqueStates: new Set(Object.keys(qTable).map(k => k.split('|').slice(0, 3).join('|'))).size,
+                totalRatings: ratings.length,
+                avgQValue: avgQValue.toFixed(2),
+                maxQValue: maxQValue.toFixed(2),
+                modelMaturity: totalInteractions < 5 ? 'cold_start' : totalInteractions < 20 ? 'learning' : 'mature'
+            },
+            activityBreakdown: activity,
+            genreHeatmap,
+            topMovies: Object.entries(qTable).sort((a, b) => b[1].q - a[1].q).slice(0, 5).map(([k, v]) => {
+                const id = parseInt(k.split('|').pop());
+                const m = MOVIES.find(movie => movie.movie_id === id);
+                return { title: m?.title || 'Unknown', q: v.q.toFixed(2) };
+            }),
+            stateSpace: states
+        };
     }
 };
