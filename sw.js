@@ -17,6 +17,7 @@ const STATIC_ASSETS = [
     './data/movieData.js',
 
     // Core JS
+    './js/localRL.js',
     './js/api.js',
     './js/components.js',
     './js/recommendationEngine.js',
