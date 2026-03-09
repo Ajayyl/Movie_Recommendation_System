@@ -53,13 +53,17 @@ const API = {
 
     // ── Ratings ──
     async rateMovie(movieId, rating) {
+        const movie = MOVIES.find(m => m.movie_id === movieId);
         const ratings = JSON.parse(localStorage.getItem(this.RATINGS_KEY) || '[]');
         const existing = ratings.findIndex(r => r.movieId === movieId);
         if (existing > -1) ratings[existing].rating = rating;
         else ratings.push({ movieId, rating });
         localStorage.setItem(this.RATINGS_KEY, JSON.stringify(ratings));
 
-        this.trackInteraction(movieId, 'rating', rating);
+        this.trackInteraction(movieId, 'rating', rating, {
+            genre: movie?.genre[0],
+            experience: movie?.experience_type
+        });
         return { ok: true };
     },
 
@@ -71,10 +75,14 @@ const API = {
 
     // ── Watchlist ──
     async addToWatchlist(movieId) {
+        const movie = MOVIES.find(m => m.movie_id === movieId);
         let list = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
         if (!list.includes(movieId)) list.push(movieId);
         localStorage.setItem(this.WATCHLIST_KEY, JSON.stringify(list));
-        this.trackInteraction(movieId, 'watchlist', 'add');
+        this.trackInteraction(movieId, 'watchlist', 'add', {
+            genre: movie?.genre[0],
+            experience: movie?.experience_type
+        });
         return { ok: true };
     },
 
