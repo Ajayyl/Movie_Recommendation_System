@@ -1,16 +1,12 @@
 // UniVibe — Recommendation Builder Page (formerly Catalogue)
 
-async function renderCatalogue(params) {
+function renderCatalogue(params) {
   const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
-
-  // We can't fetch all 700k movies, so we'll fetch a small sample of highly rated/popular ones for the selector
-  const res = await API.getMovies({ minAge: userAge, order: 'popularity', limit: 100 });
-  const sampleMovies = res.data || [];
-
-  const genres = await API.getGenres();
+  const safeMovies = applyAgeFilter(MOVIES, userAge);
+  const genres = getAllGenres(safeMovies).sort();
 
   // Prepare options for movie selector
-  const movieOptions = sampleMovies
+  const movieOptions = safeMovies
     .sort((a, b) => a.title.localeCompare(b.title))
     .map(m => `<option value="${m.movie_id}">${m.title}</option>`)
     .join('');
@@ -105,8 +101,7 @@ async function renderCatalogue(params) {
   `;
 }
 
-// Made async to fetch from real API database
-async function runRecommendationEngine() {
+function runRecommendationEngine() {
   const profileAge = parseInt(localStorage.getItem('univibe_age')) || 99;
 
   // Get Inputs
@@ -116,9 +111,11 @@ async function runRecommendationEngine() {
   const similarIdRaw = document.getElementById('rec-similar').value;
   const similarToId = similarIdRaw ? parseInt(similarIdRaw) : null;
 
+  // Calculate effective age limit
   let effectiveAge = profileAge;
   if (ageInput) {
     const selectedAge = parseInt(ageInput);
+    // Ensure we don't exceed profile limit (though UI prevents it mostly)
     if (selectedAge < effectiveAge) effectiveAge = selectedAge;
   }
 
@@ -128,59 +125,34 @@ async function runRecommendationEngine() {
   const grid = document.getElementById('rec-grid');
   const countLabel = document.getElementById('rec-results-count');
 
+  // Loading state
   emptyState.style.display = 'none';
   resultsArea.style.display = 'block';
-  grid.innerHTML = renderAnalysisLoader();
+  grid.innerHTML = renderAnalysisLoader(); // Re-use the loader from home
 
-  // Fetch results based on criteria from backend
-  let queryParams = { minAge: effectiveAge, order: 'popularity', limit: 12 };
-  if (experience) queryParams.experience = experience;
-  if (genre) queryParams.genre = genre;
+  // Logic Delay for effect
+  setTimeout(() => {
+    const criteria = { userAge: effectiveAge, experience, genre, similarToId };
+    const results = getHybridRecommendations(MOVIES, criteria, 12);
 
-  let movies = [];
-  if (similarToId) {
-    // Priority: Similar to selected movie
-    movies = await API.getSimilarMovies(similarToId, 12);
-    // If further filtered by UI, do it locally off the 12
-    if (experience) movies = movies.filter(m => m.experience_type === experience);
-    if (genre) movies = movies.filter(m => m.genre.includes(genre));
-  } else {
-    const res = await API.getMovies(queryParams);
-    movies = res.data || [];
-  }
+    if (results.length > 0) {
+      countLabel.textContent = `${results.length} matches found`;
+      grid.innerHTML = results.map(item => renderRecommendedCard(item.movie, item.reason)).join('');
 
-  // Add mock reasons since this is direct querying rather than full RL scoring
-  const results = movies.map(m => {
-    let reasons = [];
-    if (experience) reasons.push(`Matches preferred vibe: ${experience}`);
-    if (genre) reasons.push(`Contains preferred genre: ${genre}`);
-    if (similarToId && reasons.length === 0) reasons.push(`Similar to selected movie`);
-    if (reasons.length === 0) reasons.push(`Highly rated in catalogue`);
-
-    return {
-      movie: m,
-      reason: '🤖 ' + reasons[0]
-    };
-  });
-
-  if (results.length > 0) {
-    countLabel.textContent = `${results.length} matches found`;
-    grid.innerHTML = results.map(item => renderRecommendedCard(item.movie, item.reason)).join('');
-
-    // Scroll to results
-    resultsArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } else {
-    countLabel.textContent = '0 matches';
-    grid.innerHTML = `
+      // Scroll to results
+      resultsArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      countLabel.textContent = '0 matches';
+      grid.innerHTML = `
         <div class="empty-state" style="grid-column: 1/-1;">
           <div class="empty-icon">🤷‍♂️</div>
           <h3>No matches found</h3>
           <p>Try loosening your criteria (e.g. remove specific genre or vibe)</p>
         </div>
       `;
-  }
+    }
+  }, 800);
 }
-
 
 function resetRecBuilder() {
   document.getElementById('rec-experience').value = '';

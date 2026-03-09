@@ -1,5 +1,8 @@
 // UniVibe — Movie Data Layer
-const MOVIES = [
+// Separated from UI logic. Each movie follows the structured schema:
+// movie_id, title, genre, experience_type, rating_percent, popularity_score, age_limit, netflix_url, prime_url
+
+module.exports = [
     {
         "movie_id": 1,
         "title": "Inception",
@@ -44,7 +47,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B00J2PGLO0",
         "year": 2014,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/3/36/The_Grand_Budapest_Hotel_poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Grand_Budapest_Hotel.png",
         "synopsis": "A legendary concierge at a famous European hotel and his trusted lobby boy become embroiled in the theft of a priceless painting.",
         "tags": [
             "underrated"
@@ -188,7 +191,7 @@ const MOVIES = [
         "rating_percent": 89,
         "popularity_score": 0.9,
         "age_limit": 18,
-        "netflix_url": "",
+        "netflix_url": "https://www.netflix.com",
         "prime_url": "https://www.amazon.com/dp/B000I9YJ8E",
         "year": 1994,
         "poster": "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg",
@@ -204,6 +207,10 @@ const MOVIES = [
             {
                 "name": "Paramount+",
                 "url": "https://www.paramountplus.com"
+            },
+            {
+                "name": "HBO Max",
+                "url": "https://www.hbomax.com"
             }
         ]
     },
@@ -213,7 +220,8 @@ const MOVIES = [
         "genre": [
             "Animation",
             "Family",
-            "Fantasy"
+            "Fantasy",
+            "Adventure"
         ],
         "experience_type": "emotional",
         "rating_percent": 90,
@@ -280,7 +288,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B00IANO1TA",
         "year": 2013,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/c/cd/The_Secret_Life_of_Walter_Mitty_poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/f/f2/The_Secret_Life_of_Walter_Mitty_2013_poster.jpg",
         "synopsis": "A daydreamer escapes his anonymous life by disappearing into a world of fantasies of romance, heroism, and action.",
         "tags": [
             "underrated",
@@ -429,7 +437,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B01MU9CMGP",
         "year": 2016,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/8/84/Moonlight_%282016_film%29_poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/8/84/Moonlight_%282016_film%29.png",
         "synopsis": "A timeless story of human self-discovery and connection, told across three defining chapters in the life of a young Black man growing up in Miami.",
         "tags": [
             "underrated"
@@ -459,7 +467,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B000HAB4KS",
         "year": 1999,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/d/db/The_Matrix.png",
         "synopsis": "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
         "tags": [
             "cult"
@@ -510,7 +518,8 @@ const MOVIES = [
         "title": "Mad Max: Fury Road",
         "genre": [
             "Action",
-            "Sci-Fi"
+            "Sci-Fi",
+            "Adventure"
         ],
         "experience_type": "intense",
         "rating_percent": 90,
@@ -546,7 +555,7 @@ const MOVIES = [
         "rating_percent": 83,
         "popularity_score": 0.8,
         "age_limit": 0,
-        "netflix_url": "",
+        "netflix_url": "https://www.netflix.com",
         "prime_url": "https://www.amazon.com/dp/B001EBWIPY",
         "year": 1998,
         "poster": "https://upload.wikimedia.org/wikipedia/en/c/cd/Trumanshow.jpg",
@@ -563,6 +572,10 @@ const MOVIES = [
             {
                 "name": "Prime Video",
                 "url": "https://www.amazon.com/dp/B001EBWIPY"
+            },
+            {
+                "name": "Netflix",
+                "url": "https://www.netflix.com"
             }
         ]
     },
@@ -698,7 +711,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "",
         "year": 2008,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/c/c2/WALL-E_poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/4/4c/WALL-E_poster.jpg",
         "synopsis": "In a distant future, a small waste-collecting robot inadvertently embarks on a space journey that will decide the fate of mankind.",
         "tags": [
             "family-safe",
@@ -754,10 +767,10 @@ const MOVIES = [
         "rating_percent": 90,
         "popularity_score": 1,
         "age_limit": 13,
-        "netflix_url": "",
+        "netflix_url": "https://www.netflix.com",
         "prime_url": "https://www.amazon.com/dp/B001I189MG",
         "year": 2008,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/8/8a/Dark_Knight.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg",
         "synopsis": "Batman raises the stakes in his war on crime, facing off against the Joker, a criminal mastermind who wreaks havoc on Gotham City.",
         "tags": [
             "cult"
@@ -788,7 +801,7 @@ const MOVIES = [
         "netflix_url": "https://www.netflix.com",
         "prime_url": "https://www.amazon.com/dp/B079DZ5XWD",
         "year": 2017,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/2/25/Paddington_2_poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/b/b6/Paddington_2_poster.jpg",
         "synopsis": "Paddington, now settled with the Brown family in London, picks up a series of odd jobs to buy the perfect present, but must clear his name when the gift is stolen.",
         "tags": [
             "family-safe",
@@ -907,7 +920,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B000P0J0AI",
         "year": 2006,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/5/50/Departed23.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/5/50/Departed234.jpg",
         "synopsis": "An undercover cop and a mole in the police try to identify each other while infiltrating an Irish gang in Boston.",
         "tags": [
             "cult"
@@ -1079,7 +1092,8 @@ const MOVIES = [
         "title": "Goodfellas",
         "genre": [
             "Crime",
-            "Drama"
+            "Drama",
+            "Biography"
         ],
         "experience_type": "intense",
         "rating_percent": 87,
@@ -1141,7 +1155,9 @@ const MOVIES = [
         "title": "A Quiet Place",
         "genre": [
             "Horror",
-            "Thriller"
+            "Thriller",
+            "Drama",
+            "Sci-Fi"
         ],
         "experience_type": "intense",
         "rating_percent": 80,
@@ -1267,7 +1283,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "",
         "year": 2022,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/f/f7/The_Batman_%28film%29_poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/f/ff/The_Batman_%28film%29_poster.jpg",
         "synopsis": "When a sadistic serial killer begins murdering key political figures, Batman is forced to investigate the city's hidden corruption.",
         "tags": [],
         "ottPlatforms": [
@@ -1291,7 +1307,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B0B2KSYRLQ",
         "year": 2022,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/1/19/Top_Gun_Maverick_Poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/1/13/Top_Gun_Maverick_Poster.jpg",
         "synopsis": "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission.",
         "tags": [],
         "ottPlatforms": [
@@ -1373,7 +1389,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B082L42V5B",
         "year": 2019,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/1/11/Knives_Out_poster.jpeg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/1/1f/Knives_Out_poster.jpeg",
         "synopsis": "A detective investigates the death of a patriarch of an eccentric, combative family.",
         "tags": [],
         "ottPlatforms": [
@@ -1459,7 +1475,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com",
         "year": 2014,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/b/b9/Ex-machina-uk-poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-machina-uk-poster.jpg",
         "synopsis": "A young programmer is selected to participate in a ground-breaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.",
         "tags": [
             "underrated"
@@ -1505,3 +1521,8 @@ const MOVIES = [
         ]
     }
 ];
+
+// Export for ES module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = MOVIES;
+}

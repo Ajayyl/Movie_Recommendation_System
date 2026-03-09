@@ -1,26 +1,14 @@
 // UniVibe — Platform Page (shows all movies on a specific OTT platform)
 
-async function renderPlatform(params) {
+function renderPlatform(params) {
   const platformName = decodeURIComponent(params.name || '');
-
-  // We don't have all platforms in memory anymore, so we'll just mock it or rely on a predefined list
-  const platforms = [
-    { name: 'Netflix', icon: '🟥' },
-    { name: 'Prime Video', icon: '🟦' },
-    { name: 'Disney+', icon: '✨' },
-    { name: 'HBO Max', icon: '🟣' },
-    { name: 'Hulu', icon: '🟩' },
-    { name: 'Apple TV', icon: '🍏' }
-  ];
-
+  const platforms = getAllPlatforms();
   const platformMeta = platforms.find(p => p.name === platformName);
   const icon = platformMeta ? platformMeta.icon : '📺';
 
   const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
-
-  // Fetch up to 50 movies dynamically to save data
-  const res = await API.getMovies({ minAge: userAge, platform: platformName, limit: 50 });
-  const platformMovies = res.data || [];
+  const safeMovies = applyAgeFilter(MOVIES, userAge);
+  const platformMovies = getByPlatform(safeMovies, platformName);
 
   return `
     <div class="category-header">

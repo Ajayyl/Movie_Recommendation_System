@@ -25,24 +25,17 @@ function renderPlatformRow(movies, platformName, icon) {
     `;
 }
 
-async function renderHome(safeMovies) {
+function renderHome() {
   const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  const safeMovies = applyAgeFilter(MOVIES, userAge);
+  const trending = getTrending(safeMovies);
+  const latest = getLatest(safeMovies);
+  const topRated = getTopRated(safeMovies);
 
-  // Fetch from the scalable API instead of sorting local array
-  const [popRes, recRes, topRes] = await Promise.all([
-    API.getMovies({ minAge: userAge, order: 'popularity', limit: 12 }),
-    API.getMovies({ minAge: userAge, order: 'recent', limit: 12 }),
-    API.getMovies({ minAge: userAge, order: 'rating', limit: 12 })
-  ]);
-
-  const trending = popRes.data || [];
-  const latest = recRes.data || [];
-  const topRated = topRes.data || [];
-
-  // Pick a featured movie for recommendations (random from trending)
+  // Pick a featured movie for recommendations (random from trending, or first)
   const featured = trending.length > 0
     ? trending[Math.floor(Math.random() * Math.min(trending.length, 5))]
-    : null;
+    : safeMovies[0];
 
   const isLoggedIn = API.isLoggedIn();
   const user = API.getUser();
@@ -97,22 +90,6 @@ async function renderHome(safeMovies) {
     </section>
     ` : ''}
 
-    <!-- Recommended For You (content-based) -->
-    ${featured ? `
-    <section class="section recommend-section" style="padding-top: 0;">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">✨ ${isLoggedIn ? 'Similar to Trending' : 'Recommended For You'}</h2>
-            <p class="section-subtitle">Based on "${featured.title}" — movies with similar vibes</p>
-          </div>
-        </div>
-        <div id="home-recommendations">
-          ${renderAnalysisLoader()}
-        </div>
-      </div>
-    </section>
-    ` : ''}
 
     <!-- Latest Movies -->
     <section class="section" style="padding-top: 0;">
@@ -168,20 +145,18 @@ async function renderHome(safeMovies) {
 /**
  * Show content-based recommendations after simulated analysis delay.
  */
-async function showHomeRecommendations(featuredId) {
+function showHomeRecommendations(featuredId) {
   const container = document.getElementById('home-recommendations');
   if (!container) return;
 
-  const recs = await API.getSimilarMovies(featuredId, 6);
+  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  const recs = getRecommendations(MOVIES, featuredId, userAge, 6);
 
   setTimeout(() => {
     if (recs.length > 0) {
       container.innerHTML = `
         <div class="movie-row stagger">
-          ${recs.map(item => {
-        const reason = "🎯 Similar vibe to " + item.experience_type;
-        return renderRecommendedCard(item, reason);
-      }).join('')}
+          ${recs.map(item => renderRecommendedCard(item.movie, item.reason)).join('')}
         </div>
       `;
     } else {
@@ -192,7 +167,7 @@ async function showHomeRecommendations(featuredId) {
         </div>
       `;
     }
-  }, 400);
+  }, 1500);
 
   // Also load RL recommendations if logged in
   if (API.isLoggedIn()) {
@@ -215,7 +190,7 @@ async function loadHomeRLRecommendations() {
       container.innerHTML = `
         <div class="movie-row stagger">
           ${recs.map(rec => {
-        const movie = rec.movie;
+        const movie = MOVIES.find(m => m.movie_id === rec.movie_id);
         if (!movie) return '';
         return renderRecommendedCard(movie, rec.reason);
       }).join('')}
@@ -234,5 +209,5 @@ async function loadHomeRLRecommendations() {
         </div>
       `;
     }
-  }, 300);
+  }, 800);
 }

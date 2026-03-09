@@ -1,44 +1,76 @@
 // UniVibe — All Movies List Page
 // Restores the original "Catalogue" functionality
 
-async function renderMovieList(params) {
+function renderMovieList(params) {
   const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  const safeMovies = applyAgeFilter(MOVIES, userAge);
+
+  // Check for search query
+  if (params && params.query) {
+    const movies = searchByTitle(safeMovies, params.query);
+    const title = `Search Results: "${params.query}"`;
+    const subtitle = `${movies.length} matches found ${movies.length > 0 ? '' : '— try something else!'}`;
+
+    return `
+      <section class="section" style="padding-top: 100px; padding-bottom: 50px;">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">${title}</h2>
+              <p class="section-subtitle">${subtitle}</p>
+            </div>
+            <a href="#/movies" class="btn btn-sm btn-outline">← Back to Discovery</a>
+          </div>
+          
+          ${movies.length > 0 ? `
+          <div class="movie-grid stagger">
+            ${movies.map(m => renderMovieCard(m)).join('')}
+          </div>
+          ` : `
+          <div class="empty-state" style="padding: 100px 0;">
+            <div class="empty-icon">🤷‍♂️</div>
+            <h3>No movies matched your search</h3>
+            <p style="margin-bottom: 24px;">Check your spelling or try a broader term like "Action" or "Star Wars".</p>
+            <a href="#/movies" class="btn btn-primary">Discover Trends</a>
+          </div>
+          `}
+        </div>
+      </section>
+    `;
+  }
 
   // Check for specific filter (e.g., "latest", "popular", "top-rated")
   if (params && params.filter) {
     let title = "Movies";
     let subtitle = "Explore our collection";
     let movies = [];
-    let order = 'popularity';
 
     switch (params.filter) {
       case 'latest':
         title = "🆕 Latest Movies";
         subtitle = "Newest additions to our catalogue";
-        order = 'recent';
-        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
+        movies = getLatest(safeMovies);
         break;
       case 'popular':
         title = "🔥 Popular Movies";
         subtitle = "Trending right now";
-        order = 'popularity';
-        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
+        movies = getTrending(safeMovies);
         break;
       case 'top-rated':
         title = "⭐ Top Rated Movies";
         subtitle = "Highest rated by critics and audiences";
-        order = 'rating';
-        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
+        movies = getTopRated(safeMovies);
+        break;
+      case 'all':
+        title = "🔤 Complete Movie List";
+        subtitle = `A-Z collection of all ${safeMovies.length} titles`;
+        movies = [...safeMovies].sort((a, b) => a.title.localeCompare(b.title));
         break;
       default:
-        title = "📚 All Movies";
-        subtitle = "Browse our massive catalogue";
-        order = 'popularity';
-        movies = (await API.getMovies({ minAge: userAge, order, limit: 42 })).data || [];
+        // Fallback to all safe sorted by title
+        title = "Full Collection";
+        movies = [...safeMovies].sort((a, b) => a.title.localeCompare(b.title));
     }
-
-    // Set global state for Load More pagination
-    window.univibeListState = { page: 1, filter: params.filter, userAge, order };
 
     // Render Grid View for Specific Filter
     return `
@@ -56,39 +88,32 @@ async function renderMovieList(params) {
             ${movies.map(m => renderMovieCard(m)).join('')}
           </div>
           
-          ${movies.length === 0 ? `<p>No movies found for your age rating.</p>` : `
-            <div style="text-align: center; margin-top: 40px;">
-              <button id="load-more-btn" class="btn btn-primary" onclick="loadMoreMovies()">Load More Movies</button>
-            </div>
-          `}
+          ${movies.length === 0 ? `<p>No movies found for your age rating.</p>` : ''}
         </div>
       </section>
     `;
   }
 
-  // Helper generic fetch for categories
-  const fetchCat = async (opts) => (await API.getMovies({ minAge: userAge, limit: 10, order: 'none', ...opts })).data || [];
+  // --- Default: Category View ---
 
-  // Define categories in order and fetch in parallel
-  const categoryDefs = [
-    { title: "Cult Classics", req: { tag: 'cult' } },
-    { title: "Underrated Gems", req: { tag: 'underrated' } },
-    { title: "Family Friendly", req: { tag: 'family-safe' } },
-    { title: "Adrenaline Rush", req: { experience: 'intense' } },
-    { title: "Emotional Journey", req: { experience: 'emotional' } },
-    { title: "Chill & Relax", req: { experience: 'relaxing' } },
-    { title: "Animated Worlds", req: { genre: 'Animation' } },
-    { title: "Sci-Fi Futures", req: { genre: 'Sci-Fi' } },
-    { title: "Laugh Out Loud", req: { genre: 'Comedy' } }
-  ];
+  // Helper to filter movies (reusable)
+  const getMoviesByTag = (tag) => safeMovies.filter(m => m.tags && m.tags.includes(tag));
+  const getMoviesByExperience = (exp) => safeMovies.filter(m => m.experience_type === exp);
+  const getMoviesByGenre = (genre) => safeMovies.filter(m => m.genre && m.genre.includes(genre));
 
-  const catPromises = categoryDefs.map(c => fetchCat(c.req));
-  const catResults = await Promise.all(catPromises);
-
-  const categories = categoryDefs.map((def, i) => ({
-    title: def.title,
-    movies: catResults[i]
-  })).filter(cat => cat.movies && cat.movies.length > 0);
+  // Define categories in order
+  const categories = [
+    { title: "Cult Classics", movies: getMoviesByTag('cult') },
+    { title: "Underrated Gems", movies: getMoviesByTag('underrated') },
+    { title: "Family Friendly", movies: getMoviesByTag('family-safe') },
+    { title: "Adrenaline Rush", movies: getMoviesByExperience('intense') },
+    { title: "Emotional Journey", movies: getMoviesByExperience('emotional') },
+    { title: "Chill & Relax", movies: getMoviesByExperience('relaxing') },
+    { title: "Animated Worlds", movies: getMoviesByGenre('Animation') },
+    { title: "Sci-Fi Futures", movies: getMoviesByGenre('Sci-Fi') },
+    { title: "Laugh Out Loud", movies: getMoviesByGenre('Comedy') },
+    { title: "Action & Adventure", movies: [...new Set([...getMoviesByGenre('Action'), ...getMoviesByGenre('Adventure')])] }
+  ].filter(cat => cat.movies.length > 0); // Only show categories with movies
 
   return `
     <section class="section" style="padding-top: 100px; padding-bottom: 50px;">
@@ -98,9 +123,7 @@ async function renderMovieList(params) {
               <h2 class="section-title">Movie Library</h2>
               <p class="section-subtitle">Discover movies by mood, theme, and genre.</p>
             </div>
-            <a href="#/section/all" class="btn btn-primary" style="display: flex; align-items: center; gap: 8px;">
-              <span>📚</span> Browse Entire Catalogue
-            </a>
+            <a href="#/section/all" class="btn btn-sm btn-primary">🔤 View All A-Z</a>
         </div>
 
         ${categories.map(cat => `
@@ -127,47 +150,8 @@ async function renderMovieList(params) {
           </div>
         `).join('')}
 
+        ${categories.length === 0 ? `<p>No movies found for your age rating.</p>` : ''}
       </div>
     </section>
   `;
-}
-
-// Global handler for loading next pages in the grid view
-window.loadMoreMovies = async function () {
-  const state = window.univibeListState;
-  if (!state) return;
-
-  const btn = document.getElementById('load-more-btn');
-  if (btn) {
-    btn.innerHTML = 'Loading...';
-    btn.disabled = true;
-  }
-
-  state.page += 1;
-
-  try {
-    const res = await API.getMovies({ minAge: state.userAge, order: state.order, limit: 42, page: state.page });
-    const newMovies = res.data || [];
-
-    if (newMovies.length > 0) {
-      const grid = document.querySelector('.movie-grid');
-      if (grid) {
-        grid.insertAdjacentHTML('beforeend', newMovies.map(m => renderMovieCard(m)).join(''));
-      }
-      if (btn) {
-        btn.innerHTML = 'Load More Movies';
-        btn.disabled = false;
-      }
-    } else {
-      if (btn) {
-        btn.innerHTML = 'End of Catalogue';
-      }
-    }
-  } catch (err) {
-    console.error("Failed to load more movies", err);
-    if (btn) {
-      btn.innerHTML = 'Error loading. Try again.';
-      btn.disabled = false;
-    }
-  }
 }

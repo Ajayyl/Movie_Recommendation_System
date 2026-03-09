@@ -186,15 +186,6 @@ const stmts = {
     SELECT event_type, COUNT(*) as cnt FROM interactions
     WHERE user_uid = ? GROUP BY event_type
   `),
-
-  // Movies API
-  getMovieById: db.prepare('SELECT * FROM movies WHERE movie_id = ?'),
-  getMovieCandidates: db.prepare(`
-        SELECT * FROM movies 
-        WHERE age_limit <= ? 
-        ORDER BY popularity_score DESC 
-        LIMIT ?
-    `)
 };
 
 module.exports = { db, stmts };

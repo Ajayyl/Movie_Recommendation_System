@@ -988,7 +988,7 @@ function renderStateTable(stateDetails) {
         <tbody>
           ${stateDetails.map(s => {
     const parts = s.state.split('|');
-    const coverage = Math.min(100, Math.round((s.movieCount / 698754) * 1000) / 10); // Updated to use actual DB count
+    const coverage = Math.min(100, Math.round((s.movieCount / MOVIES.length) * 100));
     return `
               <tr>
                 <td>

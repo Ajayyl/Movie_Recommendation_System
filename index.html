@@ -31,38 +31,6 @@
 
 <body>
 
-  <!-- Kill any stale service workers and replace with no-op -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      // Register our no-op SW to replace any old one
-      navigator.serviceWorker.register('/sw.js').then(function (reg) {
-        console.log('[SW] No-op service worker registered');
-        // Force the new SW to activate immediately
-        if (reg.waiting) {
-          reg.waiting.postMessage({ type: 'SKIP_WAITING' });
-        }
-        reg.addEventListener('updatefound', function () {
-          var newWorker = reg.installing;
-          newWorker.addEventListener('statechange', function () {
-            if (newWorker.state === 'activated') {
-              console.log('[SW] New no-op SW activated, reloading if needed');
-            }
-          });
-        });
-      }).catch(function (err) {
-        console.log('[SW] Registration failed:', err);
-      });
-      // Also clear all caches immediately
-      if (window.caches) {
-        caches.keys().then(function (names) {
-          names.forEach(function (name) {
-            caches.delete(name);
-          });
-        });
-      }
-    }
-  </script>
-
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
@@ -70,24 +38,11 @@
         <div class="logo-icon">U</div>
         <div class="logo-text">UniVibe</div>
       </a>
-
-      <!-- Live Search Bar -->
-      <div class="nav-search-container" id="nav-search-container">
-        <div class="nav-search-wrap">
-          <span class="nav-search-icon">🔍</span>
-          <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search movies..."
-            autocomplete="off" />
-        </div>
-        <div class="nav-search-results" id="nav-search-results"></div>
+      <div class="nav-search-container">
+        <input type="text" id="global-search-input" placeholder="Search movies..."
+          onkeyup="if(event.key==='Enter') handleGlobalSearch()" />
+        <button id="global-search-btn" onclick="handleGlobalSearch()" title="Search">🔍</button>
       </div>
-
-      <!-- Hamburger Toggle for Mobile -->
-      <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Toggle menu">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-
       <div class="navbar-links" id="nav-links">
         <a class="nav-link" href="#/" data-route="/">Home</a>
         <a class="nav-link" href="#/movies" data-route="/movies">Discover</a>
@@ -103,22 +58,6 @@
   <main id="app">
     <!-- Pages render here -->
   </main>
-
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-    aria-label="Back to top">↑</button>
-  <script>
-    window.addEventListener('scroll', function () {
-      const btn = document.getElementById('back-to-top');
-      if (btn) {
-        if (window.scrollY > 400) {
-          btn.classList.add('visible');
-        } else {
-          btn.classList.remove('visible');
-        }
-      }
-    });
-  </script>
 
   <!-- Scripts (order matters: data → API → logic → components → auth → router → pages) -->
   <script src="data/movieData.js"></script>
@@ -136,53 +75,6 @@
   <script src="js/pages/ageGate.js"></script>
 
   <script>
-    // Global error catcher — fires BEFORE anything else
-    window.onerror = function (msg, url, line, col, err) {
-      console.error('[GLOBAL ERROR]', msg, 'at', url, ':', line, ':', col, err);
-      var app = document.getElementById('app');
-      if (app && app.innerHTML.length < 100) {
-        app.innerHTML = '<div style="padding:120px 20px;text-align:center;color:#f1f1f7;">' +
-          '<h2>⚠️ Startup Error</h2><p style="color:#a1a1b5;">' + msg + '</p>' +
-          '<p style="color:#6b6b80;font-size:12px;">at ' + url + ':' + line + '</p>' +
-          '<button onclick="location.reload()" style="margin-top:20px;padding:10px 20px;background:#7c3aed;color:#fff;border:none;border-radius:8px;cursor:pointer;">Reload</button></div>';
-      }
-      return false;
-    };
-  </script>
-  <script>
-    // ——————————————————————————
-    // UniVibe — Utility Functions
-    // ——————————————————————————
-
-    // XSS-safe HTML escaping
-    function escapeHTML(str) {
-      if (!str) return '';
-      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
-
-    // Mobile nav toggle
-    function toggleMobileNav() {
-      const navLinks = document.getElementById('nav-links');
-      const hamburger = document.getElementById('hamburger-btn');
-      navLinks.classList.toggle('mobile-open');
-      hamburger.classList.toggle('active');
-    }
-
-    // Close mobile nav on link click
-    document.addEventListener('click', function (e) {
-      if (e.target.matches('.navbar-links .nav-link')) {
-        const navLinks = document.getElementById('nav-links');
-        const hamburger = document.getElementById('hamburger-btn');
-        if (navLinks) navLinks.classList.remove('mobile-open');
-        if (hamburger) hamburger.classList.remove('active');
-      }
-    });
-
-    // Dynamic page title helper
-    function setPageTitle(subtitle) {
-      document.title = subtitle ? subtitle + ' — UniVibe' : 'UniVibe — AI Movie Discovery & ML Recommendations';
-    }
-
     // ——————————————————————————
     // UniVibe — App Initialisation
     // ——————————————————————————
@@ -197,145 +89,68 @@
         updateActiveNav();
       }
 
-      // ── FIX #1: Global Error Fallback ──
-      function showErrorPage(err) {
-        console.error('[UniVibe Route Error]', err);
-        app.innerHTML = `
-          <div style="padding: 120px 20px; text-align: center; max-width: 500px; margin: 0 auto;">
-            <div style="font-size: 64px; margin-bottom: 20px;">😵</div>
-            <h2 style="font-size: 24px; color: var(--text-primary); margin-bottom: 12px;">Something went wrong</h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">
-              ${err.message || 'An unexpected error occurred while loading this page.'}
-            </p>
-            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-              <button class="btn btn-primary" onclick="location.reload()" style="padding: 12px 28px;">🔄 Reload Page</button>
-              <a href="#/" class="btn btn-outline" style="padding: 12px 28px;">🏠 Go Home</a>
-            </div>
-            <p style="color: var(--text-muted); font-size: 12px; margin-top: 24px; opacity: 0.5;">Error: ${err.message || 'Unknown'}</p>
-          </div>
-        ` + renderFooter();
-      }
-
-      // ── FIX #3: Skeleton Shimmer Loader ──
-      function showAppLoading() {
-        const skeletonCards = Array(8).fill('').map(() => `
-          <div class="skeleton-card">
-            <div class="skeleton-poster skeleton-shimmer"></div>
-            <div class="skeleton-info">
-              <div class="skeleton-title skeleton-shimmer"></div>
-              <div class="skeleton-meta skeleton-shimmer"></div>
-            </div>
-          </div>
-        `).join('');
-        app.innerHTML = `
-          <section class="section" style="padding-top: 100px;">
-            <div class="container">
-              <div class="skeleton-header">
-                <div class="skeleton-heading skeleton-shimmer"></div>
-                <div class="skeleton-subheading skeleton-shimmer"></div>
-              </div>
-              <div class="movie-grid stagger">${skeletonCards}</div>
-            </div>
-          </section>
-        `;
-      }
-
-      // Global catch-all for async errors
-      window.addEventListener('unhandledrejection', (e) => {
-        console.error('[UniVibe] Unhandled Promise Rejection:', e.reason);
-        showErrorPage(e.reason || new Error('Unhandled async error'));
-      });
-
-      // ── Register routes with Error Boundaries ──
-      Router.on('/', async function () {
-        try {
-          showAppLoading();
-          setPageTitle('Home');
-          const ageLimit = parseInt(localStorage.getItem('univibe_age')) || 99;
-          const res = await API.getMovies({ minAge: ageLimit, limit: 100, order: 'popularity' });
-          const safeMovies = res.data || [];
-          const html = await renderHome(safeMovies);
-          renderPage(html);
-          const trending = getTrending(safeMovies);
-          const featured = trending.length > 0
-            ? trending[Math.floor(Math.random() * Math.min(trending.length, 5))]
-            : safeMovies[0];
-          if (featured) {
-            setTimeout(() => showHomeRecommendations(featured.movie_id), 0);
-          }
-        } catch (err) {
-          console.error('[Route /] ERROR:', err);
-          showErrorPage(err);
+      // Register routes
+      Router.on('/', function () {
+        renderPage(renderHome());
+        // Trigger recommendation loading after render
+        const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+        const safeMovies = applyAgeFilter(MOVIES, userAge);
+        const trending = getTrending(safeMovies);
+        const featured = trending.length > 0
+          ? trending[Math.floor(Math.random() * Math.min(trending.length, 5))]
+          : safeMovies[0];
+        if (featured) {
+          setTimeout(() => showHomeRecommendations(featured.movie_id), 0);
         }
       });
 
-      Router.on('/movies', async function () {
-        showAppLoading();
-        setPageTitle('Discover');
-        try {
-          const html = await renderCatalogue();
-          renderPage(html);
-          setTimeout(applyCatalogueFilters, 0);
-        } catch (err) { showErrorPage(err); }
+      Router.on('/movies', function () {
+        renderPage(renderCatalogue());
+        // Apply pre-set filters after DOM is ready
+        setTimeout(applyCatalogueFilters, 0);
       });
 
-      Router.on('/all', async function () {
-        showAppLoading();
-        setPageTitle('Library');
-        try {
-          renderPage(await renderMovieList());
-        } catch (err) { showErrorPage(err); }
+      Router.on('/all', function () {
+        renderPage(renderMovieList());
       });
 
-      Router.on('/section/:filter', async function (params) {
-        showAppLoading();
-        setPageTitle(params.filter);
-        try {
-          renderPage(await renderMovieList(params));
-        } catch (err) { showErrorPage(err); }
+      Router.on('/search/:query', function (params) {
+        renderPage(renderMovieList(params));
       });
 
-      Router.on('/movie/:id', async function (params) {
-        showAppLoading();
-        try {
-          const html = await renderDetail(params);
-          renderPage(html);
-          setTimeout(animateRatingBar, 0);
-          setTimeout(() => showDetailRecommendations(parseInt(params.id)), 0);
-          const movieId = parseInt(params.id);
-          // Fetch movie object for proper tracking instead of passing null
-          setTimeout(async () => {
-            try {
-              const movieObj = await API.getMovieById(movieId);
-              trackMovieView(movieId, movieObj);
-            } catch (e) { trackMovieView(movieId, null); }
-            loadExistingRating(movieId);
-          }, 100);
-        } catch (err) { showErrorPage(err); }
+      // Filtered view (Latest, Popular, etc.)
+      Router.on('/section/:filter', function (params) {
+        renderPage(renderMovieList(params));
       });
 
-      Router.on('/platform/:name', async function (params) {
-        showAppLoading();
-        setPageTitle(params.name);
-        try {
-          renderPage(await renderPlatform(params));
-        } catch (err) { showErrorPage(err); }
+      Router.on('/movie/:id', function (params) {
+        renderPage(renderDetail(params));
+        // Animate rating bar and load recommendations after render
+        setTimeout(animateRatingBar, 0);
+        setTimeout(() => showDetailRecommendations(parseInt(params.id)), 0);
+        // Track view & load existing rating
+        const movieId = parseInt(params.id);
+        const movie = MOVIES.find(m => m.movie_id === movieId);
+        setTimeout(() => {
+          trackMovieView(movieId, movie);
+          loadExistingRating(movieId);
+        }, 100);
       });
 
+      Router.on('/platform/:name', function (params) {
+        renderPage(renderPlatform(params));
+      });
+
+      // Profile route
       Router.on('/profile', function () {
-        setPageTitle('Profile');
-        try {
-          renderPage(renderProfile());
-          setTimeout(loadProfileData, 100);
-        } catch (err) { showErrorPage(err); }
+        renderPage(renderProfile());
+        setTimeout(loadProfileData, 100);
       });
 
+      // ML Intelligence Dashboard
       Router.on('/dashboard', function () {
-        setPageTitle('AI Dashboard');
-        try {
-          renderPage(renderDashboard());
-          setTimeout(loadDashboardData, 100);
-        } catch (err) { showErrorPage(err); }
+        renderPage(renderDashboard());
+        setTimeout(loadDashboardData, 100);
       });
 
       // Start router
@@ -376,63 +191,16 @@
         });
       }
 
-      // ── FIX #4: Live Search Bar Logic ──
-      (function initSearch() {
-        const input = document.getElementById('nav-search-input');
-        const resultsBox = document.getElementById('nav-search-results');
-        if (!input || !resultsBox) return;
-
-        let debounce = null;
-
-        input.addEventListener('input', function () {
-          clearTimeout(debounce);
-          const q = input.value.trim();
-          if (q.length < 2) {
-            resultsBox.innerHTML = '';
-            resultsBox.style.display = 'none';
-            return;
-          }
-          debounce = setTimeout(async () => {
-            try {
-              const res = await API.getMovies({ search: q, limit: 8 });
-              const movies = (res.data || []);
-              if (movies.length === 0) {
-                resultsBox.innerHTML = '<div class="search-no-results">No movies found for "' + escapeHTML(q) + '"</div>';
-              } else {
-                resultsBox.innerHTML = movies.map(m => `
-                  <div class="search-result-item" onclick="Router.navigate('/movie/${m.movie_id}'); document.getElementById('nav-search-results').style.display='none'; document.getElementById('nav-search-input').value='';">
-                    <img src="${m.poster}" alt="" class="search-result-poster" onerror="this.onerror=null; this.src='${generatePlaceholderUrl(m.title)}'" />
-                    <div class="search-result-info">
-                      <div class="search-result-title">${escapeHTML(m.title)}</div>
-                      <div class="search-result-meta">
-                        <span class="genre-badge" style="font-size:10px;padding:2px 6px;">${escapeHTML((m.genre && m.genre[0]) || 'Movie')}</span>
-                        <span style="color:var(--accent-tertiary);font-size:11px;">⭐ ${m.rating_percent}%</span>
-                      </div>
-                    </div>
-                  </div>
-                `).join('');
-              }
-              resultsBox.style.display = 'block';
-            } catch (err) {
-              console.error('Search failed', err);
-            }
-          }, 300);
-        });
-
-        // Close results when clicking outside
-        document.addEventListener('click', (e) => {
-          if (!e.target.closest('#nav-search-container')) {
-            resultsBox.style.display = 'none';
-          }
-        });
-
-        // Re-show on focus if there is text
-        input.addEventListener('focus', () => {
-          if (input.value.trim().length >= 2 && resultsBox.innerHTML) {
-            resultsBox.style.display = 'block';
-          }
-        });
-      })();
+      // Global Search Handler
+      window.handleGlobalSearch = function () {
+        const input = document.getElementById('global-search-input');
+        const query = input.value.trim();
+        if (query) {
+          Router.navigate(`/search/${encodeURIComponent(query)}`);
+          // blur input to hide keyboard on mobile
+          input.blur();
+        }
+      };
 
       // Listen for hash changes to update nav
       window.addEventListener('hashchange', updateActiveNav);

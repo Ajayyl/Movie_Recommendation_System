@@ -1,8 +1,8 @@
 // UniVibe — Movie Detail Page
 
-async function renderDetail(params) {
+function renderDetail(params) {
   const movieId = parseInt(params.id);
-  const movie = await API.getMovieById(movieId);
+  const movie = MOVIES.find(m => m.movie_id === movieId);
 
   if (!movie) {
     return `
@@ -15,10 +15,20 @@ async function renderDetail(params) {
     `;
   }
 
-  // 2nd Age Check logic block removed because it was rendering empty state text without returning properly in the original mock.
-  // The first block returns HTML if userAge < limits anyways.
+  // Check age filter
+  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  if (userAge < movie.age_limit) {
+    return `
+      <div class="empty-state" style="padding-top: 140px;">
+        <div class="empty-icon">🔒</div>
+        <h3>Age-Restricted Content</h3>
+        <p>This movie requires age ${movie.age_limit}+. Please update your age to access.</p>
+        <a href="#/" class="btn btn-primary" style="margin-top: 20px;">← Go Home</a>
+      </div>
+    `;
+  }
+
   const ageBadgeText = movie.age_limit === 0 ? 'All' : movie.age_limit + '+';
-  if (typeof setPageTitle === 'function') setPageTitle(movie.title);
 
   return `
     <div class="detail-page">
@@ -31,7 +41,7 @@ async function renderDetail(params) {
             <img
               src="${movie.poster}"
               alt="${movie.title}"
-              onerror="this.onerror=null; this.src='${generatePlaceholderUrl(movie.title)}'"
+              onerror="this.src='https://via.placeholder.com/300x450/1a1a2e/7c3aed?text=${encodeURIComponent(movie.title)}'"
             />
           </div>
 
@@ -113,11 +123,12 @@ async function renderDetail(params) {
  * Show recommendations on the detail page after analysis delay.
  * Displays reasoning text under each recommended card for explainability.
  */
-async function showDetailRecommendations(movieId) {
+function showDetailRecommendations(movieId) {
   const container = document.getElementById('detail-recommendations');
   if (!container) return;
 
-  const recs = await API.getSimilarMovies(movieId, 6);
+  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  const recs = getRecommendations(MOVIES, movieId, userAge, 6);
 
   setTimeout(() => {
     if (recs.length > 0) {
@@ -125,11 +136,10 @@ async function showDetailRecommendations(movieId) {
         <div class="movie-row stagger">
           ${recs.map(item => {
         // Wrap card to track recommendation clicks
-        const reasonStr = `🎯 Similar vibe: ${item.genre.join(', ')}`;
-        const card = renderRecommendedCard(item, reasonStr);
+        const card = renderRecommendedCard(item.movie, item.reason);
         return card.replace(
-          `onclick="Router.navigate('/movie/${item.movie_id}')"`,
-          `onclick="trackRecommendationClick(${item.movie_id}, false); Router.navigate('/movie/${item.movie_id}')"`
+          `onclick="Router.navigate('/movie/${item.movie.movie_id}')"`,
+          `onclick="trackRecommendationClick(${item.movie.movie_id}, MOVIES.find(m=>m.movie_id===${item.movie.movie_id})); Router.navigate('/movie/${item.movie.movie_id}')"`
         );
       }).join('')}
         </div>
@@ -143,7 +153,7 @@ async function showDetailRecommendations(movieId) {
         </div>
       `;
     }
-  }, 400);
+  }, 1500);
 }
 
 function getOTTIcon(name) {

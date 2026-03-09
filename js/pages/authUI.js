@@ -431,11 +431,11 @@ async function loadRLRecommendations() {
 
   const recs = res.data.recommendations;
 
-  // Use movie object from API response (MOVIES array is empty — data is served from API)
+  // Map recommendation data back to full movie objects
   container.innerHTML = `
     <div class="movie-row stagger">
       ${recs.map(rec => {
-    const movie = rec.movie;
+    const movie = MOVIES.find(m => m.movie_id === rec.movie_id);
     if (!movie) return '';
     return renderRecommendedCard(movie, rec.reason);
   }).join('')}
@@ -462,19 +462,20 @@ async function loadActivityFeed() {
   container.innerHTML = `
     <div class="activity-list">
       ${res.data.interactions.map(i => {
-    const movie_title = i.movie_title || `Movie #${i.movie_id}`;
+    const movie = MOVIES.find(m => m.movie_id === i.movie_id);
+    const title = movie ? movie.title : `Movie #${i.movie_id}`;
     const time = new Date(i.created_at).toLocaleString();
     return `
-      <div class="history-item fade-in-up">
-        <span class="history-icon">${icons[i.event_type] || '🎬'}</span>
-        <div class="history-info">
-          <span class="history-action">${i.event_type}</span>
-          <a href="#/movie/${i.movie_id}" class="history-movie">${movie_title}</a>
-          ${i.event_value ? `<span class="activity-value">${i.event_value}</span>` : ''}
-        </div>
-        <span class="history-time">${time}</span>
-      </div>
-    `;
+          <div class="activity-item fade-in-up">
+            <span class="activity-icon">${icons[i.event_type] || '📊'}</span>
+            <div class="activity-info">
+              <span class="activity-event">${i.event_type}</span>
+              <span class="activity-movie" onclick="Router.navigate('/movie/${i.movie_id}')">${title}</span>
+              ${i.event_value ? `<span class="activity-value">${i.event_value}</span>` : ''}
+            </div>
+            <span class="activity-time">${time}</span>
+          </div>
+        `;
   }).join('')}
     </div>
   `;
@@ -494,13 +495,14 @@ async function loadSearchHistory() {
     <div class="search-history-list">
       ${res.data.searches.map(s => {
     const time = new Date(s.created_at).toLocaleString();
+    const movie = s.selected_movie_id ? MOVIES.find(m => m.movie_id === s.selected_movie_id) : null;
     return `
           <div class="search-item fade-in-up">
             <span class="search-icon">🔍</span>
             <div class="search-info">
               <span class="search-query">"${s.query}"</span>
               <span class="search-results">${s.result_count} results</span>
-              ${s.selected_movie_title ? `<span class="search-selected">→ Selected: ${s.selected_movie_title}</span>` : ''}
+              ${movie ? `<span class="search-selected">→ Selected: ${movie.title}</span>` : ''}
             </div>
             <span class="search-time">${time}</span>
           </div>
@@ -519,15 +521,9 @@ function showEditProfile() {
   if (!user) return;
 
   const avatars = ['👤', '🎬', '🍿', '🎭', '🎪', '🎯', '🦊', '🐱', '🦋', '🌟', '🔥', '💜', '🌈', '🎵', '🎮', '🚀'];
+  const allGenres = getAllGenres(MOVIES);
 
-  // Show a temporary loading state if genres take a moment to fetch
-  const tempModalId = 'temp-loading-modal';
-  document.body.insertAdjacentHTML('beforeend', `<div class="auth-overlay" id="${tempModalId}"><div class="mini-spinner" style="width: 40px; height: 40px;"></div></div>`);
-
-  API.getGenres().then(allGenres => {
-    document.getElementById(tempModalId)?.remove();
-
-    const modal = `
+  const modal = `
     <div class="auth-overlay" id="edit-profile-modal">
       <div class="auth-card" style="max-width:520px;">
         <button class="auth-close" onclick="document.getElementById('edit-profile-modal').remove()">✕</button>
@@ -565,10 +561,10 @@ function showEditProfile() {
             <label>Preferred Genres (select up to 3)</label>
             <div class="genre-picker" id="genre-picker">
               ${allGenres.map(g => {
-      const preferred = JSON.parse(user.preferred_genres || '[]');
-      return `<button type="button" class="genre-pick-btn ${preferred.includes(g) ? 'active' : ''}" 
+    const preferred = JSON.parse(user.preferred_genres || '[]');
+    return `<button type="button" class="genre-pick-btn ${preferred.includes(g) ? 'active' : ''}" 
                           onclick="toggleGenrePick(this, '${g}')">${g}</button>`;
-    }).join('')}
+  }).join('')}
             </div>
           </div>
           <div class="auth-field">
@@ -587,11 +583,7 @@ function showEditProfile() {
     </div>
   `;
 
-    document.body.insertAdjacentHTML('beforeend', modal);
-  }).catch(e => {
-    console.error("Failed to load genres", e);
-    document.getElementById(tempModalId)?.remove();
-  });
+  document.body.insertAdjacentHTML('beforeend', modal);
 }
 
 function selectAvatar(btn, emoji) {
@@ -783,10 +775,9 @@ function renderRatingWidget(movieId) {
   return `
     <div class="rating-widget" id="rating-widget">
       <div class="rating-prompt">Rate this movie</div>
-      <div class="star-rating" id="star-rating" data-movie-id="${movieId}" role="group" aria-label="Rate from 1 to 5 stars">
+      <div class="star-rating" id="star-rating" data-movie-id="${movieId}">
         ${[1, 2, 3, 4, 5].map(i => `
-          <button class="star-btn" data-value="${i}" aria-label="Rate ${i} star${i > 1 ? 's' : ''}" 
-                  onclick="submitRating(${movieId}, ${i})" 
+          <button class="star-btn" data-value="${i}" onclick="submitRating(${movieId}, ${i})" 
                   onmouseenter="highlightStars(${i})" onmouseleave="resetStarHighlight(${movieId})">
             ★
           </button>
