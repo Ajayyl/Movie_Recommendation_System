@@ -144,8 +144,21 @@ const API = {
 
     async getSearchHistory() { return { ok: true, data: { searches: [] } }; },
     async getLearningStats() {
-        const history = LocalRL.db.getInteractions();
-        return { ok: true, data: { stats: { totalInteractions: history.length, modelMaturity: 'mature', topGenres: [] } } };
+        const stats = LocalRL.getUserLearningStats();
+        return {
+            ok: true,
+            data: {
+                stats: {
+                    totalInteractions: stats.summary.totalInteractions,
+                    modelMaturity: stats.summary.modelMaturity,
+                    totalQEntries: stats.summary.totalQEntries,
+                    uniqueStatesLearned: stats.summary.uniqueStates,
+                    avgQValue: stats.summary.avgQValue,
+                    topGenres: [],
+                    activityBreakdown: stats.activityBreakdown
+                }
+            }
+        };
     },
 
     // ── Generic GET (for legacy calls) ──

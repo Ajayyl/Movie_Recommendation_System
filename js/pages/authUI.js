@@ -242,7 +242,7 @@ function renderProfile() {
             </div>
             <div class="profile-stats-row" id="profile-stats-row">
               <div class="stat-pill"><span class="stat-label">Age</span><span class="stat-value">${user.age}</span></div>
-              <div class="stat-pill"><span class="stat-label">Joined</span><span class="stat-value">${new Date(user.created_at).toLocaleDateString()}</span></div>
+              <div class="stat-pill"><span class="stat-label">Joined</span><span class="stat-value">${new Date(user.created_at || Date.now()).toLocaleDateString()}</span></div>
               <div class="stat-pill" id="stat-interactions"><span class="stat-label">Interactions</span><span class="stat-value">...</span></div>
             </div>
           </div>
