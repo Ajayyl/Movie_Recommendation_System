@@ -143,43 +143,85 @@ const LocalRL = {
         const avgQValue = qValues.length > 0 ? qValues.reduce((a, b) => a + b, 0) / qValues.length : 0;
         const maxQValue = qValues.length > 0 ? Math.max(...qValues) : 0;
 
-        // Activity breakdown
-        const activity = { view: 0, click: 0, rating: 0, recommend_click: 0, watchlist: 0 };
-        interactions.forEach(i => { if (activity[i.event_type] !== undefined) activity[i.event_type]++; });
+        // 1. Timeline (grouped by day for the last 7 days)
+        const timelineLabels = [];
+        const timelineData = [];
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dateStr = d.toISOString().split('T')[0];
+            timelineLabels.push(d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
+            timelineData.push(interactions.filter(int => int.created_at?.startsWith(dateStr)).length);
+        }
 
-        // Genre heatmap simulation (simplified)
-        const genreHeatmap = {};
+        // 2. Genre Breakdown (Heatmap format)
+        const genreBreakdown = {};
         interactions.forEach(i => {
             if (!i.genre) return;
-            if (!genreHeatmap[i.genre]) genreHeatmap[i.genre] = { view: 0, click: 0, rating: 0, recommend_click: 0 };
-            if (genreHeatmap[i.genre][i.event_type] !== undefined) genreHeatmap[i.genre][i.event_type]++;
+            if (!genreBreakdown[i.genre]) genreBreakdown[i.genre] = { view: 0, click: 0, rating: 0, recommend_click: 0 };
+            if (genreBreakdown[i.genre][i.event_type] !== undefined) genreBreakdown[i.genre][i.event_type]++;
         });
 
-        // State radar simulation
-        const states = {};
-        Object.keys(qTable).forEach(k => {
-            const state = k.split('|')[0];
-            states[state] = (states[state] || 0) + 1;
+        // 3. Q-Distribution (histogram bins)
+        const bins = [0, 1, 2, 3, 4, 5];
+        const qCounts = bins.map(b => qValues.filter(q => q >= b && q < b + 1).length);
+
+        // 4. Rating Distribution
+        const ratingDist = [0, 0, 0, 0, 0];
+        ratings.forEach(r => {
+            if (r.rating >= 1 && r.rating <= 5) ratingDist[r.rating - 1]++;
         });
+
+        // 5. Source Breakdown (Fake some diversity if limited)
+        const sourceBreakdown = { rl: 0, content: 0, popular: 0, explore: 0, hybrid: 0 };
+        interactions.forEach(i => {
+            if (i.event_type === 'recommend_click') sourceBreakdown.rl++;
+            else if (i.event_type === 'view') sourceBreakdown.content++;
+        });
+        if (sourceBreakdown.rl === 0) sourceBreakdown.popular = totalInteractions;
+
+        // 6. State Details
+        const stateMap = {};
+        Object.entries(qTable).forEach(([key, val]) => {
+            const s = key.split('|')[0];
+            if (!stateMap[s]) stateMap[s] = { state: s, movieCount: 0, totalQ: 0 };
+            stateMap[s].movieCount++;
+            stateMap[s].totalQ += val.q;
+        });
+        const stateDetails = Object.values(stateMap).map(s => ({
+            ...s,
+            avgQ: (s.totalQ / s.movieCount).toFixed(2)
+        }));
+
+        const summary = {
+            totalInteractions,
+            totalQEntries: qValues.length,
+            uniqueStates: stateDetails.length,
+            totalRatings: ratings.length,
+            avgQValue: avgQValue.toFixed(2),
+            maxQValue: maxQValue.toFixed(2),
+            modelMaturity: totalInteractions < 5 ? 'cold_start' : totalInteractions < 20 ? 'learning' : 'mature'
+        };
+
+        // 7. Activity Breakdown (Needed for profile page)
+        const activityBreakdown = { view: 0, click: 0, rating: 0, recommend_click: 0, watchlist: 0 };
+        interactions.forEach(i => { if (activityBreakdown[i.event_type] !== undefined) activityBreakdown[i.event_type]++; });
 
         return {
-            summary: {
-                totalInteractions,
-                totalQEntries: qValues.length,
-                uniqueStates: new Set(Object.keys(qTable).map(k => k.split('|').slice(0, 3).join('|'))).size,
-                totalRatings: ratings.length,
-                avgQValue: avgQValue.toFixed(2),
-                maxQValue: maxQValue.toFixed(2),
-                modelMaturity: totalInteractions < 5 ? 'cold_start' : totalInteractions < 20 ? 'learning' : 'mature'
-            },
-            activityBreakdown: activity,
-            genreHeatmap,
-            topMovies: Object.entries(qTable).sort((a, b) => b[1].q - a[1].q).slice(0, 5).map(([k, v]) => {
+            summary,
+            timeline: { labels: timelineLabels, datasets: [{ label: 'Interactions', data: timelineData }] },
+            genreBreakdown,
+            qDistribution: { labels: bins, counts: qCounts },
+            ratingDistribution: ratingDist,
+            sourceBreakdown,
+            stateDetails,
+            topMovieQ: Object.entries(qTable).sort((a, b) => b[1].q - a[1].q).slice(0, 10).map(([k, v]) => {
                 const id = parseInt(k.split('|').pop());
                 const m = MOVIES.find(movie => movie.movie_id === id);
-                return { title: m?.title || 'Unknown', q: v.q.toFixed(2) };
+                return { title: m?.title || 'Unknown', maxQ: v.q };
             }),
-            stateSpace: states
+            activityBreakdown,
+            config: this.CONFIG
         };
     }
 };

@@ -1,6 +1,3 @@
-// UniVibe — Local API Mock (Serverless)
-// Handles all data locally in the browser to work on GitHub Pages & Offline.
-
 const API = {
     // ── Local Storage Keys ──
     USER_KEY: 'univibe_user_local',
@@ -13,7 +10,13 @@ const API = {
     },
 
     getUser() {
-        return JSON.parse(localStorage.getItem(this.USER_KEY) || 'null');
+        const user = JSON.parse(localStorage.getItem(this.USER_KEY) || 'null');
+        // Robustness: ensure existing users get a created_at date
+        if (user && !user.created_at) {
+            user.created_at = new Date().toISOString();
+            localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+        }
+        return user;
     },
 
     async login(username, password) {
