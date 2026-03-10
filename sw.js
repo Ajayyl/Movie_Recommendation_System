@@ -3,7 +3,7 @@
 // Caches all static assets for full offline functionality
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'univibe-v10';
+const CACHE_NAME = 'univibe-v11';
 
 // All static assets to cache for offline use
 const STATIC_ASSETS = [
@@ -91,7 +91,23 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // For static assets: Cache first, then network fallback
+    // For JS and CSS files: Network first, cache fallback (ensures code updates propagate)
+    if (request.url.endsWith('.js') || request.url.endsWith('.css') || request.url.includes('.js?') || request.url.includes('.css?')) {
+        event.respondWith(
+            fetch(request)
+                .then((response) => {
+                    if (response && response.ok) {
+                        const responseClone = response.clone();
+                        caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+                    }
+                    return response;
+                })
+                .catch(() => caches.match(request))
+        );
+        return;
+    }
+
+    // For other static assets (images etc.): Cache first, then network fallback
     event.respondWith(
         caches.match(request)
             .then((cachedResponse) => {
