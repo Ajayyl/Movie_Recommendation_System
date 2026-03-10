@@ -58,6 +58,13 @@ function renderDetail(params) {
 
             <p class="detail-synopsis">${movie.synopsis}</p>
 
+            ${movie.quote ? `
+            <blockquote class="detail-quote">
+              <span class="detail-quote-icon">💭</span>
+              <p>${movie.quote}</p>
+            </blockquote>
+            ` : ''}
+
             <!-- Rating -->
             <div class="rating-section">
               <div class="rating-label">Reference Rating (avg. IMDb, Rotten Tomatoes, Metacritic)</div>

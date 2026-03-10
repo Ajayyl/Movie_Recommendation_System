@@ -12,6 +12,7 @@ const MOVIES = [
         "year": 2010,
         "poster": "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg",
         "synopsis": "A skilled thief who infiltrates dreams is offered a chance to have his criminal record erased if he can successfully plant an idea in a target's subconscious.",
+        "quote": "An idea is like a virus. Resilient. Highly contagious. — Sometimes the smallest thought planted in your mind changes your entire life.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com/title/70131314"},
@@ -31,6 +32,7 @@ const MOVIES = [
         "year": 2014,
         "poster": "https://image.tmdb.org/t/p/w500/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
         "synopsis": "A legendary concierge at a famous European hotel and his trusted lobby boy become embroiled in the theft of a priceless painting.",
+        "quote": "There are still faint glimmers of civilization left in this barbaric slaughterhouse. — Even in chaos, hold on to what makes life beautiful.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com"},
@@ -50,6 +52,7 @@ const MOVIES = [
         "year": 2003,
         "poster": "https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg",
         "synopsis": "A clownfish named Marlin embarks on a perilous journey across the ocean to find his abducted son Nemo, with the help of a forgetful fish named Dory.",
+        "quote": "Just keep swimming. — When life gets hard, the only way out is forward.",
         "tags": ["family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/finding-nemo/5Gpj2XqF7BV2"}
@@ -68,6 +71,7 @@ const MOVIES = [
         "year": 2017,
         "poster": "https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.png",
         "synopsis": "A young blade runner uncovers a long-buried secret that has the potential to plunge what's left of society into chaos.",
+        "quote": "All those moments will be lost in time, like tears in rain. — Cherish every moment — they won't last forever.",
         "tags": ["cult", "underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B0764GY2JD"},
@@ -87,6 +91,7 @@ const MOVIES = [
         "year": 1994,
         "poster": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
         "synopsis": "A banker sentenced to life in Shawshank State Penitentiary forms an unlikely friendship and finds hope through acts of common decency.",
+        "quote": "Get busy living, or get busy dying. — Hope is the one thing no prison can take from you.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -106,6 +111,7 @@ const MOVIES = [
         "year": 1988,
         "poster": "https://image.tmdb.org/t/p/w500/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg",
         "synopsis": "Two young girls move to the countryside and befriend playful forest spirits, including the lovable giant creature Totoro.",
+        "quote": "Sometimes you just need to sit with a giant, fluffy friend. — Find your quiet place in this noisy world.",
         "tags": ["family-safe", "cult"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -125,6 +131,7 @@ const MOVIES = [
         "year": 1994,
         "poster": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
         "synopsis": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+        "quote": "The path of the righteous man is beset on all sides. — Life isn't about the destination, it's about the messy journey.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B000I9YJ8E"},
@@ -144,6 +151,7 @@ const MOVIES = [
         "year": 2017,
         "poster": "https://image.tmdb.org/t/p/w500/gGEsBPAijhVUFoiNpgZXqRVWJt2.jpg",
         "synopsis": "A young boy who dreams of becoming a musician journeys to the Land of the Dead to uncover his family's history.",
+        "quote": "Never forget where you come from. — Your roots are the most beautiful part of who you are.",
         "tags": ["family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/coco/db9orsI5O4gC"}
@@ -162,6 +170,7 @@ const MOVIES = [
         "year": 2011,
         "poster": "https://image.tmdb.org/t/p/w500/602vevIURmpDfzbnv5Ubi6wIkQm.jpg",
         "synopsis": "A Hollywood stunt driver who moonlights as a getaway driver finds himself in trouble when he helps his neighbour.",
+        "quote": "There are no clean getaways. — Some roads look simple, but every choice has a cost.",
         "tags": ["cult", "underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B006IMZ0DQ"},
@@ -181,6 +190,7 @@ const MOVIES = [
         "year": 2013,
         "poster": "https://image.tmdb.org/t/p/w500/hFesdtnQmCLFEOMA3jGvVlEGsR0.jpg",
         "synopsis": "A daydreamer escapes his anonymous life by disappearing into a world of fantasies of romance, heroism, and action.",
+        "quote": "To see the world, things dangerous to come to. To see behind walls, draw closer. — Life begins where your comfort zone ends.",
         "tags": ["underrated", "family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com"},
@@ -200,6 +210,7 @@ const MOVIES = [
         "year": 2014,
         "poster": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
         "synopsis": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival on a dying Earth.",
+        "quote": "We used to look up at the sky and wonder. Now we just look down and worry. — Don't forget to dream big, even when reality weighs you down.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Paramount+", "url": "https://www.paramountplus.com"},
@@ -219,6 +230,7 @@ const MOVIES = [
         "year": 2001,
         "poster": "https://image.tmdb.org/t/p/w500/yr7wocm26hT7IQBB78sprQVLlVd.jpg",
         "synopsis": "A young girl wanders into a world of spirits ruled by gods, witches, and strange creatures, and must find the courage to free herself and her parents.",
+        "quote": "Once you meet someone, you never really forget them. — The people who change your life stay in your heart forever.",
         "tags": ["cult", "family-safe"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -238,6 +250,7 @@ const MOVIES = [
         "year": 2013,
         "poster": "https://image.tmdb.org/t/p/w500/34m2tygAYBGqA9MXKhRDtzYd4MR.jpg",
         "synopsis": "Based on the true story of Jordan Belfort, a wealthy stockbroker who ran a massive securities fraud scheme.",
+        "quote": "The only thing standing between you and your goal is the story you keep telling yourself. — Stop making excuses. Start making moves.",
         "tags": [],
         "ottPlatforms": [
             {"name": "Paramount+", "url": "https://www.paramountplus.com"},
@@ -257,6 +270,7 @@ const MOVIES = [
         "year": 2009,
         "poster": "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
         "synopsis": "An elderly widower ties thousands of balloons to his house and flies to South America, accidentally taking a young stowaway along for the ride.",
+        "quote": "Adventure is out there! — You're never too old to chase your dreams.",
         "tags": ["family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/up/3HbSCnQEbir9"}
@@ -275,6 +289,7 @@ const MOVIES = [
         "year": 2016,
         "poster": "https://image.tmdb.org/t/p/w500/qLnfEmPrDjJfPyyddLJPkXmshkp.jpg",
         "synopsis": "A timeless story of human self-discovery and connection, told across three defining chapters in the life of a young Black man growing up in Miami.",
+        "quote": "At some point, you gotta decide for yourself who you gonna be. — Don't let the world write your story for you.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B01MU9CMGP"},
@@ -294,6 +309,7 @@ const MOVIES = [
         "year": 1999,
         "poster": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
         "synopsis": "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
+        "quote": "I know you're out there. I can feel you now. — The reality you accept is the reality you live in. Question everything.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -313,6 +329,7 @@ const MOVIES = [
         "year": 2003,
         "poster": "https://image.tmdb.org/t/p/w500/qRz3doI7a2ftwWng7wE6lZCZquk.jpg",
         "synopsis": "A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.",
+        "quote": "Let's never come here again because it would never be as much fun. — Some moments are perfect precisely because they can't be repeated.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B000IBUPMK"},
@@ -332,6 +349,7 @@ const MOVIES = [
         "year": 2015,
         "poster": "https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg",
         "synopsis": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a drifter named Max.",
+        "quote": "Oh, what a day! What a lovely day! — When everything burns around you, find something worth fighting for.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -351,6 +369,7 @@ const MOVIES = [
         "year": 1998,
         "poster": "https://image.tmdb.org/t/p/w500/vuza0WqY239yBXOadKlGwJsZJFE.jpg",
         "synopsis": "An insurance salesman discovers his whole life is actually a giant TV show, and everyone around him is acting.",
+        "quote": "We accept the reality of the world with which we are presented. — Break free from the show others have written for you.",
         "tags": ["cult", "family-safe"],
         "ottPlatforms": [
             {"name": "Paramount+", "url": "https://www.paramountplus.com"},
@@ -370,6 +389,7 @@ const MOVIES = [
         "year": 2001,
         "poster": "https://image.tmdb.org/t/p/w500/4rHIh0WlZNHE5pOgR31tBeUlJZN.jpg",
         "synopsis": "A shy waitress in Montmartre decides to change the lives of those around her for the better, while struggling with her own isolation.",
+        "quote": "Times are hard for dreamers. — But the world needs your kind of crazy. Never stop imagining.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B000I9YLWM"},
@@ -389,6 +409,7 @@ const MOVIES = [
         "year": 1999,
         "poster": "https://image.tmdb.org/t/p/w500/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg",
         "synopsis": "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into something much more.",
+        "quote": "It's only after we've lost everything that we're free to do anything. — Sometimes you have to let go of who you were to become who you need to be.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B003MAQG9Y"},
@@ -408,6 +429,7 @@ const MOVIES = [
         "year": 2015,
         "poster": "https://image.tmdb.org/t/p/w500/ayyBTAxL0ONtf8E9ttBLOjf450K.jpg",
         "synopsis": "After young Riley is uprooted from her Midwest life, her emotions — Joy, Fear, Anger, Disgust and Sadness — conflict on how to navigate a new city.",
+        "quote": "Do you ever look at someone and wonder: what is going on inside their head? — Be kind. Everyone is fighting battles you can't see.",
         "tags": ["family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/inside-out/2I0bBbhZIbkZ"}
@@ -426,6 +448,7 @@ const MOVIES = [
         "year": 2007,
         "poster": "https://image.tmdb.org/t/p/w500/bj1v6YKF8yHqA489VFfnQvOJpnc.jpg",
         "synopsis": "Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and a suitcase full of cash in the desert.",
+        "quote": "You can't stop what's coming. — Life doesn't wait for you to be ready. Keep moving anyway.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Paramount+", "url": "https://www.paramountplus.com"},
@@ -445,6 +468,7 @@ const MOVIES = [
         "year": 2008,
         "poster": "https://image.tmdb.org/t/p/w500/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg",
         "synopsis": "In a distant future, a small waste-collecting robot inadvertently embarks on a space journey that will decide the fate of mankind.",
+        "quote": "I don't want to survive. I want to live. — Existing isn't enough. Make every day count.",
         "tags": ["family-safe", "cult"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/wall-e/5G1wpZC2Lb6I"}
@@ -463,6 +487,7 @@ const MOVIES = [
         "year": 2013,
         "poster": "https://image.tmdb.org/t/p/w500/70NBqsoTHo7fOwcK4urZEFaGOSw.jpg",
         "synopsis": "In a near future, a lonely writer develops an unlikely relationship with an operating system designed to meet his every need.",
+        "quote": "The past is just a story we tell ourselves. — You are not your mistakes. You are what you choose to be next.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B00HHJR5PO"},
@@ -482,6 +507,7 @@ const MOVIES = [
         "year": 2008,
         "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
         "synopsis": "Batman raises the stakes in his war on crime, facing off against the Joker, a criminal mastermind who wreaks havoc on Gotham City.",
+        "quote": "Why so serious? — The world will test you. Don't lose your sense of self in the process.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -501,6 +527,7 @@ const MOVIES = [
         "year": 2017,
         "poster": "https://image.tmdb.org/t/p/w500/gvVgMUoDPYHORiDMkpdzq98tFin.jpg",
         "synopsis": "Paddington, now settled with the Brown family in London, picks up a series of odd jobs to buy the perfect present, but must clear his name when the gift is stolen.",
+        "quote": "If we're kind and polite, the world will be right. — A little kindness goes a long way, even when the world doesn't deserve it.",
         "tags": ["family-safe", "underrated"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -520,6 +547,7 @@ const MOVIES = [
         "year": 2004,
         "poster": "https://image.tmdb.org/t/p/w500/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg",
         "synopsis": "When their relationship turns sour, a couple undergoes a medical procedure to have each other erased from their memories.",
+        "quote": "How happy is the blameless soul's lot! — Forgetting someone doesn't erase what they meant to you.",
         "tags": ["cult", "underrated"],
         "ottPlatforms": [
             {"name": "Peacock", "url": "https://www.peacocktv.com"},
@@ -539,6 +567,7 @@ const MOVIES = [
         "year": 2014,
         "poster": "https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
         "synopsis": "An ex-hitman comes out of retirement to track down the gangsters that killed his dog and took everything from him.",
+        "quote": "People keep asking if I'm back. Yeah, I'm thinking I'm back. — When life knocks you down, come back stronger than ever.",
         "tags": [],
         "ottPlatforms": [
             {"name": "Peacock", "url": "https://www.peacocktv.com"},
@@ -558,6 +587,7 @@ const MOVIES = [
         "year": 2007,
         "poster": "https://image.tmdb.org/t/p/w500/cghrtuHdD8uujxQjG8czKQ635AJ.jpg",
         "synopsis": "A rat named Remy dreams of becoming a great chef and tries to achieve his goal by forming an alliance with a Parisian restaurant's garbage boy.",
+        "quote": "Not everyone can become a great artist, but a great artist can come from anywhere. — Never let anyone tell you that your background defines your limits.",
         "tags": ["family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/ratatouille/39wmItIWsg5s"}
@@ -576,6 +606,7 @@ const MOVIES = [
         "year": 2006,
         "poster": "https://image.tmdb.org/t/p/w500/ydomtut0UATCxnzdNdPiYTKtcwf.jpg",
         "synopsis": "An undercover cop and a mole in the police try to identify each other while infiltrating an Irish gang in Boston.",
+        "quote": "When you're facing a loaded gun, what's the difference? — Trust is fragile. Once broken, the game changes forever.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -595,6 +626,7 @@ const MOVIES = [
         "year": 2004,
         "poster": "https://image.tmdb.org/t/p/w500/mEh0NFn1C3PdbLScbooFMoaM5ET.jpg",
         "synopsis": "When a young hat-maker is turned into an old woman by a witch's curse, she finds refuge in the magical moving castle of the wizard Howl.",
+        "quote": "A heart's a heavy burden. — Love isn't always easy, but it's always worth the weight.",
         "tags": ["family-safe", "cult"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -614,6 +646,7 @@ const MOVIES = [
         "year": 2019,
         "poster": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
         "synopsis": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+        "quote": "They're not cockroaches. You can't just stamp on them. — The divide between rich and poor is a wound that never stops bleeding.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Hulu", "url": "https://www.hulu.com"},
@@ -633,6 +666,7 @@ const MOVIES = [
         "year": 1995,
         "poster": "https://image.tmdb.org/t/p/w500/9ehLZcm6rRIePqcKN2Wzak5aGWM.jpg",
         "synopsis": "A young man and woman meet on a train and end up spending one romantic evening together in Vienna before going their separate ways.",
+        "quote": "Isn't everything we do in life a way to be loved a little more? — At the end of the day, all anyone really wants is connection.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B00AEFXVYM"},
@@ -652,6 +686,7 @@ const MOVIES = [
         "year": 2014,
         "poster": "https://image.tmdb.org/t/p/w500/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
         "synopsis": "A promising young drummer enrolls at a cut-throat music conservatory where his dreams of greatness are mentored by an abusive instructor.",
+        "quote": "There are no two words more harmful than 'good job'. — Greatness demands discomfort. Comfort is the enemy of growth.",
         "tags": ["cult", "underrated"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -671,6 +706,7 @@ const MOVIES = [
         "year": 2020,
         "poster": "https://image.tmdb.org/t/p/w500/hm58Jw4Lw8OIeECIq5qyPYhAeRJ.jpg",
         "synopsis": "A middle-school music teacher's passion for jazz leads him on an extraordinary journey to discover what it means to have a soul.",
+        "quote": "Is all this living really worth dying for? — What makes life meaningful isn't the achievement — it's the passion.",
         "tags": ["family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/soul/77tlWpb1AWsC"}
@@ -689,6 +725,7 @@ const MOVIES = [
         "year": 1990,
         "poster": "https://image.tmdb.org/t/p/w500/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg",
         "synopsis": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners.",
+        "quote": "As far back as I can remember, I always wanted to be a gangster. — We all chase versions of success. Make sure yours doesn't cost you everything.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -708,6 +745,7 @@ const MOVIES = [
         "year": 1987,
         "poster": "https://image.tmdb.org/t/p/w500/lxmULlro6055tZr14ZI91TFtq58.jpg",
         "synopsis": "A farmhand-turned-pirate encounters numerous obstacles, enemies, and allies in his quest to be reunited with his true love.",
+        "quote": "As you wish. — True love doesn't need grand gestures. Sometimes three simple words say it all.",
         "tags": ["cult", "family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com"},
@@ -727,6 +765,7 @@ const MOVIES = [
         "year": 2018,
         "poster": "https://image.tmdb.org/t/p/w500/nAU74GmpUk7t5iklEp3bufwDq4n.jpg",
         "synopsis": "A family is forced to live in silence while hiding from creatures that hunt by sound, finding new ways to survive in a post-apocalyptic world.",
+        "quote": "If they hear you, they hunt you. — In a world full of noise, sometimes silence is your greatest strength.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Paramount+", "url": "https://www.paramountplus.com"},
@@ -746,6 +785,7 @@ const MOVIES = [
         "year": 1994,
         "poster": "https://image.tmdb.org/t/p/w500/2rEJ8jPjyjMIYAmTqRbLdrHud5r.jpg",
         "synopsis": "A young lion prince flees his kingdom after the murder of his father, only to learn the true meaning of responsibility and bravery.",
+        "quote": "Remember who you are. — When life makes you forget your worth, look inside — your strength was always there.",
         "tags": ["cult", "family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/the-lion-king/1HqwiEcje6Nj"}
@@ -764,6 +804,7 @@ const MOVIES = [
         "year": 2021,
         "poster": "https://image.tmdb.org/t/p/w500/5F6GBIdWpRk6f52FX5VipK57vuv.jpg",
         "synopsis": "Paul Atreides, a brilliant and gifted young man, must travel to the most dangerous planet in the universe to ensure the future of his family and his people.",
+        "quote": "Fear is the mind-killer. — Courage isn't the absence of fear. It's choosing to move forward despite it.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -783,6 +824,7 @@ const MOVIES = [
         "year": 2022,
         "poster": "https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
         "synopsis": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save the world by exploring other universes.",
+        "quote": "Every rejection, every disappointment has led you here. — Your struggles aren't setbacks — they're setup for something bigger.",
         "tags": ["cult", "underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B09X5XHHKD"}
@@ -801,6 +843,7 @@ const MOVIES = [
         "year": 2022,
         "poster": "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
         "synopsis": "When a sadistic serial killer begins murdering key political figures, Batman is forced to investigate the city's hidden corruption.",
+        "quote": "I'm vengeance. — Anger can drive you, but it's justice and purpose that give life meaning.",
         "tags": [],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"}
@@ -819,6 +862,7 @@ const MOVIES = [
         "year": 2022,
         "poster": "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
         "synopsis": "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission.",
+        "quote": "It's not the plane, it's the pilot. — The tools don't make the master. Your heart and skill do.",
         "tags": [],
         "ottPlatforms": [
             {"name": "Paramount+", "url": "https://www.paramountplus.com"},
@@ -838,6 +882,7 @@ const MOVIES = [
         "year": 2016,
         "poster": "https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
         "synopsis": "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future.",
+        "quote": "Here's to the ones who dream, foolish as they may seem. — The world needs more dreamers, not fewer. Keep believing.",
         "tags": [],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"}
@@ -856,6 +901,7 @@ const MOVIES = [
         "year": 2018,
         "poster": "https://image.tmdb.org/t/p/w500/hpaIwkvV6Pqe7pjR41TQ37bLbFR.jpg",
         "synopsis": "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+        "quote": "Anyone can wear the mask. — You don't have to be perfect to be a hero. Just show up.",
         "tags": ["family-safe", "cult"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com"}
@@ -874,6 +920,7 @@ const MOVIES = [
         "year": 2019,
         "poster": "https://image.tmdb.org/t/p/w500/3vldwDuMGJvZIx7e0a3AULGCjee.jpg",
         "synopsis": "A detective investigates the death of a patriarch of an eccentric, combative family.",
+        "quote": "I suspect foul play. — Look beneath the surface. Things aren't always what they seem.",
         "tags": [],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B082L42V5B"}
@@ -892,6 +939,7 @@ const MOVIES = [
         "year": 2000,
         "poster": "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",
         "synopsis": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
+        "quote": "What we do in life echoes in eternity. — Your actions today write the legacy of tomorrow.",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -911,6 +959,7 @@ const MOVIES = [
         "year": 2016,
         "poster": "https://image.tmdb.org/t/p/w500/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg",
         "synopsis": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world.",
+        "quote": "If you could see your whole life laid out, would you change things? — Every ending is also a beginning. Trust the journey.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -930,6 +979,7 @@ const MOVIES = [
         "year": 2014,
         "poster": "https://image.tmdb.org/t/p/w500/4JUNWIy9fmPunDlICM83FQ8Mnf5.jpg",
         "synopsis": "A young programmer is selected to participate in a ground-breaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.",
+        "quote": "One day the AIs are going to look back on us the same way we look at fossils. — Progress without empathy is just destruction in disguise.",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -949,6 +999,7 @@ const MOVIES = [
         "year": 2019,
         "poster": "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
         "synopsis": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime.",
+        "quote": "All I have are negative thoughts. — Be gentle with yourself. The world is heavy enough without fighting your own mind too.",
         "tags": [],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
