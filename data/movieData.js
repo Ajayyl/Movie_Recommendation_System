@@ -75,7 +75,7 @@ const MOVIES = [
         "poster": "https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.png",
         "synopsis": "A young blade runner uncovers a long-buried secret that has the potential to plunge what's left of society into chaos.",
         "quote": "All those moments will be lost in time, like tears in rain. — Cherish every moment — they won't last forever.",
-        "trailer": "gCcx85e7-sI",
+        "trailer": "gCcx85zbxz4",
         "tags": ["cult", "underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B0764GY2JD"},
@@ -284,7 +284,7 @@ const MOVIES = [
         "poster": "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
         "synopsis": "An elderly widower ties thousands of balloons to his house and flies to South America, accidentally taking a young stowaway along for the ride.",
         "quote": "Adventure is out there! — You're never too old to chase your dreams.",
-        "trailer": "ORFo8veHyGE",
+        "trailer": "HWEW_qTLSEE",
         "tags": ["family-safe"],
         "ottPlatforms": [
             {"name": "Disney+", "url": "https://www.disneyplus.com/movies/up/3HbSCnQEbir9"}
@@ -304,7 +304,7 @@ const MOVIES = [
         "poster": "https://image.tmdb.org/t/p/w500/qLnfEmPrDjJfPyyddLJPkXmshkp.jpg",
         "synopsis": "A timeless story of human self-discovery and connection, told across three defining chapters in the life of a young Black man growing up in Miami.",
         "quote": "At some point, you gotta decide for yourself who you gonna be. — Don't let the world write your story for you.",
-        "trailer": "9NJj12tiBzc",
+        "trailer": "9NJj12tJzqc",
         "tags": ["underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B01MU9CMGP"},
@@ -554,7 +554,7 @@ const MOVIES = [
         "poster": "https://image.tmdb.org/t/p/w500/gvVgMUoDPYHORiDMkpdzq98tFin.jpg",
         "synopsis": "Paddington, now settled with the Brown family in London, picks up a series of odd jobs to buy the perfect present, but must clear his name when the gift is stolen.",
         "quote": "If we're kind and polite, the world will be right. — A little kindness goes a long way, even when the world doesn't deserve it.",
-        "trailer": "sCMGPqeGD2k",
+        "trailer": "52x5HJ9H8DM",
         "tags": ["family-safe", "underrated"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -637,7 +637,7 @@ const MOVIES = [
         "poster": "https://image.tmdb.org/t/p/w500/ydomtut0UATCxnzdNdPiYTKtcwf.jpg",
         "synopsis": "An undercover cop and a mole in the police try to identify each other while infiltrating an Irish gang in Boston.",
         "quote": "When you're facing a loaded gun, what's the difference? — Trust is fragile. Once broken, the game changes forever.",
-        "trailer": "iUJkwotOWCs",
+        "trailer": "iojhqm0JTW4",
         "tags": ["cult"],
         "ottPlatforms": [
             {"name": "HBO Max", "url": "https://www.hbomax.com"},
@@ -658,7 +658,7 @@ const MOVIES = [
         "poster": "https://image.tmdb.org/t/p/w500/mEh0NFn1C3PdbLScbooFMoaM5ET.jpg",
         "synopsis": "When a young hat-maker is turned into an old woman by a witch's curse, she finds refuge in the magical moving castle of the wizard Howl.",
         "quote": "A heart's a heavy burden. — Love isn't always easy, but it's always worth the weight.",
-        "trailer": "iwROgK94ycU",
+        "trailer": "iwROgK94zcM",
         "tags": ["family-safe", "cult"],
         "ottPlatforms": [
             {"name": "Netflix", "url": "https://www.netflix.com"},
@@ -866,7 +866,7 @@ const MOVIES = [
         "poster": "https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
         "synopsis": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save the world by exploring other universes.",
         "quote": "Every rejection, every disappointment has led you here. — Your struggles aren't setbacks — they're setup for something bigger.",
-        "trailer": "wxN1T1qdqzk",
+        "trailer": "wxN1T1uxQ2g",
         "tags": ["cult", "underrated"],
         "ottPlatforms": [
             {"name": "Prime Video", "url": "https://www.amazon.com/dp/B09X5XHHKD"}
