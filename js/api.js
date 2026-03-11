@@ -98,34 +98,14 @@ const API = {
         // Update local brain for offline/immediate use
         LocalRL.learn(movieId, eventType, eventValue, context);
 
-        const user = this.getUser();
-        if (!user) return;
-
-        // Sync to Scaleable ML Backend (Port 8000)
-        // This utilizes BackgroundTasks and Connection Pooling for high performance
+        // Sync to server (Populates common database)
         try {
-            await fetch(`${this.ML_API_BASE}/track`, {
+            await fetch(`${this.BASE_URL}/track`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    user_uid: user.user_uid,
-                    movieId, 
-                    eventType, 
-                    eventValue, 
-                    context 
-                })
+                headers: this.getHeaders(),
+                body: JSON.stringify({ movieId, eventType, eventValue, context })
             });
-        } catch (e) { 
-            console.warn('ML Tracking sync failed, falling back to Node.js');
-            // Secondary fallback to Node.js if ML backend is down
-            try {
-                await fetch(`${this.BASE_URL}/track`, {
-                    method: 'POST',
-                    headers: this.getHeaders(),
-                    body: JSON.stringify({ movieId, eventType, eventValue, context })
-                });
-            } catch (err) {}
-        }
+        } catch (e) { console.warn('Tracking sync failed'); }
     },
 
     async trackSearch(query, resultCount) {
@@ -295,19 +275,6 @@ const API = {
                 }
             };
         }
-    },
-
-    async getMLMetrics() {
-        try {
-            const res = await fetch(`${this.ML_API_BASE}/metrics`);
-            if (res.ok) {
-                const data = await res.json();
-                return { ok: true, data };
-            }
-        } catch (e) {
-            console.warn('ML Metrics fetch failed');
-        }
-        return { ok: false };
     },
 
     // ── Generic GET (for dashboard/analytics) ──
