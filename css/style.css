@@ -1091,6 +1091,32 @@ select {
   max-width: 600px;
 }
 
+/* Detail Quote */
+.detail-quote {
+  position: relative;
+  padding: 24px 28px;
+  background: rgba(124, 58, 237, 0.05);
+  border-left: 4px solid var(--accent-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+
+.detail-quote-icon {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--bg-primary);
+  padding: 0 4px;
+}
+
+.detail-quote p {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
 /* Rating Bar */
 .rating-section {
   margin-bottom: 32px;
@@ -1135,6 +1161,76 @@ select {
 /* OTT Links */
 .ott-section {
   margin-bottom: 40px;
+}
+
+/* Trailer Section */
+.trailer-section {
+  margin-bottom: 40px;
+}
+
+.trailer-container {
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+
+.trailer-thumbnail {
+  position: relative;
+  cursor: pointer;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.trailer-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.trailer-thumbnail:hover img {
+  transform: scale(1.05);
+}
+
+.trailer-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 48px;
+  opacity: 0.9;
+  transition: all 0.3s var(--ease);
+}
+
+.trailer-thumbnail:hover .trailer-play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 1;
+}
+
+.trailer-iframe-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+
+.trailer-iframe-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ott-original-logo {
+  height: 20px;
+  width: auto;
+  object-fit: contain;
 }
 
 .ott-grid {

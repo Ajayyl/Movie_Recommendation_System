@@ -13,7 +13,7 @@
         "netflix_url": "https://www.netflix.com/title/70131314",
         "prime_url": "https://www.amazon.com/dp/B0047WJ11G",
         "year": 2010,
-        "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/edv5CZvj0Y9yOQ6oCcQbMgoFMmS.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_Poster.jpg",
         "synopsis": "A skilled thief who infiltrates dreams is offered a chance to have his criminal record erased if he can successfully plant an idea in a target's subconscious.",
         "tags": [
             "cult"
@@ -30,7 +30,9 @@
         ],
         "director": "Christopher Nolan",
         "cast": "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
-        "keywords": "dream, subconscious, thief, heist, mind-bending"
+        "keywords": "dream, subconscious, thief, heist, mind-bending",
+        "quote": "An idea is like a virus. Resilient. Highly contagious. — Sometimes the smallest thought planted in your mind changes your entire life.",
+        "trailer": "YoHD9XEInc0"
     },
     {
         "movie_id": 2,
@@ -63,7 +65,9 @@
         ],
         "director": "Wes Anderson",
         "cast": "Ralph Fiennes, Tony Revolori, Adrien Brody",
-        "keywords": "hotel, concierge, mystery, quirky, colorful"
+        "keywords": "hotel, concierge, mystery, quirky, colorful",
+        "quote": "There are still faint glimmers of civilization left in this barbaric slaughterhouse. — Even in chaos, hold on to what makes life beautiful.",
+        "trailer": "1Fg5iWmQjwk"
     },
     {
         "movie_id": 3,
@@ -79,7 +83,7 @@
         "netflix_url": "",
         "prime_url": "",
         "year": 2003,
-        "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ggQJA979vYmYpWv9idq6MvS9S7A.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg",
         "synopsis": "A clownfish named Marlin embarks on a perilous journey across the ocean to find his abducted son Nemo, with the help of a forgetful fish named Dory.",
         "tags": [
             "family-safe"
@@ -92,7 +96,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Just keep swimming. — When life gets hard, the only way out is forward.",
+        "trailer": "SPHfeNgogVs"
     },
     {
         "movie_id": 4,
@@ -108,7 +114,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B0764GY2JD",
         "year": 2017,
-        "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/g9vYUEIByByS9vjY6Yv9pM8pL9Y.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.jpg",
         "synopsis": "A young blade runner uncovers a long-buried secret that has the potential to plunge what's left of society into chaos.",
         "tags": [
             "cult",
@@ -126,7 +132,9 @@
         ],
         "director": "Denis Villeneuve",
         "cast": "Ryan Gosling, Harrison Ford, Ana de Armas",
-        "keywords": "replicant, sci-fi, cyberpunk, mystery, visuals"
+        "keywords": "replicant, sci-fi, cyberpunk, mystery, visuals",
+        "quote": "All those moments will be lost in time, like tears in rain. — Cherish every moment — they won't last forever.",
+        "trailer": "gCcx85e7-sI"
     },
     {
         "movie_id": 5,
@@ -141,7 +149,7 @@
         "netflix_url": "https://www.netflix.com",
         "prime_url": "",
         "year": 1994,
-        "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lyPX9N97vU6zd2Y0UnubUnls9SX.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
         "synopsis": "A banker sentenced to life in Shawshank State Penitentiary forms an unlikely friendship and finds hope through acts of common decency.",
         "tags": [
             "cult"
@@ -158,7 +166,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Get busy living, or get busy dying. — Hope is the one thing no prison can take from you.",
+        "trailer": "PLl99DlL6b4"
     },
     {
         "movie_id": 6,
@@ -192,7 +202,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Sometimes you just need to sit with a giant, fluffy friend. — Find your quiet place in this noisy world.",
+        "trailer": "92a7Hj0ijLs"
     },
     {
         "movie_id": 7,
@@ -225,7 +237,9 @@
         ],
         "director": "Quentin Tarantino",
         "cast": "John Travolta, Uma Thurman, Samuel L. Jackson",
-        "keywords": "crime, nonlinear, violence, dialogue-heavy, cult classic"
+        "keywords": "crime, nonlinear, violence, dialogue-heavy, cult classic",
+        "quote": "The path of the righteous man is beset on all sides. — Life isn't about the destination, it's about the messy journey.",
+        "trailer": "s7EdQ4FqbhY"
     },
     {
         "movie_id": 8,
@@ -242,7 +256,7 @@
         "netflix_url": "",
         "prime_url": "",
         "year": 2017,
-        "poster": "/assets/posters/movie_8.jpg",
+        "poster": "/assets/posters/movie_8.png",
         "synopsis": "A young boy who dreams of becoming a musician journeys to the Land of the Dead to uncover his family's history.",
         "tags": [
             "family-safe"
@@ -255,7 +269,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Never forget where you come from. — Your roots are the most beautiful part of who you are.",
+        "trailer": "Rvr68u6k5sI"
     },
     {
         "movie_id": 9,
@@ -289,7 +305,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "There are no clean getaways. — Some roads look simple, but every choice has a cost.",
+        "trailer": "KBiOF3y1W0Y"
     },
     {
         "movie_id": 10,
@@ -324,7 +342,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "To see the world, things dangerous to come to. To see behind walls, draw closer. — Life begins where your comfort zone ends.",
+        "trailer": "QD6cy4PBQPI"
     },
     {
         "movie_id": 11,
@@ -358,7 +378,9 @@
         ],
         "director": "Christopher Nolan",
         "cast": "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
-        "keywords": "space, time travel, wormhole, father-daughter, gravity"
+        "keywords": "space, time travel, wormhole, father-daughter, gravity",
+        "quote": "We used to look up at the sky and wonder. Now we just look down and worry. — Don't forget to dream big, even when reality weighs you down.",
+        "trailer": "zSWdZVtXT7E"
     },
     {
         "movie_id": 12,
@@ -393,7 +415,9 @@
         ],
         "director": "Hayao Miyazaki",
         "cast": "Rumi Hiiragi, Miyu Irino, Mari Natsuki",
-        "keywords": "animation, spirits, adventure, coming of age, fantasy"
+        "keywords": "animation, spirits, adventure, coming of age, fantasy",
+        "quote": "Once you meet someone, you never really forget them. — The people who change your life stay in your heart forever.",
+        "trailer": "ByXuk9QqQkk"
     },
     {
         "movie_id": 13,
@@ -425,7 +449,9 @@
         ],
         "director": "Martin Scorsese",
         "cast": "Leonardo DiCaprio, Jonah Hill, Margot Robbie",
-        "keywords": "finance, stock market, excess, greed, biography"
+        "keywords": "finance, stock market, excess, greed, biography",
+        "quote": "The only thing standing between you and your goal is the story you keep telling yourself. — Stop making excuses. Start making moves.",
+        "trailer": "iszwuX1AK6A"
     },
     {
         "movie_id": 14,
@@ -455,7 +481,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Adventure is out there! — You're never too old to chase your dreams.",
+        "trailer": "ORFo8veHyGE"
     },
     {
         "movie_id": 15,
@@ -487,7 +515,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "At some point, you gotta decide for yourself who you gonna be. — Don't let the world write your story for you.",
+        "trailer": "9NJj12tiBzc"
     },
     {
         "movie_id": 16,
@@ -503,7 +533,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B000HAB4KS",
         "year": 1999,
-        "poster": "/assets/posters/movie_16.jpg",
+        "poster": "/assets/posters/movie_16.png",
         "synopsis": "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
         "tags": [
             "cult"
@@ -520,7 +550,9 @@
         ],
         "director": "Lana Wachowski, Lilly Wachowski",
         "cast": "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
-        "keywords": "simulation, cyberpunk, action, rebellion, choice, red pill"
+        "keywords": "simulation, cyberpunk, action, rebellion, choice, red pill",
+        "quote": "I know you're out there. I can feel you now. — The reality you accept is the reality you live in. Question everything.",
+        "trailer": "vKQi3bBA1y8"
     },
     {
         "movie_id": 17,
@@ -553,7 +585,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Let's never come here again because it would never be as much fun. — Some moments are perfect precisely because they can't be repeated.",
+        "trailer": "W6iVPCRflQM"
     },
     {
         "movie_id": 18,
@@ -586,7 +620,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Oh, what a day! What a lovely day! — When everything burns around you, find something worth fighting for.",
+        "trailer": "hEJnMQG9ev8"
     },
     {
         "movie_id": 19,
@@ -620,11 +656,13 @@
         ],
         "director": "Peter Weir",
         "cast": "Jim Carrey, Laura Linney, Ed Harris",
-        "keywords": "reality tv, surveillance, simulation, escape"
+        "keywords": "reality tv, surveillance, simulation, escape",
+        "quote": "We accept the reality of the world with which we are presented. — Break free from the show others have written for you.",
+        "trailer": "dlnmQbPGuls"
     },
     {
         "movie_id": 20,
-        "title": "Am\u00e9lie",
+        "title": "Amélie",
         "genre": [
             "Romance",
             "Comedy"
@@ -653,7 +691,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Times are hard for dreamers. — But the world needs your kind of crazy. Never stop imagining.",
+        "trailer": "HUECWi5pX7o"
     },
     {
         "movie_id": 21,
@@ -686,7 +726,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "It's only after we've lost everything that we're free to do anything. — Sometimes you have to let go of who you were to become who you need to be.",
+        "trailer": "qtRKdVHc-cE"
     },
     {
         "movie_id": 22,
@@ -704,7 +746,7 @@
         "prime_url": "",
         "year": 2015,
         "poster": "/assets/posters/movie_22.svg",
-        "synopsis": "After young Riley is uprooted from her Midwest life, her emotions \u2014 Joy, Fear, Anger, Disgust and Sadness \u2014 conflict on how to navigate a new city.",
+        "synopsis": "After young Riley is uprooted from her Midwest life, her emotions — Joy, Fear, Anger, Disgust and Sadness — conflict on how to navigate a new city.",
         "tags": [
             "family-safe"
         ],
@@ -716,7 +758,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Do you ever look at someone and wonder: what is going on inside their head? — Be kind. Everyone is fighting battles you can't see.",
+        "trailer": "yRUAzGQ3nSY"
     },
     {
         "movie_id": 23,
@@ -749,7 +793,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "You can't stop what's coming. — Life doesn't wait for you to be ready. Keep moving anyway.",
+        "trailer": "38A__WT3-o0"
     },
     {
         "movie_id": 24,
@@ -780,7 +826,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "I don't want to survive. I want to live. — Existing isn't enough. Make every day count.",
+        "trailer": "alIq_wG9FNk"
     },
     {
         "movie_id": 25,
@@ -814,7 +862,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "The past is just a story we tell ourselves. — You are not your mistakes. You are what you choose to be next.",
+        "trailer": "ne6p6MfLBxc"
     },
     {
         "movie_id": 26,
@@ -831,7 +881,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B001I189MG",
         "year": 2008,
-        "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDp9EXm7IbmV94Lqvwq.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg",
         "synopsis": "Batman raises the stakes in his war on crime, facing off against the Joker, a criminal mastermind who wreaks havoc on Gotham City.",
         "tags": [
             "cult"
@@ -848,7 +898,9 @@
         ],
         "director": "Christopher Nolan",
         "cast": "Christian Bale, Heath Ledger, Aaron Eckhart",
-        "keywords": "batman, joker, vigilante, chaos, justice, superhero"
+        "keywords": "batman, joker, vigilante, chaos, justice, superhero",
+        "quote": "Why so serious? — The world will test you. Don't lose your sense of self in the process.",
+        "trailer": "EXeTwQWrcwY"
     },
     {
         "movie_id": 27,
@@ -865,7 +917,7 @@
         "netflix_url": "https://www.netflix.com",
         "prime_url": "https://www.amazon.com/dp/B079DZ5XWD",
         "year": 2017,
-        "poster": "/assets/posters/movie_27.jpg",
+        "poster": "/assets/posters/movie_27.png",
         "synopsis": "Paddington, now settled with the Brown family in London, picks up a series of odd jobs to buy the perfect present, but must clear his name when the gift is stolen.",
         "tags": [
             "family-safe",
@@ -883,7 +935,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "If we're kind and polite, the world will be right. — A little kindness goes a long way, even when the world doesn't deserve it.",
+        "trailer": "sCMGPqeGD2k"
     },
     {
         "movie_id": 28,
@@ -918,7 +972,9 @@
         ],
         "director": "Michel Gondry",
         "cast": "Jim Carrey, Kate Winslet, Kirsten Dunst",
-        "keywords": "memory, breakup, romance, sci-fi, surreal"
+        "keywords": "memory, breakup, romance, sci-fi, surreal",
+        "quote": "How happy is the blameless soul's lot! — Forgetting someone doesn't erase what they meant to you.",
+        "trailer": "07-QBnEkgXU"
     },
     {
         "movie_id": 29,
@@ -949,7 +1005,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "People keep asking if I'm back. Yeah, I'm thinking I'm back. — When life knocks you down, come back stronger than ever.",
+        "trailer": "2AUmvWm5ZDQ"
     },
     {
         "movie_id": 30,
@@ -979,7 +1037,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Not everyone can become a great artist, but a great artist can come from anywhere. — Never let anyone tell you that your background defines your limits.",
+        "trailer": "NgsQ8mVkN8w"
     },
     {
         "movie_id": 31,
@@ -1013,7 +1073,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "When you're facing a loaded gun, what's the difference? — Trust is fragile. Once broken, the game changes forever.",
+        "trailer": "o25VXTr6VH8"
     },
     {
         "movie_id": 32,
@@ -1048,7 +1110,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "A heart's a heavy burden. — Love isn't always easy, but it's always worth the weight.",
+        "trailer": "iwROgK94ycU"
     },
     {
         "movie_id": 33,
@@ -1082,7 +1146,9 @@
         ],
         "director": "Bong Joon-ho",
         "cast": "Song Kang-ho, Lee Sun-kyun, Cho Yeo-jeong",
-        "keywords": "class struggle, family, deception, social commentary, thriller"
+        "keywords": "class struggle, family, deception, social commentary, thriller",
+        "quote": "They're not cockroaches. You can't just stamp on them. — The divide between rich and poor is a wound that never stops bleeding.",
+        "trailer": "SEUXfv87Wpk"
     },
     {
         "movie_id": 34,
@@ -1115,7 +1181,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Isn't everything we do in life a way to be loved a little more? — At the end of the day, all anyone really wants is connection.",
+        "trailer": "6MUcuqbGTxc"
     },
     {
         "movie_id": 35,
@@ -1149,7 +1217,9 @@
         ],
         "director": "Damien Chazelle",
         "cast": "Miles Teller, J.K. Simmons, Paul Reiser",
-        "keywords": "jazz, drumming, ambition, obsession, perfection"
+        "keywords": "jazz, drumming, ambition, obsession, perfection",
+        "quote": "There are no two words more harmful than 'good job'. — Greatness demands discomfort. Comfort is the enemy of growth.",
+        "trailer": "7d_jQycdQGo"
     },
     {
         "movie_id": 36,
@@ -1179,7 +1249,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Is all this living really worth dying for? — What makes life meaningful isn't the achievement — it's the passion.",
+        "trailer": "xOsLIiBStEs"
     },
     {
         "movie_id": 37,
@@ -1212,7 +1284,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "As far back as I can remember, I always wanted to be a gangster. — We all chase versions of success. Make sure yours doesn't cost you everything.",
+        "trailer": "2ilzidi_J8Q"
     },
     {
         "movie_id": 38,
@@ -1247,7 +1321,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "As you wish. — True love doesn't need grand gestures. Sometimes three simple words say it all.",
+        "trailer": "WNNUcHRiPS8"
     },
     {
         "movie_id": 39,
@@ -1280,7 +1356,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "If they hear you, they hunt you. — In a world full of noise, sometimes silence is your greatest strength.",
+        "trailer": "WR7cc5t7tv8"
     },
     {
         "movie_id": 40,
@@ -1311,7 +1389,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "Remember who you are. — When life makes you forget your worth, look inside — your strength was always there.",
+        "trailer": "4sj1MT05lAA"
     },
     {
         "movie_id": 41,
@@ -1343,8 +1423,10 @@
             }
         ],
         "director": "Denis Villeneuve",
-        "cast": "Timoth\u00e9e Chalamet, Rebecca Ferguson, Oscar Isaac",
-        "keywords": "desert, spice, empire, prophecy, political"
+        "cast": "Timothée Chalamet, Rebecca Ferguson, Oscar Isaac",
+        "keywords": "desert, spice, empire, prophecy, political",
+        "quote": "Fear is the mind-killer. — Courage isn't the absence of fear. It's choosing to move forward despite it.",
+        "trailer": "8g18jFHCLXk"
     },
     {
         "movie_id": 42,
@@ -1375,7 +1457,9 @@
         ],
         "director": "Daniel Kwan, Daniel Scheinert",
         "cast": "Michelle Yeoh, Stephanie Hsu, Ke Huy Quan",
-        "keywords": "multiverse, family, martial arts, surreal, absurd"
+        "keywords": "multiverse, family, martial arts, surreal, absurd",
+        "quote": "Every rejection, every disappointment has led you here. — Your struggles aren't setbacks — they're setup for something bigger.",
+        "trailer": "wxN1T1qdqzk"
     },
     {
         "movie_id": 43,
@@ -1392,7 +1476,7 @@
         "netflix_url": "",
         "prime_url": "",
         "year": 2022,
-        "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/f/ff/The_Batman_%28film%29_poster.jpg",
         "synopsis": "When a sadistic serial killer begins murdering key political figures, Batman is forced to investigate the city's hidden corruption.",
         "tags": [],
         "ottPlatforms": [
@@ -1403,7 +1487,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "I'm vengeance. — Anger can drive you, but it's justice and purpose that give life meaning.",
+        "trailer": "mqqft2x_Aa4"
     },
     {
         "movie_id": 45,
@@ -1419,7 +1505,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B0B2KSYRLQ",
         "year": 2022,
-        "poster": "/assets/posters/movie_44.jpg",
+        "poster": "/assets/posters/movie_45.jpg",
         "synopsis": "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission.",
         "tags": [],
         "ottPlatforms": [
@@ -1434,7 +1520,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "It's not the plane, it's the pilot. — The tools don't make the master. Your heart and skill do.",
+        "trailer": "giXco2jaZ_4"
     },
     {
         "movie_id": 46,
@@ -1451,7 +1539,7 @@
         "netflix_url": "https://www.netflix.com",
         "prime_url": "",
         "year": 2016,
-        "poster": "/assets/posters/movie_45.jpg",
+        "poster": "/assets/posters/movie_46.jpg",
         "synopsis": "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future.",
         "tags": [],
         "ottPlatforms": [
@@ -1462,7 +1550,9 @@
         ],
         "director": "Damien Chazelle",
         "cast": "Ryan Gosling, Emma Stone, John Legend",
-        "keywords": "musical, romance, jazz, dreams, hollywood"
+        "keywords": "musical, romance, jazz, dreams, hollywood",
+        "quote": "Here's to the ones who dream, foolish as they may seem. — The world needs more dreamers, not fewer. Keep believing.",
+        "trailer": "0pdqf4P9MB8"
     },
     {
         "movie_id": 47,
@@ -1479,7 +1569,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com",
         "year": 2018,
-        "poster": "/assets/posters/movie_46.jpg",
+        "poster": "/assets/posters/movie_47.jpg",
         "synopsis": "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
         "tags": [
             "family-safe",
@@ -1493,7 +1583,9 @@
         ],
         "director": "Peter Ramsey, Robert Persichetti Jr., Rodney Rothman",
         "cast": "Shameik Moore, Jake Johnson, Hailee Steinfeld",
-        "keywords": "spider-man, multiverse, animation, superhero, style"
+        "keywords": "spider-man, multiverse, animation, superhero, style",
+        "quote": "Anyone can wear the mask. — You don't have to be perfect to be a hero. Just show up.",
+        "trailer": "g4Hbz2jLxvQ"
     },
     {
         "movie_id": 48,
@@ -1510,7 +1602,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B082L42V5B",
         "year": 2019,
-        "poster": "/assets/posters/movie_47.jpg",
+        "poster": "/assets/posters/movie_48.jpg",
         "synopsis": "A detective investigates the death of a patriarch of an eccentric, combative family.",
         "tags": [],
         "ottPlatforms": [
@@ -1521,7 +1613,9 @@
         ],
         "director": "Rian Johnson",
         "cast": "Daniel Craig, Chris Evans, Ana de Armas",
-        "keywords": "murder mystery, whodunnit, family, inheritance, detective"
+        "keywords": "murder mystery, whodunnit, family, inheritance, detective",
+        "quote": "I suspect foul play. — Look beneath the surface. Things aren't always what they seem.",
+        "trailer": "qGqiHJTsRkQ"
     },
     {
         "movie_id": 49,
@@ -1538,7 +1632,7 @@
         "netflix_url": "https://www.netflix.com",
         "prime_url": "https://www.amazon.com/dp/B000I9URAS",
         "year": 2000,
-        "poster": "/assets/posters/movie_48.jpg",
+        "poster": "/assets/posters/movie_49.jpg",
         "synopsis": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
         "tags": [
             "cult"
@@ -1555,7 +1649,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "What we do in life echoes in eternity. — Your actions today write the legacy of tomorrow.",
+        "trailer": "owK1qxDselE"
     },
     {
         "movie_id": 51,
@@ -1571,7 +1667,7 @@
         "netflix_url": "https://www.netflix.com",
         "prime_url": "",
         "year": 2016,
-        "poster": "/assets/posters/movie_49.jpg",
+        "poster": "/assets/posters/movie_51.jpg",
         "synopsis": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world.",
         "tags": [
             "underrated"
@@ -1588,7 +1684,9 @@
         ],
         "director": "Denis Villeneuve",
         "cast": "Amy Adams, Jeremy Renner, Forest Whitaker",
-        "keywords": "aliens, linguistics, time, communication, sci-fi"
+        "keywords": "aliens, linguistics, time, communication, sci-fi",
+        "quote": "If you could see your whole life laid out, would you change things? — Every ending is also a beginning. Trust the journey.",
+        "trailer": "tFMo3UJ4B4g"
     },
     {
         "movie_id": 54,
@@ -1605,7 +1703,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com",
         "year": 2014,
-        "poster": "/assets/posters/movie_50.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-Machina-poster.jpg",
         "synopsis": "A young programmer is selected to participate in a ground-breaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.",
         "tags": [
             "underrated"
@@ -1622,7 +1720,9 @@
         ],
         "director": "Various Directors",
         "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "keywords": "trending, popular, movie",
+        "quote": "One day the AIs are going to look back on us the same way we look at fossils. — Progress without empathy is just destruction in disguise.",
+        "trailer": "EoQuVnKhxaM"
     },
     {
         "movie_id": 60,
@@ -1639,7 +1739,7 @@
         "netflix_url": "",
         "prime_url": "https://www.amazon.com",
         "year": 2019,
-        "poster": "/assets/posters/movie_51.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg",
         "synopsis": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime.",
         "tags": [],
         "ottPlatforms": [
@@ -1654,6 +1754,8 @@
         ],
         "director": "Todd Phillips",
         "cast": "Joaquin Phoenix, Robert De Niro, Zazie Beetz",
-        "keywords": "mental health, clown, social decay, origin story, gritty"
+        "keywords": "mental health, clown, social decay, origin story, gritty",
+        "quote": "All I have are negative thoughts. — Be gentle with yourself. The world is heavy enough without fighting your own mind too.",
+        "trailer": "zAGVQLHvwOY"
     }
 ]
