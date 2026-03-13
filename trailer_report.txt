@@ -1,0 +1,12 @@
+Auditing trailers for 51 movies...
+...................................................
+
+--- BROKEN TRAILERS REPORT ---
+[ID 4] Blade Runner 2049: Not Found/Deleted (https://youtu.be/gCcx85e7-sI)
+[ID 14] Up: Not Found/Deleted (https://youtu.be/ORFo8veHyGE)
+[ID 15] Moonlight: Not Found/Deleted (https://youtu.be/9NJj12tiBzc)
+[ID 27] Paddington 2: Not Found/Deleted (https://youtu.be/sCMGPqeGD2k)
+[ID 32] Howl's Moving Castle: Not Found/Deleted (https://youtu.be/iwROgK94ycU)
+[ID 42] Everything Everywhere All at Once: Not Found/Deleted (https://youtu.be/wxN1T1qdqzk)
+
+Summary: Found 6 trailers with potential playback issues.

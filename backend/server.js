@@ -324,6 +324,12 @@ app.get('/api/dashboard', auth.authMiddleware, (req, res) => {
         rewardWeights: rlEngine.CONFIG.rewardWeights
     };
 
+    // 11. Activity breakdown for doughnut chart
+    const activityBreakdown = { view: 0, click: 0, rating: 0, recommend_click: 0, watchlist: 0 };
+    interactions.forEach(i => {
+        if (activityBreakdown[i.event_type] !== undefined) activityBreakdown[i.event_type]++;
+    });
+
     res.json({
         success: true,
         dashboard: {
@@ -335,6 +341,7 @@ app.get('/api/dashboard', auth.authMiddleware, (req, res) => {
             sourceBreakdown,
             stateDetails,
             config,
+            activityBreakdown,
             summary: {
                 totalInteractions: interactions.length,
                 totalQEntries: allQ.length,
@@ -378,12 +385,12 @@ function buildTimeline(interactions) {
     const sortedDays = Object.keys(dayMap).sort();
     return {
         labels: sortedDays,
-        datasets: {
-            view: sortedDays.map(d => dayMap[d].view),
-            click: sortedDays.map(d => dayMap[d].click),
-            rating: sortedDays.map(d => dayMap[d].rating),
-            recommend_click: sortedDays.map(d => dayMap[d].recommend_click)
-        }
+        datasets: [
+            { label: 'view', data: sortedDays.map(d => dayMap[d].view) },
+            { label: 'click', data: sortedDays.map(d => dayMap[d].click) },
+            { label: 'rating', data: sortedDays.map(d => dayMap[d].rating) },
+            { label: 'recommend_click', data: sortedDays.map(d => dayMap[d].recommend_click) }
+        ]
     };
 }
 

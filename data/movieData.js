@@ -13,7 +13,7 @@ const MOVIES = [
         "netflix_url": "https://www.netflix.com/title/70131314",
         "prime_url": "https://www.amazon.com/dp/B0047WJ11G",
         "year": 2010,
-        "poster": "https://en.wikipedia.org/wiki/Special:FilePath/Inception_Poster.jpg",
+        "poster": "assets/posters/movie_1.jpg",
         "synopsis": "A skilled thief who infiltrates dreams is offered a chance to have his criminal record erased if he can successfully plant an idea in a target's subconscious.",
         "quote": "An idea is like a virus. Resilient. Highly contagious. — Sometimes the smallest thought planted in your mind changes your entire life.",
         "trailer": "YoHD9XEInc0",
@@ -114,10 +114,10 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B0764GY2JD",
         "year": 2017,
-        "poster": "https://en.wikipedia.org/wiki/Special:FilePath/Blade_Runner_2049_poster.jpg",
+        "poster": "assets/posters/movie_4.jpg",
         "synopsis": "A young blade runner uncovers a long-buried secret that has the potential to plunge what's left of society into chaos.",
         "quote": "All those moments will be lost in time, like tears in rain. — Cherish every moment — they won't last forever.",
-        "trailer": "gCcx85e7-sI",
+        "trailer": "gCcx85zbxz4",
         "tags": [
             "cult",
             "underrated"
@@ -256,7 +256,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "",
         "year": 2017,
-        "poster": "assets/posters/movie_8.png",
+        "poster": "assets/posters/movie_8.jpg",
         "synopsis": "A young boy who dreams of becoming a musician journeys to the Land of the Dead to uncover his family's history.",
         "quote": "Never forget where you come from. — Your roots are the most beautiful part of who you are.",
         "trailer": "Rvr68u6k5sI",
@@ -324,7 +324,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B00IANO1TA",
         "year": 2013,
-        "poster": "assets/posters/movie_10.png",
+        "poster": "assets/posters/movie_10.jpg",
         "synopsis": "A daydreamer escapes his anonymous life by disappearing into a world of fantasies of romance, heroism, and action.",
         "quote": "To see the world, things dangerous to come to. To see behind walls, draw closer. — Life begins where your comfort zone ends.",
         "trailer": "QD6cy4PBQPI",
@@ -471,7 +471,7 @@ const MOVIES = [
         "poster": "assets/posters/movie_14.jpg",
         "synopsis": "An elderly widower ties thousands of balloons to his house and flies to South America, accidentally taking a young stowaway along for the ride.",
         "quote": "Adventure is out there! — You're never too old to chase your dreams.",
-        "trailer": "ORFo8veHyGE",
+        "trailer": "HWEW_qTLSEE",
         "tags": [
             "family-safe"
         ],
@@ -498,10 +498,10 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B01MU9CMGP",
         "year": 2016,
-        "poster": "assets/posters/movie_15.png",
+        "poster": "assets/posters/movie_15.jpg",
         "synopsis": "A timeless story of human self-discovery and connection, told across three defining chapters in the life of a young Black man growing up in Miami.",
         "quote": "At some point, you gotta decide for yourself who you gonna be. — Don't let the world write your story for you.",
-        "trailer": "9NJj12tiBzc",
+        "trailer": "9NJj12tJzqc",
         "tags": [
             "underrated"
         ],
@@ -745,7 +745,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "",
         "year": 2015,
-        "poster": "assets/posters/movie_22.svg",
+        "poster": "assets/posters/movie_22.jpg",
         "synopsis": "After young Riley is uprooted from her Midwest life, her emotions — Joy, Fear, Anger, Disgust and Sadness — conflict on how to navigate a new city.",
         "quote": "Do you ever look at someone and wonder: what is going on inside their head? — Be kind. Everyone is fighting battles you can't see.",
         "trailer": "yRUAzGQ3nSY",
@@ -881,7 +881,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com/dp/B001I189MG",
         "year": 2008,
-        "poster": "https://en.wikipedia.org/wiki/Special:FilePath/The_Dark_Knight_(2008_film).jpg",
+        "poster": "assets/posters/movie_26.jpg",
         "synopsis": "Batman raises the stakes in his war on crime, facing off against the Joker, a criminal mastermind who wreaks havoc on Gotham City.",
         "quote": "Why so serious? — The world will test you. Don't lose your sense of self in the process.",
         "trailer": "EXeTwQWrcwY",
@@ -920,7 +920,7 @@ const MOVIES = [
         "poster": "assets/posters/movie_27.png",
         "synopsis": "Paddington, now settled with the Brown family in London, picks up a series of odd jobs to buy the perfect present, but must clear his name when the gift is stolen.",
         "quote": "If we're kind and polite, the world will be right. — A little kindness goes a long way, even when the world doesn't deserve it.",
-        "trailer": "sCMGPqeGD2k",
+        "trailer": "52x5HJ9H8DM",
         "tags": [
             "family-safe",
             "underrated"
@@ -1095,7 +1095,7 @@ const MOVIES = [
         "poster": "assets/posters/movie_32.jpg",
         "synopsis": "When a young hat-maker is turned into an old woman by a witch's curse, she finds refuge in the magical moving castle of the wizard Howl.",
         "quote": "A heart's a heavy burden. — Love isn't always easy, but it's always worth the weight.",
-        "trailer": "iwROgK94ycU",
+        "trailer": "iwROgK94zcM",
         "tags": [
             "family-safe",
             "cult"
@@ -1446,7 +1446,7 @@ const MOVIES = [
         "poster": "assets/posters/movie_42.jpg",
         "synopsis": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save the world by exploring other universes.",
         "quote": "Every rejection, every disappointment has led you here. — Your struggles aren't setbacks — they're setup for something bigger.",
-        "trailer": "wxN1T1qdqzk",
+        "trailer": "wxN1T1uxQ2g",
         "tags": [
             "cult",
             "underrated"
@@ -1703,7 +1703,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com",
         "year": 2014,
-        "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-Machina-poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-machina-uk-poster.jpg",
         "synopsis": "A young programmer is selected to participate in a ground-breaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.",
         "tags": [
             "underrated"
@@ -1739,7 +1739,7 @@ const MOVIES = [
         "netflix_url": "",
         "prime_url": "https://www.amazon.com",
         "year": 2019,
-        "poster": "https://en.wikipedia.org/wiki/Special:FilePath/Joker_(2019_film)_poster.jpg",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg",
         "synopsis": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime.",
         "tags": [],
         "ottPlatforms": [

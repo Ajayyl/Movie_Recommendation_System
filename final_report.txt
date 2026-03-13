@@ -1,0 +1,20 @@
+Auditing 51 movies...
+...................................................
+
+--- BROKEN POSTERS ---
+[1] Inception: Status 404 (https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_Poster.jpg)
+[4] Blade Runner 2049: Status 404 (https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.jpg)
+[26] The Dark Knight: Status 404 (https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29_poster.jpg)
+[43] The Batman: Status 429 (https://upload.wikimedia.org/wikipedia/en/f/ff/The_Batman_%28film%29_poster.jpg)
+[54] Ex Machina: Status 429 (https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-machina-uk-poster.jpg)
+[60] Joker: Status 429 (https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg)
+
+--- MISSING TRAILERS ---
+
+Summary: 6 broken posters, 0 missingAuditing trailers for 51 movies...
+...................................................
+
+--- BROKEN TRAILERS REPORT ---
+All trailers are reachable via oEmbed!
+
+Summary: Found 0 trailers with potential playback issues.

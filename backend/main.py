@@ -16,6 +16,7 @@ import numpy as np
 import os
 import uvicorn
 import time
+import random
 from contextlib import asynccontextmanager
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, UniqueConstraint, func
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
@@ -64,9 +65,13 @@ class Interaction(Base):
     __tablename__ = "interactions"
     id = Column(Integer, primary_key=True, index=True)
     user_uid = Column(String, index=True)
-    movie_id = Column(Integer)
-    event_type = Column(String)
+    movie_id = Column(Integer, index=True)
+    event_type = Column(String, index=True)
     event_value = Column(String)
+    context_genre = Column(String, default="")
+    context_experience = Column(String, default="")
+    context_source = Column(String, default="")
+    duration_ms = Column(Integer, default=0)
     created_at = Column(DateTime, default=func.now())
 
 # ──────────────────────────────────────────────
@@ -158,6 +163,12 @@ async def rate_limit_middleware(request: Request, call_next):
         return HTTPException(status_code=429, detail="Too many requests. Peak threshold reached.")
     
     RATE_LIMIT_STORE[client_ip].append(now)
+    
+    # Global cleanup of dead IPs optionally (to prevent memory leaks from one-off IPs)
+    if random.random() < 0.01:
+        dead_ips = [ip for ip, times in RATE_LIMIT_STORE.items() if not times]
+        for ip in dead_ips: del RATE_LIMIT_STORE[ip]
+        
     return await call_next(request)
 
 
@@ -233,33 +244,131 @@ async def get_movie(movie_id: int):
     return movie_row.iloc[0].to_dict()
 
 # ──────────────────────────────────────────────
-# BACKGROUND TASKS
+# BACKGROUND TASKS & RL ENGINE (Asynchronous Queueing)
 # ──────────────────────────────────────────────
-def background_update_rl(user_id: str, movie_id: int):
-    """Placeholder for offline RL training logic."""
-    # In a real system, you'd calculate the reward here and update RLQTable
-    print(f"BG: Updating RL state for user {user_id} and movie {movie_id}")
+class RLEngine:
+    CONFIG = {
+        "learning_rate": 0.1,
+        "discount_factor": 0.95,
+        "rewards": {
+            "click": 1.0, "view": 0.5, "search": 0.3, "recommend_click": 1.5,
+            "watchlist": 1.2, "dwell": 0.8, "rating_positive": 2.0,
+            "rating_neutral": 0.5, "rating_negative": -1.0, "ignore": -0.2
+        }
+    }
+    
+    @classmethod
+    def calculate_reward(cls, event_type: str, event_value: str = '') -> float:
+        if event_type == "rating":
+            try:
+                rating = int(event_value)
+                if rating >= 4: return cls.CONFIG["rewards"]["rating_positive"]
+                if rating == 3: return cls.CONFIG["rewards"]["rating_neutral"]
+                return cls.CONFIG["rewards"]["rating_negative"]
+            except: pass
+        return cls.CONFIG["rewards"].get(event_type, 0.0)
+
+    @staticmethod
+    def encode_state(db: Session, user_uid: str) -> str:
+        import datetime
+        from collections import Counter
+        from sqlalchemy import text
+        import json
+        
+        recent = db.execute(text("SELECT context_genre, context_experience FROM interactions WHERE user_uid = :uid ORDER BY created_at DESC LIMIT 50"), {"uid": user_uid}).fetchall()
+        
+        dominant_genre = 'general'
+        dominant_exp = 'any'
+        
+        if recent:
+            genres = [r[0] for r in recent if r[0]]
+            exps = [r[1] for r in recent if r[1]]
+            if genres: dominant_genre = Counter(genres).most_common(1)[0][0]
+            if exps: dominant_exp = Counter(exps).most_common(1)[0][0]
+        else:
+            prof = db.execute(text("SELECT preferred_genres, preferred_experience FROM users WHERE user_uid = :uid"), {"uid": user_uid}).fetchone()
+            if prof:
+                try:
+                    p_genres = json.loads(prof[0])
+                    if p_genres: dominant_genre = p_genres[0]
+                except: pass
+                if prof[1]: dominant_exp = prof[1]
+                
+        hour = datetime.datetime.now().hour
+        if 5 <= hour < 12: time_slot = 'morning'
+        elif 12 <= hour < 17: time_slot = 'afternoon'
+        elif 17 <= hour < 21: time_slot = 'evening'
+        else: time_slot = 'night'
+            
+        return f"{dominant_genre}|{dominant_exp}|{time_slot}"
+
+    @classmethod
+    def update_q_value(cls, db: Session, user_uid: str, state_key: str, movie_id: int, reward: float):
+        from sqlalchemy import text
+        existing = db.execute(text("SELECT q_value, visit_count FROM rl_qtable WHERE user_uid = :uid AND state_key = :state AND movie_id = :mid"), 
+                              {"uid": user_uid, "state": state_key, "mid": movie_id}).fetchone()
+        
+        current_q = existing[0] if existing else 0.0
+        visit_count = existing[1] if existing else 0
+        
+        top_future = db.execute(text("SELECT q_value FROM rl_qtable WHERE user_uid = :uid AND state_key = :state ORDER BY q_value DESC LIMIT 1"),
+                                {"uid": user_uid, "state": state_key}).fetchone()
+        max_future_q = top_future[0] if top_future else 0.0
+        
+        td_target = reward + cls.CONFIG["discount_factor"] * max_future_q
+        td_error = td_target - current_q
+        new_q = current_q + cls.CONFIG["learning_rate"] * td_error
+        
+        if existing:
+            db.execute(text("UPDATE rl_qtable SET q_value=:q, visit_count=:v, last_reward=:r, updated_at=CURRENT_TIMESTAMP WHERE user_uid=:uid AND state_key=:state AND movie_id=:mid"),
+                       {"q": new_q, "v": visit_count + 1, "r": float(reward), "uid": user_uid, "state": state_key, "mid": movie_id})
+        else:
+            db.execute(text("INSERT INTO rl_qtable (user_uid, state_key, movie_id, q_value, visit_count, last_reward) VALUES (:uid, :state, :mid, :q, :v, :r)"),
+                       {"uid": user_uid, "state": state_key, "mid": movie_id, "q": new_q, "v": 1, "r": float(reward)})
+        db.commit()
+
+def background_update_rl(user_id: str, movie_id: int, event_type: str, event_value: str = ''):
+    """Offline RL training logic via DB connection pooling"""
+    db = SessionLocal()
+    try:
+        reward = RLEngine.calculate_reward(event_type, event_value)
+        state_key = RLEngine.encode_state(db, user_id)
+        RLEngine.update_q_value(db, user_id, state_key, movie_id, reward)
+        print(f"BG RL Update: User {user_id} | State {state_key} | Movie {movie_id} | Reward {reward:.2f}")
+    except Exception as e:
+        print(f"BG Update Error: {e}")
+    finally:
+        db.close()
 
 @app.post("/track")
 async def track_interaction(request: Request, bg: BackgroundTasks, db: Session = Depends(get_db)):
-    """Logs interactions in background to keep requests fast."""
+    """Logs interactions perfectly and triggers offline RL."""
     try:
         data = await request.json()
         uid = data.get('user_uid') or data.get('userUid')
         m_id = data.get('movie_id') or data.get('movieId')
+        event_type = str(data.get('eventType') or data.get('event_type') or 'view')
+        event_value = str(data.get('eventValue') or data.get('event_value') or '')
+        context = data.get('context', {})
+        
         if not uid or not m_id: return {"ok": False, "error": "Missing uid or m_id"}
         
         # Save to SQL interactions table
         interaction = Interaction(
             user_uid=str(uid), 
             movie_id=int(m_id), 
-            event_type=str(data.get('event_type', 'view'))
+            event_type=event_type,
+            event_value=event_value,
+            context_genre=context.get('genre', ''),
+            context_experience=context.get('experience', ''),
+            context_source=context.get('source', ''),
+            duration_ms=context.get('duration', 0)
         )
         db.add(interaction)
         db.commit()
 
-        # Offload RL update to background
-        bg.add_task(background_update_rl, str(uid), int(m_id))
+        # Offload RL update to background queue exactly as requested
+        bg.add_task(background_update_rl, str(uid), int(m_id), event_type, event_value)
         return {"status": "queued"}
     except Exception as e:
         return {"ok": False, "error": str(e)}
@@ -448,6 +557,7 @@ async def get_metrics():
 if __name__ == "__main__":
     # Ensure tables in database-url target exist
     Base.metadata.create_all(bind=engine)
-    # Start server with scaling-ready settings
-    # Recommend running with: uvicorn main:app --workers 4
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    # Start server with scaling-ready settings using multiple workers
+    import multiprocessing
+    workers = min(4, multiprocessing.cpu_count())
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, workers=workers, reload=False)

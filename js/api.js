@@ -98,9 +98,8 @@ const API = {
         // Update local brain for offline/immediate use
         LocalRL.learn(movieId, eventType, eventValue, context);
 
-        // Sync to server (Populates common database)
         try {
-            await fetch(`${this.BASE_URL}/track`, {
+            await fetch(`${this.ML_API_BASE}/track`, {
                 method: 'POST',
                 headers: this.getHeaders(),
                 body: JSON.stringify({ movieId, eventType, eventValue, context })
@@ -256,7 +255,17 @@ const API = {
         try {
             const res = await fetch(`${this.BASE_URL}/recommendations/stats`, { headers: this.getHeaders() });
             const data = await res.json();
-            return { ok: true, data: { stats: data.stats.summary } };
+            // Server returns stats at top level (no .summary wrapper)
+            const stats = data.stats || {};
+            return { ok: true, data: { stats: {
+                totalInteractions: stats.totalInteractions || 0,
+                modelMaturity: stats.modelMaturity || 'cold_start',
+                totalQEntries: stats.totalQEntries || 0,
+                uniqueStatesLearned: stats.uniqueStatesLearned || 0,
+                avgQValue: stats.avgQValue || 0,
+                topGenres: stats.topGenres || [],
+                activityBreakdown: stats.activityBreakdown || {}
+            } } };
         } catch (e) {
             // Local fallback
             const stats = LocalRL.getUserLearningStats();

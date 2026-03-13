@@ -1,0 +1,12 @@
+Auditing 51 movies...
+...................................................
+
+--- BROKEN POSTERS ---
+[1] Inception: Status 404 (https://en.wikipedia.org/wiki/Special:FilePath/Inception_Poster.jpg)
+[4] Blade Runner 2049: Status 404 (https://en.wikipedia.org/wiki/Special:FilePath/Blade_Runner_2049_poster.jpg)
+[54] Ex Machina: Status 429 (https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-Machina-poster.jpg)
+[60] Joker: Status 429 (https://en.wikipedia.org/wiki/Special:FilePath/Joker_(2019_film)_poster.jpg)
+
+--- MISSING TRAILERS ---
+
+Summary: 4 broken posters, 0 missing trailers.

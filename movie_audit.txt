@@ -1,0 +1,51 @@
+1: Inception | Poster: https://en.wikipedia.org/wiki/ | Trailer: YoHD9XEInc0
+2: The Grand Budapest Hotel | Poster: assets/posters/movie_2.png | Trailer: 1Fg5iWmQjwk
+3: Finding Nemo | Poster: https://upload.wikimedia.org/w | Trailer: SPHfeNgogVs
+4: Blade Runner 2049 | Poster: https://en.wikipedia.org/wiki/ | Trailer: gCcx85e7-sI
+5: The Shawshank Redemption | Poster: https://upload.wikimedia.org/w | Trailer: PLl99DlL6b4
+6: My Neighbor Totoro | Poster: assets/posters/movie_6.jpg | Trailer: 92a7Hj0ijLs
+7: Pulp Fiction | Poster: assets/posters/movie_7.jpg | Trailer: s7EdQ4FqbhY
+8: Coco | Poster: assets/posters/movie_8.png | Trailer: Rvr68u6k5sI
+9: Drive | Poster: assets/posters/movie_9.jpg | Trailer: KBiOF3y1W0Y
+10: The Secret Life of Walter Mitty | Poster: assets/posters/movie_10.png | Trailer: QD6cy4PBQPI
+11: Interstellar | Poster: assets/posters/movie_11.jpg | Trailer: zSWdZVtXT7E
+12: Spirited Away | Poster: assets/posters/movie_12.jpg | Trailer: ByXuk9QqQkk
+13: The Wolf of Wall Street | Poster: assets/posters/movie_13.jpg | Trailer: iszwuX1AK6A
+14: Up | Poster: assets/posters/movie_14.jpg | Trailer: ORFo8veHyGE
+15: Moonlight | Poster: assets/posters/movie_15.png | Trailer: 9NJj12tiBzc
+16: The Matrix | Poster: assets/posters/movie_16.png | Trailer: vKQi3bBA1y8
+17: Lost in Translation | Poster: assets/posters/movie_17.jpg | Trailer: W6iVPCRflQM
+18: Mad Max: Fury Road | Poster: assets/posters/movie_18.jpg | Trailer: hEJnMQG9ev8
+19: The Truman Show | Poster: assets/posters/movie_19.jpg | Trailer: dlnmQbPGuls
+20: Amélie | Poster: assets/posters/movie_20.jpg | Trailer: HUECWi5pX7o
+21: Fight Club | Poster: assets/posters/movie_21.jpg | Trailer: qtRKdVHc-cE
+22: Inside Out | Poster: assets/posters/movie_22.svg | Trailer: yRUAzGQ3nSY
+23: No Country for Old Men | Poster: assets/posters/movie_23.jpg | Trailer: 38A__WT3-o0
+24: WALL-E | Poster: assets/posters/movie_24.jpg | Trailer: alIq_wG9FNk
+25: Her | Poster: assets/posters/movie_25.jpg | Trailer: ne6p6MfLBxc
+26: The Dark Knight | Poster: https://en.wikipedia.org/wiki/ | Trailer: EXeTwQWrcwY
+27: Paddington 2 | Poster: assets/posters/movie_27.png | Trailer: sCMGPqeGD2k
+28: Eternal Sunshine of the Spotless Mind | Poster: assets/posters/movie_28.jpg | Trailer: 07-QBnEkgXU
+29: John Wick | Poster: assets/posters/movie_29.jpg | Trailer: 2AUmvWm5ZDQ
+30: Ratatouille | Poster: assets/posters/movie_30.jpg | Trailer: NgsQ8mVkN8w
+31: The Departed | Poster: assets/posters/movie_31.jpg | Trailer: o25VXTr6VH8
+32: Howl's Moving Castle | Poster: assets/posters/movie_32.jpg | Trailer: iwROgK94ycU
+33: Parasite | Poster: assets/posters/movie_33.jpg | Trailer: SEUXfv87Wpk
+34: Before Sunrise | Poster: assets/posters/movie_34.jpg | Trailer: 6MUcuqbGTxc
+35: Whiplash | Poster: assets/posters/movie_35.jpg | Trailer: 7d_jQycdQGo
+36: Soul | Poster: assets/posters/movie_36.png | Trailer: xOsLIiBStEs
+37: Goodfellas | Poster: assets/posters/movie_37.jpg | Trailer: 2ilzidi_J8Q
+38: The Princess Bride | Poster: assets/posters/movie_38.jpg | Trailer: WNNUcHRiPS8
+39: A Quiet Place | Poster: assets/posters/movie_39.jpg | Trailer: WR7cc5t7tv8
+40: The Lion King | Poster: assets/posters/movie_40.jpg | Trailer: 4sj1MT05lAA
+41: Dune | Poster: assets/posters/movie_41.jpg | Trailer: 8g18jFHCLXk
+42: Everything Everywhere All at Once | Poster: assets/posters/movie_42.jpg | Trailer: wxN1T1qdqzk
+43: The Batman | Poster: https://upload.wikimedia.org/w | Trailer: mqqft2x_Aa4
+45: Top Gun: Maverick | Poster: assets/posters/movie_45.jpg | Trailer: giXco2jaZ_4
+46: La La Land | Poster: assets/posters/movie_46.jpg | Trailer: 0pdqf4P9MB8
+47: Spider-Man: Into the Spider-Verse | Poster: assets/posters/movie_47.jpg | Trailer: g4Hbz2jLxvQ
+48: Knives Out | Poster: assets/posters/movie_48.jpg | Trailer: qGqiHJTsRkQ
+49: Gladiator | Poster: assets/posters/movie_49.jpg | Trailer: owK1qxDselE
+51: Arrival | Poster: assets/posters/movie_51.jpg | Trailer: tFMo3UJ4B4g
+54: Ex Machina | Poster: https://upload.wikimedia.org/w | Trailer: EoQuVnKhxaM
+60: Joker | Poster: https://en.wikipedia.org/wiki/ | Trailer: zAGVQLHvwOY

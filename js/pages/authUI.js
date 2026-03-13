@@ -202,7 +202,7 @@ async function handleAuthSubmit(event) {
     showToast(`Welcome${mode === 'login' ? ' back' : ''}, ${result.data.user.display_name}! 🎬`, 'success');
   } else {
     // Show error
-    errorEl.textContent = result.data.error || 'Something went wrong';
+    errorEl.textContent = result.error || (result.data && result.data.error) || 'Something went wrong';
     errorEl.style.display = 'block';
     submitText.style.display = 'inline';
     submitLoader.style.display = 'none';
@@ -671,7 +671,7 @@ async function handleProfileUpdate(event) {
     Router.resolve();
     showToast('Profile updated! 🎉', 'success');
   } else {
-    showToast(result.data.error || 'Update failed', 'error');
+    showToast(result.error || (result.data && result.data.error) || 'Update failed', 'error');
   }
 }
 
