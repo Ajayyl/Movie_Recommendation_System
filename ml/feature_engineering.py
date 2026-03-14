@@ -1,9 +1,17 @@
 """
-UniVibe — Feature Engineering Pipeline
-=======================================
+UniVibe — Feature Engineering Pipeline (Enhanced)
+===================================================
 Transforms raw movie metadata into rich feature vectors for similarity computation.
 
 Pipeline: raw movie JSON → cleaned text features → combined feature column → CSV dataset
+
+Enhanced fields:
+- genres (repeated 3x for emphasis)
+- overview/synopsis (full text cleaned)
+- keywords (domain-specific tags)
+- cast (top actors, repeated 2x)
+- director (repeated 4x for high authority)
+- experience_type, tags, release decade, rating tier, popularity tier, age class, OTT platforms
 """
 
 import json
@@ -75,14 +83,22 @@ def build_combined_features(movie: dict) -> str:
     """
     Combine multiple movie attributes into a single feature string.
 
-    Uses:
-    - genre (repeated 3x for emphasis)
+    Enhanced feature vector uses:
+    - genre (repeated 3x for emphasis — highest content signal)
+    - director (repeated 4x — strong authority signal for same-director recs)
+    - cast (repeated 2x — actor similarity matters)
+    - keywords (domain-specific tags, cleaned)
+    - synopsis/overview (full overview text, cleaned)
+    - cinematographer (repeated 2x — visual style similarity)
+    - music/composer (repeated 2x — same composer = similar feel)
+    - writer/screenplay (repeated 2x — same writer = similar narrative)
     - experience_type (repeated 2x)
-    - synopsis/overview
     - tags (cult, underrated, family-safe)
     - release decade
     - rating tier (excellent, good, average, below_average)
     - popularity tier
+    - age classification
+    - OTT platform names
     """
     parts = []
 
@@ -118,10 +134,28 @@ def build_combined_features(movie: dict) -> str:
     if keywords:
         parts.append(clean_text(keywords))
 
-    # Synopsis / overview
+    # Synopsis / overview (full overview cleaned)
     synopsis = movie.get('synopsis', '')
     if synopsis:
         parts.append(clean_text(synopsis))
+
+    # Cinematographer (repeat 2x — visual style is a strong similarity signal)
+    cinematographer = movie.get('cinematographer', '')
+    if cinematographer and cinematographer not in ('N/A', 'N/A (Animation)', ''):
+        norm_cinematographer = cinematographer.lower().replace(' ', '').replace(',', ' ')
+        parts.extend([norm_cinematographer] * 2)
+
+    # Music composer (repeat 2x — same composer = similar feel)
+    music = movie.get('music', '')
+    if music and music not in ('Various Artists', ''):
+        norm_music = music.lower().replace(' ', '').replace(',', ' ')
+        parts.extend([norm_music] * 2)
+
+    # Writer/screenplay (repeat 2x — same writer = similar narrative style)
+    writer = movie.get('writer', '')
+    if writer:
+        norm_writer = writer.lower().replace(' ', '').replace(',', ' ')
+        parts.extend([norm_writer] * 2)
 
     # Tags (cult, underrated, family-safe)
     tags = movie.get('tags', [])
@@ -205,12 +239,18 @@ def build_dataset(movies: list) -> pd.DataFrame:
 
     Returns a DataFrame with columns:
     - movie_id, title, genre, experience_type, year, rating_percent,
-      popularity_score, tags, combined_features
+      popularity_score, tags, synopsis, director, cast, keywords,
+      combined_features
     """
     records = []
 
     for movie in movies:
         combined = build_combined_features(movie)
+
+        # Extract director (normalize "Various Directors" → empty for similarity)
+        director = movie.get('director', 'Unknown')
+        cast_val = movie.get('cast', 'Unknown')
+        keywords_val = movie.get('keywords', '')
 
         records.append({
             'movie_id': movie.get('movie_id'),
@@ -223,6 +263,9 @@ def build_dataset(movies: list) -> pd.DataFrame:
             'age_limit': movie.get('age_limit', 0),
             'tags': '|'.join(movie.get('tags', [])) if isinstance(movie.get('tags'), list) else movie.get('tags', ''),
             'synopsis': movie.get('synopsis', ''),
+            'director': director,
+            'cast': cast_val,
+            'keywords': keywords_val,
             'combined_features': combined,
         })
 
@@ -230,11 +273,18 @@ def build_dataset(movies: list) -> pd.DataFrame:
 
     # Ensure no NaN in combined_features
     df['combined_features'] = df['combined_features'].fillna('')
+    df['director'] = df['director'].fillna('Unknown')
+    df['cast'] = df['cast'].fillna('Unknown')
+    df['keywords'] = df['keywords'].fillna('')
 
     print(f"Built dataset with {len(df)} movies")
     print(f"Feature column avg length: {df['combined_features'].str.len().mean():.0f} chars")
     print(f"Genres found: {df['genre'].nunique()}")
+    print(f"Directors found: {df['director'].nunique()}")
     print(f"Year range: {df['year'].min()} — {df['year'].max()}")
+    print(f"Movies with keywords: {(df['keywords'] != '').sum()}/{len(df)}")
+    print(f"Movies with cast: {(df['cast'] != 'Unknown').sum()}/{len(df)}")
+    print(f"Movies with director: {(df['director'] != 'Various Directors').sum()}/{len(df)}")
 
     return df
 
@@ -289,4 +339,7 @@ if __name__ == '__main__':
     print("\nSample features:")
     for _, row in df.head(3).iterrows():
         print(f"\n  Movie: {row['title']}")
+        print(f"     Director: {row['director']}")
+        print(f"     Cast: {row['cast']}")
+        print(f"     Keywords: {row['keywords']}")
         print(f"     Features: {row['combined_features'][:120]}...")

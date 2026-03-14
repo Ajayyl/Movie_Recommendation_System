@@ -644,7 +644,7 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-wide fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">📈 Interaction Timeline</h3>
+              <h3 class="dash-chart-title">📈 User Interaction Trends</h3>
               <p class="dash-chart-desc">Your activity over time — each event feeds the RL model</p>
             </div>
             <div class="dash-chart-body" id="chart-timeline" style="height:280px;"></div>
@@ -680,7 +680,7 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-full fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🏆 Top Movie Q-Values</h3>
+              <h3 class="dash-chart-title">🏆 Most Recommended Movies</h3>
               <p class="dash-chart-desc">Movies the RL model ranks highest for you — these get prioritized in recommendations</p>
             </div>
             <div class="dash-chart-body" id="chart-movie-q-bars" style="height:380px;"></div>
@@ -691,7 +691,7 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-wide fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🎨 Genre × Interaction Heatmap</h3>
+              <h3 class="dash-chart-title">🎨 Most Searched Genres</h3>
               <p class="dash-chart-desc">Which genres trigger which behaviors — darker cells = stronger signal</p>
             </div>
             <div class="dash-chart-body" id="chart-genre-heatmap" style="height:280px;"></div>
@@ -733,6 +733,32 @@ function renderDashboard() {
               <p class="dash-chart-desc">Every context state the model has learned — each state encodes Genre|Vibe|TimeOfDay</p>
             </div>
             <div class="dash-table-body" id="dash-state-table">
+              ${renderAnalysisLoader()}
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 7: ML Evaluation Metrics -->
+        <div class="dash-row">
+          <div class="dash-chart-card dash-full fade-in-up">
+            <div class="dash-chart-head">
+              <h3 class="dash-chart-title">📊 ML Evaluation Metrics</h3>
+              <p class="dash-chart-desc">Offline model quality: Precision, Recall, NDCG, Coverage — proves recommendation accuracy</p>
+            </div>
+            <div class="dash-metrics-body" id="dash-ml-metrics">
+              ${renderAnalysisLoader()}
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 8: Model Training Info -->
+        <div class="dash-row">
+          <div class="dash-chart-card dash-full fade-in-up">
+            <div class="dash-chart-head">
+              <h3 class="dash-chart-title">🔬 Model Training Info</h3>
+              <p class="dash-chart-desc">Similarity model architecture, cold-start weights, and training metadata</p>
+            </div>
+            <div class="dash-metrics-body" id="dash-model-info">
               ${renderAnalysisLoader()}
             </div>
           </div>
@@ -789,6 +815,9 @@ async function loadDashboardData() {
 
   // Small delay to let container dimensions settle
   setTimeout(() => renderAllCharts(d), 100);
+
+  // Load ML evaluation metrics from FastAPI
+  loadMLMetrics();
 }
 
 function renderKPIs(summary) {
@@ -1028,6 +1057,169 @@ function renderStateTable(stateDetails) {
 
 function emptyChartMsg(text) {
   return `<div class="dash-chart-empty"><span>📭</span><p>${text}</p></div>`;
+}
+
+// ──────────────────────────────────
+// ML EVALUATION METRICS PANEL
+// ──────────────────────────────────
+
+async function loadMLMetrics() {
+  // Fetch ML evaluation metrics
+  const metricsRes = await API.getMLMetrics();
+  if (metricsRes.ok && metricsRes.data) {
+    renderMLMetricsPanel(metricsRes.data);
+  } else {
+    const container = document.getElementById('dash-ml-metrics');
+    if (container) container.innerHTML = '<p class="dash-empty-text">ML metrics not available — ensure FastAPI backend is running and model_evaluator has been executed.</p>';
+  }
+
+  // Fetch model info
+  const infoRes = await API.getModelInfo();
+  if (infoRes.ok && infoRes.data) {
+    renderModelInfoPanel(infoRes.data);
+  } else {
+    const container = document.getElementById('dash-model-info');
+    if (container) container.innerHTML = '<p class="dash-empty-text">Model info not available — ensure FastAPI backend is running.</p>';
+  }
+}
+
+function renderMLMetricsPanel(metrics) {
+  const container = document.getElementById('dash-ml-metrics');
+  if (!container) return;
+
+  const metricItems = [
+    { icon: '🎯', label: `Precision@${metrics.k || 5}`, value: metrics.precision_k, desc: 'Fraction of top-K recommendations that are relevant', color: ChartColors.purple },
+    { icon: '📡', label: `Recall@${metrics.k || 5}`, value: metrics.recall_k, desc: 'Fraction of relevant items captured in top-K', color: ChartColors.pink },
+    { icon: '✅', label: `Hit Rate@${metrics.k || 5}`, value: metrics.hit_rate_k, desc: 'Fraction of queries with at least 1 relevant hit', color: ChartColors.emerald },
+    { icon: '🏅', label: 'MRR', value: metrics.mrr, desc: 'Mean Reciprocal Rank — how early is the first relevant result', color: ChartColors.amber },
+    { icon: '📈', label: `NDCG@${metrics.k || 5}`, value: metrics.ndcg_k, desc: 'Normalized Discounted Cumulative Gain — ranking quality', color: ChartColors.cyan },
+    { icon: '🌐', label: 'Coverage', value: metrics.coverage, desc: 'Fraction of catalog that appears in any recommendation', color: ChartColors.indigo },
+    { icon: '🔗', label: 'Avg Similarity', value: metrics.avg_similarity, desc: 'Mean cosine similarity of top-K pairs', color: ChartColors.teal },
+  ];
+
+  container.innerHTML = `
+    <div class="ml-metrics-grid">
+      ${metricItems.map(m => {
+        const pct = typeof m.value === 'number' ? (m.value * 100).toFixed(1) : '—';
+        const raw = typeof m.value === 'number' ? m.value.toFixed(4) : '—';
+        return `
+          <div class="ml-metric-card">
+            <div class="ml-metric-icon" style="background:${m.color}22;color:${m.color};">${m.icon}</div>
+            <div class="ml-metric-info">
+              <div class="ml-metric-label">${m.label}</div>
+              <div class="ml-metric-value" style="color:${m.color};">${raw}</div>
+              <div class="ml-metric-bar">
+                <div class="ml-metric-bar-fill" style="width:${Math.min(100, parseFloat(pct))}%;background:${m.color};"></div>
+              </div>
+              <div class="ml-metric-desc">${m.desc}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    <div class="ml-metrics-footer">
+      <span>📋 Evaluated on <strong>${metrics.num_movies || '—'}</strong> movies</span>
+      <span>🕐 ${metrics.evaluated_at ? new Date(metrics.evaluated_at).toLocaleString() : '—'}</span>
+    </div>
+  `;
+}
+
+function renderModelInfoPanel(info) {
+  const container = document.getElementById('dash-model-info');
+  if (!container) return;
+
+  const training = info.training || {};
+  const coldStart = info.cold_start_weights || {};
+  const evaluation = info.evaluation || {};
+
+  const warmUser = info.warm_user_weights || {};
+
+  container.innerHTML = `
+    <div class="model-info-grid">
+      <div class="model-info-section">
+        <h4>🏗️ Architecture</h4>
+        <div class="model-info-items">
+          <div class="model-info-row"><span>Status</span><span class="model-info-val">${info.status === 'loaded' ? '✅ Loaded' : '❌ Not Loaded'}</span></div>
+          <div class="model-info-row"><span>Catalog Size</span><span class="model-info-val">${info.catalog_size || '—'} movies</span></div>
+          <div class="model-info-row"><span>Matrix Shape</span><span class="model-info-val">${info.matrix_shape ? info.matrix_shape.join(' × ') : '—'}</span></div>
+          <div class="model-info-row"><span>Has Metadata</span><span class="model-info-val">${info.has_metadata ? '✅ Yes (XAI ready)' : '❌ No'}</span></div>
+        </div>
+      </div>
+
+      <div class="model-info-section">
+        <h4>📐 Training Details</h4>
+        <div class="model-info-items">
+          <div class="model-info-row"><span>TF-IDF Dimensions</span><span class="model-info-val">${training.tfidf_dimensions || '—'}</span></div>
+          <div class="model-info-row"><span>Vocabulary Size</span><span class="model-info-val">${training.vocabulary_size || '—'}</span></div>
+          <div class="model-info-row"><span>N-gram Range</span><span class="model-info-val">${training.ngram_range || '—'}</span></div>
+          <div class="model-info-row"><span>Trained At</span><span class="model-info-val">${training.trained_at ? new Date(training.trained_at).toLocaleString() : '—'}</span></div>
+        </div>
+      </div>
+
+      <div class="model-info-section">
+        <h4>❄️ Cold-Start Weights</h4>
+        <div class="model-info-items">
+          <div class="model-info-row">
+            <span>Similarity</span>
+            <span class="model-info-val">
+              <span class="weight-bar" style="width:${(coldStart.similarity || 0.5) * 100}%;background:${ChartColors.purple}"></span>
+              ${coldStart.similarity || 0.5}
+            </span>
+          </div>
+          <div class="model-info-row">
+            <span>Popularity</span>
+            <span class="model-info-val">
+              <span class="weight-bar" style="width:${(coldStart.popularity || 0.3) * 100}%;background:${ChartColors.pink}"></span>
+              ${coldStart.popularity || 0.3}
+            </span>
+          </div>
+          <div class="model-info-row">
+            <span>Rating</span>
+            <span class="model-info-val">
+              <span class="weight-bar" style="width:${(coldStart.rating || 0.2) * 100}%;background:${ChartColors.emerald}"></span>
+              ${coldStart.rating || 0.2}
+            </span>
+          </div>
+        </div>
+        <p class="model-info-formula">Score = 0.5×similarity + 0.3×popularity + 0.2×rating</p>
+      </div>
+
+      <div class="model-info-section">
+        <h4>🔥 Warm User Weights (with Genre Boost)</h4>
+        <div class="model-info-items">
+          <div class="model-info-row">
+            <span>Similarity</span>
+            <span class="model-info-val">
+              <span class="weight-bar" style="width:${(warmUser.similarity || 0.45) * 100}%;background:${ChartColors.purple}"></span>
+              ${warmUser.similarity || 0.45}
+            </span>
+          </div>
+          <div class="model-info-row">
+            <span>Popularity</span>
+            <span class="model-info-val">
+              <span class="weight-bar" style="width:${(warmUser.popularity || 0.25) * 100}%;background:${ChartColors.pink}"></span>
+              ${warmUser.popularity || 0.25}
+            </span>
+          </div>
+          <div class="model-info-row">
+            <span>Rating</span>
+            <span class="model-info-val">
+              <span class="weight-bar" style="width:${(warmUser.rating || 0.15) * 100}%;background:${ChartColors.emerald}"></span>
+              ${warmUser.rating || 0.15}
+            </span>
+          </div>
+          <div class="model-info-row">
+            <span>Genre Preference</span>
+            <span class="model-info-val">
+              <span class="weight-bar" style="width:${(warmUser.genre_preference || 0.15) * 100}%;background:${ChartColors.amber}"></span>
+              ${warmUser.genre_preference || 0.15}
+            </span>
+          </div>
+        </div>
+        <p class="model-info-formula">Score = 0.45×sim + 0.25×pop + 0.15×rating + 0.15×genre_pref</p>
+      </div>
+    </div>
+  `;
 }
 
 // Expose to global scope

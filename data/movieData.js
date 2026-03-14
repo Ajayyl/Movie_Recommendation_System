@@ -32,7 +32,10 @@ const MOVIES = [
         ],
         "director": "Christopher Nolan",
         "cast": "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
-        "keywords": "dream, subconscious, thief, heist, mind-bending"
+        "keywords": "dream, subconscious, thief, heist, mind-bending",
+        "cinematographer": "Wally Pfister",
+        "music": "Hans Zimmer",
+        "writer": "Christopher Nolan"
     },
     {
         "movie_id": 2,
@@ -67,7 +70,10 @@ const MOVIES = [
         ],
         "director": "Wes Anderson",
         "cast": "Ralph Fiennes, Tony Revolori, Adrien Brody",
-        "keywords": "hotel, concierge, mystery, quirky, colorful"
+        "keywords": "hotel, concierge, mystery, quirky, colorful",
+        "cinematographer": "Robert Yeoman",
+        "music": "Alexandre Desplat",
+        "writer": "Wes Anderson"
     },
     {
         "movie_id": 3,
@@ -96,9 +102,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/finding-nemo/5Gpj2XqF7BV2"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Andrew Stanton, Lee Unkrich",
+        "cast": "Albert Brooks, Ellen DeGeneres, Alexander Gould",
+        "keywords": "ocean, clownfish, father-son, journey, underwater",
+        "cinematographer": "Sharon Calahan, Jeremy Lasky",
+        "music": "Thomas Newman",
+        "writer": "Andrew Stanton, Bob Peterson"
     },
     {
         "movie_id": 4,
@@ -134,7 +143,10 @@ const MOVIES = [
         ],
         "director": "Denis Villeneuve",
         "cast": "Ryan Gosling, Harrison Ford, Ana de Armas",
-        "keywords": "replicant, sci-fi, cyberpunk, mystery, visuals"
+        "keywords": "replicant, sci-fi, cyberpunk, mystery, visuals",
+        "cinematographer": "Roger Deakins",
+        "music": "Hans Zimmer, Benjamin Wallfisch",
+        "writer": "Hampton Fancher, Michael Green"
     },
     {
         "movie_id": 5,
@@ -166,9 +178,12 @@ const MOVIES = [
                 "url": "https://www.hbomax.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Frank Darabont",
+        "cast": "Tim Robbins, Morgan Freeman, Bob Gunton",
+        "keywords": "prison, hope, friendship, escape, justice",
+        "cinematographer": "Roger Deakins",
+        "music": "Thomas Newman",
+        "writer": "Frank Darabont"
     },
     {
         "movie_id": 6,
@@ -202,9 +217,12 @@ const MOVIES = [
                 "url": "https://www.hbomax.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Hayao Miyazaki",
+        "cast": "Noriko Hidaka, Chika Sakamoto, Shigesato Itoi",
+        "keywords": "spirits, childhood, nature, countryside, fantasy",
+        "cinematographer": "Hisao Shirai",
+        "music": "Joe Hisaishi",
+        "writer": "Hayao Miyazaki"
     },
     {
         "movie_id": 7,
@@ -239,7 +257,10 @@ const MOVIES = [
         ],
         "director": "Quentin Tarantino",
         "cast": "John Travolta, Uma Thurman, Samuel L. Jackson",
-        "keywords": "crime, nonlinear, violence, dialogue-heavy, cult classic"
+        "keywords": "crime, nonlinear, violence, dialogue-heavy, cult classic",
+        "cinematographer": "Andrzej Sekuła",
+        "music": "Various Artists",
+        "writer": "Quentin Tarantino"
     },
     {
         "movie_id": 8,
@@ -269,9 +290,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/coco/db9orsI5O4gC"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Lee Unkrich, Adrian Molina",
+        "cast": "Anthony Gonzalez, Gael García Bernal, Benjamin Bratt",
+        "keywords": "music, family, afterlife, mexican culture, ancestors",
+        "cinematographer": "Matt Aspbury, Danielle Feinberg",
+        "music": "Michael Giacchino",
+        "writer": "Adrian Molina, Matthew Aldrich"
     },
     {
         "movie_id": 9,
@@ -305,9 +329,12 @@ const MOVIES = [
                 "url": "https://tv.apple.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Nicolas Winding Refn",
+        "cast": "Ryan Gosling, Carey Mulligan, Bryan Cranston",
+        "keywords": "getaway driver, stunt, neo-noir, crime, heist",
+        "cinematographer": "Newton Thomas Sigel",
+        "music": "Cliff Martinez",
+        "writer": "Hossein Amini"
     },
     {
         "movie_id": 10,
@@ -342,9 +369,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B00IANO1TA"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Ben Stiller",
+        "cast": "Ben Stiller, Kristen Wiig, Sean Penn",
+        "keywords": "daydream, adventure, photography, iceland, self-discovery",
+        "cinematographer": "Stuart Dryburgh",
+        "music": "Theodore Shapiro",
+        "writer": "Steve Conrad"
     },
     {
         "movie_id": 11,
@@ -380,7 +410,10 @@ const MOVIES = [
         ],
         "director": "Christopher Nolan",
         "cast": "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
-        "keywords": "space, time travel, wormhole, father-daughter, gravity"
+        "keywords": "space, time travel, wormhole, father-daughter, gravity",
+        "cinematographer": "Hoyte van Hoytema",
+        "music": "Hans Zimmer",
+        "writer": "Jonathan Nolan, Christopher Nolan"
     },
     {
         "movie_id": 12,
@@ -417,7 +450,10 @@ const MOVIES = [
         ],
         "director": "Hayao Miyazaki",
         "cast": "Rumi Hiiragi, Miyu Irino, Mari Natsuki",
-        "keywords": "animation, spirits, adventure, coming of age, fantasy"
+        "keywords": "animation, spirits, adventure, coming of age, fantasy",
+        "cinematographer": "Atsushi Okui",
+        "music": "Joe Hisaishi",
+        "writer": "Hayao Miyazaki"
     },
     {
         "movie_id": 13,
@@ -451,7 +487,10 @@ const MOVIES = [
         ],
         "director": "Martin Scorsese",
         "cast": "Leonardo DiCaprio, Jonah Hill, Margot Robbie",
-        "keywords": "finance, stock market, excess, greed, biography"
+        "keywords": "finance, stock market, excess, greed, biography",
+        "cinematographer": "Rodrigo Prieto",
+        "music": "Various Artists",
+        "writer": "Terence Winter"
     },
     {
         "movie_id": 14,
@@ -481,9 +520,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/up/3HbSCnQEbir9"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Pete Docter, Bob Peterson",
+        "cast": "Ed Asner, Jordan Nagai, Christopher Plummer",
+        "keywords": "adventure, balloons, elderly, friendship, paradise",
+        "cinematographer": "Patrick Lin, Jean-Claude Kalache",
+        "music": "Michael Giacchino",
+        "writer": "Pete Docter, Bob Peterson"
     },
     {
         "movie_id": 15,
@@ -515,9 +557,12 @@ const MOVIES = [
                 "url": "https://tv.apple.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Barry Jenkins",
+        "cast": "Trevante Rhodes, André Holland, Janelle Monáe",
+        "keywords": "identity, growing up, poverty, vulnerability, self-discovery",
+        "cinematographer": "James Laxton",
+        "music": "Nicholas Britell",
+        "writer": "Barry Jenkins, Tarell Alvin McCraney"
     },
     {
         "movie_id": 16,
@@ -552,7 +597,10 @@ const MOVIES = [
         ],
         "director": "Lana Wachowski, Lilly Wachowski",
         "cast": "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
-        "keywords": "simulation, cyberpunk, action, rebellion, choice, red pill"
+        "keywords": "simulation, cyberpunk, action, rebellion, choice, red pill",
+        "cinematographer": "Bill Pope",
+        "music": "Don Davis",
+        "writer": "Lana Wachowski, Lilly Wachowski"
     },
     {
         "movie_id": 17,
@@ -585,9 +633,12 @@ const MOVIES = [
                 "url": "https://tv.apple.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Sofia Coppola",
+        "cast": "Bill Murray, Scarlett Johansson, Giovanni Ribisi",
+        "keywords": "tokyo, loneliness, connection, culture, melancholy",
+        "cinematographer": "Lance Acord",
+        "music": "Kevin Shields, Brian Reitzell",
+        "writer": "Sofia Coppola"
     },
     {
         "movie_id": 18,
@@ -620,9 +671,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B00ZIFHU9Y"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "George Miller",
+        "cast": "Tom Hardy, Charlize Theron, Nicholas Hoult",
+        "keywords": "post-apocalyptic, chase, desert, rebellion, survival",
+        "cinematographer": "John Seale",
+        "music": "Junkie XL (Tom Holkenborg)",
+        "writer": "George Miller, Brendan McCarthy, Nico Lathouris"
     },
     {
         "movie_id": 19,
@@ -658,7 +712,10 @@ const MOVIES = [
         ],
         "director": "Peter Weir",
         "cast": "Jim Carrey, Laura Linney, Ed Harris",
-        "keywords": "reality tv, surveillance, simulation, escape"
+        "keywords": "reality tv, surveillance, simulation, escape",
+        "cinematographer": "Peter Biziou",
+        "music": "Burkhard Dallwitz, Philip Glass",
+        "writer": "Andrew Niccol"
     },
     {
         "movie_id": 20,
@@ -691,9 +748,12 @@ const MOVIES = [
                 "url": "https://tv.apple.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Jean-Pierre Jeunet",
+        "cast": "Audrey Tautou, Mathieu Kassovitz, Rufus",
+        "keywords": "paris, whimsy, romance, kindness, imagination",
+        "cinematographer": "Bruno Delbonnel",
+        "music": "Yann Tiersen",
+        "writer": "Jean-Pierre Jeunet, Guillaume Laurant"
     },
     {
         "movie_id": 21,
@@ -726,9 +786,12 @@ const MOVIES = [
                 "url": "https://www.hulu.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "David Fincher",
+        "cast": "Brad Pitt, Edward Norton, Helena Bonham Carter",
+        "keywords": "anarchy, identity, consumerism, underground, twist",
+        "cinematographer": "Jeff Cronenweth",
+        "music": "The Dust Brothers",
+        "writer": "Jim Uhls"
     },
     {
         "movie_id": 22,
@@ -758,9 +821,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/inside-out/2I0bBbhZIbkZ"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Pete Docter, Ronnie del Carmen",
+        "cast": "Amy Poehler, Bill Hader, Lewis Black",
+        "keywords": "emotions, memory, childhood, moving, feelings",
+        "cinematographer": "Patrick Lin",
+        "music": "Michael Giacchino",
+        "writer": "Pete Docter, Meg LeFauve, Josh Cooley"
     },
     {
         "movie_id": 23,
@@ -793,9 +859,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B0012I8B0Y"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Joel Coen, Ethan Coen",
+        "cast": "Javier Bardem, Josh Brolin, Tommy Lee Jones",
+        "keywords": "psychopath, desert, drugs, fate, neo-western",
+        "cinematographer": "Roger Deakins",
+        "music": "Carter Burwell",
+        "writer": "Joel Coen, Ethan Coen"
     },
     {
         "movie_id": 24,
@@ -826,9 +895,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/wall-e/5G1wpZC2Lb6I"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Andrew Stanton",
+        "cast": "Ben Burtt, Elissa Knight, Jeff Garlin",
+        "keywords": "robot, earth, space, environment, love, dystopia",
+        "cinematographer": "Jeremy Lasky, Danielle Feinberg",
+        "music": "Thomas Newman",
+        "writer": "Andrew Stanton, Pete Docter"
     },
     {
         "movie_id": 25,
@@ -862,9 +934,12 @@ const MOVIES = [
                 "url": "https://tv.apple.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Spike Jonze",
+        "cast": "Joaquin Phoenix, Scarlett Johansson, Amy Adams",
+        "keywords": "artificial intelligence, loneliness, futuristic, love, technology",
+        "cinematographer": "Hoyte van Hoytema",
+        "music": "Arcade Fire, Owen Pallett",
+        "writer": "Spike Jonze"
     },
     {
         "movie_id": 26,
@@ -900,7 +975,10 @@ const MOVIES = [
         ],
         "director": "Christopher Nolan",
         "cast": "Christian Bale, Heath Ledger, Aaron Eckhart",
-        "keywords": "batman, joker, vigilante, chaos, justice, superhero"
+        "keywords": "batman, joker, vigilante, chaos, justice, superhero",
+        "cinematographer": "Wally Pfister",
+        "music": "Hans Zimmer, James Newton Howard",
+        "writer": "Jonathan Nolan, Christopher Nolan"
     },
     {
         "movie_id": 27,
@@ -935,9 +1013,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B079DZ5XWD"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Paul King",
+        "cast": "Ben Whishaw, Hugh Grant, Hugh Bonneville",
+        "keywords": "bear, london, family, kindness, prison, adventure",
+        "cinematographer": "Erik Wilson",
+        "music": "Dario Marianelli",
+        "writer": "Paul King, Simon Farnaby"
     },
     {
         "movie_id": 28,
@@ -974,7 +1055,10 @@ const MOVIES = [
         ],
         "director": "Michel Gondry",
         "cast": "Jim Carrey, Kate Winslet, Kirsten Dunst",
-        "keywords": "memory, breakup, romance, sci-fi, surreal"
+        "keywords": "memory, breakup, romance, sci-fi, surreal",
+        "cinematographer": "Ellen Kuras",
+        "music": "Jon Brion",
+        "writer": "Charlie Kaufman"
     },
     {
         "movie_id": 29,
@@ -1005,9 +1089,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B00R0291Q2"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Chad Stahelski, David Leitch",
+        "cast": "Keanu Reeves, Michael Nyqvist, Alfie Allen",
+        "keywords": "assassin, revenge, action, underworld, dog",
+        "cinematographer": "Jonathan Sela",
+        "music": "Tyler Bates, Joel J. Richard",
+        "writer": "Derek Kolstad"
     },
     {
         "movie_id": 30,
@@ -1037,9 +1124,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/ratatouille/39wmItIWsg5s"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Brad Bird, Jan Pinkava",
+        "cast": "Patton Oswalt, Ian Holm, Lou Romano",
+        "keywords": "cooking, chef, paris, rat, passion, food",
+        "cinematographer": "Robert Anderson, Sharon Calahan",
+        "music": "Michael Giacchino",
+        "writer": "Brad Bird, Jan Pinkava"
     },
     {
         "movie_id": 31,
@@ -1073,9 +1163,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B000P0J0AI"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Martin Scorsese",
+        "cast": "Leonardo DiCaprio, Matt Damon, Jack Nicholson",
+        "keywords": "undercover, mob, boston, betrayal, police",
+        "cinematographer": "Michael Ballhaus",
+        "music": "Howard Shore",
+        "writer": "William Monahan"
     },
     {
         "movie_id": 32,
@@ -1110,9 +1203,12 @@ const MOVIES = [
                 "url": "https://www.hbomax.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Hayao Miyazaki",
+        "cast": "Chieko Baishō, Takuya Kimura, Akihiro Miwa",
+        "keywords": "wizard, castle, curse, war, magic, transformation",
+        "cinematographer": "Atsushi Okui",
+        "music": "Joe Hisaishi",
+        "writer": "Hayao Miyazaki"
     },
     {
         "movie_id": 33,
@@ -1148,7 +1244,10 @@ const MOVIES = [
         ],
         "director": "Bong Joon-ho",
         "cast": "Song Kang-ho, Lee Sun-kyun, Cho Yeo-jeong",
-        "keywords": "class struggle, family, deception, social commentary, thriller"
+        "keywords": "class struggle, family, deception, social commentary, thriller",
+        "cinematographer": "Hong Kyung-pyo",
+        "music": "Jung Jae-il",
+        "writer": "Bong Joon-ho, Han Jin-won"
     },
     {
         "movie_id": 34,
@@ -1181,9 +1280,12 @@ const MOVIES = [
                 "url": "https://tv.apple.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Richard Linklater",
+        "cast": "Ethan Hawke, Julie Delpy",
+        "keywords": "vienna, train, conversation, romance, philosophy",
+        "cinematographer": "Lee Daniel",
+        "music": "Johann Strauss II (Various Artists)",
+        "writer": "Richard Linklater, Kim Krizan"
     },
     {
         "movie_id": 35,
@@ -1219,7 +1321,10 @@ const MOVIES = [
         ],
         "director": "Damien Chazelle",
         "cast": "Miles Teller, J.K. Simmons, Paul Reiser",
-        "keywords": "jazz, drumming, ambition, obsession, perfection"
+        "keywords": "jazz, drumming, ambition, obsession, perfection",
+        "cinematographer": "Sharone Meir",
+        "music": "Justin Hurwitz",
+        "writer": "Damien Chazelle"
     },
     {
         "movie_id": 36,
@@ -1249,9 +1354,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/soul/77tlWpb1AWsC"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Pete Docter, Kemp Powers",
+        "cast": "Jamie Foxx, Tina Fey, Graham Norton",
+        "keywords": "jazz, soul, meaning of life, passion, afterlife",
+        "cinematographer": "Matt Aspbury, Ian Megibben",
+        "music": "Trent Reznor, Atticus Ross, Jon Batiste",
+        "writer": "Pete Docter, Mike Jones, Kemp Powers"
     },
     {
         "movie_id": 37,
@@ -1284,9 +1392,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B0011TNRNE"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Martin Scorsese",
+        "cast": "Robert De Niro, Ray Liotta, Joe Pesci",
+        "keywords": "mafia, gangster, true story, crime, rise and fall",
+        "cinematographer": "Michael Ballhaus",
+        "music": "Various Artists",
+        "writer": "Nicholas Pileggi, Martin Scorsese"
     },
     {
         "movie_id": 38,
@@ -1321,9 +1432,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B00AOT8JUC"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Rob Reiner",
+        "cast": "Cary Elwes, Robin Wright, Mandy Patinkin",
+        "keywords": "fairy tale, true love, sword fighting, comedy, rescue",
+        "cinematographer": "Adrian Biddle",
+        "music": "Mark Knopfler",
+        "writer": "William Goldman"
     },
     {
         "movie_id": 39,
@@ -1356,9 +1470,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B07BZ5HMTH"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "John Krasinski",
+        "cast": "Emily Blunt, John Krasinski, Millicent Simmonds",
+        "keywords": "silence, creatures, survival, family, horror",
+        "cinematographer": "Charlotte Bruus Christensen",
+        "music": "Marco Beltrami",
+        "writer": "Bryan Woods, Scott Beck, John Krasinski"
     },
     {
         "movie_id": 40,
@@ -1389,9 +1506,12 @@ const MOVIES = [
                 "url": "https://www.disneyplus.com/movies/the-lion-king/1HqwiEcje6Nj"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Roger Allers, Rob Minkoff",
+        "cast": "Matthew Broderick, James Earl Jones, Jeremy Irons",
+        "keywords": "lion, africa, kingdom, destiny, coming of age",
+        "cinematographer": "N/A (Animation)",
+        "music": "Hans Zimmer, Elton John",
+        "writer": "Irene Mecchi, Jonathan Roberts, Linda Woolverton"
     },
     {
         "movie_id": 41,
@@ -1426,7 +1546,10 @@ const MOVIES = [
         ],
         "director": "Denis Villeneuve",
         "cast": "Timothée Chalamet, Rebecca Ferguson, Oscar Isaac",
-        "keywords": "desert, spice, empire, prophecy, political"
+        "keywords": "desert, spice, empire, prophecy, political",
+        "cinematographer": "Greig Fraser",
+        "music": "Hans Zimmer",
+        "writer": "Jon Spaihts, Denis Villeneuve, Eric Roth"
     },
     {
         "movie_id": 42,
@@ -1459,7 +1582,10 @@ const MOVIES = [
         ],
         "director": "Daniel Kwan, Daniel Scheinert",
         "cast": "Michelle Yeoh, Stephanie Hsu, Ke Huy Quan",
-        "keywords": "multiverse, family, martial arts, surreal, absurd"
+        "keywords": "multiverse, family, martial arts, surreal, absurd",
+        "cinematographer": "Larkin Seiple",
+        "music": "Son Lux",
+        "writer": "Daniel Kwan, Daniel Scheinert"
     },
     {
         "movie_id": 43,
@@ -1487,9 +1613,12 @@ const MOVIES = [
                 "url": "https://www.hbomax.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Matt Reeves",
+        "cast": "Robert Pattinson, Zoë Kravitz, Paul Dano",
+        "keywords": "batman, detective, gothic, riddler, corruption, noir",
+        "cinematographer": "Greig Fraser",
+        "music": "Michael Giacchino",
+        "writer": "Matt Reeves, Peter Craig"
     },
     {
         "movie_id": 45,
@@ -1520,9 +1649,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B0B2KSYRLQ"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Joseph Kosinski",
+        "cast": "Tom Cruise, Miles Teller, Jennifer Connelly",
+        "keywords": "navy, fighter jet, pilot, legacy, aviation",
+        "cinematographer": "Claudio Miranda",
+        "music": "Harold Faltermeyer, Hans Zimmer, Lorne Balfe",
+        "writer": "Ehren Kruger, Eric Warren Singer, Christopher McQuarrie"
     },
     {
         "movie_id": 46,
@@ -1552,7 +1684,10 @@ const MOVIES = [
         ],
         "director": "Damien Chazelle",
         "cast": "Ryan Gosling, Emma Stone, John Legend",
-        "keywords": "musical, romance, jazz, dreams, hollywood"
+        "keywords": "musical, romance, jazz, dreams, hollywood",
+        "cinematographer": "Linus Sandgren",
+        "music": "Justin Hurwitz",
+        "writer": "Damien Chazelle"
     },
     {
         "movie_id": 47,
@@ -1585,7 +1720,10 @@ const MOVIES = [
         ],
         "director": "Peter Ramsey, Robert Persichetti Jr., Rodney Rothman",
         "cast": "Shameik Moore, Jake Johnson, Hailee Steinfeld",
-        "keywords": "spider-man, multiverse, animation, superhero, style"
+        "keywords": "spider-man, multiverse, animation, superhero, style",
+        "cinematographer": "N/A (Animation)",
+        "music": "Daniel Pemberton",
+        "writer": "Phil Lord, Rodney Rothman"
     },
     {
         "movie_id": 48,
@@ -1615,7 +1753,10 @@ const MOVIES = [
         ],
         "director": "Rian Johnson",
         "cast": "Daniel Craig, Chris Evans, Ana de Armas",
-        "keywords": "murder mystery, whodunnit, family, inheritance, detective"
+        "keywords": "murder mystery, whodunnit, family, inheritance, detective",
+        "cinematographer": "Steve Yedlin",
+        "music": "Nathan Johnson",
+        "writer": "Rian Johnson"
     },
     {
         "movie_id": 49,
@@ -1649,9 +1790,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com/dp/B000I9URAS"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie"
+        "director": "Ridley Scott",
+        "cast": "Russell Crowe, Joaquin Phoenix, Connie Nielsen",
+        "keywords": "roman empire, arena, revenge, honor, slavery",
+        "cinematographer": "John Mathieson",
+        "music": "Hans Zimmer, Lisa Gerrard",
+        "writer": "David Franzoni, John Logan, William Nicholson"
     },
     {
         "movie_id": 51,
@@ -1686,7 +1830,10 @@ const MOVIES = [
         ],
         "director": "Denis Villeneuve",
         "cast": "Amy Adams, Jeremy Renner, Forest Whitaker",
-        "keywords": "aliens, linguistics, time, communication, sci-fi"
+        "keywords": "aliens, linguistics, time, communication, sci-fi",
+        "cinematographer": "Bradford Young",
+        "music": "Jóhann Jóhannsson",
+        "writer": "Eric Heisserer"
     },
     {
         "movie_id": 54,
@@ -1718,9 +1865,12 @@ const MOVIES = [
                 "url": "https://www.amazon.com"
             }
         ],
-        "director": "Various Directors",
-        "cast": "Talented Cast",
-        "keywords": "trending, popular, movie",
+        "director": "Alex Garland",
+        "cast": "Domhnall Gleeson, Alicia Vikander, Oscar Isaac",
+        "keywords": "artificial intelligence, turing test, robot, consciousness, isolation",
+        "cinematographer": "Rob Hardy",
+        "music": "Geoff Barrow, Ben Salisbury",
+        "writer": "Alex Garland",
         "quote": "One day the AIs are going to look back on us the same way we look at fossils. — Progress without empathy is just destruction in disguise.",
         "trailer": "EoQuVnKhxaM"
     },
@@ -1755,6 +1905,9 @@ const MOVIES = [
         "director": "Todd Phillips",
         "cast": "Joaquin Phoenix, Robert De Niro, Zazie Beetz",
         "keywords": "mental health, clown, social decay, origin story, gritty",
+        "cinematographer": "Lawrence Sher",
+        "music": "Hildur Guðnadóttir",
+        "writer": "Todd Phillips, Scott Silver",
         "quote": "All I have are negative thoughts. — Be gentle with yourself. The world is heavy enough without fighting your own mind too.",
         "trailer": "zAGVQLHvwOY"
     }

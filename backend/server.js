@@ -212,9 +212,11 @@ app.get('/api/recommendations', auth.authMiddleware, (req, res) => {
     res.json({
         success: true,
         recommendations: recommendations.map(r => ({
+            movie: r.movie.title,
             movie_id: r.movie.movie_id,
-            title: r.movie.title,
             score: Math.round(r.score * 100) / 100,
+            similarity_score: Math.round(r.similarityScore * 100) / 100,
+            user_preference: Math.round(r.preferenceScore * 100) / 100,
             reason: r.reason,
             source: r.source,
             qValue: r.qValue,
@@ -416,6 +418,20 @@ app.get('/api/history/searches', auth.authMiddleware, (req, res) => {
 app.get('/api/ratings', auth.authMiddleware, (req, res) => {
     const ratings = stmts.getUserRatings.all(req.userUid);
     res.json({ success: true, ratings });
+});
+
+// ──────────────────────────────────
+// EVALUATION METRICS
+// ──────────────────────────────────
+app.get('/api/metrics', (req, res) => {
+    try {
+        const fs = require('fs');
+        const metricsPath = path.join(__dirname, '..', 'models', 'metrics.json');
+        const metrics = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
+        res.json({ success: true, ...metrics });
+    } catch (e) {
+        res.status(404).json({ success: false, error: 'Metrics not found. Run model_evaluator.py first.' });
+    }
 });
 
 // ──────────────────────────────────

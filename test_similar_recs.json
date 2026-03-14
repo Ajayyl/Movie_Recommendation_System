@@ -1,0 +1,98 @@
+[
+  {
+    "movie_id": 9,
+    "title": "Drive",
+    "genre": "Action|Drama",
+    "year": 2011,
+    "rating_percent": 79,
+    "popularity_score": 0.7,
+    "synopsis": "A Hollywood stunt driver who moonlights as a getaway driver finds himself in trouble when he helps his neighbour.",
+    "director": "Nicolas Winding Refn",
+    "cast": "Ryan Gosling, Carey Mulligan, Bryan Cranston",
+    "keywords": "getaway driver, stunt, neo-noir, crime, heist",
+    "movie": "Drive",
+    "score": 0.2257,
+    "reason": "Recommended because you watched:\n• Top Gun: Maverick",
+    "similarity_score": 0.0757,
+    "user_preference": 0.0,
+    "similarity": 0.0757,
+    "user_pref": 0.0,
+    "explanation": {
+      "factors": [
+        {
+          "type": "genre_match",
+          "label": "Shared genre: Action, Drama",
+          "weight": "high"
+        }
+      ],
+      "similarity_score": 0.0757,
+      "user_preference": 0.0,
+      "genre_boost": 0.15,
+      "final_score": 0.2257
+    }
+  },
+  {
+    "movie_id": 26,
+    "title": "The Dark Knight",
+    "genre": "Action|Crime|Drama",
+    "year": 2008,
+    "rating_percent": 90,
+    "popularity_score": 1.0,
+    "synopsis": "Batman raises the stakes in his war on crime, facing off against the Joker, a criminal mastermind who wreaks havoc on Gotham City.",
+    "director": "Christopher Nolan",
+    "cast": "Christian Bale, Heath Ledger, Aaron Eckhart",
+    "keywords": "batman, joker, vigilante, chaos, justice, superhero",
+    "movie": "The Dark Knight",
+    "score": 0.1723,
+    "reason": "Recommended because you watched:\n• Top Gun: Maverick",
+    "similarity_score": 0.0292,
+    "user_preference": 0.0,
+    "similarity": 0.0292,
+    "user_pref": 0.0,
+    "explanation": {
+      "factors": [
+        {
+          "type": "genre_match",
+          "label": "Shared genre: Action, Drama",
+          "weight": "high"
+        }
+      ],
+      "similarity_score": 0.0292,
+      "user_preference": 0.0,
+      "genre_boost": 0.15,
+      "final_score": 0.1792
+    }
+  },
+  {
+    "movie_id": 49,
+    "title": "Gladiator",
+    "genre": "Action|Adventure|Drama",
+    "year": 2000,
+    "rating_percent": 85,
+    "popularity_score": 0.84,
+    "synopsis": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
+    "director": "Ridley Scott",
+    "cast": "Russell Crowe, Joaquin Phoenix, Connie Nielsen",
+    "keywords": "roman empire, arena, revenge, honor, slavery",
+    "movie": "Gladiator",
+    "score": 0.1513,
+    "reason": "Recommended because you watched:\n• Top Gun: Maverick",
+    "similarity_score": 0.0146,
+    "user_preference": 0.0,
+    "similarity": 0.0146,
+    "user_pref": 0.0,
+    "explanation": {
+      "factors": [
+        {
+          "type": "genre_match",
+          "label": "Shared genre: Action, Drama",
+          "weight": "high"
+        }
+      ],
+      "similarity_score": 0.0146,
+      "user_preference": 0.0,
+      "genre_boost": 0.15,
+      "final_score": 0.1646
+    }
+  }
+]

@@ -1,0 +1,78 @@
+[
+  {
+    "movie_id": 45,
+    "title": "Top Gun: Maverick",
+    "genre": "Action|Drama",
+    "year": 2022,
+    "rating_percent": 88,
+    "popularity_score": 0.92,
+    "synopsis": "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission.",
+    "director": "Joseph Kosinski",
+    "cast": "Tom Cruise, Miles Teller, Jennifer Connelly",
+    "keywords": "navy, fighter jet, pilot, legacy, aviation",
+    "movie": "Top Gun: Maverick",
+    "score": 0.6518,
+    "reason": "Recommended because you watched:\n• Top Gun: Maverick",
+    "similarity_score": 0.0,
+    "user_preference": 0.125,
+    "similarity": 0.0,
+    "user_pref": 0.125,
+    "explanation": {
+      "factors": [
+        {
+          "type": "genre_preference",
+          "label": "Matches your preference for Action",
+          "weight": "high"
+        },
+        {
+          "type": "quality_baseline",
+          "label": "Quality baseline: 0.53",
+          "weight": "medium"
+        }
+      ],
+      "similarity_score": 0.0,
+      "user_preference": 0.125,
+      "genre_boost": 1.0,
+      "final_score": 0.6518,
+      "cold_start": false
+    }
+  },
+  {
+    "movie_id": 26,
+    "title": "The Dark Knight",
+    "genre": "Action|Crime|Drama",
+    "year": 2008,
+    "rating_percent": 90,
+    "popularity_score": 1.0,
+    "synopsis": "Batman raises the stakes in his war on crime, facing off against the Joker, a criminal mastermind who wreaks havoc on Gotham City.",
+    "director": "Christopher Nolan",
+    "cast": "Christian Bale, Heath Ledger, Aaron Eckhart",
+    "keywords": "batman, joker, vigilante, chaos, justice, superhero",
+    "movie": "The Dark Knight",
+    "score": 0.5568,
+    "reason": "Recommended because you watched:\n• Top Gun: Maverick",
+    "similarity_score": 0.0,
+    "user_preference": 0.0,
+    "similarity": 0.0,
+    "user_pref": 0.0,
+    "explanation": {
+      "factors": [
+        {
+          "type": "genre_preference",
+          "label": "Matches your preference for Action",
+          "weight": "high"
+        },
+        {
+          "type": "quality_baseline",
+          "label": "Quality baseline: 0.56",
+          "weight": "medium"
+        }
+      ],
+      "similarity_score": 0.0,
+      "user_preference": 0.0,
+      "genre_boost": 1.0,
+      "final_score": 0.5568,
+      "cold_start": false
+    }
+  }
+]

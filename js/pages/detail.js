@@ -94,6 +94,38 @@ function renderDetail(params) {
             <!-- User Star Rating Widget (RL-connected) -->
             ${renderRatingWidget(movieId)}
 
+            <!-- Cast & Crew -->
+            <div class="crew-section">
+              <div class="rating-label" style="margin-bottom: 14px;">🎬 Cast & Crew</div>
+              <div class="crew-grid">
+                ${movie.director ? `
+                <div class="crew-card">
+                  <span class="crew-role">🎬 Director</span>
+                  <span class="crew-name">${movie.director}</span>
+                </div>` : ''}
+                ${movie.writer ? `
+                <div class="crew-card">
+                  <span class="crew-role">✍️ Writer</span>
+                  <span class="crew-name">${movie.writer}</span>
+                </div>` : ''}
+                ${movie.cast ? `
+                <div class="crew-card crew-card-wide">
+                  <span class="crew-role">🌟 Cast</span>
+                  <span class="crew-name">${movie.cast}</span>
+                </div>` : ''}
+                ${movie.cinematographer ? `
+                <div class="crew-card">
+                  <span class="crew-role">📷 Cinematography</span>
+                  <span class="crew-name">${movie.cinematographer}</span>
+                </div>` : ''}
+                ${movie.music ? `
+                <div class="crew-card">
+                  <span class="crew-role">🎵 Music</span>
+                  <span class="crew-name">${movie.music}</span>
+                </div>` : ''}
+              </div>
+            </div>
+
             <!-- Movie Metadata -->
             <div class="detail-metadata">
               <div class="metadata-item">

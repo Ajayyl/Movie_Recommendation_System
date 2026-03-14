@@ -198,7 +198,12 @@ const API = {
                     data: {
                         recommendations: recommendations.map(m => ({
                             ...m,
-                            source: 'FastAPI_ML'
+                            source: 'FastAPI_ML',
+                            // XAI fields from enhanced backend
+                            explanation: m.explanation || null,
+                            similarity: m.similarity || 0,
+                            user_pref: m.user_pref || 0,
+                            score: m.score || 0,
                         }))
                     }
                 };
@@ -215,7 +220,11 @@ const API = {
                 recommendations: recs.map(m => ({
                     movie_id: m.movie_id,
                     reason: '🤖 AI matched your vibe (Local)',
-                    source: 'LocalRL'
+                    source: 'LocalRL',
+                    explanation: null,
+                    similarity: 0,
+                    user_pref: 0,
+                    score: 0,
                 }))
             }
         };
@@ -234,7 +243,11 @@ const API = {
                     data: {
                         recommendations: recommendations.map(m => ({
                             ...m,
-                            source: 'FastAPI_Similarity'
+                            source: 'FastAPI_Similarity',
+                            explanation: m.explanation || null,
+                            similarity: m.similarity || 0,
+                            user_pref: m.user_pref || 0,
+                            score: m.score || 0,
                         }))
                     }
                 };
@@ -294,6 +307,33 @@ const API = {
                 }
             };
         }
+    },
+
+    // ── ML Metrics & Model Info ──
+    async getMLMetrics() {
+        try {
+            const res = await fetch(`${this.BASE_URL}/metrics`);
+            if (res.ok) {
+                const data = await res.json();
+                return { ok: true, data };
+            }
+        } catch (e) {
+            console.warn('ML metrics unavailable:', e);
+        }
+        return { ok: false, error: 'ML metrics unavailable' };
+    },
+
+    async getModelInfo() {
+        try {
+            const res = await fetch(`${this.ML_API_BASE}/model-info`);
+            if (res.ok) {
+                const data = await res.json();
+                return { ok: true, data };
+            }
+        } catch (e) {
+            console.warn('Model info unavailable:', e);
+        }
+        return { ok: false, error: 'Model info unavailable' };
     },
 
     // ── Generic GET (for dashboard/analytics) ──

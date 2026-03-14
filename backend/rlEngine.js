@@ -232,7 +232,7 @@ function getRecommendations(userUid, allMovies, count = 8, userProfile = null) {
         const qEntry = qMap.get(movie.movie_id);
         if (qEntry && qEntry.visit_count > 0) {
             preferenceScore += qEntry.q_value * 2.5; // Strong preference from RL
-            reasons.push('learned from your behavior');
+            reasons.push('you interacted with similar movies in the past');
             source = 'rl';
         }
 
@@ -242,7 +242,7 @@ function getRecommendations(userUid, allMovies, count = 8, userProfile = null) {
         );
         if (hasDirectHistory) {
             preferenceScore += 1.2; 
-            reasons.push('based on your search/rating history');
+            reasons.push('it matches your search and rating history');
         }
 
         // 3. CONTENT SIMILARITY SCORE (Matches preferences)
@@ -252,24 +252,33 @@ function getRecommendations(userUid, allMovies, count = 8, userProfile = null) {
                 const sharedGenres = movie.genre.filter(g => preferredGenres.includes(g));
                 if (sharedGenres.length > 0) {
                     similarityScore += sharedGenres.length * 0.8;
-                    reasons.push(`matches your genre interests`);
+                    reasons.push(`you enjoy ${sharedGenres.join(' and ')} movies`);
                 }
             } catch (e) { /* ignore */ }
         }
 
         if (userProfile.preferred_experience && movie.experience_type === userProfile.preferred_experience) {
             similarityScore += 0.6;
-            reasons.push(`fits the vibe you love`);
+            reasons.push(`it fits the ${userProfile.preferred_experience} vibe you like`);
         }
 
-        // 4. QUALITY BASELINE
-        const qualityScore = (movie.popularity_score * 0.3) + (movie.rating_percent / 100 * 0.3);
+        // 4. QUALITY BASELINE & COLD-START
+        const ratingScore = (movie.rating_percent || 0) / 100;
+        let finalScore = 0;
         
-        // HYBRID CALCULATION: final_score = similarity_score + preference_score + quality
-        const finalScore = similarityScore + preferenceScore + qualityScore;
+        if (preferenceScore === 0) {
+             // Cold-Start Handling
+             finalScore = (0.5 * similarityScore) + (0.3 * (movie.popularity_score || 0)) + (0.2 * ratingScore);
+             if (reasons.length === 0) {
+                 reasons.push('it is a highly rated and popular choice');
+             }
+        } else {
+             const qualityScore = ((movie.popularity_score || 0) * 0.3) + (ratingScore * 0.2);
+             finalScore = similarityScore + preferenceScore + qualityScore;
+        }
 
         if (reasons.length === 0) {
-            reasons.push('recommended high-quality content');
+            reasons.push('of its overall high quality and relevance');
         }
 
         return {
@@ -278,7 +287,7 @@ function getRecommendations(userUid, allMovies, count = 8, userProfile = null) {
             similarityScore,
             preferenceScore,
             source,
-            reason: '🤖 ' + reasons[0].charAt(0).toUpperCase() + reasons[0].slice(1),
+            reason: `Recommended because ${reasons[0]}.`,
             allReasons: reasons,
             qValue: qEntry ? qEntry.q_value : null,
             visitCount: qEntry ? qEntry.visit_count : 0
