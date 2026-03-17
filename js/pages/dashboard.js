@@ -1,4 +1,4 @@
-// UniVibe — ML Intelligence Dashboard
+// UniVibe — AI Intelligence Dashboard
 // Full-page analytics with Canvas-based visualizations
 
 // ──────────────────────────────────
@@ -623,8 +623,8 @@ function renderDashboard() {
         <!-- Dashboard Header -->
         <div class="dash-header fade-in">
           <div>
-            <h1 class="dash-title">🧠 ML Intelligence Dashboard</h1>
-            <p class="dash-subtitle">Real-time analytics from your personal reinforcement learning model</p>
+            <h1 class="dash-title">🧠 AI Intelligence Dashboard</h1>
+            <p class="dash-subtitle">Real-time analytics from your personal AI recommendation model</p>
           </div>
           <div class="dash-header-actions">
             <div class="dash-model-badge" id="dash-model-badge">
@@ -645,7 +645,7 @@ function renderDashboard() {
           <div class="dash-chart-card dash-wide fade-in-up">
             <div class="dash-chart-head">
               <h3 class="dash-chart-title">📈 User Interaction Trends</h3>
-              <p class="dash-chart-desc">Your activity over time — each event feeds the RL model</p>
+              <p class="dash-chart-desc">Your activity over time — each event feeds the AI model</p>
             </div>
             <div class="dash-chart-body" id="chart-timeline" style="height:280px;"></div>
           </div>
@@ -681,7 +681,7 @@ function renderDashboard() {
           <div class="dash-chart-card dash-full fade-in-up">
             <div class="dash-chart-head">
               <h3 class="dash-chart-title">🏆 Most Recommended Movies</h3>
-              <p class="dash-chart-desc">Movies the RL model ranks highest for you — these get prioritized in recommendations</p>
+              <p class="dash-chart-desc">Movies the AI model ranks highest for you — these get prioritized in recommendations</p>
             </div>
             <div class="dash-chart-body" id="chart-movie-q-bars" style="height:380px;"></div>
           </div>
@@ -705,7 +705,7 @@ function renderDashboard() {
           </div>
         </div>
 
-        <!-- Row 5: State-Space Radar + RL Config -->
+        <!-- Row 5: State-Space Radar + AI Config -->
         <div class="dash-row">
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
@@ -717,7 +717,7 @@ function renderDashboard() {
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
               <h3 class="dash-chart-title">⚙️ Model Configuration</h3>
-              <p class="dash-chart-desc">Current RL hyperparameters driving your recommendations</p>
+              <p class="dash-chart-desc">Current AI hyperparameters driving your recommendations</p>
             </div>
             <div class="dash-config-body" id="dash-config-body">
               ${renderAnalysisLoader()}
@@ -794,12 +794,12 @@ async function loadDashboardData() {
     if (res.ok && res.data && res.data.dashboard) {
       d = res.data.dashboard;
     } else {
-      console.warn('Backend unavailable, using LocalRL for dashboard data.');
-      d = LocalRL.getUserLearningStats();
+      console.warn('Backend unavailable, using LocalAI for dashboard data.');
+      d = LocalAI.getUserLearningStats();
     }
   } catch (error) {
-    console.warn('Error fetching dashboard data, using LocalRL fallback.', error);
-    d = LocalRL.getUserLearningStats();
+    console.warn('Error fetching dashboard data, using LocalAI fallback.', error);
+    d = LocalAI.getUserLearningStats();
   }
 
   // ── KPI Cards ──

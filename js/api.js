@@ -106,7 +106,7 @@ const API = {
     // ── Interaction Tracking (Shared across backends via SQLite) ──
     async trackInteraction(movieId, eventType, eventValue, context) {
         // Update local brain for offline/immediate use
-        LocalRL.learn(movieId, eventType, eventValue, context);
+        LocalAI.learn(movieId, eventType, eventValue, context);
 
         try {
             await fetch(`${this.ML_API_BASE}/track`, {
@@ -209,18 +209,18 @@ const API = {
                 };
             }
         } catch (error) {
-            console.warn('FastAPI Backend unreachable, falling back to LocalRL:', error);
+            console.warn('FastAPI Backend unreachable, falling back to LocalAI:', error);
         }
 
-        // Fallback to LocalRL if FastAPI is unavailable
-        const recs = LocalRL.getRecommendations(count);
+        // Fallback to LocalAI if FastAPI is unavailable
+        const recs = LocalAI.getRecommendations(count);
         return {
             ok: true,
             data: {
                 recommendations: recs.map(m => ({
                     movie_id: m.movie_id,
                     reason: '🤖 AI matched your vibe (Local)',
-                    source: 'LocalRL',
+                    source: 'LocalAI',
                     explanation: null,
                     similarity: 0,
                     user_pref: 0,
@@ -291,7 +291,7 @@ const API = {
             } } };
         } catch (e) {
             // Local fallback
-            const stats = LocalRL.getUserLearningStats();
+            const stats = LocalAI.getUserLearningStats();
             return {
                 ok: true,
                 data: {

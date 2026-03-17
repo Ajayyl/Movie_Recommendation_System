@@ -1,0 +1,14 @@
+Auditing all 101 posters...
+...........
+
+--- BROKEN POSTERS REPORT ---
+[ID 11] Interstellar: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
+[ID 18] Mad Max: Fury Road: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/h9DI7R9Y9ad3mcS99mY7zfsUvA6.jpg
+[ID 26] The Dark Knight: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tWugHbbp7M9ssy6A6KWKGv7l.jpg
+[ID 41] Dune: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/d5iIlSXY9Cnpv7STsmVTqh7jOdB.jpg
+[ID 43] The Batman: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/74xTEgt7R36Fpooo50r9T25onAs.jpg
+[ID 46] Spider-Man: Into the Spider-Verse: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/iiZZu0z9Ho4h96vS9S0unH79asP.jpg
+[ID 48] Gladiator: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/ty8TGRSspRjsZd36UoLyLS9zD3G.jpg
+[ID 49] Arrival: 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/4mS96mX7VfRveB76KsnM73O8Uis.jpg
+
+Found 8 broken poster links.

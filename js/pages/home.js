@@ -72,14 +72,14 @@ function renderHome() {
       </div>
     </section>
 
-    <!-- RL-Powered Recommendations (logged in users) -->
+    <!-- AI-Powered Recommendations (logged in users) -->
     ${isLoggedIn ? `
     <section class="section recommend-section" style="padding-top: 0;">
       <div class="container">
         <div class="section-header">
           <div>
             <h2 class="section-title">🤖 AI Picks For You</h2>
-            <p class="section-subtitle">Personalized by your reinforcement learning model</p>
+            <p class="section-subtitle">Personalized by your AI recommendation model</p>
           </div>
           <a href="#/dashboard" class="btn btn-sm btn-outline">View AI Dashboard →</a>
         </div>
@@ -169,16 +169,16 @@ function showHomeRecommendations(featuredId) {
     }
   }, 1500);
 
-  // Also load RL recommendations if logged in
+  // Also load AI recommendations if logged in
   if (API.isLoggedIn()) {
-    loadHomeRLRecommendations();
+    loadHomeAIRecommendations();
   }
 }
 
 /**
- * Load RL-powered recommendations for the home page.
+ * Load AI-powered recommendations for the home page.
  */
-async function loadHomeRLRecommendations() {
+async function loadHomeAIRecommendations() {
   const container = document.getElementById('home-rl-recommendations');
   if (!container) return;
 
@@ -196,7 +196,7 @@ async function loadHomeRLRecommendations() {
       }).join('')}
         </div>
         <div class="rl-meta-info">
-          <span>⚡ Powered by your personal RL model</span>
+          <span>⚡ Powered by your personal AI model</span>
           <span>🧠 ${[...new Set(recs.map(r => r.source))].join(', ')} signals</span>
         </div>
       `;

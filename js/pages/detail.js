@@ -91,7 +91,7 @@ function renderDetail(params) {
               <div class="rating-note">Ratings shown for reference only — not the sole factor in recommendations</div>
             </div>
 
-            <!-- User Star Rating Widget (RL-connected) -->
+            <!-- User Star Rating Widget (AI-connected) -->
             ${renderRatingWidget(movieId)}
 
             <!-- Cast & Crew -->
@@ -238,7 +238,7 @@ function renderRecList(container, items) {
     const reason = item.reason || '🤖 AI matched your vibe';
     const card = renderRecommendedCard(movie, reason);
 
-    // Wrap card to track recommendation clicks for RL learning
+    // Wrap card to track recommendation clicks for AI learning
     return card.replace(
       `onclick="Router.navigate('/movie/${movie.movie_id}')"`,
       `onclick="trackRecommendationClick(${movie.movie_id}, MOVIES.find(m=>m.movie_id===${movie.movie_id})); Router.navigate('/movie/${movie.movie_id}')"`

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UniVibe — AI Movie Discovery & ML Recommendations</title>
   <meta name="description"
-    content="Discover movies that match your vibe. Powered by a Reinforcement Learning engine that learns your taste — then stream on your favourite platform." />
+    content="Discover movies that match your vibe. Powered by an AI Recommendation engine that learns your taste — then stream on your favourite platform." />
 
   <!-- Favicon -->
   <link rel="icon" href="assets/logo/v2.png" type="image/png" />
@@ -68,7 +68,7 @@
 
   <!-- Scripts (order matters: data → AI → API → logic → components → auth → router → pages) -->
   <script src="data/movieData.js?v=14"></script>
-  <script src="js/localRL.js?v=14"></script>
+  <script src="js/localAI.js?v=14"></script>
   <script src="js/api.js?v=14"></script>
   <script src="js/recommendationEngine.js?v=14"></script>
   <script src="js/components.js?v=14"></script>
@@ -110,9 +110,9 @@
         if (featured) {
           setTimeout(() => showHomeRecommendations(featured.movie_id), 0);
         }
-        // Load RL-powered AI recommendations for logged-in users
+        // Load AI recommendations for logged-in users
         if (API.isLoggedIn()) {
-          setTimeout(() => loadHomeRLRecommendations(), 0);
+          setTimeout(() => loadHomeAIRecommendations(), 0);
         }
       });
 
@@ -160,7 +160,7 @@
         setTimeout(loadProfileData, 100);
       });
 
-      // ML Intelligence Dashboard
+      // AI Intelligence Dashboard
       Router.on('/dashboard', function () {
         renderPage(renderDashboard());
         setTimeout(loadDashboardData, 100);

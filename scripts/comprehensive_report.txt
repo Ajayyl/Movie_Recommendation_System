@@ -1,0 +1,190 @@
+Auditing all links for 101 movies...
+...........
+
+--- COMPREHENSIVE LINK AUDIT ---
+[ID 1] Inception: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYu6YfOuzS6099YmS8vSAsS6Sps.jpg
+[ID 1] Inception: [Netflix] 405 - https://www.netflix.com/title/70131314
+[ID 1] Inception: [Prime] 405 - https://www.amazon.com/dp/B0047WJ11G
+[ID 1] Inception: [Platform:Netflix] 405 - https://www.netflix.com/title/70131314
+[ID 1] Inception: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0047WJ11G
+[ID 2] The Grand Budapest Hotel: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/nX5XotM9yprCKarRH4fzOq1VM1J.jpg
+[ID 2] The Grand Budapest Hotel: [Prime] 405 - https://www.amazon.com/dp/B00J2PGLO0
+[ID 2] The Grand Budapest Hotel: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00J2PGLO0
+[ID 3] Finding Nemo: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/ggq966pB90U49S3MvN797v9A94E.jpg
+[ID 4] Blade Runner 2049: [Prime] 405 - https://www.amazon.com/dp/B0764GY2JD
+[ID 4] Blade Runner 2049: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0764GY2JD
+[ID 5] The Shawshank Redemption: [Netflix] 405 - https://www.netflix.com
+[ID 5] The Shawshank Redemption: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 6] My Neighbor Totoro: [Netflix] 405 - https://www.netflix.com
+[ID 6] My Neighbor Totoro: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 7] Pulp Fiction: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/d5iIl9h9FvS68vUvR9UXqP1Szh1.jpg
+[ID 7] Pulp Fiction: [Prime] 405 - https://www.amazon.com/dp/B000I9YJ8E
+[ID 7] Pulp Fiction: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B000I9YJ8E
+[ID 9] Drive: [Prime] 405 - https://www.amazon.com/dp/B006IMZ0DQ
+[ID 9] Drive: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B006IMZ0DQ
+[ID 10] The Secret Life of Walter Mitty: [Prime] 405 - https://www.amazon.com/dp/B00IANO1TA
+[ID 10] The Secret Life of Walter Mitty: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00IANO1TA
+[ID 11] Interstellar: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/gEU2QniE6E77NI6vCU679yvC9Pj.jpg
+[ID 11] Interstellar: [Prime] 405 - https://www.amazon.com/dp/B00TU9UFTS
+[ID 11] Interstellar: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00TU9UFTS
+[ID 12] Spirited Away: [Netflix] 405 - https://www.netflix.com
+[ID 12] Spirited Away: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 13] The Wolf of Wall Street: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/pWHf4pRLv7U9V3f3S97S89R60pS.jpg
+[ID 13] The Wolf of Wall Street: [Prime] 405 - https://www.amazon.com/dp/B00IIU9FMQ
+[ID 13] The Wolf of Wall Street: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00IIU9FMQ
+[ID 15] Moonlight: [Prime] 405 - https://www.amazon.com/dp/B01MU9CMGP
+[ID 15] Moonlight: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B01MU9CMGP
+[ID 16] The Matrix: [Prime] 405 - https://www.amazon.com/dp/B000HAB4KS
+[ID 16] The Matrix: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B000HAB4KS
+[ID 17] Lost in Translation: [Prime] 405 - https://www.amazon.com/dp/B000IBUPMK
+[ID 17] Lost in Translation: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B000IBUPMK
+[ID 18] Mad Max: Fury Road: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/h97STuLYkAxSl4oS30qxH7S3vR.jpg
+[ID 18] Mad Max: Fury Road: [Prime] 405 - https://www.amazon.com/dp/B00ZIFHU9Y
+[ID 18] Mad Max: Fury Road: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00ZIFHU9Y
+[ID 19] The Truman Show: [Prime] 405 - https://www.amazon.com/dp/B001EBWIPY
+[ID 19] The Truman Show: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B001EBWIPY
+[ID 20] Amélie: [Prime] 405 - https://www.amazon.com/dp/B000I9YLWM
+[ID 20] Amélie: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B000I9YLWM
+[ID 21] Fight Club: [Prime] 405 - https://www.amazon.com/dp/B003MAQG9Y
+[ID 21] Fight Club: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B003MAQG9Y
+[ID 23] No Country for Old Men: [Prime] 405 - https://www.amazon.com/dp/B0012I8B0Y
+[ID 23] No Country for Old Men: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0012I8B0Y
+[ID 25] Her: [Prime] 405 - https://www.amazon.com/dp/B00HHJR5PO
+[ID 25] Her: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00HHJR5PO
+[ID 26] The Dark Knight: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDp9EXS0tUzsT92OveY.jpg
+[ID 26] The Dark Knight: [Prime] 405 - https://www.amazon.com/dp/B001I189MG
+[ID 26] The Dark Knight: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B001I189MG
+[ID 27] Paddington 2: [Netflix] 405 - https://www.netflix.com
+[ID 27] Paddington 2: [Prime] 405 - https://www.amazon.com/dp/B079DZ5XWD
+[ID 27] Paddington 2: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 27] Paddington 2: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B079DZ5XWD
+[ID 28] Eternal Sunshine of the Spotless Mind: [Prime] 405 - https://www.amazon.com/dp/B000JLQUZI
+[ID 28] Eternal Sunshine of the Spotless Mind: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B000JLQUZI
+[ID 29] John Wick: [Prime] 405 - https://www.amazon.com/dp/B00R0291Q2
+[ID 29] John Wick: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00R0291Q2
+[ID 31] The Departed: [Prime] 405 - https://www.amazon.com/dp/B000P0J0AI
+[ID 31] The Departed: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B000P0J0AI
+[ID 32] Howl's Moving Castle: [Netflix] 405 - https://www.netflix.com
+[ID 32] Howl's Moving Castle: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 33] Parasite: [Prime] 405 - https://www.amazon.com/dp/B07YM14FPF
+[ID 33] Parasite: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B07YM14FPF
+[ID 34] Before Sunrise: [Prime] 405 - https://www.amazon.com/dp/B00AEFXVYM
+[ID 34] Before Sunrise: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00AEFXVYM
+[ID 35] Whiplash: [Netflix] 405 - https://www.netflix.com
+[ID 35] Whiplash: [Prime] 405 - https://www.amazon.com/dp/B00QGHB8D0
+[ID 35] Whiplash: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 35] Whiplash: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00QGHB8D0
+[ID 37] Goodfellas: [Prime] 405 - https://www.amazon.com/dp/B0011TNRNE
+[ID 37] Goodfellas: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0011TNRNE
+[ID 38] The Princess Bride: [Prime] 405 - https://www.amazon.com/dp/B00AOT8JUC
+[ID 38] The Princess Bride: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B00AOT8JUC
+[ID 39] A Quiet Place: [Prime] 405 - https://www.amazon.com/dp/B07BZ5HMTH
+[ID 39] A Quiet Place: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B07BZ5HMTH
+[ID 41] Dune: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/d5oc2n0FiI0YvLXN9Wn3BKFoJw3.jpg
+[ID 41] Dune: [Prime] 405 - https://www.amazon.com/dp/B09J5D7GV1
+[ID 41] Dune: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B09J5D7GV1
+[ID 42] Everything Everywhere All at Once: [Prime] 405 - https://www.amazon.com/dp/B09X5XHHKD
+[ID 42] Everything Everywhere All at Once: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B09X5XHHKD
+[ID 43] The Batman: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/74xTEgt7R36FpoO3pSja9TCV6R3.jpg
+[ID 44] Top Gun: Maverick: [Prime] 405 - https://www.amazon.com/dp/B0B2KSYRLQ
+[ID 44] Top Gun: Maverick: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0B2KSYRLQ
+[ID 45] La La Land: [Netflix] 405 - https://www.netflix.com
+[ID 45] La La Land: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 46] Spider-Man: Into the Spider-Verse: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/iiZZdoBmB1D19p9S79idqkv0S31.jpg
+[ID 46] Spider-Man: Into the Spider-Verse: [Prime] 405 - https://www.amazon.com
+[ID 46] Spider-Man: Into the Spider-Verse: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 47] Knives Out: [Prime] 405 - https://www.amazon.com/dp/B082L42V5B
+[ID 47] Knives Out: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B082L42V5B
+[ID 48] Gladiator: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/ty8TGRvSxcwaMv0CFoXvXfzw9rL.jpg
+[ID 48] Gladiator: [Netflix] 405 - https://www.netflix.com
+[ID 48] Gladiator: [Prime] 405 - https://www.amazon.com/dp/B000I9URAS
+[ID 48] Gladiator: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 48] Gladiator: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B000I9URAS
+[ID 49] Arrival: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/x9ezu8CdPkpSULoGIl7mHrvu4Ju.jpg
+[ID 49] Arrival: [Netflix] 405 - https://www.netflix.com
+[ID 49] Arrival: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 50] Ex Machina: [Prime] 405 - https://www.amazon.com
+[ID 50] Ex Machina: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 51] Joker: [Prime] 405 - https://www.amazon.com
+[ID 51] Joker: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 53] Love Today: [Netflix] 405 - https://www.netflix.com/title/81643110
+[ID 53] Love Today: [Platform:Netflix] 405 - https://www.netflix.com/title/81643110
+[ID 54] The Goat Life (Aadujeevitham): [Netflix] 405 - https://www.netflix.com/title/81643111
+[ID 54] The Goat Life (Aadujeevitham): [Platform:Netflix] 405 - https://www.netflix.com/title/81643111
+[ID 55] Lubber Pandhu: [Prime] 405 - https://www.amazon.com
+[ID 55] Lubber Pandhu: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 56] Garudan: [Prime] 405 - https://www.amazon.com
+[ID 56] Garudan: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 57] Vaagai Sooda Vaa: [Prime] 405 - https://www.amazon.com
+[ID 57] Vaagai Sooda Vaa: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 58] Aalavandhan: [Prime] 405 - https://www.amazon.com
+[ID 58] Aalavandhan: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 59] Virumaandi: [Prime] 405 - https://www.amazon.com
+[ID 60] Thuppakki: [Prime] 405 - https://www.amazon.com
+[ID 62] Aruvi: [Prime] 405 - https://www.amazon.com
+[ID 62] Aruvi: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 63] Kaithi: [Netflix] 405 - https://www.netflix.com/title/81232014
+[ID 63] Kaithi: [Platform:Netflix] 405 - https://www.netflix.com/title/81232014
+[ID 64] Theeran Adhigaaram Ondru: [Prime] 405 - https://www.amazon.com
+[ID 64] Theeran Adhigaaram Ondru: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 65] Soorarai Pottru: [Prime] 405 - https://www.amazon.com/dp/B08L79L7Q6
+[ID 65] Soorarai Pottru: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B08L79L7Q6
+[ID 66] Jai Bhim: [Prime] 405 - https://www.amazon.com/dp/B09K8Y6W9Z
+[ID 66] Jai Bhim: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B09K8Y6W9Z
+[ID 67] Karnan: [Prime] 405 - https://www.amazon.com
+[ID 67] Karnan: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 69] Kadaisi Vivasayi: [Platform:SonyLIV] TIMEOUT - https://www.sonyliv.com
+[ID 70] Merku Thodarchi Malai: [Platform:Netflix] 405 - https://www.netflix.com
+[ID 71] 7G Rainbow Colony: [Prime] 405 - https://www.amazon.com
+[ID 71] 7G Rainbow Colony: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 72] Pudhupettai: [Prime] 405 - https://www.amazon.com
+[ID 72] Pudhupettai: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 73] Super Deluxe: [Netflix] 405 - https://www.netflix.com/title/81087532
+[ID 73] Super Deluxe: [Platform:Netflix] 405 - https://www.netflix.com/title/81087532
+[ID 74] Hey Ram: [Prime] 405 - https://www.amazon.com
+[ID 74] Hey Ram: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 77] Maanadu: [Platform:SonyLIV] TIMEOUT - https://www.sonyliv.com
+[ID 78] Padayappa: [Prime] 405 - https://www.amazon.com
+[ID 78] Padayappa: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 80] Anniyan: [Prime] 405 - https://www.amazon.com
+[ID 80] Anniyan: [Platform:Prime Video] 405 - https://www.amazon.com
+[ID 83] Irugapatru: [Netflix] 405 - https://www.netflix.com/title/81643112
+[ID 83] Irugapatru: [Platform:Netflix] 405 - https://www.netflix.com/title/81643112
+[ID 84] Minnal Murali: [Netflix] 405 - https://www.netflix.com/title/81414844
+[ID 84] Minnal Murali: [Platform:Netflix] 405 - https://www.netflix.com/title/81414844
+[ID 85] Leo: [Netflix] 405 - https://www.netflix.com/title/81721676
+[ID 85] Leo: [Platform:Netflix] 405 - https://www.netflix.com/title/81721676
+[ID 86] Master: [Netflix] 405 - https://www.netflix.com/title/81403061
+[ID 86] Master: [Prime] 405 - https://www.amazon.com/dp/B08SYK6557
+[ID 86] Master: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B08SYK6557
+[ID 86] Master: [Platform:Netflix] 405 - https://www.netflix.com/title/81403061
+[ID 87] Vikram: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/6s88AqqeJqT7iL3SndOa0mX1c7p.jpg
+[ID 87] Vikram: [Prime] 405 - https://www.amazon.com/dp/B0B5F9Z9Y9
+[ID 87] Vikram: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0B5F9Z9Y9
+[ID 88] Jailer: [Prime] 405 - https://www.amazon.com/dp/B0C8V9Y9Y9
+[ID 88] Jailer: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0C8V9Y9Y9
+[ID 89] Ponniyin Selvan: I: [Prime] 405 - https://www.amazon.com/dp/B0BHKV9Y9Y
+[ID 89] Ponniyin Selvan: I: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0BHKV9Y9Y
+[ID 90] Ponniyin Selvan: II: [Prime] 405 - https://www.amazon.com/dp/B0C5V9Y9Y9
+[ID 90] Ponniyin Selvan: II: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B0C5V9Y9Y9
+[ID 92] Petta: [Netflix] 405 - https://www.netflix.com/title/81043132
+[ID 92] Petta: [Platform:Netflix] 405 - https://www.netflix.com/title/81043132
+[ID 93] Viswasam: [Prime] 405 - https://www.amazon.com/dp/B07N8V9Y9Y
+[ID 93] Viswasam: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B07N8V9Y9Y
+[ID 94] Kaththi: [Netflix] 405 - https://www.netflix.com/title/80119853
+[ID 94] Kaththi: [Platform:Netflix] 405 - https://www.netflix.com/title/80119853
+[ID 95] Asuran: [Prime] 405 - https://www.amazon.com/dp/B07Y7V9Y9Y
+[ID 95] Asuran: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B07Y7V9Y9Y
+[ID 96] Vada Chennai: [Prime] 405 - https://www.amazon.com/dp/B07J8V9Y9Y
+[ID 96] Vada Chennai: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B07J8V9Y9Y
+[ID 98] Indian: [Netflix] 405 - https://www.netflix.com/title/80114170
+[ID 98] Indian: [Prime] 405 - https://www.amazon.com/dp/B07N8V9Y9Y
+[ID 98] Indian: [Platform:Netflix] 405 - https://www.netflix.com/title/80114170
+[ID 98] Indian: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B07N8V9Y9Y
+[ID 99] Nayakan: [Prime] 405 - https://www.amazon.com/dp/B07Y7V9Y9Y
+[ID 99] Nayakan: [Platform:Prime Video] 405 - https://www.amazon.com/dp/B07Y7V9Y9Y
+[ID 100] Thalapathi: [Prime] 405 - https://www.amazon.com/dp/B07N8V9Y9Y
+[ID 100] Thalapathi: [Platform:Amazon Video] 405 - https://www.amazon.com/dp/B07N8V9Y9Y
+[ID 101] Enthiran: [Poster] 404 - https://image.tmdb.org/t/p/w600_and_h900_bestv2/wfPHdfofBD5PN96dV96a51B3Ja2.jpg
+
+Summary: Found 184 broken links.

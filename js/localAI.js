@@ -1,9 +1,9 @@
 // ═══════════════════════════════════════════════════════════════
-// UniVibe — Frontend ML Brain (Reinforcement Learning)
+// UniVibe — Frontend AI Brain (Recommendation Learning)
 // Handles all intelligence locally in the browser for offline use.
 // ═══════════════════════════════════════════════════════════════
 
-const LocalRL = {
+const LocalAI = {
     CONFIG: {
         epsilon: 0.15,
         epsilonDecay: 0.999,

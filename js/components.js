@@ -136,6 +136,101 @@ function renderAnalysisLoader() {
 }
 
 /**
+ * Render a star rating widget for the detail page.
+ * Connected to AI engine — explicit feedback improves recommendations.
+ */
+function renderRatingWidget(movieId) {
+  // Check if logged in
+  if (!API.isLoggedIn()) {
+    return `
+      <div class="rating-widget" style="margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; text-align: center;">
+        <p style="color: var(--text-muted); margin-bottom: 12px;">Login to rate this movie and improve your recommendations</p>
+        <a href="#/login" class="btn btn-outline btn-sm">Sign In</a>
+      </div>
+    `;
+  }
+
+  // Initial skeleton while we fetch current rating
+  setTimeout(() => fetchAndRenderStars(movieId), 10);
+
+  return `
+    <div class="rating-widget" id="rating-widget-${movieId}" style="margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px;">
+      <div class="rating-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span>⭐ Your Rating</span>
+        <span id="rating-status-${movieId}" style="font-size: 11px; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.5px;"></span>
+      </div>
+      <div class="star-rating" id="star-rating-${movieId}" style="display: flex; gap: 8px;">
+        ${[1, 2, 3, 4, 5].map(i => `
+          <span class="star" data-rating="${i}" onclick="handleRating(${movieId}, ${i})" style="font-size: 28px; cursor: pointer; color: rgba(255,255,255,0.1); transition: transform 0.2s ease, color 0.2s ease;">★</span>
+        `).join('')}
+      </div>
+      <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">This feeds the AI to learn your specific taste profile.</p>
+    </div>
+  `;
+}
+
+/**
+ * Fetch existing rating and update the stars.
+ */
+async function fetchAndRenderStars(movieId) {
+  const result = await API.getMovieRating(movieId);
+  const rating = result.ok ? result.data.rating : null;
+  updateStarUI(movieId, rating);
+}
+
+/**
+ * Update the visual state of stars.
+ */
+function updateStarUI(movieId, rating) {
+  const container = document.getElementById(`star-rating-${movieId}`);
+  if (!container) return;
+
+  const stars = container.querySelectorAll('.star');
+  stars.forEach(star => {
+    const val = parseInt(star.dataset.rating);
+    if (rating && val <= rating) {
+      star.style.color = 'var(--accent-primary)';
+      star.style.transform = 'scale(1.1)';
+    } else {
+      star.style.color = 'rgba(255,255,255,0.1)';
+      star.style.transform = 'scale(1)';
+    }
+  });
+
+  if (rating) {
+    const status = document.getElementById(`rating-status-${movieId}`);
+    if (status) status.innerText = 'Feedback Saved';
+  }
+}
+
+/**
+ * Handle user clicking a star.
+ */
+async function handleRating(movieId, rating) {
+  // Optimistic UI update
+  updateStarUI(movieId, rating);
+  
+  const status = document.getElementById(`rating-status-${movieId}`);
+  if (status) status.innerText = 'Saving...';
+
+  const result = await API.rateMovie(movieId, rating);
+  
+  if (result.success || result.ok) {
+    if (status) status.innerText = 'Feedback Saved';
+    // Success animation
+    const container = document.getElementById(`rating-widget-${movieId}`);
+    if (container) {
+      container.classList.add('pulse');
+      setTimeout(() => container.classList.remove('pulse'), 500);
+    }
+  } else {
+    if (status) status.innerText = 'Error Saving';
+    // Reset if failed
+    fetchAndRenderStars(movieId);
+  }
+}
+
+/**
  * Render the footer.
  */
 function renderFooter() {
