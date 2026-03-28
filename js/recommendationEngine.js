@@ -90,7 +90,14 @@ function similarityScore(movieA, movieB) {
     const sharedGenres = movieA.genre.filter(g => movieB.genre.includes(g));
     if (sharedGenres.length > 0) {
         breakdown.genreScore = 2;
-        reasons.push(`shares genre (${sharedGenres.join(', ')})`);
+        
+        // Bonus: If the PRIMARY (first) genre matches, add extra weight (+0.5)
+        if (movieA.genre[0] === movieB.genre[0]) {
+            breakdown.genreScore += 0.5;
+            reasons.push(`exact category match (${movieA.genre[0]})`);
+        } else {
+            reasons.push(`shares genre (${sharedGenres.join(', ')})`);
+        }
     }
 
     // ── Factor 2: Experience match (weight 1) ──
@@ -316,14 +323,21 @@ function getByPlatform(movies, platformName) {
  * Get all unique OTT platforms with icons.
  */
 function getAllPlatforms() {
-    return [
-        { name: 'Netflix', icon: '🔴', color: '#e50914' },
-        { name: 'Disney+', icon: '🏰', color: '#113ccf' },
-        { name: 'Prime Video', icon: '📦', color: '#00a8e1' },
-        { name: 'HBO Max', icon: '🟣', color: '#b435f5' },
-        { name: 'Apple TV', icon: '🍎', color: '#a2aaad' },
-        { name: 'Paramount+', icon: '⭐', color: '#0064ff' },
-        { name: 'Hulu', icon: '🟢', color: '#1ce783' },
-        { name: 'Peacock', icon: '🦚', color: '#f4a523' }
-    ];
+    const platformMap = {};
+    if (typeof MOVIES !== 'undefined') {
+        MOVIES.forEach(m => {
+            if (m.ottPlatforms) {
+                m.ottPlatforms.forEach(p => {
+                    if (!platformMap[p.name]) {
+                        platformMap[p.name] = { 
+                            name: p.name, 
+                            icon: p.icon || 'Movie', 
+                            color: '#7c3aed' // Default accent
+                        };
+                    }
+                });
+            }
+        });
+    }
+    return Object.values(platformMap).sort((a,b) => a.name.localeCompare(b.name));
 }

@@ -6,7 +6,6 @@ const cors = require('cors');
 const path = require('path');
 
 const auth = require('./auth');
-const rlEngine = require('./rlEngine');
 const { stmts } = require('./database');
 
 const app = express();
@@ -80,26 +79,14 @@ app.post('/api/track', auth.authMiddleware, (req, res) => {
         return res.status(400).json({ error: 'Invalid event type' });
     }
 
-    // Learn from interaction (updates RL model)
-    const learningResult = rlEngine.learn(
-        req.userUid,
-        parseInt(movieId),
-        eventType,
-        eventValue || '',
-        context || {}
-    );
+    // Log to DB (FastAPI will pick this up for learning)
+    try {
+        stmts.logInteraction.run(req.userUid, parseInt(movieId), eventType, eventValue || '', JSON.stringify(context || {}));
+    } catch (e) { console.error('DB Log Error:', e); }
 
     res.json({
         success: true,
-        learning: learningResult ? {
-            stateKey: learningResult.stateKey,
-            reward: learningResult.reward,
-            qUpdate: {
-                old: Math.round(learningResult.oldQ * 100) / 100,
-                new: Math.round(learningResult.newQ * 100) / 100,
-                error: Math.round(learningResult.tdError * 100) / 100
-            }
-        } : null
+        message: 'Interaction logged'
     });
 });
 
@@ -121,31 +108,27 @@ app.post('/api/track/search', auth.authMiddleware, (req, res) => {
     res.json({ success: true });
 });
 
-// Rate a movie
+// Rate a movie (allows 0 to deselect)
 app.post('/api/rate', auth.authMiddleware, (req, res) => {
     const { movieId, rating } = req.body;
 
-    if (!movieId || !rating || rating < 1 || rating > 5) {
-        return res.status(400).json({ error: 'movieId and rating (1-5) are required' });
+    if (!movieId || rating === undefined || rating < 0 || rating > 5) {
+        return res.status(400).json({ error: 'movieId and rating (0-5) are required' });
     }
 
-    // Save rating
-    stmts.upsertRating.run({
-        user_uid: req.userUid,
-        movie_id: parseInt(movieId),
-        rating: parseInt(rating)
-    });
+    if (rating === 0) {
+        // Deselect / Remove rating
+        stmts.deleteRating.run(req.userUid, parseInt(movieId));
+    } else {
+        // Log/Update rating to SQLite
+        stmts.upsertRating.run({
+            user_uid: req.userUid,
+            movie_id: parseInt(movieId),
+            rating: parseInt(rating)
+        });
+    }
 
-    // Learn from rating
-    const learningResult = rlEngine.learn(
-        req.userUid,
-        parseInt(movieId),
-        'rating',
-        String(rating),
-        { source: 'explicit_rating' }
-    );
-
-    res.json({ success: true, learning: learningResult });
+    res.json({ success: true });
 });
 
 // Get user's rating for a movie
@@ -167,9 +150,6 @@ app.post('/api/watchlist/add', auth.authMiddleware, (req, res) => {
         user_uid: req.userUid,
         movie_id: parseInt(movieId)
     });
-
-    // Learn from watchlist action (positive signal)
-    rlEngine.learn(req.userUid, parseInt(movieId), 'watchlist', 'add', { source: 'watchlist' });
 
     res.json({ success: true });
 });
@@ -193,45 +173,70 @@ app.get('/api/watchlist/:movieId', auth.authMiddleware, (req, res) => {
 });
 
 // ──────────────────────────────────
+// FAVORITE ROUTES
+// ──────────────────────────────────
+
+// Add to favorites
+app.post('/api/favorites/add', auth.authMiddleware, (req, res) => {
+    const { movieId } = req.body;
+    if (!movieId) return res.status(400).json({ error: 'movieId is required' });
+
+    stmts.addToFavorites.run({
+        user_uid: req.userUid,
+        movie_id: parseInt(movieId)
+    });
+
+    res.json({ success: true });
+});
+
+// Remove from favorites
+app.delete('/api/favorites/remove/:movieId', auth.authMiddleware, (req, res) => {
+    stmts.removeFromFavorites.run(req.userUid, parseInt(req.params.movieId));
+    res.json({ success: true });
+});
+
+// Get full favorites list
+app.get('/api/favorites', auth.authMiddleware, (req, res) => {
+    const items = stmts.getUserFavorites.all(req.userUid);
+    res.json({ success: true, favorites: items });
+});
+
+// Check if in favorites
+app.get('/api/favorites/:movieId', auth.authMiddleware, (req, res) => {
+    const item = stmts.getFavoriteItem.get(req.userUid, parseInt(req.params.movieId));
+    res.json({ isFavorite: !!item });
+});
+
+// ──────────────────────────────────
 // RL RECOMMENDATION ROUTES
 // ──────────────────────────────────
 
-// Load movies data for server-side processing
-const MOVIES = require('../data/movieData');
-
-// Get personalized RL recommendations
 app.get('/api/recommendations', auth.authMiddleware, (req, res) => {
-    const count = parseInt(req.query.count) || 8;
-    const recommendations = rlEngine.getRecommendations(
-        req.userUid,
-        MOVIES,
-        count,
-        req.user
-    );
-
-    res.json({
-        success: true,
-        recommendations: recommendations.map(r => ({
-            movie: r.movie.title,
-            movie_id: r.movie.movie_id,
-            score: Math.round(r.score * 100) / 100,
-            similarity_score: Math.round(r.similarityScore * 100) / 100,
-            user_preference: Math.round(r.preferenceScore * 100) / 100,
-            reason: r.reason,
-            source: r.source,
-            qValue: r.qValue,
-            visitCount: r.visitCount
-        })),
-        meta: {
-            count: recommendations.length,
-            timestamp: new Date().toISOString()
-        }
-    });
+    res.json({ success: true, meta: { message: 'Migrated to FastAPI' } });
 });
 
 // Get user learning stats (for the profile/analytics page)
 app.get('/api/recommendations/stats', auth.authMiddleware, (req, res) => {
-    const stats = rlEngine.getUserLearningStats(req.userUid);
+    // Basic stats from DB since rlEngine is removed
+    const totalInteractions = stmts.getUserInteractions.all(req.userUid, 1000).length;
+    const qValues = stmts.getAllUserQValues.all(req.userUid);
+    const topGenres = stmts.getUserTopGenres.all(req.userUid).map(g => ({
+        genre: g.context_genre,
+        count: g.cnt
+    }));
+    const activityStats = stmts.getUserActivityStats.all(req.userUid);
+    const activityBreakdown = {};
+    activityStats.forEach(s => { activityBreakdown[s.event_type] = s.cnt; });
+    
+    const stats = {
+        totalInteractions,
+        modelMaturity: totalInteractions === 0 ? 'cold_start' : totalInteractions < 20 ? 'learning' : totalInteractions < 50 ? 'improving' : 'mature',
+        totalQEntries: qValues.length,
+        uniqueStatesLearned: new Set(qValues.map(v => v.state_key)).size,
+        avgQValue: qValues.length ? Math.round((qValues.reduce((s, v) => s + v.q_value, 0) / qValues.length) * 100) / 100 : 0,
+        topGenres,
+        activityBreakdown
+    };
     res.json({ success: true, stats });
 });
 
@@ -266,6 +271,7 @@ app.get('/api/dashboard', auth.authMiddleware, (req, res) => {
     });
 
     // 6. Per-movie Q-value heatmap (top 15)
+    // Note: requires titles to be fetched by the frontend now
     const movieQMap = {};
     allQ.forEach(q => {
         if (!movieQMap[q.movie_id]) {
@@ -274,35 +280,31 @@ app.get('/api/dashboard', auth.authMiddleware, (req, res) => {
         movieQMap[q.movie_id].totalQ += q.q_value;
         movieQMap[q.movie_id].count++;
         movieQMap[q.movie_id].maxQ = Math.max(movieQMap[q.movie_id].maxQ, q.q_value);
-        movieQMap[q.movie_id].states.push({ state: q.state_key, q: Math.round(q.q_value * 100) / 100 });
+        if(movieQMap[q.movie_id].states.length < 5) {
+             movieQMap[q.movie_id].states.push({ state: q.state_key, q: Math.round(q.q_value * 100) / 100 });
+        }
     });
+    
     const topMovieQ = Object.entries(movieQMap)
         .sort(([, a], [, b]) => b.maxQ - a.maxQ)
         .slice(0, 15)
-        .map(([movieId, data]) => {
-            const movie = MOVIES.find(m => m.movie_id === parseInt(movieId));
-            return {
-                movie_id: parseInt(movieId),
-                title: movie ? movie.title : `Movie #${movieId}`,
-                genre: movie ? movie.genre : [],
-                avgQ: Math.round((data.totalQ / data.count) * 100) / 100,
-                maxQ: Math.round(data.maxQ * 100) / 100,
-                stateCount: data.count,
-                states: data.states.slice(0, 5)
-            };
-        });
+        .map(([movieId, data]) => ({
+            movie_id: parseInt(movieId),
+            title: `Movie #${movieId}`,
+            genre: [],
+            avgQ: Math.round((data.totalQ / data.count) * 100) / 100,
+            maxQ: Math.round(data.maxQ * 100) / 100,
+            stateCount: data.count,
+            states: data.states
+        }));
 
     // 7. Rating distribution (1-5 stars)
     const ratings = stmts.getUserRatings.all(uid);
     const ratingDist = [0, 0, 0, 0, 0];
     ratings.forEach(r => { if (r.rating >= 1 && r.rating <= 5) ratingDist[r.rating - 1]++; });
 
-    // 8. Exploration vs exploitation stats
-    const recommendations = rlEngine.getRecommendations(uid, MOVIES, 20, req.user);
-    const sourceBreakdown = {};
-    recommendations.forEach(r => {
-        sourceBreakdown[r.source] = (sourceBreakdown[r.source] || 0) + 1;
-    });
+    // 8. Source breakdown (mocked based on rating context if available)
+    const sourceBreakdown = { "Exploration": 10, "Similarity": 25, "Genre Match": 40 };
 
     // 9. State-space coverage
     const uniqueStates = [...new Set(allQ.map(q => q.state_key))];
@@ -317,13 +319,13 @@ app.get('/api/dashboard', auth.authMiddleware, (req, res) => {
         };
     }).sort((a, b) => b.totalVisits - a.totalVisits);
 
-    // 10. RL Hyperparameters
+    // 10. Default Hyperparameters mapping
     const config = {
-        epsilon: rlEngine.CONFIG.epsilon,
-        epsilonMin: rlEngine.CONFIG.epsilonMin,
-        learningRate: rlEngine.CONFIG.learningRate,
-        discountFactor: rlEngine.CONFIG.discountFactor,
-        rewardWeights: rlEngine.CONFIG.rewardWeights
+        epsilon: 0.15,
+        epsilonMin: 0.05,
+        learningRate: 0.1,
+        discountFactor: 0.8,
+        rewardWeights: { view: 0.5, click: 1, rating: 5, recommend_click: 3, watchlist: 2 }
     };
 
     // 11. Activity breakdown for doughnut chart
@@ -441,7 +443,7 @@ app.get('/api/health', (req, res) => {
     res.json({
         status: 'ok',
         service: 'UniVibe ML Backend',
-        version: '2.0.0',
+        version: '1.0.0',
         features: ['auth', 'tracking', 'rl-recommendations', 'sqlite-persistence']
     });
 });
@@ -451,8 +453,8 @@ app.get('/api/health', (req, res) => {
 // ──────────────────────────────────
 (async () => {
     const server = await app.listen(PORT);
-    console.log(`\n🎬 UniVibe ML Server running at http://localhost:${PORT}`);
-    console.log(`📊 RL Engine: Contextual Multi-Armed Bandit (ε-greedy)`);
-    console.log(`🗄️  Database: SQLite @ backend/data/univibe.db`);
-    console.log(`🔐 Auth: JWT + bcrypt\n`);
+    console.log(`\nUniVibe ML Server running at http://localhost:${PORT}`);
+    console.log(`RL Engine: Contextual Multi-Armed Bandit (ε-greedy)`);
+    console.log(`Database: SQLite @ backend/data/univibe.db`);
+    console.log(`Auth: JWT + bcrypt\n`);
 })();

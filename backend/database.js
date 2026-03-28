@@ -108,6 +108,16 @@ db.exec(`
     FOREIGN KEY (user_uid) REFERENCES users(user_uid)
   );
 
+  -- Favorite Movies
+  CREATE TABLE IF NOT EXISTS favorites (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_uid TEXT NOT NULL,
+    movie_id INTEGER NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_uid, movie_id),
+    FOREIGN KEY (user_uid) REFERENCES users(user_uid)
+  );
+
   -- Indexes for performance
   CREATE INDEX IF NOT EXISTS idx_interactions_user ON interactions(user_uid);
   CREATE INDEX IF NOT EXISTS idx_interactions_movie ON interactions(movie_id);
@@ -116,6 +126,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_rl_user_state ON rl_qtable(user_uid, state_key);
   CREATE INDEX IF NOT EXISTS idx_ratings_user ON ratings(user_uid);
   CREATE INDEX IF NOT EXISTS idx_watchlist_user ON watchlist(user_uid);
+  CREATE INDEX IF NOT EXISTS idx_favorites_user ON favorites(user_uid);
 `);
 
 // ──────────────────────────────────
@@ -167,6 +178,7 @@ const stmts = {
   `),
   getUserRatings: db.prepare('SELECT * FROM ratings WHERE user_uid = ?'),
   getMovieRating: db.prepare('SELECT * FROM ratings WHERE user_uid = ? AND movie_id = ?'),
+  deleteRating: db.prepare('DELETE FROM ratings WHERE user_uid = ? AND movie_id = ?'),
 
   // Watchlist
   addToWatchlist: db.prepare(`
@@ -191,6 +203,12 @@ const stmts = {
     ORDER BY q_value DESC LIMIT ?
   `),
   getAllUserQValues: db.prepare('SELECT * FROM rl_qtable WHERE user_uid = ?'),
+
+  // Favorites
+  addToFavorites: db.prepare('INSERT OR IGNORE INTO favorites (user_uid, movie_id) VALUES (@user_uid, @movie_id)'),
+  removeFromFavorites: db.prepare('DELETE FROM favorites WHERE user_uid = ? AND movie_id = ?'),
+  getUserFavorites: db.prepare('SELECT * FROM favorites WHERE user_uid = ? ORDER BY created_at DESC'),
+  getFavoriteItem: db.prepare('SELECT * FROM favorites WHERE user_uid = ? AND movie_id = ?'),
 
   // Analytics
   getUserTopGenres: db.prepare(`

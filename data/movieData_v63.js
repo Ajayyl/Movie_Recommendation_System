@@ -2,7 +2,7 @@ const MOVIES = [
   {
     "movie_id": 1,
     "title": "War Machine",
-    "year": 2017,
+    "year": 2026,
     "genre": [
       "Action",
       "Sci-Fi",
@@ -41,7 +41,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "a9Jg20Ukf4E",
-    "duration_minutes": 154
+    "duration_minutes": 154,
+    "release_date": "Mar 06, 2026"
   },
   {
     "movie_id": 2,
@@ -82,7 +83,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "zbL9lyk2kqY",
-    "duration_minutes": 108
+    "duration_minutes": 108,
+    "release_date": "Jun 16, 2007"
   },
   {
     "movie_id": 4,
@@ -125,7 +127,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "u6GVb4p7oD4",
-    "duration_minutes": 144
+    "duration_minutes": 144,
+    "release_date": "Sep 26, 2025"
   },
   {
     "movie_id": 10,
@@ -168,12 +171,13 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "l2h2lC0vlX4",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Apr 18, 2025"
   },
   {
     "movie_id": 11,
     "title": "Whistle",
-    "year": 2025,
+    "year": 2026,
     "genre": [
       "Horror"
     ],
@@ -207,7 +211,8 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "-O5DgGQJeks",
-    "duration_minutes": 109
+    "duration_minutes": 109,
+    "release_date": "Feb 06, 2026"
   },
   {
     "movie_id": 14,
@@ -250,7 +255,8 @@ const MOVIES = [
       "Comedy"
     ],
     "trailer": "Nm4WbapDzDQ",
-    "duration_minutes": 131
+    "duration_minutes": 131,
+    "release_date": "Sep 17, 2025"
   },
   {
     "movie_id": 15,
@@ -291,7 +297,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "3fLCdIYShEQ",
-    "duration_minutes": 147
+    "duration_minutes": 147,
+    "release_date": "Feb 22, 1939"
   },
   {
     "movie_id": 18,
@@ -334,7 +341,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "d9erkpdh5o0",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "Jan 09, 2005"
   },
   {
     "movie_id": 19,
@@ -377,7 +385,8 @@ const MOVIES = [
       "Mystery"
     ],
     "trailer": "ok46QVymwkU",
-    "duration_minutes": 133
+    "duration_minutes": 133,
+    "release_date": "Apr 26, 2024"
   },
   {
     "movie_id": 20,
@@ -421,12 +430,13 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "EpAlHmuA2YM",
-    "duration_minutes": 109
+    "duration_minutes": 109,
+    "release_date": "Jul 13, 2025"
   },
   {
     "movie_id": 23,
     "title": "Alpha",
-    "year": 2018,
+    "year": 2025,
     "genre": [
       "Drama",
       "Horror"
@@ -462,7 +472,8 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "4Cc2A-YLARs",
-    "duration_minutes": 122
+    "duration_minutes": 122,
+    "release_date": "Dec 25, 2025"
   },
   {
     "movie_id": 24,
@@ -505,7 +516,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "BqWH0KDqm3U",
-    "duration_minutes": 121
+    "duration_minutes": 121,
+    "release_date": "Jun 12, 2025"
   },
   {
     "movie_id": 25,
@@ -548,7 +560,8 @@ const MOVIES = [
       "Sci-Fi"
     ],
     "trailer": "LkBqjfg8TGM",
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "Jul 15, 2025"
   },
   {
     "movie_id": 26,
@@ -591,7 +604,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "xvmADAJOoCg",
-    "duration_minutes": 139
+    "duration_minutes": 139,
+    "release_date": "Jun 14, 2025"
   },
   {
     "movie_id": 27,
@@ -632,7 +646,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "gB3_HnYBZ-Y",
-    "duration_minutes": 141
+    "duration_minutes": 141,
+    "release_date": "Jun 14, 2017"
   },
   {
     "movie_id": 29,
@@ -675,7 +690,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "uXRFha7MLTM",
-    "duration_minutes": 116
+    "duration_minutes": 116,
+    "release_date": "Jun 07, 2013"
   },
   {
     "movie_id": 30,
@@ -714,7 +730,8 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "Pk3s4ZCqSbU",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Aug 20, 2025"
   },
   {
     "movie_id": 31,
@@ -755,7 +772,8 @@ const MOVIES = [
       "Sport"
     ],
     "trailer": "s9gSuKaKcqM",
-    "duration_minutes": 158
+    "duration_minutes": 158,
+    "release_date": "Sep 19, 2025"
   },
   {
     "movie_id": 33,
@@ -798,7 +816,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "O7vKuVadFmo",
-    "duration_minutes": 118
+    "duration_minutes": 118,
+    "release_date": "Jun 10, 2010"
   },
   {
     "movie_id": 35,
@@ -841,7 +860,8 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "9WZllcEgWrM",
-    "duration_minutes": 144
+    "duration_minutes": 144,
+    "release_date": "Aug 06, 2025"
   },
   {
     "movie_id": 36,
@@ -885,7 +905,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "gWgyI6_lR0A",
-    "duration_minutes": 93
+    "duration_minutes": 93,
+    "release_date": "Aug 22, 2025"
   },
   {
     "movie_id": 37,
@@ -929,7 +950,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "ms5zPHs51ew",
-    "duration_minutes": 131
+    "duration_minutes": 131,
+    "release_date": "Sep 21, 2025"
   },
   {
     "movie_id": 39,
@@ -972,7 +994,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "NgPdDDzVhkA",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "Oct 02, 2002"
   },
   {
     "movie_id": 40,
@@ -1015,7 +1038,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "6nBe4kzC0OE",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Dec 04, 1977"
   },
   {
     "movie_id": 41,
@@ -1058,7 +1082,8 @@ const MOVIES = [
       "Comedy"
     ],
     "trailer": "LFLyvzIZjK4",
-    "duration_minutes": 150
+    "duration_minutes": 150,
+    "release_date": "Jan 17, 1997"
   },
   {
     "movie_id": 42,
@@ -1099,7 +1124,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "noU-vKiA9ts",
-    "duration_minutes": 152
+    "duration_minutes": 152,
+    "release_date": "Mar 23, 2022"
   },
   {
     "movie_id": 43,
@@ -1142,7 +1168,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "ZMlCJQ2SefU",
-    "duration_minutes": 147
+    "duration_minutes": 147,
+    "release_date": "Jun 10, 2025"
   },
   {
     "movie_id": 44,
@@ -1186,7 +1213,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "XeoQg5PVOLI",
-    "duration_minutes": 133
+    "duration_minutes": 133,
+    "release_date": "Jul 23, 2025"
   },
   {
     "movie_id": 45,
@@ -1227,12 +1255,13 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "lLWESUfW-0A",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "Sep 19, 2025"
   },
   {
     "movie_id": 46,
     "title": "GOAT",
-    "year": 2016,
+    "year": 2024,
     "genre": [
       "Animation",
       "Action",
@@ -1271,7 +1300,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "kmY-rYS7yng",
-    "duration_minutes": 112
+    "duration_minutes": 112,
+    "release_date": "Sep 05, 2024"
   },
   {
     "movie_id": 47,
@@ -1314,7 +1344,8 @@ const MOVIES = [
       "Sci-Fi"
     ],
     "trailer": "zSWdZVtXT7E",
-    "duration_minutes": 169
+    "duration_minutes": 169,
+    "release_date": "Nov 07, 2014"
   },
   {
     "movie_id": 50,
@@ -1355,7 +1386,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "4i49XISKA48",
-    "duration_minutes": 111
+    "duration_minutes": 111,
+    "release_date": "Apr 04, 2004"
   },
   {
     "movie_id": 52,
@@ -1396,7 +1428,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "I8GbcVkqZwQ",
-    "duration_minutes": 135
+    "duration_minutes": 135,
+    "release_date": "Jul 13, 2025"
   },
   {
     "movie_id": 53,
@@ -1439,7 +1472,8 @@ const MOVIES = [
       "History"
     ],
     "trailer": "xYcgQMxQwmk",
-    "duration_minutes": 108
+    "duration_minutes": 108,
+    "release_date": "Sep 07, 2025"
   },
   {
     "movie_id": 54,
@@ -1479,7 +1513,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "PLl99DlL6b4",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Sep 21, 1994"
   },
   {
     "movie_id": 55,
@@ -1520,7 +1555,8 @@ const MOVIES = [
       "Sci-Fi"
     ],
     "trailer": "hIR8Ar-Z4hw",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Jan 01, 2012"
   },
   {
     "movie_id": 56,
@@ -1562,7 +1598,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "Ew9ngL1GZvs",
-    "duration_minutes": 175
+    "duration_minutes": 175,
+    "release_date": "Feb 10, 1972"
   },
   {
     "movie_id": 57,
@@ -1605,7 +1642,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "qbJt-u9L7cA",
-    "duration_minutes": 115
+    "duration_minutes": 115,
+    "release_date": "Aug 04, 1997"
   },
   {
     "movie_id": 58,
@@ -1648,7 +1686,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "svnAD0TApb8",
-    "duration_minutes": 112
+    "duration_minutes": 112,
+    "release_date": "Nov 07, 2017"
   },
   {
     "movie_id": 59,
@@ -1691,7 +1730,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "p9edTXRfmX4",
-    "duration_minutes": 144
+    "duration_minutes": 144,
+    "release_date": "May 05, 2025"
   },
   {
     "movie_id": 60,
@@ -1734,7 +1774,8 @@ const MOVIES = [
       "Mystery"
     ],
     "trailer": "rz5ohrdXNRI",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Aug 04, 1984"
   },
   {
     "movie_id": 61,
@@ -1777,7 +1818,8 @@ const MOVIES = [
       "Sport"
     ],
     "trailer": "ge_ABjtYx88",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Sep 11, 2025"
   },
   {
     "movie_id": 62,
@@ -1816,7 +1858,8 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "fkoU01NwHlE",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Aug 16, 1982"
   },
   {
     "movie_id": 63,
@@ -1857,7 +1900,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "P9F8xTrx6fw",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Jan 25, 2019"
   },
   {
     "movie_id": 64,
@@ -1900,7 +1944,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "Hzk4ovnGOyw",
-    "duration_minutes": 119
+    "duration_minutes": 119,
+    "release_date": "Jan 09, 1990"
   },
   {
     "movie_id": 65,
@@ -1941,7 +1986,8 @@ const MOVIES = [
       "Sci-Fi"
     ],
     "trailer": "oJ960Hqz9DY",
-    "duration_minutes": 138
+    "duration_minutes": 138,
+    "release_date": "Sep 19, 2025"
   },
   {
     "movie_id": 66,
@@ -1980,7 +2026,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "tFYeYKAGVek",
-    "duration_minutes": 100
+    "duration_minutes": 100,
+    "release_date": "Jun 26, 2012"
   },
   {
     "movie_id": 67,
@@ -2023,7 +2070,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "wZti8QKBWPo",
-    "duration_minutes": 133
+    "duration_minutes": 133,
+    "release_date": "Mar 11, 2021"
   },
   {
     "movie_id": 68,
@@ -2066,7 +2114,8 @@ const MOVIES = [
       "Mystery"
     ],
     "trailer": "9UfrzDKrhEc",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Jun 16, 2025"
   },
   {
     "movie_id": 70,
@@ -2109,7 +2158,8 @@ const MOVIES = [
       "Comedy"
     ],
     "trailer": "l_jEicE6KyQ",
-    "duration_minutes": 107
+    "duration_minutes": 107,
+    "release_date": "Aug 08, 2023"
   },
   {
     "movie_id": 71,
@@ -2150,7 +2200,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "odPUipiGYek",
-    "duration_minutes": 131
+    "duration_minutes": 131,
+    "release_date": "Apr 12, 1997"
   },
   {
     "movie_id": 72,
@@ -2193,7 +2244,8 @@ const MOVIES = [
       "Sci-Fi"
     ],
     "trailer": "_iHJHYjq7XI",
-    "duration_minutes": 136
+    "duration_minutes": 136,
+    "release_date": "Dec 04, 1987"
   },
   {
     "movie_id": 73,
@@ -2232,7 +2284,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "qYlmTxnGjUA",
-    "duration_minutes": 103
+    "duration_minutes": 103,
+    "release_date": "Apr 04, 1953"
   },
   {
     "movie_id": 75,
@@ -2275,7 +2328,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "IHwF6gdGi-g",
-    "duration_minutes": 156
+    "duration_minutes": 156,
+    "release_date": "Jul 27, 2023"
   },
   {
     "movie_id": 76,
@@ -2319,7 +2373,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "dqolYtJGuf4",
-    "duration_minutes": 158
+    "duration_minutes": 158,
+    "release_date": "May 07, 2025"
   },
   {
     "movie_id": 78,
@@ -2362,7 +2417,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "QyLhkoGeSl4",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "Mar 15, 1991"
   },
   {
     "movie_id": 79,
@@ -2405,7 +2461,8 @@ const MOVIES = [
       "Mystery"
     ],
     "trailer": "1dvZwG8_sZY",
-    "duration_minutes": 107
+    "duration_minutes": 107,
+    "release_date": "Jul 03, 2024"
   },
   {
     "movie_id": 80,
@@ -2446,7 +2503,8 @@ const MOVIES = [
       "Comedy"
     ],
     "trailer": "xGTq0blCPVQ",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Aug 10, 2025"
   },
   {
     "movie_id": 81,
@@ -2489,7 +2547,8 @@ const MOVIES = [
       "History"
     ],
     "trailer": "Rb0ZhiDD9J0",
-    "duration_minutes": 159
+    "duration_minutes": 159,
+    "release_date": "Jul 15, 2025"
   },
   {
     "movie_id": 82,
@@ -2528,7 +2587,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "zBFstFXdk90",
-    "duration_minutes": 158
+    "duration_minutes": 158,
+    "release_date": "Jul 19, 2025"
   },
   {
     "movie_id": 83,
@@ -2571,7 +2631,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "CiAg-P62ptk",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "Nov 15, 1968"
   },
   {
     "movie_id": 84,
@@ -2614,7 +2675,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "LtD9f8ybT8c",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Jul 07, 2001"
   },
   {
     "movie_id": 85,
@@ -2655,7 +2717,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "xY-qRGC6Yu0",
-    "duration_minutes": 145
+    "duration_minutes": 145,
+    "release_date": "Apr 12, 2023"
   },
   {
     "movie_id": 86,
@@ -2694,7 +2757,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "_t4YuPXdLZw",
-    "duration_minutes": 144
+    "duration_minutes": 144,
+    "release_date": "Jul 11, 2018"
   },
   {
     "movie_id": 87,
@@ -2733,7 +2797,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "_-90I4kLHug",
-    "duration_minutes": 139
+    "duration_minutes": 139,
+    "release_date": "Mar 03, 2022"
   },
   {
     "movie_id": 88,
@@ -2776,7 +2841,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "xx5sYS0pHJg",
-    "duration_minutes": 108
+    "duration_minutes": 108,
+    "release_date": "Jan 05, 2023"
   },
   {
     "movie_id": 89,
@@ -2817,7 +2883,8 @@ const MOVIES = [
       "Crime"
     ],
     "trailer": "z5mCWsv0Z7U",
-    "duration_minutes": 117
+    "duration_minutes": 117,
+    "release_date": "Aug 10, 2025"
   },
   {
     "movie_id": 91,
@@ -2860,7 +2927,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "hverb7siYJ8",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Mar 23, 1992"
   },
   {
     "movie_id": 93,
@@ -2903,7 +2971,8 @@ const MOVIES = [
       "History"
     ],
     "trailer": "YWlCCVnZ4bo",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Sep 11, 2025"
   },
   {
     "movie_id": 94,
@@ -2946,7 +3015,8 @@ const MOVIES = [
       "War"
     ],
     "trailer": "3wJBG6P5Wlg",
-    "duration_minutes": 154
+    "duration_minutes": 154,
+    "release_date": "Nov 03, 2004"
   },
   {
     "movie_id": 95,
@@ -2989,7 +3059,8 @@ const MOVIES = [
       "Sci-Fi"
     ],
     "trailer": "2ZhB-YO5Tnk",
-    "duration_minutes": 124
+    "duration_minutes": 124,
+    "release_date": "Jul 13, 2025"
   },
   {
     "movie_id": 97,
@@ -3033,7 +3104,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "GJ1jrCnm-t8",
-    "duration_minutes": 112
+    "duration_minutes": 112,
+    "release_date": "Aug 14, 2025"
   },
   {
     "movie_id": 98,
@@ -3076,7 +3148,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "jm2sNLIPPvA",
-    "duration_minutes": 128
+    "duration_minutes": 128,
+    "release_date": "Mar 03, 2009"
   },
   {
     "movie_id": 99,
@@ -3120,7 +3193,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "wS3mgDtELaU",
-    "duration_minutes": 108
+    "duration_minutes": 108,
+    "release_date": "Jul 21, 2025"
   },
   {
     "movie_id": 100,
@@ -3163,7 +3237,8 @@ const MOVIES = [
       "Sci-Fi"
     ],
     "trailer": "7VBigr-JHB0",
-    "duration_minutes": 108
+    "duration_minutes": 108,
+    "release_date": "May 13, 2025"
   },
   {
     "movie_id": 101,
@@ -3202,7 +3277,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "6voWeM-xQ4Y",
-    "duration_minutes": 152
+    "duration_minutes": 152,
+    "release_date": "Sep 23, 2025"
   },
   {
     "movie_id": 102,
@@ -3243,7 +3319,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "1fCZhJMkBaY",
-    "duration_minutes": 141
+    "duration_minutes": 141,
+    "release_date": "Jul 23, 2025"
   },
   {
     "movie_id": 103,
@@ -3285,7 +3362,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "sptc2IcHnc4",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "May 01, 1990"
   },
   {
     "movie_id": 104,
@@ -3328,7 +3406,8 @@ const MOVIES = [
       "History"
     ],
     "trailer": "7vwC2GKi3iA",
-    "duration_minutes": 158
+    "duration_minutes": 158,
+    "release_date": "Sep 23, 2025"
   },
   {
     "movie_id": 105,
@@ -3371,7 +3450,8 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "LBwfO9Hj6oQ",
-    "duration_minutes": 119
+    "duration_minutes": 119,
+    "release_date": "Jun 26, 2019"
   },
   {
     "movie_id": 106,
@@ -3415,7 +3495,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "hSLE5Psfs6U",
-    "duration_minutes": 158
+    "duration_minutes": 158,
+    "release_date": "Sep 05, 1976"
   },
   {
     "movie_id": 107,
@@ -3456,7 +3537,8 @@ const MOVIES = [
       "Mystery"
     ],
     "trailer": "QKHySfXqN0I",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "May 17, 2025"
   },
   {
     "movie_id": 108,
@@ -3497,7 +3579,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "-oDLBRLkflo",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Jun 22, 2025"
   },
   {
     "movie_id": 109,
@@ -3541,7 +3624,8 @@ const MOVIES = [
       "family-safe"
     ],
     "trailer": "jWM0ct-OLsM",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Feb 22, 2016"
   },
   {
     "movie_id": 110,
@@ -3584,7 +3668,8 @@ const MOVIES = [
       "Crime"
     ],
     "trailer": "UGOvEad8qd4",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Jun 22, 2025"
   },
   {
     "movie_id": 111,
@@ -3627,7 +3712,8 @@ const MOVIES = [
       "History"
     ],
     "trailer": "ssZU6xUM-YI",
-    "duration_minutes": 131
+    "duration_minutes": 131,
+    "release_date": "Oct 22, 2025"
   },
   {
     "movie_id": 112,
@@ -3670,7 +3756,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "3_9OkHX8ZiA",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "Jun 06, 2025"
   },
   {
     "movie_id": 113,
@@ -3713,7 +3800,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "fZt7gtFiVJk",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Nov 11, 1956"
   },
   {
     "movie_id": 114,
@@ -3756,7 +3844,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "HFTV-phVwAw",
-    "duration_minutes": 109
+    "duration_minutes": 109,
+    "release_date": "Aug 28, 1999"
   },
   {
     "movie_id": 115,
@@ -3799,7 +3888,8 @@ const MOVIES = [
       "Mystery"
     ],
     "trailer": "9oHw2ubyWE4",
-    "duration_minutes": 94
+    "duration_minutes": 94,
+    "release_date": "Oct 24, 2025"
   },
   {
     "movie_id": 116,
@@ -3842,7 +3932,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "qo7gRHip0lI",
-    "duration_minutes": 153
+    "duration_minutes": 153,
+    "release_date": "Sep 21, 2025"
   },
   {
     "movie_id": 117,
@@ -3881,7 +3972,8 @@ const MOVIES = [
       "Comedy"
     ],
     "trailer": "zztJyEY8VuQ",
-    "duration_minutes": 159
+    "duration_minutes": 159,
+    "release_date": "Oct 18, 2025"
   },
   {
     "movie_id": 118,
@@ -3924,7 +4016,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "McEkNCpTOKs",
-    "duration_minutes": 134
+    "duration_minutes": 134,
+    "release_date": "Jul 27, 2002"
   },
   {
     "movie_id": 119,
@@ -3964,7 +4057,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "jgYYxs_d_bo",
-    "duration_minutes": 104
+    "duration_minutes": 104,
+    "release_date": "Feb 26, 2016"
   },
   {
     "movie_id": 120,
@@ -4007,7 +4101,8 @@ const MOVIES = [
       "Romance"
     ],
     "trailer": "KiKE-ezpY3U",
-    "duration_minutes": 160
+    "duration_minutes": 160,
+    "release_date": "Oct 26, 2006"
   },
   {
     "movie_id": 121,
@@ -4049,7 +4144,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "vIZmPQaDuI8",
-    "duration_minutes": 141
+    "duration_minutes": 141,
+    "release_date": "Feb 10, 1995"
   },
   {
     "movie_id": 122,
@@ -4091,7 +4187,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "fAcLNMkzfTE",
-    "duration_minutes": 144
+    "duration_minutes": 144,
+    "release_date": "Jun 02, 1941"
   },
   {
     "movie_id": 123,
@@ -4131,7 +4228,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "EkWJEBxzYb0",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Jan 25, 2019"
   },
   {
     "movie_id": 124,
@@ -4149,7 +4247,7 @@ const MOVIES = [
     "age_limit": 13,
     "synopsis": "A retired jailer goes on a manhunt to find his son's killers. But the road leads him to a familiar, albeit a bit darker place. Can he emerge from this complex situation successfully?",
     "quote": "Vibe... -- Jailer is a whisper in the wind, a reminder that the most beautiful things in life are often the ones we cannot catch. Embrace the jailer within.",
-    "director": "Nelson",
+    "director": "Nelson Dilipkumar",
     "cast": [
       "Rajinikanth",
       "Vinayakan",
@@ -4174,7 +4272,8 @@ const MOVIES = [
       "Crime"
     ],
     "trailer": "Y5BeWdODPqo",
-    "duration_minutes": 168
+    "duration_minutes": 168,
+    "release_date": "Aug 10, 2023"
   },
   {
     "movie_id": 125,
@@ -4216,7 +4315,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "zKN7LOs5Z5o",
-    "duration_minutes": 155
+    "duration_minutes": 155,
+    "release_date": "Feb 02, 1986"
   },
   {
     "movie_id": 126,
@@ -4258,7 +4358,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "vPfVWb2Cl4Q",
-    "duration_minutes": 136
+    "duration_minutes": 148,
+    "release_date": "Oct 06, 2007"
   },
   {
     "movie_id": 127,
@@ -4302,7 +4403,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "L2E_DfExUmU",
-    "duration_minutes": 94
+    "duration_minutes": 94,
+    "release_date": "May 13, 1950"
   },
   {
     "movie_id": 128,
@@ -4345,7 +4447,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "0_f1LzYjFI4",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Aug 29, 2024"
   },
   {
     "movie_id": 129,
@@ -4371,9 +4474,9 @@ const MOVIES = [
     ],
     "trailer_yt_id": "rQkD0QQOJ0Y",
     "keywords": "Action, Crime, Drama",
-    "cinematographer": "Vetri",
+    "cinematographer": "K. V. Anand",
     "music": "A. R. Rahman",
-    "writer": "Swanand Kirkire, S. Shankar, Sujatha",
+    "writer": "S. Shankar, Sujatha",
     "overview": "A software engineer comes to India in order to serve the nation and invest in its welfare. A few corrupt officials and politicians try to stop him while he tries to do good for the poor.",
     "ottPlatforms": [
       {
@@ -4388,7 +4491,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "rQkD0QQOJ0Y",
-    "duration_minutes": 188
+    "duration_minutes": 188,
+    "release_date": "May 05, 2007"
   },
   {
     "movie_id": 130,
@@ -4431,7 +4535,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "JfVOs4VSpmA",
-    "duration_minutes": 100
+    "duration_minutes": 100,
+    "release_date": "Aug 16, 2021"
   },
   {
     "movie_id": 131,
@@ -4473,7 +4578,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "EHyaTJGmN4k",
-    "duration_minutes": 115
+    "duration_minutes": 115,
+    "release_date": "Mar 07, 2018"
   },
   {
     "movie_id": 132,
@@ -4517,7 +4623,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "s_OdRGbpKUA",
-    "duration_minutes": 156
+    "duration_minutes": 156,
+    "release_date": "Nov 19, 2022"
   },
   {
     "movie_id": 133,
@@ -4559,7 +4666,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "H0fuHY4U1UA",
-    "duration_minutes": 94
+    "duration_minutes": 94,
+    "release_date": "Jan 01, 2004"
   },
   {
     "movie_id": 134,
@@ -4602,7 +4710,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "1Q8fG0TtVAY",
-    "duration_minutes": 124
+    "duration_minutes": 124,
+    "release_date": "Nov 27, 2017"
   },
   {
     "movie_id": 135,
@@ -4646,7 +4755,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "yNncHPl1UXg",
-    "duration_minutes": 91
+    "duration_minutes": 91,
+    "release_date": "Feb 18, 2007"
   },
   {
     "movie_id": 136,
@@ -4689,7 +4799,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "b-XZtmVhN4U",
-    "duration_minutes": 150
+    "duration_minutes": 150,
+    "release_date": "Aug 20, 2012"
   },
   {
     "movie_id": 137,
@@ -4732,7 +4843,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "-KfsY-qwBS0",
-    "duration_minutes": 156
+    "duration_minutes": 156,
+    "release_date": "Dec 21, 2018"
   },
   {
     "movie_id": 138,
@@ -4753,8 +4865,8 @@ const MOVIES = [
     "director": "Rishab Shetty",
     "cast": [
       "Rishab Shetty",
-      "Kishore Kumar G.",
-      "Achyuth Kumar"
+      "Sapthami Gowda",
+      "Kishore"
     ],
     "trailer_yt_id": "8mrVmf239GU",
     "keywords": "Action, Adventure, Drama",
@@ -4775,7 +4887,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "8mrVmf239GU",
-    "duration_minutes": 150
+    "duration_minutes": 150,
+    "release_date": "Sep 30, 2022"
   },
   {
     "movie_id": 139,
@@ -4818,7 +4931,8 @@ const MOVIES = [
       "Thriller"
     ],
     "trailer": "ZK4uGLpkAKk",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Aug 04, 2016"
   },
   {
     "movie_id": 140,
@@ -4862,7 +4976,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "XTTAHt4VlUA",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Jul 22, 2021"
   },
   {
     "movie_id": 141,
@@ -4904,7 +5019,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "AjAe_Q1WZ_8",
-    "duration_minutes": 132
+    "duration_minutes": 132,
+    "release_date": "Sep 21, 2019"
   },
   {
     "movie_id": 142,
@@ -4946,7 +5062,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "R7MR12XOMGQ",
-    "duration_minutes": 155
+    "duration_minutes": 155,
+    "release_date": "Dec 24, 2017"
   },
   {
     "movie_id": 143,
@@ -4988,7 +5105,8 @@ const MOVIES = [
       "Horror"
     ],
     "trailer": "byxLYzDRGYs",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "May 17, 2025"
   },
   {
     "movie_id": 144,
@@ -5031,7 +5149,8 @@ const MOVIES = [
       "Adventure"
     ],
     "trailer": "Qwe6qXFTdgc",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Jul 16, 2010"
   },
   {
     "movie_id": 145,
@@ -5074,7 +5193,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "EXeTwQWrcwY",
-    "duration_minutes": 152
+    "duration_minutes": 152,
+    "release_date": "Jul 18, 2008"
   },
   {
     "movie_id": 146,
@@ -5116,7 +5236,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "tGpTpVyI_OQ",
-    "duration_minutes": 154
+    "duration_minutes": 154,
+    "release_date": "Sep 01, 1994"
   },
   {
     "movie_id": 147,
@@ -5156,7 +5277,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "qtRKdVHc-cE",
-    "duration_minutes": 122
+    "duration_minutes": 122,
+    "release_date": "Aug 20, 1999"
   },
   {
     "movie_id": 148,
@@ -5198,7 +5320,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "d0XTFAMmhrE",
-    "duration_minutes": 92
+    "duration_minutes": 92,
+    "release_date": "Oct 18, 1999"
   },
   {
     "movie_id": 149,
@@ -5238,7 +5361,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "PTBRNXGQR9Q",
-    "duration_minutes": 145
+    "duration_minutes": 145,
+    "release_date": "May 01, 1990"
   },
   {
     "movie_id": 150,
@@ -5282,7 +5406,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "KPOuJGkpblk",
-    "duration_minutes": 125
+    "duration_minutes": 125,
+    "release_date": "Sep 01, 1995"
   },
   {
     "movie_id": 151,
@@ -5322,7 +5447,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "6iB21hsprAQ",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "Jan 21, 1991"
   },
   {
     "movie_id": 152,
@@ -5361,7 +5487,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "y4SA9yUDgW8",
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "Dec 08, 1998"
   },
   {
     "movie_id": 153,
@@ -5400,7 +5527,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "v0RB-3sWbBA",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Mar 23, 1993"
   },
   {
     "movie_id": 154,
@@ -5439,7 +5567,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "bx46tthKXmc",
-    "duration_minutes": 111
+    "duration_minutes": 111,
+    "release_date": "Feb 14, 1993"
   },
   {
     "movie_id": 155,
@@ -5478,7 +5607,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "UgjEj5mXLlk",
-    "duration_minutes": 127
+    "duration_minutes": 127,
+    "release_date": "Feb 18, 1994"
   },
   {
     "movie_id": 156,
@@ -5518,7 +5648,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "ez6WQ7IX72U",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Oct 10, 1985"
   },
   {
     "movie_id": 157,
@@ -5557,7 +5688,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "0xQSIdSRlAk",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Mar 15, 1981"
   },
   {
     "movie_id": 158,
@@ -5600,7 +5732,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "P5ieIbInFpg",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "May 09, 2000"
   },
   {
     "movie_id": 159,
@@ -5639,7 +5772,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "bM9QabAojCg",
-    "duration_minutes": 100
+    "duration_minutes": 100,
+    "release_date": "May 30, 2019"
   },
   {
     "movie_id": 160,
@@ -5678,7 +5812,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "AMSITikqKiM",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Apr 26, 2019"
   },
   {
     "movie_id": 161,
@@ -5717,7 +5852,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "8ugaeA-nMTc",
-    "duration_minutes": 113
+    "duration_minutes": 113,
+    "release_date": "Nov 07, 2008"
   },
   {
     "movie_id": 162,
@@ -5756,7 +5892,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "Rvr68u6k5sI",
-    "duration_minutes": 128
+    "duration_minutes": 128,
+    "release_date": "Apr 04, 2017"
   },
   {
     "movie_id": 163,
@@ -5795,7 +5932,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "o4-URMnBOPU",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Jan 13, 2016"
   },
   {
     "movie_id": 164,
@@ -5835,7 +5973,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "DD-6bmOY__g",
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "Jul 11, 1994"
   },
   {
     "movie_id": 165,
@@ -5875,7 +6014,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "ObGVA1WOqyE",
-    "duration_minutes": 132
+    "duration_minutes": 132,
+    "release_date": "Sep 13, 2006"
   },
   {
     "movie_id": 166,
@@ -5915,7 +6055,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "Q7kZy3T6vRM",
-    "duration_minutes": 159
+    "duration_minutes": 159,
+    "release_date": "Jan 09, 2014"
   },
   {
     "movie_id": 167,
@@ -5954,7 +6095,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "_iH0UBYDI4g",
-    "duration_minutes": 131
+    "duration_minutes": 131,
+    "release_date": "Aug 24, 2012"
   },
   {
     "movie_id": 168,
@@ -5993,7 +6135,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "r-MiSNsCdQ4",
-    "duration_minutes": 146
+    "duration_minutes": 146,
+    "release_date": "May 01, 2006"
   },
   {
     "movie_id": 169,
@@ -6033,7 +6176,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "tAaBkFChaRg",
-    "duration_minutes": 91
+    "duration_minutes": 91,
+    "release_date": "Jan 25, 2003"
   },
   {
     "movie_id": 170,
@@ -6073,7 +6217,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "555A7T_kmIc",
-    "duration_minutes": 116
+    "duration_minutes": 116,
+    "release_date": "Dec 08, 2001"
   },
   {
     "movie_id": 171,
@@ -6113,7 +6258,8 @@ const MOVIES = [
       "underrated"
     ],
     "trailer": "dcUOO4Itgmw",
-    "duration_minutes": 156
+    "duration_minutes": 156,
+    "release_date": "Feb 14, 2002"
   },
   {
     "movie_id": 172,
@@ -6152,7 +6298,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "GAp2_0JJskk",
-    "duration_minutes": 125
+    "duration_minutes": 125,
+    "release_date": "Oct 18, 2001"
   },
   {
     "movie_id": 173,
@@ -6191,7 +6338,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "ARCQf2CEr8k",
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "Feb 18, 2004"
   },
   {
     "movie_id": 174,
@@ -6230,7 +6378,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "I1dHzoRl0sQ",
-    "duration_minutes": 134
+    "duration_minutes": 134,
+    "release_date": "Apr 20, 1997"
   },
   {
     "movie_id": 175,
@@ -6269,7 +6418,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "4vPeTSRd580",
-    "duration_minutes": 145
+    "duration_minutes": 145,
+    "release_date": "Jul 07, 1988"
   },
   {
     "movie_id": 176,
@@ -6308,7 +6458,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "Q6iK6DjV_iE",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Dec 24, 2019"
   },
   {
     "movie_id": 177,
@@ -6347,7 +6498,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "g0JMPkn7Wuo",
-    "duration_minutes": 134
+    "duration_minutes": 134,
+    "release_date": "Dec 28, 2022"
   },
   {
     "movie_id": 178,
@@ -6386,7 +6538,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "E-gGTCru5ZM",
-    "duration_minutes": 135
+    "duration_minutes": 135,
+    "release_date": "Jul 19, 2022"
   },
   {
     "movie_id": 179,
@@ -6425,7 +6578,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "A002-b7IH2M",
-    "duration_minutes": 135
+    "duration_minutes": 135,
+    "release_date": "Jun 06, 2023"
   },
   {
     "movie_id": 180,
@@ -6465,7 +6619,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "RrWausp8zDQ",
-    "duration_minutes": 101
+    "duration_minutes": 101,
+    "release_date": "Mar 23, 1997"
   },
   {
     "movie_id": 181,
@@ -6504,7 +6659,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "a6avI9oPgnw",
-    "duration_minutes": 113
+    "duration_minutes": 113,
+    "release_date": "Jul 03, 2006"
   },
   {
     "movie_id": 182,
@@ -6544,7 +6700,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "5XnptKCeaJE",
-    "duration_minutes": 113
+    "duration_minutes": 113,
+    "release_date": "Mar 03, 2017"
   },
   {
     "movie_id": 183,
@@ -6584,7 +6741,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "Jq4ER-P6NCQ",
-    "duration_minutes": 95
+    "duration_minutes": 95,
+    "release_date": "Jun 22, 1988"
   },
   {
     "movie_id": 184,
@@ -6623,7 +6781,8 @@ const MOVIES = [
       "Drama"
     ],
     "trailer": "4HALL5-PZu4",
-    "duration_minutes": 147
+    "duration_minutes": 147,
+    "release_date": "Oct 14, 1997"
   },
   {
     "movie_id": 185,
@@ -6664,7 +6823,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "_nZdmwHrcnw",
-    "duration_minutes": 131
+    "duration_minutes": 131,
+    "release_date": "Nov 03, 2001"
   },
   {
     "movie_id": 186,
@@ -6705,7 +6865,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "nuTU5XcZTLA",
-    "duration_minutes": 112
+    "duration_minutes": 112,
+    "release_date": "Mar 03, 2002"
   },
   {
     "movie_id": 187,
@@ -6746,7 +6907,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "zckJCxYxn1g",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Dec 20, 2003"
   },
   {
     "movie_id": 188,
@@ -6787,7 +6949,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "l91Km49W9qI",
-    "duration_minutes": 134
+    "duration_minutes": 134,
+    "release_date": "Dec 28, 2001"
   },
   {
     "movie_id": 189,
@@ -6828,7 +6991,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "nE11U5iBnH0",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Oct 26, 2002"
   },
   {
     "movie_id": 190,
@@ -6869,7 +7033,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "XsS1yE2f-hE",
-    "duration_minutes": 135
+    "duration_minutes": 135,
+    "release_date": "Sep 09, 1977"
   },
   {
     "movie_id": 191,
@@ -6910,7 +7075,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "vU6L3jXt2r8",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Sep 01, 1980"
   },
   {
     "movie_id": 192,
@@ -6951,7 +7117,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "MAW1E3JIQZE",
-    "duration_minutes": 101
+    "duration_minutes": 101,
+    "release_date": "Sep 25, 1983"
   },
   {
     "movie_id": 193,
@@ -6993,7 +7160,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "nGrW-OR2uDk",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Jul 11, 1984"
   },
   {
     "movie_id": 194,
@@ -7034,7 +7202,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "CRRlbK5w8AE",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Dec 24, 1991"
   },
   {
     "movie_id": 195,
@@ -7076,7 +7245,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "bM01Al2SWx4",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Dec 12, 1979"
   },
   {
     "movie_id": 196,
@@ -7117,7 +7287,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "8OxirbuHsBA",
-    "duration_minutes": 102
+    "duration_minutes": 102,
+    "release_date": "Feb 26, 1986"
   },
   {
     "movie_id": 197,
@@ -7159,7 +7330,8 @@ const MOVIES = [
       "cult"
     ],
     "trailer": "geFtxCSz8xI",
-    "duration_minutes": 95
+    "duration_minutes": 95,
+    "release_date": "Dec 24, 2017"
   },
   {
     "movie_id": 198,
@@ -7200,7 +7372,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "w0HgHet0sxg",
-    "duration_minutes": 154
+    "duration_minutes": 154,
+    "release_date": "May 21, 2021"
   },
   {
     "movie_id": 199,
@@ -7241,7 +7414,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "U2Qp5pL3ovA",
-    "duration_minutes": 166
+    "duration_minutes": 166,
+    "release_date": "Mar 05, 2024"
   },
   {
     "movie_id": 200,
@@ -7282,7 +7456,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "ej3ioOneTy8",
-    "duration_minutes": 104
+    "duration_minutes": 104,
+    "release_date": "Sep 21, 2015"
   },
   {
     "movie_id": 201,
@@ -7323,7 +7498,8 @@ const MOVIES = [
       "Fantasy"
     ],
     "trailer": "o5F8MOz_IDw",
-    "duration_minutes": 159
+    "duration_minutes": 159,
+    "release_date": "Dec 16, 2022"
   },
   {
     "title": "Leo",
@@ -7336,7 +7512,7 @@ const MOVIES = [
     "cast": [
       "Vijay",
       "Sanjay Dutt",
-      "Trisha Kristnan"
+      "Trisha"
     ],
     "music": "Anirudh Ravichander",
     "cinematographer": "Manoj Paramahamsa",
@@ -7366,7 +7542,8 @@ const MOVIES = [
       }
     ],
     "overview": "A mild-mannered cafe owner becomes a local hero, but his past soon catches up with him as dangerous family members return to pull him back into a life of crime.",
-    "duration_minutes": 164
+    "duration_minutes": 164,
+    "release_date": "Oct 19, 2023"
   },
   {
     "title": "Master",
@@ -7409,7 +7586,8 @@ const MOVIES = [
       }
     ],
     "overview": "An alcoholic professor is sent to a juvenile school, where he clashes with a gangster who uses the children of the school for criminal activities.",
-    "duration_minutes": 179
+    "duration_minutes": 179,
+    "release_date": "Jan 25, 2021"
   },
   {
     "title": "Vikram",
@@ -7454,7 +7632,8 @@ const MOVIES = [
       }
     ],
     "overview": "A special investigator is assigned a case of serial killings, he finds the case is not what it seems to be, leading down a path where getting involved turns out dangerous.",
-    "duration_minutes": 175
+    "duration_minutes": 175,
+    "release_date": "Jun 03, 2022"
   },
   {
     "title": "Kaithi",
@@ -7499,7 +7678,8 @@ const MOVIES = [
       }
     ],
     "overview": "An ex-convict tries to meet his daughter for the first time after leaving prison, but his attempts are interrupted by a drug raid led by an injured police officer.",
-    "duration_minutes": 147
+    "duration_minutes": 147,
+    "release_date": "Nov 07, 2019"
   },
   {
     "title": "Asuran",
@@ -7517,7 +7697,7 @@ const MOVIES = [
     "music": "G. V. Prakash Kumar",
     "cinematographer": "Velraj",
     "writer": "Vetrimaaran",
-    "synopsis": "A mathematician genius, Mathi, has another identity, Cobra, who commits intelligent crimes using maths.",
+    "synopsis": "A hot-blooded farmer attempts to save his family from the wrath of an influential landlord who seeks revenge for a past humiliation.",
     "trailer": "vOCM9wztBYQ",
     "poster": "https://image.tmdb.org/t/p/w500/Elnp3XrAlMM30dil8rbL7D9XeP.jpg",
     "experience_type": "intense",
@@ -7542,7 +7722,8 @@ const MOVIES = [
       }
     ],
     "overview": "The teenage son of a farmer from an underprivileged caste kills a rich, upper-caste landlord. The peaceful father must now hide his son and fight to save his family.",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Aug 12, 2019"
   },
   {
     "title": "Vada Chennai",
@@ -7585,33 +7766,34 @@ const MOVIES = [
       }
     ],
     "overview": "Anbuf, a skilled carrom player, is drawn into the world of local gangsters in North Chennai. He becomes a pawn in a power struggle between two rivalry gangs while trying to protect his neighborhood and his loved ones.",
-    "duration_minutes": 164
+    "duration_minutes": 164,
+    "release_date": "Nov 07, 2018"
   },
   {
     "title": "96",
-    "year": 2022,
+    "year": 2018,
     "genre": [
       "Romance",
       "Drama"
     ],
-    "director": "Kiranraj K",
+    "director": "C. Prem Kumar",
     "cast": [
-      "Rakshit Shetty",
-      "Charlie",
-      "Sangeetha Sringeri"
+      "Vijay Sethupathi",
+      "Trisha Krishnan",
+      "Gouri G. Kishan"
     ],
     "music": "Govind Vasantha",
     "cinematographer": "Mahendiran Jayaraju",
     "writer": "C. Prem Kumar",
-    "synopsis": "Dharma is stuck in a rut with his negative and lonely lifestyle and spends each day in the comfort of his loneliness. A pup named Charlie enters his life and gives him a new perspective towards it.",
+    "synopsis": "Two high school sweethearts meet at a reunion after 22 years and reminisce about their past and their unfinished love story.",
     "trailer": "r0synl-lI4I",
-    "poster": "https://m.media-amazon.com/images/M/MV5BOWY4MzlmNjItZGYzMS00ZDVhLWI2ZDMtNWEwZTBiMmU0YzQ4XkEyXkFqcGc@._V1_SX300.jpg",
+    "poster": "https://m.media-amazon.com/images/M/MV5BNmU2N2U1NGEtNTEyYy00Mzk3LWE1ZTYtMjgwNzcyYTFlZDA2XkEyXkFqcGc@._V1_SX300.jpg",
     "experience_type": "emotional",
-    "rating_percent": 85,
-    "popularity_score": 0.8,
+    "rating_percent": 88,
+    "popularity_score": 0.85,
     "age_limit": 13,
     "movie_id": 208,
-    "quote": "Reality... -- 96 doesn't pull its punches, and neither does life. You either get up, or you get out. Embrace the spends within.",
+    "quote": "Connection... -- In a digital age, 96 is a reminder that the most important signal is the one we feel in our hearts. Embrace the unfinished within.",
     "keywords": "Romance, Drama",
     "tags": [
       "Romance",
@@ -7628,7 +7810,8 @@ const MOVIES = [
       }
     ],
     "overview": "Two high school sweethearts meet at a reunion after 22 years and reminisce about their past over the course of a single evening.",
-    "duration_minutes": 150
+    "duration_minutes": 158,
+    "release_date": "Oct 04, 2018"
   },
   {
     "title": "Ratsasan",
@@ -7673,7 +7856,8 @@ const MOVIES = [
       }
     ],
     "overview": "An aspiring film director turns into a police officer after his father's death and attempts to track down a serial killer targeting schoolgirls.",
-    "duration_minutes": 111
+    "duration_minutes": 170,
+    "release_date": "Oct 05, 2018"
   },
   {
     "title": "Soorarai Pottru",
@@ -7685,8 +7869,8 @@ const MOVIES = [
     "director": "Sudha Kongara",
     "cast": [
       "Suriya",
-      "Paresh Rawal",
-      "Aparna Balamurali"
+      "Aparna Balamurali",
+      "Paresh Rawal"
     ],
     "music": "G. V. Prakash Kumar",
     "cinematographer": "Niketh Bommireddy",
@@ -7716,7 +7900,8 @@ const MOVIES = [
       }
     ],
     "overview": "Maara, a young man from a remote village, dreams of launching his own airline service. However, he must overcome several obstacles and challenges in order to be successful.",
-    "duration_minutes": 116
+    "duration_minutes": 153,
+    "release_date": "Nov 12, 2020"
   },
   {
     "title": "Jai Bhim",
@@ -7725,10 +7910,10 @@ const MOVIES = [
       "Drama",
       "Mystery"
     ],
-    "director": "T.J. Gnanavel",
+    "director": "T. J. Gnanavel",
     "cast": [
       "Suriya",
-      "Lijo Mol Jose",
+      "Lijomol Jose",
       "Manikandan"
     ],
     "music": "Sean Roldan",
@@ -7759,7 +7944,8 @@ const MOVIES = [
       }
     ],
     "overview": "When a tribal man is arrested for a case of alleged theft, his wife turns to a human-rights lawyer to help bring justice.",
-    "duration_minutes": 145
+    "duration_minutes": 164,
+    "release_date": "Nov 02, 2021"
   },
   {
     "title": "Maharaja",
@@ -7804,7 +7990,8 @@ const MOVIES = [
       }
     ],
     "overview": "A barber seeks vengeance after his home is burglarized, leaving police baffled when his only complaint is the theft of a seemingly worthless dustbin.",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Jun 14, 2024"
   },
   {
     "title": "Super Deluxe",
@@ -7849,7 +8036,8 @@ const MOVIES = [
       }
     ],
     "overview": "An unfaithful wife, an estranged father, and a priest must all face their demons on one fateful day where their lives mysteriously intertwine in Chennai.",
-    "duration_minutes": 103
+    "duration_minutes": 176,
+    "release_date": "Mar 29, 2019"
   },
   {
     "title": "Mankatha",
@@ -7861,9 +8049,9 @@ const MOVIES = [
     ],
     "director": "Venkat Prabhu",
     "cast": [
-      "Michiko Kichise",
-      "Juna Aoki",
-      "Kasumi Arimura"
+      "Ajith Kumar",
+      "Arjun Sarja",
+      "Trisha Krishnan"
     ],
     "music": "Yuvan Shankar Raja",
     "cinematographer": "Sakthi Saravanan",
@@ -7894,20 +8082,21 @@ const MOVIES = [
       }
     ],
     "overview": "A suspended cop joins hands with a gang of thieves to steal a massive sum of cricket betting money, only to face double-crossings at every turn.",
-    "duration_minutes": 160
+    "duration_minutes": 160,
+    "release_date": "Sep 13, 2011"
   },
   {
     "title": "Thuppakki",
-    "year": 2006,
+    "year": 2012,
     "genre": [
       "Action",
       "Thriller"
     ],
     "director": "AR Murugadoss",
     "cast": [
-      "Yeon-hong Ahn",
-      "Jung Dong-hwan",
-      "Lee Yeon Hee"
+      "Vijay",
+      "Kajal Aggarwal",
+      "Vidyut Jammwal"
     ],
     "music": "Harris Jayaraj",
     "cinematographer": "Santosh Sivan",
@@ -7916,8 +8105,8 @@ const MOVIES = [
     "trailer": "aW_j4pNvG98",
     "poster": "https://m.media-amazon.com/images/M/MV5BNDhmMWI0OWEtNTY3My00MjcxLTgwNDItMTgzYmJkMWQyMzg0XkEyXkFqcGc@._V1_SX250.jpg",
     "experience_type": "intense",
-    "rating_percent": 83,
-    "popularity_score": 0.86,
+    "rating_percent": 85,
+    "popularity_score": 0.88,
     "age_limit": 13,
     "movie_id": 215,
     "quote": "Impact... -- Thuppakki is the proof that one decision, one moment, can change the orbit of an entire life. Embrace the plotting within.",
@@ -7937,7 +8126,8 @@ const MOVIES = [
       }
     ],
     "overview": "An intelligence officer from the Indian Army sets out to hunt down a sleeper cell network plotting massive terrorist attacks across Mumbai.",
-    "duration_minutes": 124
+    "duration_minutes": 165,
+    "release_date": "Nov 13, 2012"
   },
   {
     "title": "Anbe Sivam",
@@ -7980,22 +8170,22 @@ const MOVIES = [
       }
     ],
     "overview": "Two men of contrasting personalities, a communist activist and a capitalist ad filmmaker, undertake a journey together that changes their perspectives on life.",
-    "duration_minutes": 153
+    "duration_minutes": 153,
+    "release_date": "Nov 27, 2003"
   },
   {
     "title": "Jigarthanda",
-    "year": 2005,
+    "year": 2014,
     "genre": [
       "Action",
       "Comedy",
       "Crime"
     ],
-    "director": "Petra Clever",
+    "director": "Karthik Subbaraj",
     "cast": [
-      "Nils Brunkhorst",
-      "Yvonne Burbach",
-      "Inez Bj\u00f8rg David",
-      "Wolfram Grandezka"
+      "Siddharth",
+      "Bobby Simha",
+      "Lakshmi Menon"
     ],
     "music": "Santhosh Narayanan",
     "cinematographer": "Gavemic U. Ary",
@@ -8004,9 +8194,9 @@ const MOVIES = [
     "trailer": "_T8n-EHr4ZE",
     "poster": "https://m.media-amazon.com/images/M/MV5BOGM5NGE4Y2UtMzQzZS00ZGRjLWFiNDItNjk5YTkwZmMyZmM5XkEyXkFqcGc@._V1_SX250.jpg",
     "experience_type": "fun",
-    "rating_percent": 83,
-    "popularity_score": 0.78,
-    "age_limit": 0,
+    "rating_percent": 85,
+    "popularity_score": 0.82,
+    "age_limit": 13,
     "movie_id": 218,
     "quote": "Power... -- Own your story with the ferocity of Jigarthanda. The world is waiting for your roar. Embrace the filmmaker within.",
     "keywords": "Action, Comedy, Crime",
@@ -8026,7 +8216,8 @@ const MOVIES = [
       }
     ],
     "overview": "An aspiring filmmaker tries to secretly shadow a ruthless gangster to research a movie about him, but gets caught in a dangerous web of deception and violence.",
-    "duration_minutes": 158
+    "duration_minutes": 158,
+    "release_date": "Nov 07, 2005"
   },
   {
     "title": "Pariyerum Perumal",
@@ -8069,7 +8260,8 @@ const MOVIES = [
       }
     ],
     "overview": "A law student from a lower caste faces immense discrimination and violence after he befriends a girl from a higher caste in his college.",
-    "duration_minutes": 117
+    "duration_minutes": 154,
+    "release_date": "Sep 28, 2018"
   },
   {
     "title": "Nayakan",
@@ -8115,7 +8307,8 @@ const MOVIES = [
       }
     ],
     "overview": "A young boy from Tamil Nadu flees to Mumbai and gradually rises through the ranks of the underworld to become a powerful don to protect the poor.",
-    "duration_minutes": 101
+    "duration_minutes": 145,
+    "release_date": "Oct 21, 1987"
   },
   {
     "title": "Theeran Adhigaaram Ondru",
@@ -8160,7 +8353,8 @@ const MOVIES = [
       }
     ],
     "overview": "A dedicated police officer investigates a series of cold-blooded murders and burglaries committed by a highly dangerous and elusive gang across India.",
-    "duration_minutes": 133
+    "duration_minutes": 157,
+    "release_date": "Nov 17, 2017"
   },
   {
     "title": "Forrest Gump",
@@ -8202,7 +8396,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 125
+    "duration_minutes": 125,
+    "release_date": "Sep 21, 1994"
   },
   {
     "title": "Everything Everywhere All at Once",
@@ -8246,7 +8441,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 129
+    "duration_minutes": 129,
+    "release_date": "Feb 22, 2022"
   },
   {
     "title": "Memento",
@@ -8289,7 +8485,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 100
+    "duration_minutes": 100,
+    "release_date": "Jan 13, 2000"
   },
   {
     "title": "Die Hard",
@@ -8332,7 +8529,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 141
+    "duration_minutes": 141,
+    "release_date": "Sep 09, 1988"
   },
   {
     "title": "Toy Story",
@@ -8377,7 +8575,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=netflix.com"
       }
     ],
-    "duration_minutes": 119
+    "duration_minutes": 119,
+    "release_date": "Aug 28, 1995"
   },
   {
     "title": "UP",
@@ -8422,7 +8621,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 124
+    "duration_minutes": 124,
+    "release_date": "Feb 18, 2009"
   },
   {
     "title": "WALL\u00b7E",
@@ -8467,7 +8667,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 134
+    "duration_minutes": 134,
+    "release_date": "Mar 07, 2008"
   },
   {
     "title": "Inglourious Basterds",
@@ -8511,7 +8712,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 118
+    "duration_minutes": 118,
+    "release_date": "May 13, 2009"
   },
   {
     "title": "The Wolf of Wall Street",
@@ -8555,7 +8757,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 180
+    "duration_minutes": 180,
+    "release_date": "Mar 07, 2013"
   },
   {
     "title": "Shutter Island",
@@ -8597,7 +8800,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 132
+    "duration_minutes": 132,
+    "release_date": "Jul 15, 2010"
   },
   {
     "title": "Catch Me If You Can",
@@ -8641,7 +8845,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "May 25, 2002"
   },
   {
     "title": "The Truman Show",
@@ -8684,7 +8889,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 125
+    "duration_minutes": 125,
+    "release_date": "Feb 26, 1998"
   },
   {
     "title": "Eternal Sunshine of the Spotless Mind",
@@ -8729,7 +8935,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 139
+    "duration_minutes": 139,
+    "release_date": "Aug 20, 2004"
   },
   {
     "title": "The Social Network",
@@ -8771,7 +8978,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 135
+    "duration_minutes": 135,
+    "release_date": "Oct 22, 2010"
   },
   {
     "title": "Mad Max: Fury Road",
@@ -8815,7 +9023,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 117
+    "duration_minutes": 117,
+    "release_date": "May 01, 2015"
   },
   {
     "title": "Oppenheimer",
@@ -8859,7 +9068,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 180
+    "duration_minutes": 180,
+    "release_date": "Jul 21, 2023"
   },
   {
     "title": "Barbie",
@@ -8903,7 +9113,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 114
+    "duration_minutes": 114,
+    "release_date": "Jul 21, 2023"
   },
   {
     "title": "Avengers: Infinity War",
@@ -8947,7 +9158,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 139
+    "duration_minutes": 139,
+    "release_date": "Feb 14, 2018"
   },
   {
     "title": "Spider-Man: Into the Spider-Verse",
@@ -8992,7 +9204,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 109
+    "duration_minutes": 109,
+    "release_date": "Jan 09, 2018"
   },
   {
     "title": "Inside Out",
@@ -9037,7 +9250,8 @@ const MOVIES = [
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
-    "duration_minutes": 103
+    "duration_minutes": 103,
+    "release_date": "Jul 19, 2015"
   },
   {
     "movie_id": 272,
@@ -9078,7 +9292,8 @@ const MOVIES = [
     "writer": "Wes Anderson",
     "cinematographer": "Robert Yeoman",
     "music": "Alexandre Desplat",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Jul 27, 2014"
   },
   {
     "movie_id": 273,
@@ -9121,7 +9336,8 @@ const MOVIES = [
     "writer": "Andrew Stanton",
     "cinematographer": "Animated",
     "music": "Thomas Newman",
-    "duration_minutes": 101
+    "duration_minutes": 101,
+    "release_date": "Jul 07, 2003"
   },
   {
     "movie_id": 274,
@@ -9164,7 +9380,8 @@ const MOVIES = [
     "writer": "Hayao Miyazaki",
     "cinematographer": "Animated",
     "music": "Joe Hisaishi",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Oct 18, 1988"
   },
   {
     "movie_id": 275,
@@ -9206,7 +9423,8 @@ const MOVIES = [
     "writer": "Nicolas Winding Refn",
     "cinematographer": "Newton Thomas Sigel",
     "music": "Cliff Martinez",
-    "duration_minutes": 102
+    "duration_minutes": 102,
+    "release_date": "Oct 14, 2011"
   },
   {
     "movie_id": 276,
@@ -9249,7 +9467,8 @@ const MOVIES = [
     "writer": "Ben Stiller",
     "cinematographer": "Stuart Dryburgh",
     "music": "Theodore Shapiro",
-    "duration_minutes": 121
+    "duration_minutes": 121,
+    "release_date": "Oct 26, 2013"
   },
   {
     "movie_id": 277,
@@ -9288,7 +9507,8 @@ const MOVIES = [
     "writer": "Barry Jenkins",
     "cinematographer": "James Laxton",
     "music": "Nicholas Britell",
-    "duration_minutes": 93
+    "duration_minutes": 93,
+    "release_date": "Apr 20, 2016"
   },
   {
     "movie_id": 278,
@@ -9329,7 +9549,8 @@ const MOVIES = [
     "writer": "Sofia Coppola",
     "cinematographer": "Lance Acord",
     "music": "Kevin Shields",
-    "duration_minutes": 135
+    "duration_minutes": 135,
+    "release_date": "May 17, 2003"
   },
   {
     "movie_id": 279,
@@ -9372,7 +9593,8 @@ const MOVIES = [
     "writer": "Ethan Coen",
     "cinematographer": "Roger Deakins",
     "music": "Carter Burwell",
-    "duration_minutes": 105
+    "duration_minutes": 105,
+    "release_date": "Apr 08, 2007"
   },
   {
     "movie_id": 281,
@@ -9415,7 +9637,8 @@ const MOVIES = [
     "writer": "Spike Jonze",
     "cinematographer": "Hoyte van Hoytema",
     "music": "Arcade Fire",
-    "duration_minutes": 127
+    "duration_minutes": 127,
+    "release_date": "May 09, 2013"
   },
   {
     "movie_id": 282,
@@ -9459,7 +9682,8 @@ const MOVIES = [
     "writer": "Paul King",
     "cinematographer": "Erik Wilson",
     "music": "Dario Marianelli",
-    "duration_minutes": 114
+    "duration_minutes": 114,
+    "release_date": "Dec 20, 2017"
   },
   {
     "movie_id": 283,
@@ -9501,7 +9725,8 @@ const MOVIES = [
     "writer": "Chad Stahelski",
     "cinematographer": "Jonathan Sela",
     "music": "Tyler Bates",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "Apr 24, 2014"
   },
   {
     "movie_id": 284,
@@ -9545,7 +9770,8 @@ const MOVIES = [
     "writer": "Brad Bird",
     "cinematographer": "Animated",
     "music": "Michael Giacchino",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Jan 17, 2007"
   },
   {
     "movie_id": 285,
@@ -9588,7 +9814,8 @@ const MOVIES = [
     "writer": "Richard Linklater",
     "cinematographer": "Lee Daniel",
     "music": "Various Artists",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "May 13, 1995"
   },
   {
     "movie_id": 286,
@@ -9632,7 +9859,8 @@ const MOVIES = [
     "writer": "Pete Docter",
     "cinematographer": "Animated",
     "music": "Trent Reznor & Atticus Ross",
-    "duration_minutes": 103
+    "duration_minutes": 103,
+    "release_date": "Jun 02, 2020"
   },
   {
     "movie_id": 287,
@@ -9676,7 +9904,8 @@ const MOVIES = [
     "writer": "Rob Reiner",
     "cinematographer": "Adrian Biddle",
     "music": "Mark Knopfler",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "Jan 01, 1987"
   },
   {
     "movie_id": 288,
@@ -9718,7 +9947,8 @@ const MOVIES = [
     "writer": "John Krasinski",
     "cinematographer": "Charlotte Bruus Christensen",
     "music": "Marco Beltrami",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Jul 27, 2018"
   },
   {
     "movie_id": 289,
@@ -9760,7 +9990,8 @@ const MOVIES = [
     "writer": "Matt Reeves",
     "cinematographer": "Greig Fraser",
     "music": "Michael Giacchino",
-    "duration_minutes": 176
+    "duration_minutes": 176,
+    "release_date": "Nov 03, 2022"
   },
   {
     "movie_id": 290,
@@ -9800,7 +10031,8 @@ const MOVIES = [
     "writer": "Joseph Kosinski",
     "cinematographer": "Claudio Miranda",
     "music": "Harold Faltermeyer",
-    "duration_minutes": 138
+    "duration_minutes": 138,
+    "release_date": "Jan 13, 2022"
   },
   {
     "movie_id": 291,
@@ -9843,7 +10075,8 @@ const MOVIES = [
     "writer": "Damien Chazelle",
     "cinematographer": "Linus Sandgren",
     "music": "Justin Hurwitz",
-    "duration_minutes": 128
+    "duration_minutes": 128,
+    "release_date": "Sep 05, 2016"
   },
   {
     "movie_id": 292,
@@ -9886,7 +10119,8 @@ const MOVIES = [
     "writer": "Rian Johnson",
     "cinematographer": "Steve Yedlin",
     "music": "Nathan Johnson",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Sep 13, 2019"
   },
   {
     "movie_id": 293,
@@ -9930,7 +10164,8 @@ const MOVIES = [
     "cinematographer": "Bradford Young",
     "music": "J\u00f3hann J\u00f3hannsson",
     "duration_minutes": 149,
-    "overview": "When twelve mysterious spacecraft land across the globe, linguist Louise Banks is recruited by the military to communicate with the extraterrestrial visitors and decipher their complex language before global tensions lead to war."
+    "overview": "When twelve mysterious spacecraft land across the globe, linguist Louise Banks is recruited by the military to communicate with the extraterrestrial visitors and decipher their complex language before global tensions lead to war.",
+    "release_date": "Oct 22, 2016"
   },
   {
     "movie_id": 294,
@@ -9973,7 +10208,8 @@ const MOVIES = [
     "writer": "Alex Garland",
     "cinematographer": "Rob Hardy",
     "music": "Geoff Barrow & Ben Salisbury",
-    "duration_minutes": 136
+    "duration_minutes": 136,
+    "release_date": "Oct 02, 2014"
   },
   {
     "movie_id": 295,
@@ -10015,7 +10251,8 @@ const MOVIES = [
     "writer": "Todd Phillips",
     "cinematographer": "Lawrence Sher",
     "music": "Hildur Gu\u00f0nad\u00f3ttir",
-    "duration_minutes": 122
+    "duration_minutes": 122,
+    "release_date": "Oct 04, 2019"
   },
   {
     "movie_id": 296,
@@ -10053,7 +10290,8 @@ const MOVIES = [
     "writer": "Hiphop Tamizha Adhi",
     "cinematographer": "P. C. Sreeram",
     "music": "S. Thaman",
-    "duration_minutes": 159
+    "duration_minutes": 159,
+    "release_date": "Jun 24, 2024"
   },
   {
     "movie_id": 297,
@@ -10096,7 +10334,8 @@ const MOVIES = [
     "writer": "Pradeep Ranganathan",
     "cinematographer": "Dinesh Krishnan",
     "music": "Yuvan Shankar Raja",
-    "duration_minutes": 130
+    "duration_minutes": 130,
+    "release_date": "Jul 23, 2022"
   },
   {
     "movie_id": 298,
@@ -10136,7 +10375,8 @@ const MOVIES = [
     "writer": "Blessy",
     "cinematographer": "Sunil K.S.",
     "music": "A. R. Rahman",
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "Mar 28, 2024"
   },
   {
     "movie_id": 299,
@@ -10179,7 +10419,8 @@ const MOVIES = [
     "writer": "Tamizharasan Pachamuthu",
     "cinematographer": "M. Ezhil Arasu",
     "music": "Vishnu Vijay",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Oct 05, 2024"
   },
   {
     "movie_id": 300,
@@ -10216,10 +10457,11 @@ const MOVIES = [
       "Crime",
       "Thriller"
     ],
-    "writer": "Arun Varma",
-    "cinematographer": "Santosh Sivan",
-    "music": "Anirudh Ravichander",
-    "duration_minutes": 120
+    "writer": "R.S. Durai Senthilkumar",
+    "cinematographer": "Arthur A. Wilson",
+    "music": "Jakes Bejoy",
+    "duration_minutes": 133,
+    "release_date": "May 31, 2024"
   },
   {
     "movie_id": 301,
@@ -10259,9 +10501,10 @@ const MOVIES = [
       "Romance"
     ],
     "writer": "A. Sarkunam",
-    "cinematographer": "Manoj Paramahamsa",
-    "music": "M. M. Keeravani",
-    "duration_minutes": 157
+    "cinematographer": "Om Prakash",
+    "music": "Ghibran",
+    "duration_minutes": 123,
+    "release_date": "Sep 30, 2011"
   },
   {
     "movie_id": 302,
@@ -10300,10 +10543,11 @@ const MOVIES = [
       "Crime",
       "Thriller"
     ],
-    "writer": "Suresh Krishna",
-    "cinematographer": "R. D. Rajasekhar",
-    "music": "Santhosh Narayanan",
-    "duration_minutes": 132
+    "writer": "Kamal Haasan",
+    "cinematographer": "Tirru",
+    "music": "Shankar-Ehsaan-Loy",
+    "duration_minutes": 178,
+    "release_date": "Nov 14, 2001"
   },
   {
     "movie_id": 303,
@@ -10344,9 +10588,10 @@ const MOVIES = [
       "cult"
     ],
     "writer": "Kamal Haasan",
-    "cinematographer": "Sanu Varghese",
+    "cinematographer": "Keshav Prakash",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 109
+    "duration_minutes": 178,
+    "release_date": "Jan 14, 2004"
   },
   {
     "movie_id": 304,
@@ -10386,9 +10631,10 @@ const MOVIES = [
       "Musical"
     ],
     "writer": "K. Selvaraghavan",
-    "cinematographer": "Nirav Shah",
+    "cinematographer": "Ramji",
     "music": "G.V. Prakash Kumar",
-    "duration_minutes": 150
+    "duration_minutes": 183,
+    "release_date": "Jan 14, 2010"
   },
   {
     "movie_id": 305,
@@ -10426,9 +10672,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "Mari Selvaraj",
-    "cinematographer": "Girish Gangadharan",
-    "music": "S. Thaman",
-    "duration_minutes": 98
+    "cinematographer": "Theni Eswar",
+    "music": "Santhosh Narayanan",
+    "duration_minutes": 159,
+    "release_date": "Apr 09, 2021"
   },
   {
     "movie_id": 306,
@@ -10468,9 +10715,10 @@ const MOVIES = [
       "Thriller"
     ],
     "writer": "Shoojit Sircar",
-    "cinematographer": "Santosh Sivan",
-    "music": "Harris Jayaraj",
-    "duration_minutes": 136
+    "cinematographer": "Kamaljeet Negi",
+    "music": "Shantanu Moitra",
+    "duration_minutes": 130,
+    "release_date": "Aug 23, 2013"
   },
   {
     "movie_id": 307,
@@ -10506,9 +10754,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "M. Manikandan",
-    "cinematographer": "Nirav Shah",
-    "music": "G. V. Prakash Kumar",
-    "duration_minutes": 123
+    "cinematographer": "M. Manikandan",
+    "music": "Santhosh Narayanan",
+    "duration_minutes": 144,
+    "release_date": "Feb 11, 2022"
   },
   {
     "movie_id": 308,
@@ -10547,7 +10796,8 @@ const MOVIES = [
     "cinematographer": "C. Prem Kumar",
     "music": "Justin Prabhakaran",
     "duration_minutes": 118,
-    "overview": "Rangasamy, a hard-working laborer in the spice plantations on the Kerala-Tamil Nadu border, dreams of owning his own piece of land. His journey reflects the struggles and resilience of people living on the geographical and social margins."
+    "overview": "Rangasamy, a hard-working laborer in the spice plantations on the Kerala-Tamil Nadu border, dreams of owning his own piece of land. His journey reflects the struggles and resilience of people living on the geographical and social margins.",
+    "release_date": "Jun 18, 2018"
   },
   {
     "movie_id": 309,
@@ -10585,9 +10835,10 @@ const MOVIES = [
       "Romance"
     ],
     "writer": "K. Selvaraghavan",
-    "cinematographer": "Nirav Shah",
-    "music": "Santhosh Narayanan",
-    "duration_minutes": 126
+    "cinematographer": "Arvind Krishna",
+    "music": "Yuvan Shankar Raja",
+    "duration_minutes": 185,
+    "release_date": "Oct 15, 2004"
   },
   {
     "movie_id": 310,
@@ -10626,7 +10877,8 @@ const MOVIES = [
     "writer": "Selvaraghavan",
     "cinematographer": "Arvind Krishna",
     "music": "Yuvan Shankar Raja",
-    "duration_minutes": 149
+    "duration_minutes": 166,
+    "release_date": "May 26, 2006"
   },
   {
     "movie_id": 311,
@@ -10669,7 +10921,8 @@ const MOVIES = [
     "writer": "Kamal Haasan",
     "cinematographer": "Tirru",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 186
+    "duration_minutes": 186,
+    "release_date": "Feb 18, 2000"
   },
   {
     "movie_id": 312,
@@ -10711,7 +10964,8 @@ const MOVIES = [
     "writer": "K.S. Ravikumar",
     "cinematographer": "Ravi Varman",
     "music": "Himesh Reshammiya",
-    "duration_minutes": 188
+    "duration_minutes": 188,
+    "release_date": "Jun 13, 2008"
   },
   {
     "movie_id": 313,
@@ -10750,10 +11004,11 @@ const MOVIES = [
       "Drama",
       "Romance"
     ],
-    "writer": "Dharani",
-    "cinematographer": "Nirav Shah",
-    "music": "A. R. Rahman",
-    "duration_minutes": 132
+    "writer": "Bharathan",
+    "cinematographer": "S. Gopinath",
+    "music": "Vidyasagar",
+    "duration_minutes": 160,
+    "release_date": "Apr 17, 2004"
   },
   {
     "movie_id": 314,
@@ -10795,7 +11050,8 @@ const MOVIES = [
     "writer": "Takashi Yamazaki",
     "cinematographer": "Kyohei Arai",
     "music": "Naoki Sato",
-    "duration_minutes": 130
+    "duration_minutes": 130,
+    "release_date": "Apr 24, 2023"
   },
   {
     "movie_id": 315,
@@ -10819,9 +11075,9 @@ const MOVIES = [
       "Rajinikanth",
       "Ramya Krishnan"
     ],
-    "trailer_yt_id": "CnRXxRmPMQg",
+    "trailer_yt_id": "1g-yZ3BDDK0",
     "keywords": "Action, Comedy, Drama",
-    "trailer": "CnRXxRmPMQg",
+    "trailer": "1g-yZ3BDDK0",
     "ottPlatforms": [
       {
         "name": "Amazon Prime Video",
@@ -10835,9 +11091,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "K.S. Ravikumar",
-    "cinematographer": "Ravi Varman",
+    "cinematographer": "P. S. Vinod",
     "music": "A. R. Rahman",
-    "duration_minutes": 128
+    "duration_minutes": 172,
+    "release_date": "Apr 10, 1999"
   },
   {
     "movie_id": 316,
@@ -10878,9 +11135,10 @@ const MOVIES = [
       "cult"
     ],
     "writer": "Suresh Krishna",
-    "cinematographer": "Jeeva",
+    "cinematographer": "P. S. Prakash",
     "music": "Deva",
-    "duration_minutes": 160
+    "duration_minutes": 145,
+    "release_date": "Jan 12, 1995"
   },
   {
     "movie_id": 317,
@@ -10901,7 +11159,7 @@ const MOVIES = [
     "director": "S. Shankar",
     "cast": [
       "Vikram",
-      "Sada",
+      "Sadha",
       "Prakash Raj"
     ],
     "trailer_yt_id": "bzAxJDtS7zE",
@@ -10920,9 +11178,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "S. Shankar",
-    "cinematographer": "Nirav Shah",
-    "music": "Yuvan Shankar Raja",
-    "duration_minutes": 91
+    "cinematographer": "Ravi Varman",
+    "music": "Harris Jayaraj",
+    "duration_minutes": 181,
+    "release_date": "Jun 17, 2005"
   },
   {
     "movie_id": 318,
@@ -10958,9 +11217,10 @@ const MOVIES = [
       "Horror"
     ],
     "writer": "Sundar C.",
-    "cinematographer": "Girish Gangadharan",
-    "music": "Yuvan Shankar Raja",
-    "duration_minutes": 151
+    "cinematographer": "E. Krishnaswamy",
+    "music": "Hiphop Tamizha",
+    "duration_minutes": 155,
+    "release_date": "May 03, 2024"
   },
   {
     "movie_id": 319,
@@ -10997,9 +11257,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "Yuvaraj Dhayalan",
-    "cinematographer": "Ravi K. Chandran",
-    "music": "Devi Sri Prasad",
-    "duration_minutes": 144
+    "cinematographer": "Gokul Benoy",
+    "music": "Justin Prabhakaran",
+    "duration_minutes": 152,
+    "release_date": "Oct 06, 2023"
   },
   {
     "movie_id": 320,
@@ -11042,7 +11303,8 @@ const MOVIES = [
     "writer": "Basil Joseph",
     "cinematographer": "Saiju Sreedharan",
     "music": "Shaan Rahman",
-    "duration_minutes": 107
+    "duration_minutes": 107,
+    "release_date": "Dec 16, 2021"
   },
   {
     "movie_id": 321,
@@ -11082,9 +11344,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "Mani Ratnam",
-    "cinematographer": "R. D. Rajasekhar",
-    "music": "M. M. Keeravani",
-    "duration_minutes": 112
+    "cinematographer": "Ravi Varman",
+    "music": "A. R. Rahman",
+    "duration_minutes": 167,
+    "release_date": "Sep 30, 2022"
   },
   {
     "movie_id": 322,
@@ -11124,9 +11387,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "Mani Ratnam",
-    "cinematographer": "Girish Gangadharan",
-    "music": "Anirudh Ravichander",
-    "duration_minutes": 111
+    "cinematographer": "Ravi Varman",
+    "music": "A. R. Rahman",
+    "duration_minutes": 164,
+    "release_date": "Apr 28, 2023"
   },
   {
     "movie_id": 323,
@@ -11164,9 +11428,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "Karthik Subbaraj",
-    "cinematographer": "Santosh Sivan",
-    "music": "G. V. Prakash Kumar",
-    "duration_minutes": 134
+    "cinematographer": "Tirru",
+    "music": "Anirudh Ravichander",
+    "duration_minutes": 171,
+    "release_date": "Jan 10, 2019"
   },
   {
     "movie_id": 324,
@@ -11204,9 +11469,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "Siva",
-    "cinematographer": "P. C. Sreeram",
-    "music": "M. M. Keeravani",
-    "duration_minutes": 116
+    "cinematographer": "Vetri",
+    "music": "D. Imman",
+    "duration_minutes": 153,
+    "release_date": "Jan 10, 2019"
   },
   {
     "movie_id": 325,
@@ -11244,9 +11510,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "A.R. Murugadoss",
-    "cinematographer": "P. C. Sreeram",
-    "music": "A. R. Rahman",
-    "duration_minutes": 112
+    "cinematographer": "George C. Williams",
+    "music": "Anirudh Ravichander",
+    "duration_minutes": 164,
+    "release_date": "Oct 22, 2014"
   },
   {
     "movie_id": 326,
@@ -11284,9 +11551,10 @@ const MOVIES = [
       "Romance"
     ],
     "writer": "Gautham Vasudev Menon",
-    "cinematographer": "R. D. Rajasekhar",
+    "cinematographer": "Manoj Paramahamsa",
     "music": "A. R. Rahman",
-    "duration_minutes": 114
+    "duration_minutes": 166,
+    "release_date": "Feb 26, 2010"
   },
   {
     "movie_id": 327,
@@ -11326,7 +11594,8 @@ const MOVIES = [
     "writer": "Valerio Zurlini",
     "cinematographer": "Jerry Hirschfeld",
     "music": "Various Artists",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Apr 24, 1972"
   },
   {
     "movie_id": 328,
@@ -11369,7 +11638,8 @@ const MOVIES = [
     "writer": "Mani Ratnam",
     "cinematographer": "P. C. Sriram",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 107
+    "duration_minutes": 107,
+    "release_date": "Jan 09, 1991"
   },
   {
     "movie_id": 329,
@@ -11410,8 +11680,9 @@ const MOVIES = [
     ],
     "writer": "S. Shankar",
     "cinematographer": "Rathnavelu",
-    "music": "M. M. Keeravani",
-    "duration_minutes": 92
+    "music": "A. R. Rahman",
+    "duration_minutes": 166,
+    "release_date": "Oct 01, 2010"
   },
   {
     "movie_id": 330,
@@ -11453,7 +11724,8 @@ const MOVIES = [
     "writer": "James Gunn",
     "cinematographer": "Ben Davis",
     "music": "Tyler Bates",
-    "duration_minutes": 158
+    "duration_minutes": 158,
+    "release_date": "Sep 05, 2014"
   },
   {
     "movie_id": 331,
@@ -11495,7 +11767,8 @@ const MOVIES = [
     "writer": "Ryan Coogler",
     "cinematographer": "Rachel Morrison",
     "music": "Ludwig G\u00f6ransson",
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "Aug 20, 2018"
   },
   {
     "movie_id": 332,
@@ -11537,7 +11810,8 @@ const MOVIES = [
     "writer": "Zack Snyder",
     "cinematographer": "Amir Mokri",
     "music": "Hans Zimmer",
-    "duration_minutes": 109
+    "duration_minutes": 109,
+    "release_date": "Oct 02, 2013"
   },
   {
     "movie_id": 333,
@@ -11579,7 +11853,8 @@ const MOVIES = [
     "writer": "Zack Snyder",
     "cinematographer": "Fabian Wagner",
     "music": "Junkie XL",
-    "duration_minutes": 103
+    "duration_minutes": 103,
+    "release_date": "Oct 22, 2021"
   },
   {
     "movie_id": 336,
@@ -11621,7 +11896,8 @@ const MOVIES = [
     "writer": "Gore Verbinski",
     "cinematographer": "Dariusz Wolski",
     "music": "Klaus Badelt",
-    "duration_minutes": 138
+    "duration_minutes": 138,
+    "release_date": "Mar 07, 2003"
   },
   {
     "movie_id": 339,
@@ -11664,7 +11940,8 @@ const MOVIES = [
     "writer": "David Yates",
     "cinematographer": "Eduardo Serra",
     "music": "Alexandre Desplat",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Apr 08, 2011"
   },
   {
     "movie_id": 341,
@@ -11707,7 +11984,8 @@ const MOVIES = [
     "writer": "Alfonso Cuar\u00f3n",
     "cinematographer": "Michael Seresin",
     "music": "John Williams",
-    "duration_minutes": 91
+    "duration_minutes": 91,
+    "release_date": "Mar 23, 2004"
   },
   {
     "movie_id": 342,
@@ -11749,7 +12027,8 @@ const MOVIES = [
     "writer": "Chad Stahelski",
     "cinematographer": "Dan Laustsen",
     "music": "Tyler Bates",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Sep 09, 2023"
   },
   {
     "movie_id": 343,
@@ -11792,7 +12071,8 @@ const MOVIES = [
     "writer": "Joaquim Dos Santos",
     "cinematographer": "Animated",
     "music": "Daniel Pemberton",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Aug 04, 2023"
   },
   {
     "movie_id": 344,
@@ -11834,7 +12114,8 @@ const MOVIES = [
     "writer": "Christopher Nolan",
     "cinematographer": "Wally Pfister",
     "music": "Hans Zimmer",
-    "duration_minutes": 130
+    "duration_minutes": 130,
+    "release_date": "Dec 12, 2005"
   },
   {
     "movie_id": 345,
@@ -11876,7 +12157,8 @@ const MOVIES = [
     "writer": "Christopher Nolan",
     "cinematographer": "Wally Pfister",
     "music": "Hans Zimmer",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Jul 07, 2012"
   },
   {
     "movie_id": 346,
@@ -11893,11 +12175,11 @@ const MOVIES = [
     "age_limit": 13,
     "synopsis": "A child from the Mahishmati kingdom is raised by tribal people and one day learns about his royal heritage, his father's bravery in battle and a mission to overthrow the incumbent ruler.",
     "quote": "Truth... -- In the world of Baahubali: The Beginning, loyalty isn't a word; it's a debt paid in blood and sweat. Embrace the Mahishmati within.",
-    "director": "S.S. Rajamouli",
+    "director": "S. S. Rajamouli",
     "cast": [
       "Prabhas",
       "Rana Daggubati",
-      "Anushka Shetty"
+      "Tamannaah Bhatia"
     ],
     "trailer_yt_id": "3NQRhE772b0",
     "keywords": "Action, Drama",
@@ -11916,7 +12198,8 @@ const MOVIES = [
     "writer": "S.S. Rajamouli",
     "cinematographer": "Manoj Paramahamsa",
     "music": "A. R. Rahman",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Jul 10, 2015"
   },
   {
     "movie_id": 347,
@@ -11956,7 +12239,8 @@ const MOVIES = [
     "writer": "S.S. Rajamouli",
     "cinematographer": "R. D. Rajasekhar",
     "music": "M. M. Keeravani",
-    "duration_minutes": 101
+    "duration_minutes": 101,
+    "release_date": "Aug 28, 2017"
   },
   {
     "movie_id": 348,
@@ -11998,7 +12282,8 @@ const MOVIES = [
     "writer": "Prashanth Neel",
     "cinematographer": "Bhuvan Gowda",
     "music": "Ravi Basrur",
-    "duration_minutes": 168
+    "duration_minutes": 168,
+    "release_date": "Jun 18, 2022"
   },
   {
     "movie_id": 349,
@@ -12040,7 +12325,8 @@ const MOVIES = [
     "writer": "James Mangold",
     "cinematographer": "John Mathieson",
     "music": "Marco Beltrami",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "Sep 05, 2017"
   },
   {
     "movie_id": 350,
@@ -12082,7 +12368,8 @@ const MOVIES = [
     "writer": "Tim Miller",
     "cinematographer": "Ken Seng",
     "music": "Junkie XL",
-    "duration_minutes": 132
+    "duration_minutes": 132,
+    "release_date": "Mar 11, 2016"
   },
   {
     "movie_id": 351,
@@ -12122,7 +12409,8 @@ const MOVIES = [
     "writer": "James Cameron",
     "cinematographer": "Russell Carpenter",
     "music": "James Horner",
-    "duration_minutes": 194
+    "duration_minutes": 194,
+    "release_date": "May 21, 1997"
   },
   {
     "movie_id": 352,
@@ -12162,7 +12450,8 @@ const MOVIES = [
     "writer": "Lana Wachowski",
     "cinematographer": "Bill Pope",
     "music": "Don Davis",
-    "duration_minutes": 94
+    "duration_minutes": 94,
+    "release_date": "Nov 23, 2003"
   },
   {
     "movie_id": 353,
@@ -12204,7 +12493,8 @@ const MOVIES = [
     "writer": "S.S. Rajamouli",
     "cinematographer": "K.K. Senthil Kumar",
     "music": "M.M. Keeravani",
-    "duration_minutes": 187
+    "duration_minutes": 187,
+    "release_date": "Mar 25, 2022"
   },
   {
     "movie_id": 354,
@@ -12246,7 +12536,8 @@ const MOVIES = [
     "writer": "Sukumar",
     "cinematographer": "Girish Gangadharan",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 136
+    "duration_minutes": 136,
+    "release_date": "Mar 07, 2021"
   },
   {
     "movie_id": 355,
@@ -12289,7 +12580,8 @@ const MOVIES = [
     "writer": "Chris Buck",
     "cinematographer": "Animated",
     "music": "Christophe Beck",
-    "duration_minutes": 115
+    "duration_minutes": 115,
+    "release_date": "Aug 16, 2013"
   },
   {
     "movie_id": 356,
@@ -12331,7 +12623,8 @@ const MOVIES = [
     "writer": "Christopher McQuarrie",
     "cinematographer": "Rob Hardy",
     "music": "Lorne Balfe",
-    "duration_minutes": 155
+    "duration_minutes": 155,
+    "release_date": "Feb 14, 2018"
   },
   {
     "movie_id": 357,
@@ -12371,7 +12664,8 @@ const MOVIES = [
     "writer": "James Wan",
     "cinematographer": "Stephen F. Windon",
     "music": "Brian Tyler",
-    "duration_minutes": 107
+    "duration_minutes": 107,
+    "release_date": "Dec 16, 2015"
   },
   {
     "movie_id": 358,
@@ -12411,7 +12705,8 @@ const MOVIES = [
     "writer": "Anthony Russo",
     "cinematographer": "Trent Opaloch",
     "music": "Henry Jackman",
-    "duration_minutes": 99
+    "duration_minutes": 99,
+    "release_date": "Oct 14, 2016"
   },
   {
     "movie_id": 359,
@@ -12453,7 +12748,8 @@ const MOVIES = [
     "writer": "Taika Waititi",
     "cinematographer": "Javier Aguirresarobe",
     "music": "Mark Mothersbaugh",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Oct 14, 2017"
   },
   {
     "movie_id": 360,
@@ -12495,7 +12791,8 @@ const MOVIES = [
     "writer": "Sam Mendes",
     "cinematographer": "Roger Deakins",
     "music": "Thomas Newman",
-    "duration_minutes": 104
+    "duration_minutes": 104,
+    "release_date": "Aug 08, 2012"
   },
   {
     "movie_id": 361,
@@ -12538,7 +12835,8 @@ const MOVIES = [
     "writer": "Andrew Adamson",
     "cinematographer": "Animated",
     "music": "Harry Gregson-Williams",
-    "duration_minutes": 116
+    "duration_minutes": 116,
+    "release_date": "Jul 23, 2001"
   },
   {
     "movie_id": 362,
@@ -12581,7 +12879,8 @@ const MOVIES = [
     "writer": "Mark Osborne",
     "cinematographer": "Animated",
     "music": "Hans Zimmer",
-    "duration_minutes": 92
+    "duration_minutes": 92,
+    "release_date": "Dec 16, 2008"
   },
   {
     "movie_id": 363,
@@ -12623,7 +12922,8 @@ const MOVIES = [
     "writer": "Gayatri",
     "cinematographer": "Rajeev Ravi",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Jan 05, 2017"
   },
   {
     "movie_id": 364,
@@ -12665,7 +12965,8 @@ const MOVIES = [
     "writer": "Chidambaram",
     "cinematographer": "Girish Gangadharan",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 124
+    "duration_minutes": 124,
+    "release_date": "Feb 22, 2024"
   },
   {
     "movie_id": 365,
@@ -12707,7 +13008,8 @@ const MOVIES = [
     "writer": "Scott Derrickson",
     "cinematographer": "Ben Davis",
     "music": "Michael Giacchino",
-    "duration_minutes": 156
+    "duration_minutes": 156,
+    "release_date": "Jul 19, 2016"
   },
   {
     "movie_id": 367,
@@ -12749,7 +13051,8 @@ const MOVIES = [
     "writer": "Martin Campbell",
     "cinematographer": "Phil M\u00e9heux",
     "music": "David Arnold",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "Nov 27, 2006"
   },
   {
     "movie_id": 369,
@@ -12791,7 +13094,8 @@ const MOVIES = [
     "writer": "K.V. Anand",
     "cinematographer": "Manoj Paramahamsa",
     "music": "Harris Jayaraj",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Jun 18, 2009"
   },
   {
     "movie_id": 370,
@@ -12831,7 +13135,8 @@ const MOVIES = [
     "writer": "Marc Webb",
     "cinematographer": "John Schwartzman",
     "music": "James Horner",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "May 09, 2012"
   },
   {
     "movie_id": 371,
@@ -12873,7 +13178,8 @@ const MOVIES = [
     "writer": "Sam Raimi",
     "cinematographer": "Don Burgess",
     "music": "Danny Elfman",
-    "duration_minutes": 94
+    "duration_minutes": 94,
+    "release_date": "Mar 27, 2002"
   },
   {
     "movie_id": 373,
@@ -12916,7 +13222,8 @@ const MOVIES = [
     "writer": "Pete Docter",
     "cinematographer": "Animated",
     "music": "Randy Newman",
-    "duration_minutes": 139
+    "duration_minutes": 139,
+    "release_date": "Jan 17, 2001"
   },
   {
     "movie_id": 374,
@@ -12957,7 +13264,8 @@ const MOVIES = [
     "writer": "Sidney Lumet",
     "cinematographer": "Boris Kaufman",
     "music": "Kenyon Hopkins",
-    "duration_minutes": 135
+    "duration_minutes": 135,
+    "release_date": "Jan 17, 1957"
   },
   {
     "movie_id": 375,
@@ -12998,7 +13306,8 @@ const MOVIES = [
     "writer": "Francis Ford Coppola",
     "cinematographer": "Gordon Willis",
     "music": "Nino Rota",
-    "duration_minutes": 129
+    "duration_minutes": 129,
+    "release_date": "Feb 18, 1974"
   },
   {
     "movie_id": 377,
@@ -13040,7 +13349,8 @@ const MOVIES = [
     "writer": "Madhu C. Narayanan",
     "cinematographer": "Girish Gangadharan",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "Jul 15, 2019"
   },
   {
     "movie_id": 378,
@@ -13084,7 +13394,8 @@ const MOVIES = [
     "writer": "Dan Gilroy",
     "cinematographer": "Robert Elswit",
     "music": "James Newton Howard",
-    "duration_minutes": 138
+    "duration_minutes": 138,
+    "release_date": "Sep 21, 2014"
   },
   {
     "movie_id": 379,
@@ -13126,7 +13437,8 @@ const MOVIES = [
     "writer": "Nag Ashwin",
     "cinematographer": "R. D. Rajasekhar",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 123
+    "duration_minutes": 123,
+    "release_date": "Jun 27, 2024"
   },
   {
     "movie_id": 380,
@@ -13146,8 +13458,8 @@ const MOVIES = [
     "director": "Jithu Madhavan",
     "cast": [
       "Fahadh Faasil",
-      "Hipzster",
-      "Mithun Jai Shankar"
+      "Sajin Gopu",
+      "Mansoor Ali Khan"
     ],
     "trailer_yt_id": "OsMqr3556F8",
     "keywords": "Action, Comedy",
@@ -13166,7 +13478,8 @@ const MOVIES = [
     "writer": "Jithu Madhavan",
     "cinematographer": "Girish Gangadharan",
     "music": "Anirudh Ravichander",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Apr 11, 2024"
   },
   {
     "movie_id": 381,
@@ -13207,7 +13520,8 @@ const MOVIES = [
     "writer": "Akira Kurosawa",
     "cinematographer": "Asakazu Nakai",
     "music": "Fumio Hayasaka",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Dec 04, 1954"
   },
   {
     "movie_id": 382,
@@ -13250,7 +13564,8 @@ const MOVIES = [
     "writer": "Alfred Hitchcock",
     "cinematographer": "John L. Russell",
     "music": "Bernard Herrmann",
-    "duration_minutes": 117
+    "duration_minutes": 117,
+    "release_date": "Apr 12, 1960"
   },
   {
     "movie_id": 383,
@@ -13291,7 +13606,8 @@ const MOVIES = [
     "writer": "Stanley Kubrick",
     "cinematographer": "Geoffrey Unsworth",
     "music": "Various (Strauss, Ligeti)",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Jul 03, 1968"
   },
   {
     "movie_id": 384,
@@ -13332,7 +13648,8 @@ const MOVIES = [
     "writer": "Stanley Kubrick",
     "cinematographer": "John Alcott",
     "music": "Wendy Carlos",
-    "duration_minutes": 112
+    "duration_minutes": 112,
+    "release_date": "Oct 14, 1980"
   },
   {
     "movie_id": 385,
@@ -13373,7 +13690,8 @@ const MOVIES = [
     "writer": "John G. Avildsen",
     "cinematographer": "James Crabe",
     "music": "Bill Conti",
-    "duration_minutes": 112
+    "duration_minutes": 112,
+    "release_date": "Jan 05, 1976"
   },
   {
     "movie_id": 386,
@@ -13416,7 +13734,8 @@ const MOVIES = [
     "writer": "Steven Spielberg",
     "cinematographer": "Bill Butler",
     "music": "John Williams",
-    "duration_minutes": 109
+    "duration_minutes": 109,
+    "release_date": "Sep 09, 1975"
   },
   {
     "movie_id": 387,
@@ -13459,7 +13778,8 @@ const MOVIES = [
     "writer": "Mike Newell",
     "cinematographer": "Roger Pratt",
     "music": "Patrick Doyle",
-    "duration_minutes": 150
+    "duration_minutes": 150,
+    "release_date": "Mar 15, 2005"
   },
   {
     "movie_id": 388,
@@ -13499,7 +13819,8 @@ const MOVIES = [
     "writer": "Steven Spielberg",
     "cinematographer": "Douglas Slocombe",
     "music": "John Williams",
-    "duration_minutes": 102
+    "duration_minutes": 102,
+    "release_date": "Nov 07, 1989"
   },
   {
     "movie_id": 389,
@@ -13541,7 +13862,8 @@ const MOVIES = [
     "writer": "Sam Raimi",
     "cinematographer": "Bill Pope",
     "music": "Christopher Young",
-    "duration_minutes": 147
+    "duration_minutes": 147,
+    "release_date": "Apr 28, 2007"
   },
   {
     "movie_id": 390,
@@ -13584,7 +13906,8 @@ const MOVIES = [
     "writer": "Alphonse Puthren",
     "cinematographer": "Anend C. Chandran",
     "music": "Rajesh Murugesan",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Aug 28, 2015"
   },
   {
     "movie_id": 391,
@@ -13626,7 +13949,8 @@ const MOVIES = [
     "writer": "Jeethu Joseph",
     "cinematographer": "Rathnavelu",
     "music": "S. Thaman",
-    "duration_minutes": 145
+    "duration_minutes": 145,
+    "release_date": "Jun 10, 2013"
   },
   {
     "movie_id": 392,
@@ -13668,7 +13992,8 @@ const MOVIES = [
     "writer": "Prithviraj Sukumaran",
     "cinematographer": "Rajeev Ravi",
     "music": "Devi Sri Prasad",
-    "duration_minutes": 154
+    "duration_minutes": 154,
+    "release_date": "Oct 18, 2019"
   },
   {
     "movie_id": 393,
@@ -13708,7 +14033,8 @@ const MOVIES = [
     "writer": "Nag Ashwin",
     "cinematographer": "R. D. Rajasekhar",
     "music": "M. M. Keeravani",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Sep 13, 2018"
   },
   {
     "movie_id": 394,
@@ -13748,7 +14074,8 @@ const MOVIES = [
     "writer": "Madonne Ashwin",
     "cinematographer": "Girish Gangadharan",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 140
+    "duration_minutes": 140,
+    "release_date": "Jan 21, 2021"
   },
   {
     "movie_id": 395,
@@ -13790,7 +14117,8 @@ const MOVIES = [
     "writer": "Vetrimaaran",
     "cinematographer": "Girish Gangadharan",
     "music": "A. R. Rahman",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Jan 01, 2023"
   },
   {
     "movie_id": 396,
@@ -13812,7 +14140,7 @@ const MOVIES = [
     "cast": [
       "Dhanush",
       "Taapsee Pannu",
-      "Jayabalan"
+      "V.I.S. Jayapalan"
     ],
     "trailer_yt_id": "GDA-PZjqjeA",
     "keywords": "Action, Drama, Romance",
@@ -13830,9 +14158,10 @@ const MOVIES = [
       "Romance"
     ],
     "writer": "Vetrimaaran",
-    "cinematographer": "Rathnavelu",
-    "music": "Santhosh Narayanan",
-    "duration_minutes": 106
+    "cinematographer": "Velraj",
+    "music": "G. V. Prakash Kumar",
+    "duration_minutes": 155,
+    "release_date": "Jan 14, 2011"
   },
   {
     "movie_id": 397,
@@ -13872,7 +14201,8 @@ const MOVIES = [
     "writer": "Anwar Rasheed",
     "cinematographer": "Nirav Shah",
     "music": "Harris Jayaraj",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Dec 24, 2012"
   },
   {
     "movie_id": 398,
@@ -13915,7 +14245,8 @@ const MOVIES = [
     "writer": "Swaroop Rsj",
     "cinematographer": "Srinivas Reddy",
     "music": "Mark K. Robin",
-    "duration_minutes": 150
+    "duration_minutes": 150,
+    "release_date": "May 25, 2019"
   },
   {
     "movie_id": 399,
@@ -13954,7 +14285,8 @@ const MOVIES = [
     "writer": "Manu Warrier",
     "cinematographer": "Subin Sudheer",
     "music": "Jakes Bejoy",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Oct 22, 2021"
   },
   {
     "movie_id": 400,
@@ -13994,7 +14326,8 @@ const MOVIES = [
     "writer": "Karthik Subbaraj",
     "cinematographer": "Santosh Sivan",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 137
+    "duration_minutes": 137,
+    "release_date": "May 01, 2016"
   },
   {
     "movie_id": 401,
@@ -14033,7 +14366,8 @@ const MOVIES = [
     "writer": "Venkatesh Maha",
     "cinematographer": "Ranga Kumar",
     "music": "Sweekar Agasthi",
-    "duration_minutes": 121
+    "duration_minutes": 121,
+    "release_date": "Mar 23, 2018"
   },
   {
     "movie_id": 402,
@@ -14072,7 +14406,8 @@ const MOVIES = [
     "writer": "Shankar",
     "cinematographer": "Manoj Paramahamsa",
     "music": "Yuvan Shankar Raja",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "May 19, 2024"
   },
   {
     "movie_id": 403,
@@ -14112,7 +14447,8 @@ const MOVIES = [
     "writer": "Taylor Hackford",
     "cinematographer": "Donald Thorin",
     "music": "Jack Nitzsche",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "Aug 12, 1982"
   },
   {
     "movie_id": 404,
@@ -14155,7 +14491,8 @@ const MOVIES = [
     "writer": "Mani Ratnam",
     "cinematographer": "Santosh Sivan",
     "music": "A. R. Rahman",
-    "duration_minutes": 159
+    "duration_minutes": 159,
+    "release_date": "Jan 05, 1992"
   },
   {
     "movie_id": 405,
@@ -14196,7 +14533,8 @@ const MOVIES = [
     "writer": "Mani Ratnam",
     "cinematographer": "Santosh Sivan",
     "music": "A. R. Rahman",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Sep 05, 1997"
   },
   {
     "movie_id": 406,
@@ -14239,7 +14577,8 @@ const MOVIES = [
     "writer": "Mani Ratnam",
     "cinematographer": "P. C. Sriram",
     "music": "A. R. Rahman",
-    "duration_minutes": 107
+    "duration_minutes": 107,
+    "release_date": "Jan 21, 2015"
   },
   {
     "movie_id": 407,
@@ -14282,7 +14621,8 @@ const MOVIES = [
     "writer": "Mani Ratnam",
     "cinematographer": "Ravi Varman",
     "music": "A. R. Rahman",
-    "duration_minutes": 103
+    "duration_minutes": 103,
+    "release_date": "Nov 07, 2002"
   },
   {
     "movie_id": 408,
@@ -14325,7 +14665,8 @@ const MOVIES = [
     "writer": "Gautham Vasudev Menon",
     "cinematographer": "Ravi K. Chandran",
     "music": "Harris Jayaraj",
-    "duration_minutes": 169
+    "duration_minutes": 169,
+    "release_date": "May 09, 2008"
   },
   {
     "movie_id": 409,
@@ -14368,7 +14709,8 @@ const MOVIES = [
     "writer": "Gautham Vasudev Menon",
     "cinematographer": "Ravi K. Chandran",
     "music": "Harris Jayaraj",
-    "duration_minutes": 131
+    "duration_minutes": 150,
+    "release_date": "Aug 01, 2003"
   },
   {
     "movie_id": 410,
@@ -14409,9 +14751,10 @@ const MOVIES = [
       "underrated"
     ],
     "writer": "Gautham Vasudev Menon",
-    "cinematographer": "Sanu Varghese",
+    "cinematographer": "Ravi Varman",
     "music": "Harris Jayaraj",
-    "duration_minutes": 151
+    "duration_minutes": 176,
+    "release_date": "Aug 25, 2006"
   },
   {
     "movie_id": 411,
@@ -14454,7 +14797,8 @@ const MOVIES = [
     "writer": "Gautham Vasudev Menon",
     "cinematographer": "Ravi K. Chandran",
     "music": "Harris Jayaraj",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "Jul 23, 2001"
   },
   {
     "movie_id": 412,
@@ -14497,7 +14841,8 @@ const MOVIES = [
     "writer": "Quentin Tarantino",
     "cinematographer": "Robert Richardson",
     "music": "The RZA",
-    "duration_minutes": 129
+    "duration_minutes": 129,
+    "release_date": "Oct 18, 2003"
   },
   {
     "movie_id": 413,
@@ -14540,7 +14885,8 @@ const MOVIES = [
     "writer": "Frank Darabont",
     "cinematographer": "David Tattersall",
     "music": "Thomas Newman",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "Apr 28, 1999"
   },
   {
     "movie_id": 416,
@@ -14581,7 +14927,8 @@ const MOVIES = [
     "writer": "Gus Van Sant",
     "cinematographer": "Jean-Yves Escoffier",
     "music": "Danny Elfman",
-    "duration_minutes": 113
+    "duration_minutes": 113,
+    "release_date": "Jan 05, 1997"
   },
   {
     "movie_id": 417,
@@ -14624,7 +14971,8 @@ const MOVIES = [
     "writer": "Ameer Sultan",
     "cinematographer": "M. Sukumar",
     "music": "Yuvan Shankar Raja",
-    "duration_minutes": 121
+    "duration_minutes": 121,
+    "release_date": "Jun 18, 2007"
   },
   {
     "movie_id": 418,
@@ -14667,52 +15015,56 @@ const MOVIES = [
     "writer": "Mani Ratnam",
     "cinematographer": "P. C. Sriram",
     "music": "A. R. Rahman",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "Mar 03, 2000"
   },
   {
     "movie_id": 419,
     "title": "Polladhavan",
-    "year": 2024,
+    "year": 2007,
     "genre": [
-      "Drama",
-      "Action"
+      "Action",
+      "Crime",
+      "Drama"
     ],
     "poster": "https://image.tmdb.org/t/p/w500/1RYVHriU4DP6awmb62Qu6dJ3YxD.jpg",
     "experience_type": "intense",
-    "rating_percent": 77,
+    "rating_percent": 82,
     "popularity_score": 0.8,
     "age_limit": 13,
     "synopsis": "Prabhu is dejected when he learns that his bike has been stolen. He decides to find the people who stole the bike, but lands in trouble when he realises that his bike has been used to transport drugs.",
-    "quote": "Wit... -- If life were as simple as Polladhavan, we'd all have better theme music and fewer taxes. Embrace the dejected within.",
+    "quote": "Reality... -- Polladhavan is the proof that one decision, one moment, can change the orbit of an entire life. Embrace the bike within.",
     "director": "Vetrimaaran",
     "cast": [
       "Dhanush",
-      "Kishore",
-      "Divya Spandana"
+      "Divya Spandana",
+      "Daniel Balaji"
     ],
     "trailer_yt_id": "3GXCRENTVCY",
-    "keywords": "",
+    "keywords": "Action, Crime, Drama",
     "trailer": "3GXCRENTVCY",
     "ottPlatforms": [
       {
-        "name": "Netflix",
-        "url": "https://www.netflix.com/search?q=Polladhavan",
-        "icon": "https://www.google.com/s2/favicons?sz=64&domain=netflix.com"
+        "name": "Amazon Prime Video",
+        "url": "https://www.primevideo.com/search/ref=atv_nb_sr?phrase=Polladhavan",
+        "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
     ],
     "tags": [
-      "Drama",
-      "cult"
+      "Action",
+      "Crime",
+      "Drama"
     ],
     "writer": "Vetrimaaran",
-    "cinematographer": "Arvind Krishna",
+    "cinematographer": "Velraj",
     "music": "G.V. Prakash Kumar",
-    "duration_minutes": 143
+    "duration_minutes": 160,
+    "release_date": "Nov 08, 2007"
   },
   {
     "movie_id": 420,
     "title": "Aaranya Kaandam",
-    "year": 2010,
+    "year": 2011,
     "genre": [
       "Action",
       "Comedy",
@@ -14747,9 +15099,10 @@ const MOVIES = [
       "Crime"
     ],
     "writer": "Thiagarajan Kumararaja",
-    "cinematographer": "Santosh Sivan",
-    "music": "Anirudh Ravichander",
-    "duration_minutes": 117
+    "cinematographer": "P.S. Vinod",
+    "music": "Yuvan Shankar Raja",
+    "duration_minutes": 126,
+    "release_date": "Jun 10, 2011"
   },
   {
     "movie_id": 421,
@@ -14792,47 +15145,8 @@ const MOVIES = [
     "writer": "Nalan Kumarasamy",
     "cinematographer": "P. V. Shankar",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 145
-  },
-  {
-    "movie_id": 422,
-    "title": "Pizza Movie",
-    "year": 2024,
-    "genre": [
-      "Drama",
-      "Action"
-    ],
-    "poster": "https://live.metahub.space/poster/small/tt37209937/img",
-    "experience_type": "intense",
-    "rating_percent": 80,
-    "popularity_score": 0.8,
-    "age_limit": 13,
-    "synopsis": "A shy college student and his reckless roommate set out on a simple mission to grab pizza, but after a strange dose of a mind-bending experimental drug, they're thrust into a chaotic night of absurd encounters, wild hallucinations, and unexpected revelations that could change their lives forever.",
-    "quote": "Perspective... -- In the end, Pizza Movie reminds us that we are not defined by our circumstances, but by our response to them. Embrace the simple within.",
-    "director": "Nick Kocher",
-    "cast": [
-      "Gaten Matarazzo",
-      "Sean Giambrone",
-      "Lulu Wilson"
-    ],
-    "trailer_yt_id": "fOzF87PFGnw",
-    "keywords": "",
-    "trailer": "fOzF87PFGnw",
-    "ottPlatforms": [
-      {
-        "name": "Netflix",
-        "url": "https://www.netflix.com/search?q=Pizza%20Movie",
-        "icon": "https://www.google.com/s2/favicons?sz=64&domain=netflix.com"
-      }
-    ],
-    "tags": [
-      "Drama",
-      "underrated"
-    ],
-    "writer": "Nick Kocher",
-    "cinematographer": "Sujith Sarang",
-    "music": "Sam C.S.",
-    "duration_minutes": 101
+    "duration_minutes": 145,
+    "release_date": "May 05, 2013"
   },
   {
     "movie_id": 423,
@@ -14875,7 +15189,8 @@ const MOVIES = [
     "writer": "Madonne Ashwin",
     "cinematographer": "Vidhu Ayyanna",
     "music": "Bharath Sankar",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Feb 10, 2023"
   },
   {
     "movie_id": 424,
@@ -14913,7 +15228,8 @@ const MOVIES = [
     "writer": "Todd Phillips",
     "cinematographer": "Lawrence Sher",
     "music": "Christophe Beck",
-    "duration_minutes": 145
+    "duration_minutes": 145,
+    "release_date": "Feb 18, 2009"
   },
   {
     "movie_id": 425,
@@ -14956,7 +15272,8 @@ const MOVIES = [
     "writer": "Mary Harron",
     "cinematographer": "Andrzej Seku\u0142a",
     "music": "John Cale",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Apr 28, 2000"
   },
   {
     "movie_id": 426,
@@ -14998,7 +15315,8 @@ const MOVIES = [
     "writer": "Shawn Levy",
     "cinematographer": "George Richmond",
     "music": "Rob Simonsen",
-    "duration_minutes": 108
+    "duration_minutes": 108,
+    "release_date": "May 08, 2024"
   },
   {
     "movie_id": 427,
@@ -15040,7 +15358,8 @@ const MOVIES = [
     "writer": "Lokesh Kanagaraj",
     "cinematographer": "Tirru",
     "music": "Anirudh Ravichander",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Jun 24, 2025"
   },
   {
     "movie_id": 428,
@@ -15083,7 +15402,8 @@ const MOVIES = [
     "writer": "Sergio Leone",
     "cinematographer": "Tonino Delli Colli",
     "music": "Ennio Morricone",
-    "duration_minutes": 130
+    "duration_minutes": 130,
+    "release_date": "May 01, 1966"
   },
   {
     "movie_id": 429,
@@ -15126,7 +15446,8 @@ const MOVIES = [
     "writer": "Kelsey Mann",
     "cinematographer": "Animated",
     "music": "Andrea Datzman",
-    "duration_minutes": 104
+    "duration_minutes": 104,
+    "release_date": "Aug 12, 2024"
   },
   {
     "movie_id": 430,
@@ -15167,7 +15488,8 @@ const MOVIES = [
     "cinematographer": "Venkatesh S.",
     "music": "Yuvan Shankar Raja",
     "duration_minutes": 179,
-    "overview": "Gandhi, a former field agent for the Special Anti-Terrorist Squad (SATS), is forced out of retirement for one final mission that pits him against a dangerous enemy from his past, leading to a series of high-stakes confrontations."
+    "overview": "Gandhi, a former field agent for the Special Anti-Terrorist Squad (SATS), is forced out of retirement for one final mission that pits him against a dangerous enemy from his past, leading to a series of high-stakes confrontations.",
+    "release_date": "Sep 05, 2024"
   },
   {
     "movie_id": 431,
@@ -15209,7 +15531,8 @@ const MOVIES = [
     "writer": "Rajkumar Periasamy",
     "cinematographer": "R. Velraj",
     "music": "G.V. Prakash Kumar",
-    "duration_minutes": 169
+    "duration_minutes": 169,
+    "release_date": "Oct 31, 2024"
   },
   {
     "movie_id": 432,
@@ -15251,7 +15574,8 @@ const MOVIES = [
     "writer": "James Gunn",
     "cinematographer": "Henry Braham",
     "music": "John Murphy",
-    "duration_minutes": 155
+    "duration_minutes": 155,
+    "release_date": "May 19, 2025"
   },
   {
     "movie_id": 433,
@@ -15293,7 +15617,8 @@ const MOVIES = [
     "writer": "T.J. Gnanavel",
     "cinematographer": "S. R. Kathir",
     "music": "Anirudh Ravichander",
-    "duration_minutes": 163
+    "duration_minutes": 163,
+    "release_date": "Oct 10, 2024"
   },
   {
     "movie_id": 434,
@@ -15335,7 +15660,8 @@ const MOVIES = [
     "writer": "C. Prem Kumar",
     "cinematographer": "Harshavardhan Rameshwar",
     "music": "Govind Vasantha",
-    "duration_minutes": 177
+    "duration_minutes": 177,
+    "release_date": "Sep 16, 2024"
   },
   {
     "movie_id": 435,
@@ -15374,10 +15700,11 @@ const MOVIES = [
       "Musical",
       "Romance"
     ],
-    "writer": "Jon M. Chu",
+    "writer": "Winnie Holzman",
     "cinematographer": "Alice Brooks",
-    "music": "John Powell",
-    "duration_minutes": 143
+    "music": "Stephen Schwartz",
+    "duration_minutes": 160,
+    "release_date": "Nov 22, 2024"
   },
   {
     "movie_id": 436,
@@ -15416,10 +15743,11 @@ const MOVIES = [
       "Adventure",
       "Drama"
     ],
-    "writer": "Ridley Scott",
+    "writer": "David Scarpa",
     "cinematographer": "John Mathieson",
     "music": "Harry Gregson-Williams",
-    "duration_minutes": 104
+    "duration_minutes": 148,
+    "release_date": "Nov 15, 2024"
   },
   {
     "movie_id": 437,
@@ -15461,7 +15789,8 @@ const MOVIES = [
     "writer": "Mani Ratnam",
     "cinematographer": "Rathnavelu",
     "music": "A. R. Rahman",
-    "duration_minutes": 92
+    "duration_minutes": 92,
+    "release_date": "Aug 24, 2025"
   },
   {
     "movie_id": 438,
@@ -15501,7 +15830,8 @@ const MOVIES = [
     "writer": "Magizh Thirumeni",
     "cinematographer": "Om Prakash",
     "music": "Anirudh Ravichander",
-    "duration_minutes": 145
+    "duration_minutes": 145,
+    "release_date": "Aug 12, 2025"
   },
   {
     "movie_id": 439,
@@ -15544,7 +15874,8 @@ const MOVIES = [
     "writer": "Arun Matheswaran",
     "cinematographer": "Shreyaas Krishna",
     "music": "G.V. Prakash Kumar",
-    "duration_minutes": 157
+    "duration_minutes": 157,
+    "release_date": "Apr 03, 2024"
   },
   {
     "movie_id": 440,
@@ -15583,7 +15914,8 @@ const MOVIES = [
     "writer": "Mari Selvaraj",
     "cinematographer": "Theni Eswar",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 124
+    "duration_minutes": 132,
+    "release_date": "Aug 23, 2024"
   },
   {
     "movie_id": 441,
@@ -15625,7 +15957,8 @@ const MOVIES = [
     "writer": "Vetrimaaran",
     "cinematographer": "Manoj Paramahamsa",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 107
+    "duration_minutes": 107,
+    "release_date": "Feb 01, 2024"
   },
   {
     "movie_id": 442,
@@ -15665,9 +15998,10 @@ const MOVIES = [
       "Drama"
     ],
     "writer": "Dhanush",
-    "cinematographer": "Rajeev Ravi",
-    "music": "Ilaiyaraaja",
-    "duration_minutes": 142
+    "cinematographer": "Om Prakash",
+    "music": "A. R. Rahman",
+    "duration_minutes": 145,
+    "release_date": "Jul 26, 2024"
   },
   {
     "movie_id": 444,
@@ -15709,7 +16043,8 @@ const MOVIES = [
     "writer": "Bong Joon Ho",
     "cinematographer": "Darius Khondji",
     "music": "Jung Jae-il",
-    "duration_minutes": 139
+    "duration_minutes": 139,
+    "release_date": "Jul 21, 2025"
   },
   {
     "movie_id": 445,
@@ -15726,9 +16061,9 @@ const MOVIES = [
     "age_limit": 0,
     "synopsis": "Sachin's quest for love takes unexpected turns, creating a laughter-filled love triangle.",
     "quote": "Vibe... -- Premalu is a whisper in the wind, a reminder that the most beautiful things in life are often the ones we cannot catch. Embrace the Sachin within.",
-    "director": "Girish A.D.",
+    "director": "Girish A. D.",
     "cast": [
-      "Naslen",
+      "Naslen K. Gafoor",
       "Mamitha Baiju",
       "Shyam Mohan"
     ],
@@ -15750,7 +16085,8 @@ const MOVIES = [
     "writer": "Girish A.D.",
     "cinematographer": "Mukesh Muraleedharan",
     "music": "Vishnu Vijay",
-    "duration_minutes": 100
+    "duration_minutes": 100,
+    "release_date": "Feb 09, 2024"
   },
   {
     "movie_id": 446,
@@ -15793,7 +16129,8 @@ const MOVIES = [
     "writer": "Rahul Sadasivan",
     "cinematographer": "Shehnad Jalal",
     "music": "Christo Xavier",
-    "duration_minutes": 155
+    "duration_minutes": 139,
+    "release_date": "Feb 15, 2024"
   },
   {
     "movie_id": 447,
@@ -15835,7 +16172,8 @@ const MOVIES = [
     "writer": "Dean DeBlois",
     "cinematographer": "Bill Pope",
     "music": "John Powell",
-    "duration_minutes": 125
+    "duration_minutes": 125,
+    "release_date": "Jul 15, 2025"
   },
   {
     "movie_id": 454,
@@ -15876,7 +16214,8 @@ const MOVIES = [
     "writer": "Martin Scorsese",
     "cinematographer": "Michael Chapman",
     "music": "Bernard Herrmann",
-    "duration_minutes": 92
+    "duration_minutes": 92,
+    "release_date": "May 01, 1976"
   },
   {
     "movie_id": 455,
@@ -15919,7 +16258,8 @@ const MOVIES = [
     "writer": "Francis Ford Coppola",
     "cinematographer": "Vittorio Storaro",
     "music": "Carmine Coppola",
-    "duration_minutes": 124
+    "duration_minutes": 124,
+    "release_date": "May 09, 1979"
   },
   {
     "movie_id": 456,
@@ -15960,7 +16300,8 @@ const MOVIES = [
     "writer": "Stanley Kubrick",
     "cinematographer": "John Alcott",
     "music": "Walter Carlos",
-    "duration_minutes": 125
+    "duration_minutes": 125,
+    "release_date": "Oct 18, 1971"
   },
   {
     "movie_id": 457,
@@ -16003,7 +16344,8 @@ const MOVIES = [
     "writer": "Alfred Hitchcock",
     "cinematographer": "Robert Burks",
     "music": "Bernard Herrmann",
-    "duration_minutes": 127
+    "duration_minutes": 127,
+    "release_date": "Jan 25, 1958"
   },
   {
     "movie_id": 458,
@@ -16046,7 +16388,8 @@ const MOVIES = [
     "writer": "Bharathan",
     "cinematographer": "P. C. Sriram",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 91
+    "duration_minutes": 91,
+    "release_date": "Apr 16, 1992"
   },
   {
     "movie_id": 459,
@@ -16089,7 +16432,8 @@ const MOVIES = [
     "writer": "Fazil",
     "cinematographer": "W.B. Rajendrababu",
     "music": "M.G. Radhakrishnan",
-    "duration_minutes": 92
+    "duration_minutes": 92,
+    "release_date": "Feb 06, 1993"
   },
   {
     "movie_id": 460,
@@ -16129,7 +16473,8 @@ const MOVIES = [
     "writer": "Kadiri Venkata Reddy",
     "cinematographer": "Marcus Bartley",
     "music": "Ghantasala Venkateswara Rao",
-    "duration_minutes": 149
+    "duration_minutes": 149,
+    "release_date": "Nov 23, 1957"
   },
   {
     "movie_id": 461,
@@ -16168,7 +16513,8 @@ const MOVIES = [
     "writer": "J. Mahendran",
     "cinematographer": "Ashok Kumar",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "Feb 06, 1978"
   },
   {
     "movie_id": 462,
@@ -16211,7 +16557,8 @@ const MOVIES = [
     "writer": "Charles Chaplin",
     "cinematographer": "Karl Struss & Roland Totheroh",
     "music": "Meredith Willson",
-    "duration_minutes": 90
+    "duration_minutes": 90,
+    "release_date": "Feb 10, 1940"
   },
   {
     "movie_id": 463,
@@ -16252,7 +16599,8 @@ const MOVIES = [
     "writer": "Quentin Tarantino",
     "cinematographer": "Andrzej Seku\u0142a",
     "music": "Various (Reservoir Dogs OST)",
-    "duration_minutes": 152
+    "duration_minutes": 152,
+    "release_date": "Oct 14, 1992"
   },
   {
     "movie_id": 464,
@@ -16295,12 +16643,13 @@ const MOVIES = [
     "writer": "Stanley Donen",
     "cinematographer": "Harold Rosson",
     "music": "Nacio Herb Brown",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Jun 14, 1952"
   },
   {
     "movie_id": 465,
     "title": "16 Vayathinile",
-    "year": 2024,
+    "year": 1977,
     "genre": [
       "Drama",
       "Action"
@@ -16310,12 +16659,12 @@ const MOVIES = [
     "rating_percent": 80,
     "popularity_score": 0.8,
     "age_limit": 13,
-    "synopsis": "Sixteen-year-old Mayil is secretly loved by her handicapped cousin, Chappani, and the village rowdy, Parattai. But, she falls for a city doctor who takes advantage of her and deserts her. Gradually she realises how much Chappani loves her meanwhile, Parattai also eyeing for Mayil.",
+    "synopsis": "A rural drama about Mayil, a young woman caught between the innocent Chappani and the rowdy Parattai.",
     "quote": "Essence... -- What if the world in 16 Vayathinile is just a mirror of the questions we are too afraid to ask ourselves? Embrace the advantage within.",
     "director": "Bharathiraja",
     "cast": [
-      "Sridevi",
       "Kamal Haasan",
+      "Sridevi",
       "Rajinikanth"
     ],
     "trailer_yt_id": "cDgcvWNMEl4",
@@ -16335,7 +16684,8 @@ const MOVIES = [
     "writer": "Bharathiraja",
     "cinematographer": "Ashok Kumar",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Sep 15, 1977"
   },
   {
     "movie_id": 466,
@@ -16377,7 +16727,8 @@ const MOVIES = [
     "cinematographer": "Ashok Kumar",
     "music": "M.S. Viswanathan",
     "duration_minutes": 98,
-    "overview": "A complex relationship triangle forms between a young woman and two friends who fall in love with her. As jealousy and fate intervene, their lives take unexpected turns in this classic drama about love and sacrifice."
+    "overview": "A complex relationship triangle forms between a young woman and two friends who fall in love with her. As jealousy and fate intervene, their lives take unexpected turns in this classic drama about love and sacrifice.",
+    "release_date": "Jun 06, 1976"
   },
   {
     "movie_id": 468,
@@ -16420,7 +16771,8 @@ const MOVIES = [
     "writer": "Anand Ekarshi",
     "cinematographer": "Gibin Gopinath",
     "music": "Ranjin Raj",
-    "duration_minutes": 160
+    "duration_minutes": 160,
+    "release_date": "Jan 25, 2023"
   },
   {
     "movie_id": 469,
@@ -16463,7 +16815,8 @@ const MOVIES = [
     "writer": "Bryan Singer",
     "cinematographer": "Newton Thomas Sigel",
     "music": "John Ottman",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Jan 17, 1995"
   },
   {
     "movie_id": 470,
@@ -16502,7 +16855,8 @@ const MOVIES = [
     "writer": "M. Manikandan",
     "cinematographer": "Dinesh Krishnan",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 143
+    "duration_minutes": 143,
+    "release_date": "Jun 22, 2016"
   },
   {
     "movie_id": 471,
@@ -16544,7 +16898,8 @@ const MOVIES = [
     "writer": "Dinjith Ayyathan",
     "cinematographer": "Rajeev Ravi",
     "music": "Harris Jayaraj",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "Jan 01, 2024"
   },
   {
     "movie_id": 472,
@@ -16586,7 +16941,8 @@ const MOVIES = [
     "writer": "Danny Boyle",
     "cinematographer": "Anthony Dod Mantle",
     "music": "A.R. Rahman",
-    "duration_minutes": 95
+    "duration_minutes": 95,
+    "release_date": "Jan 05, 2008"
   },
   {
     "movie_id": 473,
@@ -16629,7 +16985,8 @@ const MOVIES = [
     "writer": "M. Night Shyamalan",
     "cinematographer": "Eduardo Serra",
     "music": "James Newton Howard",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Dec 20, 2000"
   },
   {
     "movie_id": 474,
@@ -16672,7 +17029,8 @@ const MOVIES = [
     "writer": "Ang Lee",
     "cinematographer": "Peter Pau",
     "music": "Tan Dun",
-    "duration_minutes": 92
+    "duration_minutes": 92,
+    "release_date": "May 05, 2000"
   },
   {
     "movie_id": 475,
@@ -16715,7 +17073,8 @@ const MOVIES = [
     "writer": "Ang Lee",
     "cinematographer": "Claudio Miranda",
     "music": "Mychael Danna",
-    "duration_minutes": 97
+    "duration_minutes": 97,
+    "release_date": "Jan 25, 2012"
   },
   {
     "movie_id": 476,
@@ -16757,7 +17116,8 @@ const MOVIES = [
     "writer": "Sasi",
     "cinematographer": "Rathnavelu",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 154
+    "duration_minutes": 154,
+    "release_date": "Jul 23, 2019"
   },
   {
     "movie_id": 477,
@@ -16799,7 +17159,8 @@ const MOVIES = [
     "writer": "Mari Selvaraj",
     "cinematographer": "P. C. Sreeram",
     "music": "Yuvan Shankar Raja",
-    "duration_minutes": 140
+    "duration_minutes": 140,
+    "release_date": "Feb 14, 2023"
   },
   {
     "movie_id": 478,
@@ -16841,7 +17202,8 @@ const MOVIES = [
     "writer": "Prasanth Varma",
     "cinematographer": "Chota K. Naidu",
     "music": "G.V. Prakash Kumar",
-    "duration_minutes": 125
+    "duration_minutes": 125,
+    "release_date": "Oct 05, 2024"
   },
   {
     "movie_id": 479,
@@ -16879,7 +17241,8 @@ const MOVIES = [
     "writer": "Christo Tomy",
     "cinematographer": "Santosh Sivan",
     "music": "Devi Sri Prasad",
-    "duration_minutes": 128
+    "duration_minutes": 128,
+    "release_date": "Feb 23, 2024"
   },
   {
     "movie_id": 480,
@@ -16918,7 +17281,8 @@ const MOVIES = [
     "writer": "P. S. Vinothraj",
     "cinematographer": "Vijay Karthik Kannan",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 129
+    "duration_minutes": 129,
+    "release_date": "Apr 17, 2024"
   },
   {
     "movie_id": 481,
@@ -16960,7 +17324,8 @@ const MOVIES = [
     "writer": "Venky Atluri",
     "cinematographer": "Girish Gangadharan",
     "music": "Devi Sri Prasad",
-    "duration_minutes": 118
+    "duration_minutes": 118,
+    "release_date": "Oct 31, 2024"
   },
   {
     "movie_id": 482,
@@ -17002,7 +17367,8 @@ const MOVIES = [
     "writer": "Hanu Raghavapudi",
     "cinematographer": "Manoj Paramahamsa",
     "music": "Harris Jayaraj",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "Jan 09, 2022"
   },
   {
     "movie_id": 483,
@@ -17043,7 +17409,8 @@ const MOVIES = [
     "writer": "Jeo Baby",
     "cinematographer": "R. Chandramouli",
     "music": "Mathews Pulickan",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "Apr 12, 2021"
   },
   {
     "movie_id": 484,
@@ -17085,7 +17452,8 @@ const MOVIES = [
     "writer": "Lijo Jose Pellissery",
     "cinematographer": "R. D. Rajasekhar",
     "music": "Harris Jayaraj",
-    "duration_minutes": 133
+    "duration_minutes": 133,
+    "release_date": "Feb 02, 2017"
   },
   {
     "movie_id": 485,
@@ -17124,7 +17492,8 @@ const MOVIES = [
     "writer": "Sandeep Sunkad",
     "cinematographer": "R. D. Rajasekhar",
     "music": "S. Thaman",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Dec 01, 2024"
   },
   {
     "movie_id": 487,
@@ -17166,7 +17535,8 @@ const MOVIES = [
     "writer": "S.S. Rajamouli",
     "cinematographer": "Manoj Paramahamsa",
     "music": "Harris Jayaraj",
-    "duration_minutes": 123
+    "duration_minutes": 123,
+    "release_date": "Jan 05, 2009"
   },
   {
     "movie_id": 488,
@@ -17205,7 +17575,8 @@ const MOVIES = [
     "writer": "Hemanth M. Rao",
     "cinematographer": "Nirav Shah",
     "music": "S. Thaman",
-    "duration_minutes": 98
+    "duration_minutes": 98,
+    "release_date": "Dec 12, 2024"
   },
   {
     "movie_id": 489,
@@ -17245,7 +17616,8 @@ const MOVIES = [
     "writer": "Raj B Shetty",
     "cinematographer": "Praveen Shriyan",
     "music": "Charan Raj",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Feb 25, 2024"
   },
   {
     "movie_id": 490,
@@ -17285,7 +17657,8 @@ const MOVIES = [
     "writer": "Julio Medem",
     "cinematographer": "Javier Aguirresarobe",
     "music": "Alberto Iglesias",
-    "duration_minutes": 142
+    "duration_minutes": 142,
+    "release_date": "May 25, 2001"
   },
   {
     "movie_id": 491,
@@ -17327,7 +17700,8 @@ const MOVIES = [
     "writer": "M. Sasikumar",
     "cinematographer": "Manoj Paramahamsa",
     "music": "Anirudh Ravichander",
-    "duration_minutes": 128
+    "duration_minutes": 128,
+    "release_date": "Jun 18, 2008"
   },
   {
     "movie_id": 492,
@@ -17367,7 +17741,8 @@ const MOVIES = [
     "writer": "Dileesh Pothan",
     "cinematographer": "P. C. Sreeram",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Apr 16, 2021"
   },
   {
     "movie_id": 493,
@@ -17410,7 +17785,8 @@ const MOVIES = [
     "writer": "Denis Villeneuve",
     "cinematographer": "Andr\u00e9 Turpin",
     "music": "Gr\u00e9goire Hetzel",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Sep 17, 2010"
   },
   {
     "movie_id": 494,
@@ -17453,7 +17829,8 @@ const MOVIES = [
     "writer": "Michael Spierig",
     "cinematographer": "Ben Nott",
     "music": "Peter Spierig",
-    "duration_minutes": 148
+    "duration_minutes": 148,
+    "release_date": "May 21, 2014"
   },
   {
     "movie_id": 495,
@@ -17496,7 +17873,8 @@ const MOVIES = [
     "writer": "Alfonso Cuar\u00f3n",
     "cinematographer": "Emmanuel Lubezki",
     "music": "John Tavener",
-    "duration_minutes": 118
+    "duration_minutes": 118,
+    "release_date": "Jul 07, 2006"
   },
   {
     "movie_id": 496,
@@ -17539,7 +17917,8 @@ const MOVIES = [
     "writer": "James Ward Byrkit",
     "cinematographer": "Nic Sadler",
     "music": "Kristin \u00d8hrn Dyrud",
-    "duration_minutes": 155
+    "duration_minutes": 155,
+    "release_date": "Mar 23, 2013"
   },
   {
     "movie_id": 497,
@@ -17581,7 +17960,8 @@ const MOVIES = [
     "writer": "David Leitch",
     "cinematographer": "George Burt",
     "music": "Dominic Lewis",
-    "duration_minutes": 111
+    "duration_minutes": 111,
+    "release_date": "Sep 03, 2024"
   },
   {
     "movie_id": 498,
@@ -17623,7 +18003,8 @@ const MOVIES = [
     "writer": "Andrei Tarkovsky",
     "cinematographer": "Aleksandr Knyazhinsky",
     "music": "Eduard Artemyev",
-    "duration_minutes": 112
+    "duration_minutes": 112,
+    "release_date": "Feb 14, 1979"
   },
   {
     "movie_id": 499,
@@ -17666,7 +18047,8 @@ const MOVIES = [
     "writer": "David Fincher",
     "cinematographer": "Jeff Cronenweth",
     "music": "Trent Reznor & Atticus Ross",
-    "duration_minutes": 160
+    "duration_minutes": 160,
+    "release_date": "Sep 05, 2014"
   },
   {
     "movie_id": 500,
@@ -17707,7 +18089,8 @@ const MOVIES = [
     "writer": "Emma Seligman",
     "cinematographer": "Maria Rusche",
     "music": "Ariel Marx",
-    "duration_minutes": 100
+    "duration_minutes": 100,
+    "release_date": "Nov 23, 2020"
   },
   {
     "movie_id": 501,
@@ -17746,7 +18129,8 @@ const MOVIES = [
     "writer": "Cole Webley",
     "cinematographer": "Various",
     "music": "Various Artists",
-    "duration_minutes": 127
+    "duration_minutes": 127,
+    "release_date": "Jan 13, 2024"
   },
   {
     "movie_id": 502,
@@ -17789,7 +18173,8 @@ const MOVIES = [
     "writer": "Mike Mitchell",
     "cinematographer": "Animated",
     "music": "Hans Zimmer",
-    "duration_minutes": 97
+    "duration_minutes": 97,
+    "release_date": "Jul 03, 2024"
   },
   {
     "movie_id": 503,
@@ -17831,7 +18216,8 @@ const MOVIES = [
     "writer": "Michael Sarnoski",
     "cinematographer": "Pat Scola",
     "music": "Alexis Grapsas",
-    "duration_minutes": 120
+    "duration_minutes": 120,
+    "release_date": "Nov 12, 2024"
   },
   {
     "movie_id": 504,
@@ -17873,7 +18259,8 @@ const MOVIES = [
     "writer": "Nissam Basheer",
     "cinematographer": "Girish Gangadharan",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 131
+    "duration_minutes": 131,
+    "release_date": "May 21, 2022"
   },
   {
     "movie_id": 505,
@@ -17916,7 +18303,8 @@ const MOVIES = [
     "writer": "D.R. Suri",
     "cinematographer": "A.K. Vijay Kumar",
     "music": "Ajaneesh Loknath",
-    "duration_minutes": 108
+    "duration_minutes": 108,
+    "release_date": "Sep 08, 2024"
   },
   {
     "movie_id": 506,
@@ -17958,7 +18346,8 @@ const MOVIES = [
     "writer": "Ritesh Rana",
     "cinematographer": "Ravi K. Chandran",
     "music": "Harris Jayaraj",
-    "duration_minutes": 150
+    "duration_minutes": 150,
+    "release_date": "Feb 01, 2024"
   },
   {
     "movie_id": 507,
@@ -18000,7 +18389,8 @@ const MOVIES = [
     "writer": "Kodi Ramakrishna",
     "cinematographer": "R. D. Rajasekhar",
     "music": "Anirudh Ravichander",
-    "duration_minutes": 141
+    "duration_minutes": 141,
+    "release_date": "Oct 06, 2009"
   },
   {
     "movie_id": 508,
@@ -18043,7 +18433,8 @@ const MOVIES = [
     "writer": "Vikram K. Kumar",
     "cinematographer": "K. S. Selvaraj",
     "music": "Shankar Ehsaan Loy",
-    "duration_minutes": 151
+    "duration_minutes": 151,
+    "release_date": "Jan 21, 2009"
   },
   {
     "movie_id": 510,
@@ -18085,7 +18476,8 @@ const MOVIES = [
     "writer": "Dileesh Pothan",
     "cinematographer": "Manoj Paramahamsa",
     "music": "Santhosh Narayanan",
-    "duration_minutes": 126
+    "duration_minutes": 126,
+    "release_date": "May 17, 2016"
   },
   {
     "movie_id": 511,
@@ -18123,7 +18515,8 @@ const MOVIES = [
     "writer": "Midhun Manuel Thomas",
     "cinematographer": "Alby Antony",
     "music": "Shaan Rahman",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Nov 27, 2017"
   },
   {
     "movie_id": 512,
@@ -18162,7 +18555,8 @@ const MOVIES = [
     "writer": "K. Madhu",
     "cinematographer": "P. C. Sreeram",
     "music": "Harris Jayaraj",
-    "duration_minutes": 115
+    "duration_minutes": 115,
+    "release_date": "Jun 10, 2024"
   },
   {
     "movie_id": 513,
@@ -18204,7 +18598,8 @@ const MOVIES = [
     "writer": "Sagar Ambre",
     "cinematographer": "R. D. Rajasekhar",
     "music": "S. Thaman",
-    "duration_minutes": 96
+    "duration_minutes": 96,
+    "release_date": "Mar 15, 2024"
   },
   {
     "movie_id": 514,
@@ -18245,7 +18640,8 @@ const MOVIES = [
     "writer": "Santhana Bharathi",
     "cinematographer": "Jeeva",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 147
+    "duration_minutes": 147,
+    "release_date": "Jul 03, 1994"
   },
   {
     "movie_id": 515,
@@ -18288,7 +18684,8 @@ const MOVIES = [
     "writer": "Velraj",
     "cinematographer": "Velraj",
     "music": "Anirudh Ravichander",
-    "duration_minutes": 110
+    "duration_minutes": 110,
+    "release_date": "Feb 22, 2014"
   },
   {
     "movie_id": 516,
@@ -18331,7 +18728,8 @@ const MOVIES = [
     "cinematographer": "Nirav Shah",
     "music": "A. R. Rahman",
     "duration_minutes": 155,
-    "overview": "Ten years after he was imprisoned for a crime he didn't commit, Manu is released and searches for his lost love, Priya. His quest leads him into deep emotional waters and a new life where past and present collide."
+    "overview": "Ten years after he was imprisoned for a crime he didn't commit, Manu is released and searches for his lost love, Priya. His quest leads him into deep emotional waters and a new life where past and present collide.",
+    "release_date": "Jun 02, 2023"
   },
   {
     "movie_id": 517,
@@ -18373,7 +18771,8 @@ const MOVIES = [
     "writer": "K. Viswanath",
     "cinematographer": "Girish Gangadharan",
     "music": "Devi Sri Prasad",
-    "duration_minutes": 118
+    "duration_minutes": 118,
+    "release_date": "Jul 07, 1983"
   },
   {
     "movie_id": 518,
@@ -18414,7 +18813,8 @@ const MOVIES = [
     "writer": "Santhana Bharathi",
     "cinematographer": "P. C. Sriram",
     "music": "Ilaiyaraaja",
-    "duration_minutes": 115
+    "duration_minutes": 115,
+    "release_date": "Nov 05, 1991"
   },
   {
     "movie_id": 519,
@@ -18435,7 +18835,7 @@ const MOVIES = [
     "cast": [
       "Prakash Raj",
       "Trisha Krishnan",
-      "Aishwariyaa Bhaskaran"
+      "Ganesh Venkatraman"
     ],
     "trailer_yt_id": "FiEJcz5OKl0",
     "keywords": "Comedy, Drama",
@@ -18455,7 +18855,8 @@ const MOVIES = [
     "writer": "Radha Mohan",
     "cinematographer": "Arthur A. Wilson",
     "music": "Vidyasagar",
-    "duration_minutes": 102
+    "duration_minutes": 102,
+    "release_date": "Dec 19, 2008"
   },
   {
     "movie_id": 521,
@@ -18471,12 +18872,12 @@ const MOVIES = [
     "rating_percent": 86,
     "popularity_score": 0.8,
     "age_limit": 0,
-    "synopsis": "When a man realizes that the Hindu woman he loves is in love with a Christian man, he decides to sacrifice his love and unite their families so as to make the love story a success.",
+    "synopsis": "A young man stays in a village to unite two feuding families while being in love with a girl who loves someone else.",
     "quote": "Reflection... -- Poove Unakkaga suggests that time is a river, and we are but echoes of the choices we made upstream. Embrace the success within.",
     "director": "Vikraman",
     "cast": [
-      "Joseph Vijay",
-      "Sangeetha",
+      "Vijay",
+      "Sangita",
       "Anju Aravind"
     ],
     "trailer_yt_id": "o0fUBUErcro",
@@ -18498,7 +18899,8 @@ const MOVIES = [
     "writer": "Vikraman",
     "cinematographer": "Jeeva",
     "music": "Deva",
-    "duration_minutes": 106
+    "duration_minutes": 106,
+    "release_date": "Feb 18, 1996"
   },
   {
     "movie_id": 522,
@@ -18545,7 +18947,8 @@ const MOVIES = [
         "url": "https://www.primevideo.com/search/ref=atv_nb_sr?phrase=Aadu",
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
-    ]
+    ],
+    "release_date": "Feb 02, 2015"
   },
   {
     "movie_id": 523,
@@ -18574,7 +18977,7 @@ const MOVIES = [
       "added-by-user"
     ],
     "age_limit": 13,
-    "duration_minutes": 140,
+    "duration_minutes": 205,
     "quote": "Perspective... -- In the end, Dhurandhar reminds us that we are not defined by our circumstances, but by our response to them. Embrace the Indian within.",
     "music": "Pritam",
     "cinematographer": "Ayananka Bose",
@@ -18592,7 +18995,8 @@ const MOVIES = [
         "url": "https://www.netflix.com/search?q=Dhurandhar",
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=netflix.com"
       }
-    ]
+    ],
+    "release_date": "May 13, 2025"
   },
   {
     "movie_id": 524,
@@ -18639,7 +19043,8 @@ const MOVIES = [
         "url": "https://www.netflix.com/search?q=Madharaasi",
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=netflix.com"
       }
-    ]
+    ],
+    "release_date": "Aug 22, 2025"
   },
   {
     "movie_id": 525,
@@ -18685,7 +19090,8 @@ const MOVIES = [
         "url": "https://www.primevideo.com/search/ref=atv_nb_sr?phrase=Beast",
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
-    ]
+    ],
+    "release_date": "Mar 23, 2022"
   },
   {
     "movie_id": 526,
@@ -18704,8 +19110,7 @@ const MOVIES = [
     "cast": [
       "Sivakarthikeyan",
       "Priyanka Mohan",
-      "Vinay Rai",
-      "Yogi Babu"
+      "Vinay Rai"
     ],
     "director": "Nelson Dilipkumar",
     "tags": [
@@ -18731,6 +19136,7 @@ const MOVIES = [
         "url": "https://www.primevideo.com/search/ref=atv_nb_sr?phrase=Doctor",
         "icon": "https://www.google.com/s2/favicons?sz=64&domain=primevideo.com"
       }
-    ]
+    ],
+    "release_date": "Oct 09, 2021"
   }
 ];

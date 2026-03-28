@@ -4,8 +4,9 @@ const API = {
     TOKEN_KEY: 'univibe_auth_token',
     RATINGS_KEY: 'univibe_ratings',
     WATCHLIST_KEY: 'univibe_watchlist',
-    BASE_URL: 'http://localhost:3000/api',
-    ML_API_BASE: 'http://127.0.0.1:8000',
+    FAVORITES_KEY: 'univibe_favorites',
+    BASE_URL: `http://${window.location.hostname}:3000/api`,
+    ML_API_BASE: `http://${window.location.hostname}:8000`,
 
     // ── Auth ──
     isLoggedIn() {
@@ -108,13 +109,34 @@ const API = {
         // Update local brain for offline/immediate use
         LocalAI.learn(movieId, eventType, eventValue, context);
 
+        const user = this.getUser();
+        const uid = user ? user.user_uid : null;
+
+        // 1. Track via Node.js authenticated backend (SQLite logging)
         try {
-            await fetch(`${this.ML_API_BASE}/track`, {
+            await fetch(`${this.BASE_URL}/track`, {
                 method: 'POST',
                 headers: this.getHeaders(),
                 body: JSON.stringify({ movieId, eventType, eventValue, context })
             });
-        } catch (e) { console.warn('Tracking sync failed'); }
+        } catch (e) { /* Node backend might be down, that's ok */ }
+
+        // 2. Track via FastAPI ML backend (RL Q-table updates) — requires user_uid in payload
+        if (uid) {
+            try {
+                await fetch(`${this.ML_API_BASE}/track`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_uid: uid,
+                        movie_id: parseInt(movieId),
+                        eventType,
+                        eventValue: eventValue || '',
+                        context: context || {}
+                    })
+                });
+            } catch (e) { console.warn('ML tracking sync failed'); }
+        }
     },
 
     async trackSearch(query, resultCount) {
@@ -156,50 +178,142 @@ const API = {
 
     // ── Watchlist ──
     async addToWatchlist(movieId) {
-        const movie = MOVIES.find(m => m.movie_id === movieId);
-        let list = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
-        if (!list.includes(movieId)) list.push(movieId);
-        localStorage.setItem(this.WATCHLIST_KEY, JSON.stringify(list));
-        this.trackInteraction(movieId, 'watchlist', 'add', {
-            genre: movie?.genre[0],
-            experience: movie?.experience_type
-        });
-        return { ok: true };
+        try {
+            const res = await fetch(`${this.BASE_URL}/watchlist/add`, {
+                method: 'POST',
+                headers: this.getHeaders(),
+                body: JSON.stringify({ movieId })
+            });
+            return await res.json();
+        } catch (e) {
+            // Local fallback
+            const watchlist = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
+            if (!watchlist.includes(movieId)) {
+                watchlist.push(movieId);
+                localStorage.setItem(this.WATCHLIST_KEY, JSON.stringify(watchlist));
+            }
+            return { ok: true, local: true };
+        }
     },
 
     async removeFromWatchlist(movieId) {
-        let list = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
-        list = list.filter(id => id !== movieId);
-        localStorage.setItem(this.WATCHLIST_KEY, JSON.stringify(list));
-        return { ok: true };
+        try {
+            const res = await fetch(`${this.BASE_URL}/watchlist/remove/${movieId}`, {
+                method: 'DELETE',
+                headers: this.getHeaders()
+            });
+            return await res.json();
+        } catch (e) {
+            // Local fallback
+            let watchlist = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
+            watchlist = watchlist.filter(id => id !== movieId);
+            localStorage.setItem(this.WATCHLIST_KEY, JSON.stringify(watchlist));
+            return { ok: true, local: true };
+        }
     },
 
     async checkWatchlist(movieId) {
-        const list = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
-        return { inWatchlist: list.includes(movieId) };
+        try {
+            const res = await fetch(`${this.BASE_URL}/watchlist/${movieId}`, { headers: this.getHeaders() });
+            return await res.json();
+        } catch (e) {
+            const watchlist = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
+            return { inWatchlist: watchlist.includes(movieId) };
+        }
     },
 
     async getWatchlist() {
-        const list = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
-        return { ok: true, data: { watchlist: list.map(id => ({ movie_id: id })) } };
+        try {
+            const res = await fetch(`${this.BASE_URL}/watchlist`, { headers: this.getHeaders() });
+            if (!res.ok && res.status === 401) { this.logout(); return { ok: false }; }
+            const data = await res.json();
+            return { ok: true, data: data };
+        } catch (e) {
+            const watchlist = JSON.parse(localStorage.getItem(this.WATCHLIST_KEY) || '[]');
+            return { ok: true, data: { watchlist: watchlist.map(id => ({ movie_id: id })) } };
+        }
     },
 
-    // ── AI Recommendations (Now sourced from FastAPI ML Backend) ──
+    // ── Favorites ──
+    async addToFavorites(movieId) {
+        try {
+            const res = await fetch(`${this.BASE_URL}/favorites/add`, {
+                method: 'POST',
+                headers: this.getHeaders(),
+                body: JSON.stringify({ movieId })
+            });
+            if (res.status === 401) this.logout();
+            return await res.json();
+        } catch (e) {
+            const favs = JSON.parse(localStorage.getItem('univibe_favorites') || '[]');
+            if (!favs.includes(movieId)) {
+                favs.push(movieId);
+                localStorage.setItem('univibe_favorites', JSON.stringify(favs));
+            }
+            return { ok: true, local: true };
+        }
+    },
+
+    async removeFromFavorites(movieId) {
+        try {
+            const res = await fetch(`${this.BASE_URL}/favorites/remove/${movieId}`, {
+                method: 'DELETE',
+                headers: this.getHeaders()
+            });
+            if (res.status === 401) this.logout();
+            return await res.json();
+        } catch (e) {
+            let favs = JSON.parse(localStorage.getItem('univibe_favorites') || '[]');
+            favs = favs.filter(id => id !== movieId);
+            localStorage.setItem('univibe_favorites', JSON.stringify(favs));
+            return { ok: true, local: true };
+        }
+    },
+
+    async checkFavorite(movieId) {
+        try {
+            const res = await fetch(`${this.BASE_URL}/favorites/${movieId}`, { headers: this.getHeaders() });
+            return await res.json();
+        } catch (e) {
+            const favs = JSON.parse(localStorage.getItem('univibe_favorites') || '[]');
+            return { isFavorite: favs.includes(movieId) };
+        }
+    },
+
+    async getFavorites() {
+        try {
+            const res = await fetch(`${this.BASE_URL}/favorites`, { headers: this.getHeaders() });
+            if (!res.ok && res.status === 401) { this.logout(); return { ok: false }; }
+            const data = await res.json();
+            return { ok: true, data: data };
+        } catch (e) {
+            const favs = JSON.parse(localStorage.getItem('univibe_favorites') || '[]');
+            return { ok: true, data: { favorites: favs.map(id => ({ movie_id: id })) } };
+        }
+    },
+
+    // ── AI Recommendations ──
     async getRecommendations(count = 8) {
         const user = this.getUser();
         if (!user) return { ok: false, error: 'User not logged in' };
 
         try {
-            const response = await fetch(`${this.ML_API_BASE}/recommend?user_id=${user.user_uid}&count=${count}`);
+            const response = await fetch(`${this.ML_API_BASE}/recommend?user_id=${user.user_uid}&count=${count * 2}`);
             if (response.ok) {
                 const recommendations = await response.json();
+                // Deduplicate by movie_id
+                const seen = new Set();
+                const deduped = recommendations.filter(m => {
+                    if (seen.has(m.movie_id)) return false;
+                    seen.add(m.movie_id);
+                    return true;
+                }).slice(0, count);
                 return {
                     ok: true,
                     data: {
-                        recommendations: recommendations.map(m => ({
+                        recommendations: deduped.map(m => ({
                             ...m,
-                            source: 'FastAPI_ML',
-                            // XAI fields from enhanced backend
+                            source: 'AI',
                             explanation: m.explanation || null,
                             similarity: m.similarity || 0,
                             user_pref: m.user_pref || 0,
@@ -209,18 +323,25 @@ const API = {
                 };
             }
         } catch (error) {
-            console.warn('FastAPI Backend unreachable, falling back to LocalAI:', error);
+            console.warn('AI Backend unreachable, falling back to LocalAI:', error);
         }
 
-        // Fallback to LocalAI if FastAPI is unavailable
-        const recs = LocalAI.getRecommendations(count);
+        // Fallback to LocalAI
+        const recs = LocalAI.getRecommendations(count * 2);
+        // Deduplicate fallback recs
+        const seen = new Set();
+        const dedupedLocal = recs.filter(m => {
+            if (seen.has(m.movie_id)) return false;
+            seen.add(m.movie_id);
+            return true;
+        }).slice(0, count);
         return {
             ok: true,
             data: {
-                recommendations: recs.map(m => ({
+                recommendations: dedupedLocal.map(m => ({
                     movie_id: m.movie_id,
-                    reason: '🤖 AI matched your vibe (Local)',
-                    source: 'LocalAI',
+                    reason: 'AI matched your vibe',
+                    source: 'AI',
                     explanation: null,
                     similarity: 0,
                     user_pref: 0,
@@ -235,15 +356,22 @@ const API = {
         if (!user) return { ok: false, error: 'User not logged in' };
 
         try {
-            const response = await fetch(`${this.ML_API_BASE}/recommend/${movieId}?user_id=${user.user_uid}&count=${count}`);
+            const response = await fetch(`${this.ML_API_BASE}/recommend/${movieId}?user_id=${user.user_uid}&count=${count * 2}`);
             if (response.ok) {
                 const recommendations = await response.json();
+                // Deduplicate and exclude the current movie
+                const seen = new Set([movieId]);
+                const deduped = recommendations.filter(m => {
+                    if (seen.has(m.movie_id)) return false;
+                    seen.add(m.movie_id);
+                    return true;
+                }).slice(0, count);
                 return {
                     ok: true,
                     data: {
-                        recommendations: recommendations.map(m => ({
+                        recommendations: deduped.map(m => ({
                             ...m,
-                            source: 'FastAPI_Similarity',
+                            source: 'AI',
                             explanation: m.explanation || null,
                             similarity: m.similarity || 0,
                             user_pref: m.user_pref || 0,
@@ -253,7 +381,7 @@ const API = {
                 };
             }
         } catch (error) {
-            console.error('FastAPI Recommendation Error:', error);
+            console.error('AI Recommendation Error:', error);
         }
         return { ok: false, error: 'Could not fetch similarity recommendations' };
     },
@@ -261,6 +389,7 @@ const API = {
     async getHistory() {
         try {
             const res = await fetch(`${this.BASE_URL}/history`, { headers: this.getHeaders() });
+            if (!res.ok && res.status === 401) { this.logout(); return { ok: false }; }
             const data = await res.json();
             return { ok: true, data: { interactions: data.interactions } };
         } catch (e) { return { ok: false }; }
@@ -269,6 +398,7 @@ const API = {
     async getSearchHistory() {
         try {
             const res = await fetch(`${this.BASE_URL}/history/searches`, { headers: this.getHeaders() });
+            if (!res.ok && res.status === 401) { this.logout(); return { ok: false }; }
             const data = await res.json();
             return { ok: true, data: { searches: data.searches } };
         } catch (e) { return { ok: false }; }
@@ -277,6 +407,7 @@ const API = {
     async getLearningStats() {
         try {
             const res = await fetch(`${this.BASE_URL}/recommendations/stats`, { headers: this.getHeaders() });
+            if (!res.ok && res.status === 401) { this.logout(); return { ok: false }; }
             const data = await res.json();
             // Server returns stats at top level (no .summary wrapper)
             const stats = data.stats || {};
@@ -312,7 +443,7 @@ const API = {
     // ── ML Metrics & Model Info ──
     async getMLMetrics() {
         try {
-            const res = await fetch(`${this.BASE_URL}/metrics`);
+            const res = await fetch(`${this.ML_API_BASE}/metrics`);
             if (res.ok) {
                 const data = await res.json();
                 return { ok: true, data };
@@ -340,8 +471,9 @@ const API = {
     async get(url) {
         try {
             const res = await fetch(`${this.BASE_URL.replace('/api', '')}${url}`, { headers: this.getHeaders() });
+            if (!res.ok && res.status === 401) { this.logout(); return { ok: false }; }
             const data = await res.json();
-            return { ok: true, data };
+            return res.ok ? { ok: true, data } : { ok: false, error: data.error };
         } catch (e) {
             return { ok: false, error: 'Server unreachable' };
         }

@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UniVibe — AI Movie Discovery & ML Recommendations</title>
+  <title>UniVibe — Smart Movie Discovery & Recommendations</title>
   <meta name="description"
-    content="Discover movies that match your vibe. Powered by an AI Recommendation engine that learns your taste — then stream on your favourite platform." />
+    content="Discover movies that match your vibe. Powered by a recommendation engine that learns your taste — then stream on your favourite platform." />
+  <meta name="referrer" content="no-referrer" />
 
   <!-- Favicon -->
-  <link rel="icon" href="assets/logo/v2.png" type="image/png" />
+  <link rel="icon" href="assets/logo/v3.png" type="image/png" />
 
   <!-- PWA Support -->
   <link rel="manifest" href="manifest.json" />
@@ -17,10 +18,12 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="UniVibe" />
-  <link rel="apple-touch-icon" href="assets/logo/v2.png" />
+  <link rel="apple-touch-icon" href="assets/logo/v3.png" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=14" />
+  <!-- Professional Icon System (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css?v=64" />
 
   <!-- Fade-out keyframe for age gate removal -->
   <style>
@@ -37,27 +40,43 @@
 </head>
 
 <body>
+  <!-- Global Background Layer -->
+  <div id="global-bg-blur" class="global-bg-blur"></div>
+
+  <!-- Aggressive Cache Buster to solve Localhost stickiness -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+    caches.keys().then(function(names) {
+        for (let name of names) caches.delete(name);
+    });
+    // Force one-time reload if URL doesn't have ?reloaded
+    if (!window.location.search.includes('reloaded=true')) {
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?reloaded=true" + window.location.hash;
+        window.location.replace(newUrl);
+    }
+  </script>
 
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
       <a class="navbar-brand" href="#/">
-        <img src="assets/logo/v2.png" alt="UniVibe" class="logo-img" />
+        <img src="assets/logo/v3.png" alt="UniVibe" class="logo-img" />
         <div class="logo-text">UniVibe</div>
       </a>
-      <div class="nav-search-container">
-        <input type="text" id="global-search-input" placeholder="Search movies..."
-          onkeyup="if(event.key==='Enter') handleGlobalSearch()" />
-        <button id="global-search-btn" onclick="handleGlobalSearch()" title="Search">🔍</button>
-      </div>
       <div class="navbar-links" id="nav-links">
         <a class="nav-link" href="#/" data-route="/">Home</a>
+        <a class="nav-link" href="#/advanced-search" data-route="/advanced-search">Search</a>
         <a class="nav-link" href="#/movies" data-route="/movies">Discover</a>
         <a class="nav-link" href="#/all" data-route="/all">Library</a>
-        <button class="nav-age-badge" id="nav-age-badge" onclick="resetAge()" title="Click to reset age">
-          👤 Set Age
-        </button>
+        <a class="nav-link" href="#/dashboard" data-route="/dashboard">Dashboard</a>
       </div>
+      <div class="navbar-user" id="navbar-user"></div>
     </div>
   </nav>
 
@@ -67,20 +86,21 @@
   </main>
 
   <!-- Scripts (order matters: data → AI → API → logic → components → auth → router → pages) -->
-  <script src="data/movieData.js?v=14"></script>
-  <script src="js/localAI.js?v=14"></script>
-  <script src="js/api.js?v=14"></script>
-  <script src="js/recommendationEngine.js?v=14"></script>
-  <script src="js/components.js?v=14"></script>
-  <script src="js/router.js?v=14"></script>
-  <script src="js/pages/ageGate.js?v=14"></script>
-  <script src="js/pages/authUI.js?v=14"></script>
-  <script src="js/pages/dashboard.js?v=14"></script>
-  <script src="js/pages/home.js?v=14"></script>
-  <script src="js/pages/catalogue.js?v=14"></script>
-  <script src="js/pages/movieList.js?v=14"></script>
-  <script src="js/pages/detail.js?v=14"></script>
-  <script src="js/pages/platform.js?v=14"></script>
+  <script src="data/movieData_v63.js?v=64"></script>
+    <script src="js/localAI.js?v=64"></script>
+    <script src="js/api.js?v=64"></script>
+    <script src="js/recommendationEngine.js?v=64"></script>
+    <script src="js/components.js?v=64"></script>
+    <script src="js/router.js?v=64"></script>
+    <script src="js/pages/ageGate.js?v=64"></script>
+    <script src="js/pages/authUI.js?v=64"></script>
+    <script src="js/pages/dashboard.js?v=64"></script>
+    <script src="js/pages/home.js?v=64"></script>
+    <script src="js/pages/catalogue.js?v=64"></script>
+    <script src="js/pages/movieList.js?v=64"></script>
+    <script src="js/pages/search.js?v=64"></script>
+    <script src="js/pages/detail.js?v=64"></script>
+    <script src="js/pages/platform.js?v=64"></script>
 
   <script>
     // ——————————————————————————
@@ -90,16 +110,66 @@
     (function () {
       const app = document.getElementById('app');
 
+      // Keep track of scroll positions per route
+      const scrollPositions = {};
+      window.addEventListener('scroll', () => {
+          if (Router.currentRoute) {
+              scrollPositions[Router.currentRoute] = window.scrollY;
+          }
+      }, { passive: true });
+
       // Helper: render a page and add footer
       function renderPage(html) {
         app.innerHTML = html + renderFooter();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const savedScroll = scrollPositions[Router.currentRoute] || 0;
+        window.scrollTo({ top: savedScroll, behavior: 'instant' });
         updateActiveNav();
+        
+        // Update global background based on current route
+        updateGlobalAppBackground();
+      }
+
+      function updateGlobalAppBackground(customImgUrl = null) {
+        const hash = window.location.hash.slice(1) || '/';
+        const bg = document.getElementById('global-bg-blur');
+        if (!bg) return;
+        
+        let imgUrl = customImgUrl;
+        
+        if (!imgUrl) {
+          // Detail page handling
+          if (hash.startsWith('/movie/')) {
+            const movieId = parseInt(hash.split('/')[2]);
+            const movie = MOVIES.find(m => m.movie_id === movieId);
+            if (movie) imgUrl = movie.poster;
+          } 
+          // Home page handling
+          else if (hash === '/' || hash === '') {
+            // Use the first slider wallpaper as the main home background
+            imgUrl = 'assets/wallpapers/cyberpunk.png';
+          }
+          // Others
+          else {
+            // Sample a movie from the top 10
+            const trending = getTrending(MOVIES);
+            if (trending.length > 5) imgUrl = trending[4].poster;
+            else if (trending.length > 0) imgUrl = trending[0].poster;
+          }
+        }
+        
+        if (imgUrl) {
+          bg.style.backgroundImage = `url('${imgUrl}')`;
+          bg.classList.add('visible');
+        } else {
+          bg.classList.remove('visible');
+        }
       }
 
       // Register routes
       Router.on('/', function () {
         renderPage(renderHome());
+        // Init Slider
+        setTimeout(initHomeSlider, 100);
         // Trigger recommendation loading after render
         const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
         const safeMovies = applyAgeFilter(MOVIES, userAge);
@@ -110,9 +180,9 @@
         if (featured) {
           setTimeout(() => showHomeRecommendations(featured.movie_id), 0);
         }
-        // Load AI recommendations for logged-in users
-        if (API.isLoggedIn()) {
-          setTimeout(() => loadHomeAIRecommendations(), 0);
+        // Load RL recommendations if logged in
+        if (API.isLoggedIn() && typeof loadHomeAIRecommendations === 'function') {
+          setTimeout(loadHomeAIRecommendations, 100);
         }
       });
 
@@ -126,8 +196,30 @@
         renderPage(renderMovieList());
       });
 
+      Router.on('/advanced-search', function () {
+        renderPage(renderSearch());
+        setTimeout(resetAdvancedFilters, 100);
+      });
+
+      Router.on('/advanced-search/:query', function (params) {
+        renderPage(renderSearch());
+        setTimeout(() => {
+          resetAdvancedFilters();
+          const keywordInput = document.getElementById('adv-search-keyword');
+          if (keywordInput) {
+            keywordInput.value = decodeURIComponent(params.query);
+            applyAdvancedFilters();
+          }
+        }, 100);
+      });
+
+      // Legacy redirect
       Router.on('/search/:query', function (params) {
-        renderPage(renderMovieList(params));
+        Router.navigate('/advanced-search/' + params.query);
+      });
+
+      Router.on('/ai-picks', function () {
+        renderPage(renderMovieList({ filter: 'ai-picks' }));
       });
 
       // Filtered view (Latest, Popular, etc.)
@@ -147,6 +239,7 @@
           trackMovieView(movieId, movie);
           loadExistingRating(movieId);
           updateWatchlistButton(movieId);
+          updateFavoriteButton(movieId);
         }, 100);
       });
 
@@ -158,6 +251,12 @@
       Router.on('/profile', function () {
         renderPage(renderProfile());
         setTimeout(loadProfileData, 100);
+      });
+
+      // History route
+      Router.on('/history', function () {
+        renderPage(renderActivityHistory());
+        setTimeout(loadFullActivityHistory, 100);
       });
 
       // AI Intelligence Dashboard

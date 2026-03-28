@@ -5,7 +5,7 @@ function renderAgeGate() {
   return `
     <div class="age-gate-overlay" id="age-gate">
       <div class="age-gate-card">
-        <div class="gate-icon">🎈</div>
+        <div class="gate-icon">?</div>
         <h2>Welcome to UniVibe</h2>
         <p>Enter your age to personalize your movie discovery</p>
         
@@ -77,17 +77,17 @@ function updateNavAgeBadge() {
   if (age) {
     if (user) {
       // Logged in: show Name + Avatar only
-      badge.innerHTML = `${user.avatar_emoji || '👤'} ${user.display_name}`;
+      badge.innerHTML = `${user.avatar_emoji || ''} ${user.display_name}`;
       badge.onclick = () => Router.navigate('/profile');
       badge.title = 'View your profile';
     } else {
       // Guest: show generic profile label
-      badge.innerHTML = `👤 Guest Profile`;
+      badge.innerHTML = `Guest Profile`;
       badge.onclick = () => resetAge();
       badge.title = 'Click to reset age';
     }
   } else {
-    badge.innerHTML = '👤 Set Age';
+    badge.innerHTML = 'Set Age';
     badge.onclick = () => showAgeGate();
   }
 }

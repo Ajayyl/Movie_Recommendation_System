@@ -19,10 +19,7 @@ function renderMovieCard(movie) {
           onerror="this.onerror=null; this.src='${placeholderUrl}'"
         />
         <div class="poster-overlay">
-          <div class="overlay-rating">⭐ ${movie.rating_percent}%</div>
-          <button class="watch-later-btn" onclick="event.stopPropagation(); toggleWatchlist(event, ${movie.movie_id})" title="Watch Later">
-            🔖
-          </button>
+          <div class="overlay-rating">${movie.rating_percent}%</div>
         </div>
       </div>
       <div class="card-info">
@@ -44,34 +41,25 @@ function renderRecommendedCard(movie, reason) {
   const placeholderUrl = generatePlaceholderUrl(movie.title);
 
   return `
-    <div class="rec-card-wrapper fade-in-up">
-      <div class="movie-card" onclick="Router.navigate('/movie/${movie.movie_id}')">
-        <div class="poster-wrap">
-          <img
-            src="${movie.poster}"
-            alt="${movie.title}"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-            onerror="this.onerror=null; this.src='${placeholderUrl}'"
-          />
-          <div class="poster-overlay">
-            <div class="overlay-rating">⭐ ${movie.rating_percent}%</div>
-            <button class="watch-later-btn" onclick="event.stopPropagation(); toggleWatchlist(event, ${movie.movie_id})" title="Watch Later">
-              🔖
-            </button>
-          </div>
-        </div>
-        <div class="card-info">
-          <div class="card-title" title="${movie.title}">${movie.title}</div>
-          <div class="card-meta">
-            <span class="genre-badge">${movie.genre[0]}</span>
-            <span class="exp-badge ${movie.experience_type}">${movie.experience_type}</span>
-          </div>
+    <div class="movie-card fade-in-up" onclick="Router.navigate('/movie/${movie.movie_id}')" title="${(reason || '').replace(/"/g, '&quot;')}">
+      <div class="poster-wrap">
+        <img
+          src="${movie.poster}"
+          alt="${movie.title}"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          onerror="this.onerror=null; this.src='${placeholderUrl}'"
+        />
+        <div class="poster-overlay">
+          <div class="overlay-rating">${movie.rating_percent}%</div>
         </div>
       </div>
-      <div class="rec-reason" title="${reason}">
-        <span class="rec-reason-icon">💡</span>
-        <span class="rec-reason-text">${reason}</span>
+      <div class="card-info">
+        <div class="card-title" title="${movie.title}">${movie.title}</div>
+        <div class="card-meta">
+          <span class="genre-badge">${movie.genre[0]}</span>
+          <span class="exp-badge ${movie.experience_type}">${movie.experience_type}</span>
+        </div>
       </div>
     </div>
   `;
@@ -115,58 +103,142 @@ function generatePlaceholderUrl(title) {
 }
 
 /**
- * Render the analysis loading state.
+ * Render a sleek skeleton loading grid for movie cards.
+ * This looks much more premium than a simple spinning loader.
  */
-function renderAnalysisLoader() {
+function renderAnalysisLoader(count = 5) {
+  const skeletons = Array(count).fill(0).map(() => `
+    <div style="width: 200px; flex: 0 0 auto;" class="skeleton-card">
+      <div class="skeleton-poster skeleton-shimmer" style="width: 100%; height: 300px; border-radius: 12px; background: rgba(255,255,255,0.05); margin-bottom: 12px;"></div>
+      <div class="skeleton-text skeleton-shimmer" style="width: 80%; height: 16px; border-radius: 4px; background: rgba(255,255,255,0.05); margin-bottom: 8px;"></div>
+      <div class="skeleton-text skeleton-shimmer" style="width: 50%; height: 12px; border-radius: 4px; background: rgba(255,255,255,0.05);"></div>
+    </div>
+  `).join('');
+
   return `
-    <div class="analysis-loader" id="analysis-loader">
-      <div class="loader-content">
-        <div class="loader-icon">
-          <div class="loader-ring"></div>
-          <span class="loader-emoji">🧠</span>
-        </div>
-        <h3 class="loader-title">Analyzing movie similarity...</h3>
-        <p class="loader-subtitle">Comparing genres, experience, ratings & popularity</p>
-        <div class="loader-bar">
-          <div class="loader-bar-fill"></div>
-        </div>
-      </div>
+    <div class="movie-row stagger skeleton-loader-wrapper" style="overflow: hidden;">
+      ${skeletons}
     </div>
   `;
 }
 
 /**
- * Render a star rating widget for the detail page.
- * Connected to AI engine — explicit feedback improves recommendations.
+ * Render a unified Rate & Review section.
+ * Merges explicit star ratings and textual reviews into one cohesive block.
  */
-function renderRatingWidget(movieId) {
-  // Check if logged in
-  if (!API.isLoggedIn()) {
-    return `
-      <div class="rating-widget" style="margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; text-align: center;">
-        <p style="color: var(--text-muted); margin-bottom: 12px;">Login to rate this movie and improve your recommendations</p>
-        <a href="#/login" class="btn btn-outline btn-sm">Sign In</a>
+function renderUserFeedback(movieId) {
+  const reviews = getMovieReviews(movieId);
+  const isLoggedIn = API.isLoggedIn();
+
+  // 1. Check if logged in for the whole widget
+  if (!isLoggedIn) {
+     return `
+      <div class="user-feedback-section" style="margin-top: 32px; padding: 24px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px;">
+        <div class="rating-label" style="margin-bottom: 20px;">Rate & Review</div>
+        
+        <div class="stars-view" style="display: flex; gap: 8px; margin-bottom: 30px; opacity: 0.3; justify-content: center;">
+          ${[1, 2, 3, 4, 5].map(i => `<span style="font-size: 32px;">★</span>`).join('')}
+        </div>
+
+        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px;">
+          <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 14px;">Want to share your thoughts?</p>
+          <a href="#/login" class="btn btn-primary btn-sm">Sign in to Rate & Review</a>
+        </div>
+        
+        <div class="review-list-mini" style="margin-top: 30px;">
+           <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px;">Community Reviews (${reviews.length})</div>
+           ${renderReviewItemsHTML(movieId, reviews)}
+        </div>
       </div>
     `;
   }
 
-  // Initial skeleton while we fetch current rating
+  // 2. Logged in experience
+  // Initial star fetch
   setTimeout(() => fetchAndRenderStars(movieId), 10);
 
   return `
-    <div class="rating-widget" id="rating-widget-${movieId}" style="margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px;">
-      <div class="rating-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <span>⭐ Your Rating</span>
-        <span id="rating-status-${movieId}" style="font-size: 11px; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.5px;"></span>
+    <div class="user-feedback-section" id="user-feedback-${movieId}" style="margin-top: 32px; padding: 24px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px;">
+      
+      <!-- Upper: Rate -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+        <div>
+          <div class="rating-label" style="margin-bottom: 6px;">Rate & Review</div>
+          <p style="font-size: 12px; color: var(--text-muted);">How was your experience?</p>
+        </div>
+        <div style="text-align: right;">
+           <span id="rating-status-${movieId}" style="font-size: 11px; color: var(--accent-primary); text-transform: uppercase; font-weight: 600;"></span>
+        </div>
       </div>
-      <div class="star-rating" id="star-rating-${movieId}" style="display: flex; gap: 8px;">
-        ${[1, 2, 3, 4, 5].map(i => `
-          <span class="star" data-rating="${i}" onclick="handleRating(${movieId}, ${i})" style="font-size: 28px; cursor: pointer; color: rgba(255,255,255,0.1); transition: transform 0.2s ease, color 0.2s ease;">★</span>
-        `).join('')}
+
+      <div class="feedback-stars-row" style="display: flex; align-items: center; gap: 15px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 24px;">
+        <div class="star-rating" id="star-rating-${movieId}" style="display: flex; gap: 8px;">
+          ${[1, 2, 3, 4, 5].map(i => `
+            <span class="star" data-rating="${i}" onclick="handleRating(${movieId}, ${i})" style="font-size: 32px; cursor: pointer; color: rgba(255,255,255,0.1); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;">★</span>
+          `).join('')}
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted); max-width: 140px; line-height: 1.4;">
+           This feeds the AI to learn your specific taste profile.
+        </div>
       </div>
-      <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">This feeds the AI to learn your specific taste profile.</p>
+
+      <!-- Middle: Review Form -->
+      <div class="review-form-area" style="margin-bottom: 30px;">
+        <textarea id="review-input-${movieId}" placeholder="Write a review... (how was the story, vibes, music?)" style="
+          width: 100%; min-height: 90px; padding: 16px; border-radius: 12px;
+          background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+          color: var(--text-primary); font-family: inherit; font-size: 14px;
+          resize: none; outline: none; transition: all 0.3s ease;
+          box-sizing: border-box;
+        " onfocus="this.style.borderColor='var(--accent-primary)';this.style.background='rgba(255,255,255,0.05)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.03)'"></textarea>
+        
+        <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
+          <button onclick="submitReview(${movieId})" class="btn btn-primary btn-sm" style="padding: 10px 24px; font-size: 13px; border-radius: 10px;">
+            Post Review
+          </button>
+        </div>
+      </div>
+
+      <!-- Lower: Review List -->
+      <div class="community-reviews" id="review-list-${movieId}">
+         <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; display: flex; justify-content: space-between;">
+           <span>Community Reviews</span>
+           <span>${reviews.length} total</span>
+         </div>
+         ${renderReviewItemsHTML(movieId, reviews)}
+      </div>
+
     </div>
   `;
+}
+
+/**
+ * Helper to render individual review cards.
+ */
+function renderReviewItemsHTML(movieId, reviews) {
+  if (reviews.length === 0) {
+    return `<p style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px 0;">No written reviews yet.</p>`;
+  }
+
+  return reviews.map((r, i) => `
+    <div class="review-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 12px; transition: transform 0.2s ease;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="background: var(--accent-primary); color: #fff; width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; box-shadow: 0 2px 6px rgba(124,58,237,0.3);">${(r.author || 'U')[0].toUpperCase()}</div>
+          <div style="display: flex; flex-direction: column;">
+            <span style="font-weight: 600; color: var(--text-primary); font-size: 13px;">${r.author || 'Anonymous'}</span>
+            <span style="font-size: 10px; color: var(--text-muted);">${new Date(r.timestamp).toLocaleDateString()}</span>
+          </div>
+        </div>
+        ${API.isLoggedIn() ? `
+          <button onclick="deleteReview(${movieId}, ${i})" style="background: none; border: none; color: rgba(239,68,68,0.4); cursor: pointer; padding: 8px; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.color='#ef4444';this.style.background='rgba(239,68,68,0.1)'" onmouseout="this.style.color='rgba(239,68,68,0.4)';this.style.background='none'">
+            <i class="fa-solid fa-trash-can" style="font-size: 11px;"></i>
+          </button>
+        ` : ''}
+      </div>
+      <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin: 0;">${r.text}</p>
+    </div>
+  `).join('');
 }
 
 /**
@@ -185,6 +257,9 @@ function updateStarUI(movieId, rating) {
   const container = document.getElementById(`star-rating-${movieId}`);
   if (!container) return;
 
+  // Track the current rating for toggle/deselection logic
+  container.dataset.currentRating = rating || 0;
+
   const stars = container.querySelectorAll('.star');
   stars.forEach(star => {
     const val = parseInt(star.dataset.rating);
@@ -197,9 +272,13 @@ function updateStarUI(movieId, rating) {
     }
   });
 
-  if (rating) {
-    const status = document.getElementById(`rating-status-${movieId}`);
-    if (status) status.innerText = 'Feedback Saved';
+  const status = document.getElementById(`rating-status-${movieId}`);
+  if (status) {
+    if (rating) {
+      status.innerText = 'Feedback Saved';
+    } else {
+      status.innerText = ''; // Clear status if no rating
+    }
   }
 }
 
@@ -207,25 +286,32 @@ function updateStarUI(movieId, rating) {
  * Handle user clicking a star.
  */
 async function handleRating(movieId, rating) {
+  const container = document.getElementById(`star-rating-${movieId}`);
+  const currentRating = container ? parseInt(container.dataset.currentRating || '0') : 0;
+  
+  // Toggle: if clicking the same rating, deselect it (set to 0)
+  const finalRating = (rating === currentRating) ? 0 : rating;
+
   // Optimistic UI update
-  updateStarUI(movieId, rating);
+  updateStarUI(movieId, finalRating);
   
   const status = document.getElementById(`rating-status-${movieId}`);
-  if (status) status.innerText = 'Saving...';
+  if (status) status.innerText = finalRating === 0 ? 'Removing...' : 'Saving...';
 
-  const result = await API.rateMovie(movieId, rating);
+  const result = await API.rateMovie(movieId, finalRating);
   
   if (result.success || result.ok) {
-    if (status) status.innerText = 'Feedback Saved';
-    // Success animation
-    const container = document.getElementById(`rating-widget-${movieId}`);
-    if (container) {
-      container.classList.add('pulse');
-      setTimeout(() => container.classList.remove('pulse'), 500);
+    if (status) status.innerText = finalRating === 0 ? 'Cleared' : 'Feedback Saved';
+    
+    // Success animation for feedback container
+    const feedbackBox = document.getElementById(`user-feedback-${movieId}`);
+    if (feedbackBox) {
+      feedbackBox.classList.add('pulse');
+      setTimeout(() => feedbackBox.classList.remove('pulse'), 500);
     }
   } else {
     if (status) status.innerText = 'Error Saving';
-    // Reset if failed
+    // Reset to previous state if failed
     fetchAndRenderStars(movieId);
   }
 }
@@ -236,13 +322,97 @@ async function handleRating(movieId, rating) {
 function renderFooter() {
   return `
     <footer class="footer">
-      <div class="footer-text">
-        Made with 💜 by <a href="#">UniVibe</a> · ${new Date().getFullYear()}
-      </div>
-      <div class="footer-disclaimer">
-        UniVibe is a movie discovery platform. We do not stream or host any content.
-        All streaming links redirect to official external platforms.
+      <div class="container footer-content">
+        <div class="footer-brand">
+          Made by <a href="#" class="brand-link">UniVibe</a> · ${new Date().getFullYear()}
+        </div>
+        <div class="footer-disclaimer">
+          UniVibe is a movie discovery platform. We do not stream or host any content. 
+          All streaming links redirect to official external platforms.
+        </div>
       </div>
     </footer>
   `;
 }
+
+
+/**
+ * Get reviews for a movie from localStorage.
+ */
+function getMovieReviews(movieId) {
+  try {
+    const all = JSON.parse(localStorage.getItem('univibe_reviews') || '{}');
+    return all[movieId] || [];
+  } catch { return []; }
+}
+
+/**
+ * Submit a review for a movie.
+ */
+function submitReview(movieId) {
+  const textarea = document.getElementById(`review-input-${movieId}`);
+  if (!textarea) return;
+
+  const text = textarea.value.trim();
+  if (!text) {
+    textarea.style.borderColor = '#ef4444';
+    setTimeout(() => textarea.style.borderColor = 'rgba(255,255,255,0.08)', 1500);
+    return;
+  }
+
+  const user = API.getUser();
+  const review = {
+    author: user?.display_name || user?.username || 'Anonymous',
+    text: text,
+    timestamp: Date.now()
+  };
+
+  // Save to localStorage
+  const all = JSON.parse(localStorage.getItem('univibe_reviews') || '{}');
+  if (!all[movieId]) all[movieId] = [];
+  all[movieId].push(review);
+  localStorage.setItem('univibe_reviews', JSON.stringify(all));
+
+  // Track the interaction for AI learning
+  if (typeof API !== 'undefined' && API.trackInteraction) {
+    API.trackInteraction(movieId, 'review', 1, { reviewLength: text.length });
+  }
+
+  // Re-render the feedback section
+  const container = document.getElementById(`user-feedback-${movieId}`);
+  if (container) {
+    container.outerHTML = renderUserFeedback(movieId);
+  }
+}
+
+/**
+ * Delete a specific review by index.
+ */
+function deleteReview(movieId, index) {
+  const all = JSON.parse(localStorage.getItem('univibe_reviews') || '{}');
+  if (all[movieId] && all[movieId][index]) {
+    all[movieId].splice(index, 1);
+    if (all[movieId].length === 0) delete all[movieId];
+    localStorage.setItem('univibe_reviews', JSON.stringify(all));
+
+    // Re-render
+    const container = document.getElementById(`user-feedback-${movieId}`);
+    if (container) {
+      container.outerHTML = renderUserFeedback(movieId);
+    }
+  }
+}
+
+// Make components and logic accessible globally
+window.renderMovieCard = renderMovieCard;
+window.renderRecommendedCard = renderRecommendedCard;
+window.renderUserFeedback = renderUserFeedback;
+window.renderAnalysisLoader = renderAnalysisLoader;
+window.fetchAndRenderStars = fetchAndRenderStars;
+window.updateStarUI = updateStarUI;
+window.handleRating = handleRating;
+window.generatePlaceholderUrl = generatePlaceholderUrl;
+window.renderFooter = renderFooter;
+window.submitReview = submitReview;
+window.deleteReview = deleteReview;
+window.getMovieReviews = getMovieReviews;

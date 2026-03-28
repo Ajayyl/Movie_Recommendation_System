@@ -514,8 +514,8 @@ function drawRadarChart(containerId, labels, values, options = {}) {
   }
 
   const cx = w / 2;
-  const cy = h / 2 + 10;
-  const radius = Math.min(cx - 50, cy - 40);
+  const cy = h / 2 + 20; // Deeper vertical offset for large scale
+  const radius = Math.min(cx - 180, cy - 130); // Increased padding to ensure full labels fit
   const maxVal = customMax || Math.max(...values, 1);
   const count = labels.length;
 
@@ -588,13 +588,13 @@ function drawRadarChart(containerId, labels, values, options = {}) {
     ctx.stroke();
 
     // Label
-    const lx = cx + (radius + 20) * Math.cos(angle);
-    const ly = cy + (radius + 20) * Math.sin(angle);
-    ctx.fillStyle = 'rgba(255,255,255,0.65)';
-    ctx.font = '10px Inter, system-ui, sans-serif';
+    const lx = cx + (radius + 28) * Math.cos(angle);
+    const ly = cy + (radius + 28) * Math.sin(angle);
+    ctx.fillStyle = 'rgba(255,255,255,0.75)'; // Slightly brighter
+    ctx.font = '11px Inter, system-ui, sans-serif';
     ctx.textAlign = angle > Math.PI / 2 || angle < -Math.PI / 2 ? 'right' : (Math.abs(angle + Math.PI / 2) < 0.1 ? 'center' : 'left');
-    const shortLabel = labels[i].length > 14 ? labels[i].slice(0, 13) + '…' : labels[i];
-    ctx.fillText(shortLabel, lx, ly + 4);
+    const fullLabel = labels[i]; // Removed truncation
+    ctx.fillText(fullLabel, lx, ly + 4);
   }
 }
 
@@ -608,7 +608,7 @@ function renderDashboard() {
   if (!user) {
     return `
       <div class="empty-state" style="padding-top:140px;">
-        <div class="empty-icon">🧠</div>
+        <div class="empty-icon">Note</div>
         <h3>Sign in required</h3>
         <p>Log in to access your ML Intelligence Dashboard.</p>
         <button class="btn btn-primary" onclick="showAuthModal('login')" style="margin-top:20px;">Sign In</button>
@@ -623,7 +623,7 @@ function renderDashboard() {
         <!-- Dashboard Header -->
         <div class="dash-header fade-in">
           <div>
-            <h1 class="dash-title">🧠 AI Intelligence Dashboard</h1>
+            <h1 class="dash-title">AI Intelligence Dashboard</h1>
             <p class="dash-subtitle">Real-time analytics from your personal AI recommendation model</p>
           </div>
           <div class="dash-header-actions">
@@ -631,7 +631,10 @@ function renderDashboard() {
               <span class="model-status-dot"></span>
               Loading...
             </div>
-            <a href="#/profile" class="btn btn-outline btn-sm">← Back to Profile</a>
+            <button class="btn btn-outline btn-sm sync-btn" onclick="syncDashboard(this)" style="display:flex;align-items:center;gap:8px;border-color:rgba(255,255,255,0.1);">
+              <i class="fa-solid fa-rotate"></i>
+              <span>Sync Now</span>
+            </button>
           </div>
         </div>
 
@@ -644,14 +647,14 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-wide fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">📈 User Interaction Trends</h3>
+              <h3 class="dash-chart-title">User Interaction Trends</h3>
               <p class="dash-chart-desc">Your activity over time — each event feeds the AI model</p>
             </div>
             <div class="dash-chart-body" id="chart-timeline" style="height:280px;"></div>
           </div>
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🎯 Activity Breakdown</h3>
+              <h3 class="dash-chart-title">Activity Breakdown</h3>
               <p class="dash-chart-desc">How you interact with movies</p>
             </div>
             <div class="dash-chart-body" id="chart-activity-doughnut" style="height:240px;"></div>
@@ -662,14 +665,14 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">📊 Q-Value Distribution</h3>
+              <h3 class="dash-chart-title">Q-Value Distribution</h3>
               <p class="dash-chart-desc">Learned value estimates — higher = model is more confident about recommending</p>
             </div>
             <div class="dash-chart-body" id="chart-q-distribution" style="height:260px;"></div>
           </div>
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🔀 Explore vs Exploit</h3>
+              <h3 class="dash-chart-title">Explore vs Exploit</h3>
               <p class="dash-chart-desc">How your AI balances trying new things vs using what it knows</p>
             </div>
             <div class="dash-chart-body" id="chart-source-doughnut" style="height:240px;"></div>
@@ -680,7 +683,7 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-full fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🏆 Most Recommended Movies</h3>
+              <h3 class="dash-chart-title">Most Recommended Movies</h3>
               <p class="dash-chart-desc">Movies the AI model ranks highest for you — these get prioritized in recommendations</p>
             </div>
             <div class="dash-chart-body" id="chart-movie-q-bars" style="height:380px;"></div>
@@ -691,14 +694,14 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-wide fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🎨 Most Searched Genres</h3>
+              <h3 class="dash-chart-title">Most Searched Genres</h3>
               <p class="dash-chart-desc">Which genres trigger which behaviors — darker cells = stronger signal</p>
             </div>
             <div class="dash-chart-body" id="chart-genre-heatmap" style="height:280px;"></div>
           </div>
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">⭐ Your Ratings</h3>
+              <h3 class="dash-chart-title">Your Ratings</h3>
               <p class="dash-chart-desc">Distribution of your explicit ratings</p>
             </div>
             <div class="dash-chart-body" id="chart-rating-dist" style="height:260px;"></div>
@@ -709,14 +712,14 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🕸️ State-Space Coverage</h3>
+              <h3 class="dash-chart-title">State-Space Coverage</h3>
               <p class="dash-chart-desc">How many movies the model knows about in each context state</p>
             </div>
-            <div class="dash-chart-body" id="chart-state-radar" style="height:300px;"></div>
+            <div class="dash-chart-body" id="chart-state-radar" style="height:550px;"></div>
           </div>
           <div class="dash-chart-card fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">⚙️ Model Configuration</h3>
+              <h3 class="dash-chart-title">Model Configuration</h3>
               <p class="dash-chart-desc">Current AI hyperparameters driving your recommendations</p>
             </div>
             <div class="dash-config-body" id="dash-config-body">
@@ -729,7 +732,7 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-full fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🗂️ Learned State Table</h3>
+              <h3 class="dash-chart-title">Learned State Table</h3>
               <p class="dash-chart-desc">Every context state the model has learned — each state encodes Genre|Vibe|TimeOfDay</p>
             </div>
             <div class="dash-table-body" id="dash-state-table">
@@ -742,7 +745,7 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-full fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">📊 ML Evaluation Metrics</h3>
+              <h3 class="dash-chart-title">ML Evaluation Metrics</h3>
               <p class="dash-chart-desc">Offline model quality: Precision, Recall, NDCG, Coverage — proves recommendation accuracy</p>
             </div>
             <div class="dash-metrics-body" id="dash-ml-metrics">
@@ -755,7 +758,7 @@ function renderDashboard() {
         <div class="dash-row">
           <div class="dash-chart-card dash-full fade-in-up">
             <div class="dash-chart-head">
-              <h3 class="dash-chart-title">🔬 Model Training Info</h3>
+              <h3 class="dash-chart-title">Model Training Info</h3>
               <p class="dash-chart-desc">Similarity model architecture, cold-start weights, and training metadata</p>
             </div>
             <div class="dash-metrics-body" id="dash-model-info">
@@ -807,7 +810,7 @@ async function loadDashboardData() {
 
   // ── Model Badge ──
   const badge = document.getElementById('dash-model-badge');
-  const maturityLabels = { cold_start: '❄️ Cold Start', learning: '📚 Learning', improving: '📈 Improving', mature: '🎯 Mature' };
+  const maturityLabels = { cold_start: 'Cold Start', learning: 'Learning', improving: 'Improving', mature: 'Mature' };
   const maturityColors = { cold_start: '#6b7280', learning: '#f59e0b', improving: '#10b981', mature: '#7c3aed' };
   if (badge) {
     badge.innerHTML = `<span class="model-status-dot" style="background:${maturityColors[d.summary.modelMaturity]}"></span> ${maturityLabels[d.summary.modelMaturity]}`;
@@ -816,7 +819,7 @@ async function loadDashboardData() {
   // Small delay to let container dimensions settle
   setTimeout(() => renderAllCharts(d), 100);
 
-  // Load ML evaluation metrics from FastAPI
+  // Load ML evaluation metrics from AI backend
   loadMLMetrics();
 }
 
@@ -825,8 +828,8 @@ function renderKPIs(summary) {
   if (!grid) return;
 
   const kpis = [
-    { icon: '⚡', label: 'Interactions', value: summary.totalInteractions, color: ChartColors.purple },
-    { icon: '🧩', label: 'Q-Table Entries', value: summary.totalQEntries, color: ChartColors.pink },
+    { icon: '💓', label: 'Interactions', value: summary.totalInteractions, color: ChartColors.purple },
+    { icon: '📊', label: 'Q-Table Entries', value: summary.totalQEntries, color: ChartColors.pink },
     { icon: '🌐', label: 'States Learned', value: summary.uniqueStates, color: ChartColors.cyan },
     { icon: '⭐', label: 'Ratings Given', value: summary.totalRatings, color: ChartColors.amber },
     { icon: '📈', label: 'Avg Q-Value', value: summary.avgQValue, color: ChartColors.emerald },
@@ -893,7 +896,7 @@ function renderAllCharts(d) {
   const srcColors = { rl: ChartColors.purple, explore: ChartColors.amber, hybrid: ChartColors.emerald, content: ChartColors.cyan, popular: ChartColors.pink };
   if (srcLabels.length > 0) {
     drawDoughnutChart('chart-source-doughnut', srcLabels, srcValues, {
-      colors: srcLabels.map(l => srcColors[l] || ChartColors.indigo)
+      colors: srcLabels.map((l, i) => srcColors[l] || ChartColors.palette[i % ChartColors.palette.length])
     });
   } else {
     document.getElementById('chart-source-doughnut').innerHTML = emptyChartMsg('No recommendation sources yet');
@@ -914,7 +917,7 @@ function renderAllCharts(d) {
   drawHeatmap('chart-genre-heatmap', d.genreBreakdown || {}, { height: 280 });
 
   // 7. Rating Distribution
-  const ratingLabels = ['★ 1', '★★ 2', '★★★ 3', '★★★★ 4', '★★★★★ 5'];
+  const ratingLabels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
   const ratingDist = d.ratingDistribution || [0, 0, 0, 0, 0];
   const hasRatings = ratingDist.some(v => v > 0);
   if (hasRatings) {
@@ -930,9 +933,9 @@ function renderAllCharts(d) {
   const states = d.stateDetails || [];
   if (states.length >= 3) {
     drawRadarChart('chart-state-radar',
-      states.slice(0, 8).map(s => s.state),
+      states.slice(0, 8).map(s => s.state.replace(/\|/g, ' • ')),
       states.slice(0, 8).map(s => s.movieCount),
-      { title: '', height: 300 }
+      { title: '', height: 550 }
     );
   } else {
     document.getElementById('chart-state-radar').innerHTML = emptyChartMsg('Need 3+ context states for radar — keep interacting!');
@@ -968,7 +971,7 @@ function renderConfigPanel(config) {
         </div>
       </div>
       <div class="config-item">
-        <div class="config-icon">📚</div>
+        <div class="config-icon">📖</div>
         <div class="config-info">
           <div class="config-label">Learning Rate (α)</div>
           <div class="config-value">${config.learningRate}</div>
@@ -976,7 +979,7 @@ function renderConfigPanel(config) {
         </div>
       </div>
       <div class="config-item">
-        <div class="config-icon">🔮</div>
+        <div class="config-icon">⏳</div>
         <div class="config-info">
           <div class="config-label">Discount Factor (γ)</div>
           <div class="config-value">${config.discountFactor}</div>
@@ -997,7 +1000,7 @@ function renderConfigPanel(config) {
 }
 
 function rewardIcon(key) {
-  const icons = { click: '👆', view: '👁️', rating_5: '🌟', rating_4: '⭐', rating_3: '😐', rating_2: '👎', rating_1: '💀', recommend_click: '🤖', dwell_long: '⏱️', dwell_short: '⏩', search_select: '🔍' };
+  const icons = { click: '🖱️', view: '👁️', rating_5: '🌟', rating_4: '👍', rating_3: '😐', rating_2: '👎', rating_1: '😡', recommend_click: '🤖', dwell_long: '⏳', dwell_short: '⚡', search_select: '🔍' };
   return icons[key] || '📊';
 }
 
@@ -1056,7 +1059,7 @@ function renderStateTable(stateDetails) {
 }
 
 function emptyChartMsg(text) {
-  return `<div class="dash-chart-empty"><span>📭</span><p>${text}</p></div>`;
+  return `<div class="dash-chart-empty"><i class="fa-solid fa-circle-info" style="font-size:32px;"></i><p>${text}</p></div>`;
 }
 
 // ──────────────────────────────────
@@ -1070,7 +1073,7 @@ async function loadMLMetrics() {
     renderMLMetricsPanel(metricsRes.data);
   } else {
     const container = document.getElementById('dash-ml-metrics');
-    if (container) container.innerHTML = '<p class="dash-empty-text">ML metrics not available — ensure FastAPI backend is running and model_evaluator has been executed.</p>';
+    if (container) container.innerHTML = '<p class="dash-empty-text">ML metrics not available — ensure the AI backend is running and model_evaluator has been executed.</p>';
   }
 
   // Fetch model info
@@ -1079,7 +1082,7 @@ async function loadMLMetrics() {
     renderModelInfoPanel(infoRes.data);
   } else {
     const container = document.getElementById('dash-model-info');
-    if (container) container.innerHTML = '<p class="dash-empty-text">Model info not available — ensure FastAPI backend is running.</p>';
+    if (container) container.innerHTML = '<p class="dash-empty-text">Model info not available — ensure the AI backend is running.</p>';
   }
 }
 
@@ -1088,13 +1091,13 @@ function renderMLMetricsPanel(metrics) {
   if (!container) return;
 
   const metricItems = [
-    { icon: '🎯', label: `Precision@${metrics.k || 5}`, value: metrics.precision_k, desc: 'Fraction of top-K recommendations that are relevant', color: ChartColors.purple },
-    { icon: '📡', label: `Recall@${metrics.k || 5}`, value: metrics.recall_k, desc: 'Fraction of relevant items captured in top-K', color: ChartColors.pink },
-    { icon: '✅', label: `Hit Rate@${metrics.k || 5}`, value: metrics.hit_rate_k, desc: 'Fraction of queries with at least 1 relevant hit', color: ChartColors.emerald },
-    { icon: '🏅', label: 'MRR', value: metrics.mrr, desc: 'Mean Reciprocal Rank — how early is the first relevant result', color: ChartColors.amber },
-    { icon: '📈', label: `NDCG@${metrics.k || 5}`, value: metrics.ndcg_k, desc: 'Normalized Discounted Cumulative Gain — ranking quality', color: ChartColors.cyan },
-    { icon: '🌐', label: 'Coverage', value: metrics.coverage, desc: 'Fraction of catalog that appears in any recommendation', color: ChartColors.indigo },
-    { icon: '🔗', label: 'Avg Similarity', value: metrics.avg_similarity, desc: 'Mean cosine similarity of top-K pairs', color: ChartColors.teal },
+    { icon: '<i class="fa-solid fa-bullseye"></i>', label: `Precision@${metrics.k || 5}`, value: metrics.precision_k, desc: 'Fraction of top-K recommendations that are relevant', color: ChartColors.purple },
+    { icon: '<i class="fa-solid fa-tower-broadcast"></i>', label: `Recall@${metrics.k || 5}`, value: metrics.recall_k, desc: 'Fraction of relevant items captured in top-K', color: ChartColors.pink },
+    { icon: '<i class="fa-solid fa-circle-check"></i>', label: `Hit Rate@${metrics.k || 5}`, value: metrics.hit_rate_k, desc: 'Fraction of queries with at least 1 relevant hit', color: ChartColors.emerald },
+    { icon: '<i class="fa-solid fa-medal"></i>', label: 'MRR', value: metrics.mrr, desc: 'Highest ranked recommendation position average', color: ChartColors.amber },
+    { icon: '<i class="fa-solid fa-chart-line"></i>', label: `NDCG@${metrics.k || 5}`, value: metrics.ndcg_k, desc: 'Normalized Discounted Cumulative Gain — rank quality', color: ChartColors.cyan },
+    { icon: '<i class="fa-solid fa-earth-americas"></i>', label: 'Coverage', value: metrics.coverage, desc: 'Fraction of catalog items recommended across users', color: ChartColors.indigo },
+    { icon: '<i class="fa-solid fa-link"></i>', label: 'Avg Similarity', value: metrics.avg_similarity, desc: 'Mean cosine similarity score of top recommendations', color: ChartColors.teal },
   ];
 
   container.innerHTML = `
@@ -1118,8 +1121,8 @@ function renderMLMetricsPanel(metrics) {
       }).join('')}
     </div>
     <div class="ml-metrics-footer">
-      <span>📋 Evaluated on <strong>${metrics.num_movies || '—'}</strong> movies</span>
-      <span>🕐 ${metrics.evaluated_at ? new Date(metrics.evaluated_at).toLocaleString() : '—'}</span>
+      <span>List Evaluated on <strong>${metrics.num_movies || '—'}</strong> movies</span>
+      <span>Time: ${metrics.evaluated_at ? new Date(metrics.evaluated_at).toLocaleString() : '—'}</span>
     </div>
   `;
 }
@@ -1137,17 +1140,17 @@ function renderModelInfoPanel(info) {
   container.innerHTML = `
     <div class="model-info-grid">
       <div class="model-info-section">
-        <h4>🏗️ Architecture</h4>
+        <h4>Architecture</h4>
         <div class="model-info-items">
-          <div class="model-info-row"><span>Status</span><span class="model-info-val">${info.status === 'loaded' ? '✅ Loaded' : '❌ Not Loaded'}</span></div>
+          <div class="model-info-row"><span>Status</span><span class="model-info-val">${info.status === 'loaded' ? 'Loaded' : 'Not Loaded'}</span></div>
           <div class="model-info-row"><span>Catalog Size</span><span class="model-info-val">${info.catalog_size || '—'} movies</span></div>
           <div class="model-info-row"><span>Matrix Shape</span><span class="model-info-val">${info.matrix_shape ? info.matrix_shape.join(' × ') : '—'}</span></div>
-          <div class="model-info-row"><span>Has Metadata</span><span class="model-info-val">${info.has_metadata ? '✅ Yes (XAI ready)' : '❌ No'}</span></div>
+          <div class="model-info-row"><span>Has Metadata</span><span class="model-info-val">${info.has_metadata ? 'Yes (XAI ready)' : 'No'}</span></div>
         </div>
       </div>
 
       <div class="model-info-section">
-        <h4>📐 Training Details</h4>
+        <h4>Training Details</h4>
         <div class="model-info-items">
           <div class="model-info-row"><span>TF-IDF Dimensions</span><span class="model-info-val">${training.tfidf_dimensions || '—'}</span></div>
           <div class="model-info-row"><span>Vocabulary Size</span><span class="model-info-val">${training.vocabulary_size || '—'}</span></div>
@@ -1157,7 +1160,7 @@ function renderModelInfoPanel(info) {
       </div>
 
       <div class="model-info-section">
-        <h4>❄️ Cold-Start Weights</h4>
+        <h4>Cold-Start Weights</h4>
         <div class="model-info-items">
           <div class="model-info-row">
             <span>Similarity</span>
@@ -1185,7 +1188,7 @@ function renderModelInfoPanel(info) {
       </div>
 
       <div class="model-info-section">
-        <h4>🔥 Warm User Weights (with Genre Boost)</h4>
+        <h4>Warm User Weights (with Genre Boost)</h4>
         <div class="model-info-items">
           <div class="model-info-row">
             <span>Similarity</span>
@@ -1222,6 +1225,38 @@ function renderModelInfoPanel(info) {
   `;
 }
 
+
+/**
+ * Global sync function to refresh all dashboard data.
+ */
+async function syncDashboard(btn) {
+  if (btn) {
+    const icon = btn.querySelector('i');
+    if (icon) icon.classList.add('fa-spin');
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+  }
+
+  // Reload all dashboard component data
+  await loadDashboardData();
+  
+  // Visual success feedback
+  if (btn) {
+    const icon = btn.querySelector('i');
+    if (icon) icon.classList.remove('fa-spin');
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    
+    // Quick indicator success
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>Synced</span>';
+    setTimeout(() => {
+        btn.innerHTML = originalContent;
+    }, 2000);
+  }
+}
+
 // Expose to global scope
+window.syncDashboard = syncDashboard;
 window.renderDashboard = renderDashboard;
 window.loadDashboardData = loadDashboardData;

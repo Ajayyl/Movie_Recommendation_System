@@ -13,16 +13,16 @@ function renderCatalogue(params) {
 
   // Prepare Age Options based on profile
   let ageOptions = `<option value="">Any (Up to Profile)</option>`;
-  if (userAge >= 9) ageOptions += `<option value="9">🎈 Kids (Safe)</option>`;
-  if (userAge >= 15) ageOptions += `<option value="15">🍿 Teen (13+)</option>`;
-  if (userAge >= 18) ageOptions += `<option value="18">🔞 Adult (18+)</option>`;
+  if (userAge >= 9) ageOptions += `<option value="9">Kids (Safe)</option>`;
+  if (userAge >= 15) ageOptions += `<option value="15">Teen (13+)</option>`;
+  if (userAge >= 18) ageOptions += `<option value="18">Adult (18+)</option>`;
 
   return `
     <section class="section" style="padding-top: 100px;">
       <div class="container">
         <div class="section-header" style="justify-content: center; text-align: center; margin-bottom: 40px;">
           <div style="max-width: 600px;">
-            <div class="hero-badge" style="margin: 0 auto 16px;">🤖 AI Recommendation Engine</div>
+
             <h2 class="section-title">Build Your Perfect Vibe</h2>
             <p class="section-subtitle">
               Mix and match criteria to let our engine discover the perfect movie for you right now.
@@ -39,10 +39,10 @@ function renderCatalogue(params) {
               <label>What's your vibe?</label>
               <select id="rec-experience" class="rec-select">
                 <option value="">Any Vibe</option>
-                <option value="fun">🎉 Fun & Light</option>
-                <option value="intense">🔥 Intense & Thrilling</option>
-                <option value="emotional">💙 Emotional & Deep</option>
-                <option value="relaxing">🌿 Relaxing & Chill</option>
+                <option value="fun">Fun & Light</option>
+                <option value="intense">Intense & Thrilling</option>
+                <option value="emotional">Emotional & Deep</option>
+                <option value="relaxing">Relaxing & Chill</option>
               </select>
             </div>
 
@@ -75,7 +75,7 @@ function renderCatalogue(params) {
 
           <div class="rec-actions">
             <button class="btn btn-primary btn-lg btn-block" onclick="runRecommendationEngine()">
-              ✨ Generate Recommendations
+              Show Recommendations
             </button>
             <button class="btn btn-text" onclick="resetRecBuilder()">Clear Filters</button>
           </div>
@@ -92,8 +92,6 @@ function renderCatalogue(params) {
         
         <!-- Empty/Init State -->
         <div id="rec-empty-state" class="empty-state" style="margin-top: 40px; opacity: 0.6;">
-          <div class="empty-icon">👆</div>
-          <p>Select your preferences above to start the engine</p>
         </div>
 
       </div>
@@ -145,7 +143,7 @@ function runRecommendationEngine() {
       countLabel.textContent = '0 matches';
       grid.innerHTML = `
         <div class="empty-state" style="grid-column: 1/-1;">
-          <div class="empty-icon">🤷‍♂️</div>
+          <div class="empty-icon"></div>
           <h3>No matches found</h3>
           <p>Try loosening your criteria (e.g. remove specific genre or vibe)</p>
         </div>

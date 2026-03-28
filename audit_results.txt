@@ -1,6 +1,0 @@
---- RESULTS ---
-BROKEN/MISSING IMAGES:
-- [54] Ex Machina (https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-Machina-poster.jpg)
-
-MISSING TRAILERS:
-None.

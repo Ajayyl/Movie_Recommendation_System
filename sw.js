@@ -3,7 +3,8 @@
 // Caches all static assets for full offline functionality
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'univibe-v13';
+// SW version bump strictly to clear caches smoothly
+const CACHE_NAME = 'univibe-v63';
 
 // All static assets to cache for offline use
 const STATIC_ASSETS = [
@@ -14,7 +15,7 @@ const STATIC_ASSETS = [
     './assets/logo/v2.png',
 
     // Data
-    './data/movieData.js',
+    './data/movieData_v63.js',
 
     // Core JS
     './js/localAI.js',

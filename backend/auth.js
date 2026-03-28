@@ -12,7 +12,7 @@ const JWT_EXPIRY = '7d'; // Token expires in 7 days
 const SALT_ROUNDS = 10;
 
 // Available avatar emojis for profile
-const AVATARS = ['👤', '🎬', '🍿', '🎭', '🎪', '🎯', '🦊', '🐱', '🦋', '🌟', '🔥', '💜', '🌈', '🎵', '🎮', '🚀'];
+const AVATARS = ['👤', '🎬', '🍿', '🎭', '🎪', '🎯', '🦊', '🐱', '🦋', '⭐', '🔥', '💖', '🌈', '🎵', '🎮', '🚀'];
 
 // ──────────────────────────────────
 // REGISTRATION

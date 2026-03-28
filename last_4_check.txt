@@ -1,4 +1,0 @@
-https://image.tmdb.org/t/p/w500/7YncShtIGNJP5euTPSZGxGsImaN.jpg -> 200
-https://image.tmdb.org/t/p/w500/AeGrue5mIPMPoS2U7htptMvjfwZ.jpg -> 200
-https://image.tmdb.org/t/p/w500/mZ3NNmHsdf3HGdHDDQLT6aJAe2c.jpg -> 200
-https://image.tmdb.org/t/p/w500/nPd1q0E7UMwfuWOwNWqKakh0JBh.jpg -> 200

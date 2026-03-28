@@ -15,10 +15,10 @@ function renderAuthModal(mode = 'login') {
         
         <div class="auth-header">
           <div class="auth-logo">
-            <img src="assets/logo/v2.png" alt="UniVibe" class="logo-img" style="width:54px; height:54px;" />
+            <img src="assets/logo/v3.png" alt="UniVibe" class="logo-img" style="width:54px; height:54px;" />
           </div>
           <h2 class="auth-title">${isLogin ? 'Welcome Back' : 'Join UniVibe'}</h2>
-          <p class="auth-subtitle">${isLogin ? 'Sign in to get personalized ML recommendations' : 'Create your account for AI-powered movie picks'}</p>
+          <p class="auth-subtitle">${isLogin ? 'Sign in to get personalized recommendations' : 'Create your account for personalized movie picks'}</p>
         </div>
 
         <div class="auth-tabs">
@@ -50,7 +50,7 @@ function renderLoginForm() {
     <div class="auth-field">
       <label for="auth-username">Username or Email</label>
       <div class="auth-input-wrap">
-        <span class="auth-input-icon">👤</span>
+        <span class="auth-input-icon"><i class="fa-solid fa-user"></i></span>
         <input type="text" id="auth-username" name="usernameOrEmail" placeholder="Enter username or email" 
                required autocomplete="username" />
       </div>
@@ -58,7 +58,7 @@ function renderLoginForm() {
     <div class="auth-field">
       <label for="auth-password">Password</label>
       <div class="auth-input-wrap">
-        <span class="auth-input-icon">🔒</span>
+        <span class="auth-input-icon"><i class="fa-solid fa-key"></i></span>
         <input type="password" id="auth-password" name="password" placeholder="Enter password" 
                required autocomplete="current-password" />
       </div>
@@ -79,14 +79,14 @@ function renderRegisterForm() {
       <div class="auth-field">
         <label for="auth-display-name">Display Name</label>
         <div class="auth-input-wrap">
-          <span class="auth-input-icon">✨</span>
+          <span class="auth-input-icon"><i class="fa-solid fa-id-card"></i></span>
           <input type="text" id="auth-display-name" name="displayName" placeholder="Your name" required />
         </div>
       </div>
       <div class="auth-field">
         <label for="auth-age">Age</label>
         <div class="auth-input-wrap">
-          <span class="auth-input-icon">🎂</span>
+          <span class="auth-input-icon"><i class="fa-solid fa-calendar"></i></span>
           <input type="number" id="auth-age" name="age" placeholder="Age" min="1" max="120" value="18" required />
         </div>
       </div>
@@ -94,7 +94,7 @@ function renderRegisterForm() {
     <div class="auth-field">
       <label for="auth-username-reg">Username</label>
       <div class="auth-input-wrap">
-        <span class="auth-input-icon">👤</span>
+        <span class="auth-input-icon">User</span>
         <input type="text" id="auth-username-reg" name="username" placeholder="Choose a username (3-24 chars)" 
                required pattern="[a-zA-Z0-9_]+" minlength="3" maxlength="24" autocomplete="username" />
       </div>
@@ -102,7 +102,7 @@ function renderRegisterForm() {
     <div class="auth-field">
       <label for="auth-email">Email</label>
       <div class="auth-input-wrap">
-        <span class="auth-input-icon">📧</span>
+        <span class="auth-input-icon"><i class="fa-solid fa-envelope"></i></span>
         <input type="email" id="auth-email" name="email" placeholder="your@email.com" 
                required autocomplete="email" />
       </div>
@@ -110,7 +110,7 @@ function renderRegisterForm() {
     <div class="auth-field">
       <label for="auth-password-reg">Password</label>
       <div class="auth-input-wrap">
-        <span class="auth-input-icon">🔒</span>
+        <span class="auth-input-icon"><i class="fa-solid fa-lock"></i></span>
         <input type="password" id="auth-password-reg" name="password" placeholder="Min 6 characters" 
                required minlength="6" autocomplete="new-password" />
       </div>
@@ -199,7 +199,7 @@ async function handleAuthSubmit(event) {
     Router.resolve(); // Re-render current page
 
     // Show success toast
-    showToast(`Welcome${mode === 'login' ? ' back' : ''}, ${result.data.user.display_name}! 🎬`, 'success');
+    showToast(`Welcome${mode === 'login' ? ' back' : ''}, ${result.data.user.display_name}!`, 'success');
   } else {
     // Show error
     errorEl.textContent = result.error || (result.data && result.data.error) || 'Something went wrong';
@@ -219,7 +219,7 @@ function renderProfile() {
   if (!user) {
     return `
       <div class="empty-state" style="padding-top:140px;">
-        <div class="empty-icon">🔐</div>
+        <div class="empty-icon"><i class="fa-solid fa-lock" style="font-size:48px;"></i></div>
         <h3>Sign in required</h3>
         <p>Log in to view your profile and ML recommendations.</p>
         <button class="btn btn-primary" onclick="showAuthModal('login')" style="margin-top:20px;">Sign In</button>
@@ -233,11 +233,10 @@ function renderProfile() {
         
         <!-- Profile Header -->
         <div class="profile-hero fade-in">
-          <div class="profile-avatar-large">${user.avatar_emoji || '👤'}</div>
           <div class="profile-hero-info">
             <h1 class="profile-name">${user.display_name}</h1>
             <div class="profile-uid">
-              <span class="uid-badge">🔑 ${user.user_uid}</span>
+              <span class="uid-badge">ID: ${user.user_uid}</span>
               <span class="profile-username">@${user.username}</span>
             </div>
             <div class="profile-stats-row" id="profile-stats-row">
@@ -247,8 +246,8 @@ function renderProfile() {
             </div>
           </div>
           <div class="profile-actions">
-            <button class="btn btn-outline btn-sm" onclick="showEditProfile()">✏️ Edit Profile</button>
-            <button class="btn btn-outline btn-sm" onclick="handleLogout()" style="border-color:rgba(239,68,68,0.3);color:#ef4444;">🚪 Sign Out</button>
+            <button class="btn btn-outline btn-sm" onclick="showEditProfile()">Edit Profile</button>
+            <button class="btn btn-outline btn-sm" onclick="handleLogout()" style="border-color:rgba(239,68,68,0.3);color:#ef4444;">Sign Out</button>
           </div>
         </div>
 
@@ -256,14 +255,13 @@ function renderProfile() {
         <div class="ml-intelligence-card fade-in-up" id="ml-intelligence-card">
           <div class="ml-card-header">
             <div>
-              <h2 class="section-title">🧠 AI Intelligence</h2>
+              <h2 class="section-title">AI Intelligence</h2>
               <p class="section-subtitle">Your personal recommendation model learns from every interaction</p>
             </div>
             <div style="display:flex;align-items:center;gap:12px;">
-              <a href="#/dashboard" class="btn btn-primary btn-sm">📊 Full Dashboard</a>
               <div class="ml-model-badge" id="ml-model-badge">
                 <span class="model-status-dot"></span>
-                Loading...
+                Processing...
               </div>
             </div>
           </div>
@@ -272,11 +270,24 @@ function renderProfile() {
           </div>
         </div>
 
-        <!-- Watch Later Section -->
-        <div class="section fade-in-up" style="padding-top:0;margin-top:20px;">
+        <!-- Favorites Section -->
+        <div class="section fade-in-up" style="padding-top:0;padding-bottom:10px;margin-top:10px;">
           <div class="section-header">
             <div>
-              <h2 class="section-title">🔖 Watch Later</h2>
+              <h2 class="section-title">Favorites</h2>
+              <p class="section-subtitle">Your most loved movies</p>
+            </div>
+          </div>
+          <div id="favorites-feed">
+            ${renderAnalysisLoader()}
+          </div>
+        </div>
+
+        <!-- Watch Later Section -->
+        <div class="section fade-in-up" style="padding-top:0;padding-bottom:10px;margin-top:10px;">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Watch Later</h2>
               <p class="section-subtitle">Movies you've saved to watch another time</p>
             </div>
           </div>
@@ -285,38 +296,19 @@ function renderProfile() {
           </div>
         </div>
 
-        <!-- AI Recommendations Section -->
-        <div class="section recommend-section fade-in-up" style="padding-top:0;margin-top:40px;">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title">🤖 AI Picks For You</h2>
-              <p class="section-subtitle">Generated by your AI recommendation model</p>
+        <!-- Recent Activity Card -->
+        <div class="section fade-in-up" style="padding-top:0;padding-bottom:30px;margin-top:10px;">
+          <div class="activity-cta-card">
+            <div class="cta-card-content">
+              <div class="cta-card-info">
+                <h2 class="section-title">Recent Activity</h2>
+                <p class="section-subtitle">Review your recently viewed movies, clicked recommendations, and search history.</p>
+              </div>
             </div>
-          </div>
-          <div id="ai-recommendations">
-            ${renderAnalysisLoader()}
+            <a href="#/history" class="btn btn-primary" style="margin-top: 24px;"><i class="fa-solid fa-clock-rotate-left" style="margin-right:8px;"></i> View Full History &rarr;</a>
           </div>
         </div>
 
-        <!-- Recent Activity -->
-        <div class="section fade-in-up" style="padding-top:0;margin-top:20px;">
-          <div class="section-header">
-            <h2 class="section-title">📊 Recent Activity</h2>
-          </div>
-          <div id="activity-feed">
-            ${renderAnalysisLoader()}
-          </div>
-        </div>
-
-        <!-- Search History -->
-        <div class="section fade-in-up" style="padding-top:0;margin-top:20px;">
-          <div class="section-header">
-            <h2 class="section-title">🔍 Search History</h2>
-          </div>
-          <div id="search-history-feed">
-            ${renderAnalysisLoader()}
-          </div>
-        </div>
         
       </div>
     </section>
@@ -333,17 +325,41 @@ async function loadProfileData() {
   // Load AI stats
   loadAIStats();
 
+  // Load Favorites
+  loadFavorites();
+
   // Load Watchlist
   loadWatchlist();
 
   // Load AI recommendations
   loadAIRecommendations();
+}
 
-  // Load activity feed
-  loadActivityFeed();
+async function loadFavorites() {
+  const container = document.getElementById('favorites-feed');
+  if (!container) return;
 
-  // Load search history
-  loadSearchHistory();
+  const res = await API.getFavorites();
+  if (!res.ok || !res.data.favorites || res.data.favorites.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding:40px 0;">
+        <div class="empty-icon"><i class="fa-solid fa-heart-crack" style="font-size:48px;"></i></div>
+        <p style="color:var(--text-muted);">You haven't added any movies to your Favorites yet.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const items = res.data.favorites;
+  container.innerHTML = `
+    <div class="movie-row movie-row-compact stagger">
+      ${items.map(item => {
+    const movie = MOVIES.find(m => m.movie_id === item.movie_id);
+    if (!movie) return '';
+    return renderMovieCard(movie);
+  }).join('')}
+    </div>
+  `;
 }
 
 async function loadWatchlist() {
@@ -351,10 +367,10 @@ async function loadWatchlist() {
   if (!container) return;
 
   const res = await API.getWatchlist();
-  if (!res.ok || res.data.watchlist.length === 0) {
+  if (!res.ok || !res.data.watchlist || res.data.watchlist.length === 0) {
     container.innerHTML = `
       <div class="empty-state" style="padding:40px 0;">
-        <div class="empty-icon">🔖</div>
+        <div class="empty-icon"><i class="fa-solid fa-list-ul" style="font-size:48px;"></i></div>
         <p style="color:var(--text-muted);">Your Watch Later list is empty. Save movies you want to watch later!</p>
       </div>
     `;
@@ -363,7 +379,7 @@ async function loadWatchlist() {
 
   const items = res.data.watchlist;
   container.innerHTML = `
-    <div class="movie-row stagger">
+    <div class="movie-row movie-row-compact stagger">
       ${items.map(item => {
     const movie = MOVIES.find(m => m.movie_id === item.movie_id);
     if (!movie) return '';
@@ -386,10 +402,10 @@ async function loadAIStats() {
 
   const stats = res.data.stats;
   const maturityLabels = {
-    cold_start: '❄️ Cold Start',
-    learning: '📚 Learning',
-    improving: '📈 Improving',
-    mature: '🎯 Mature'
+    cold_start: 'Cold Start',
+    learning: 'Learning',
+    improving: 'Improving',
+    mature: 'Mature'
   };
   const maturityColors = {
     cold_start: '#6b7280',
@@ -398,8 +414,12 @@ async function loadAIStats() {
     mature: '#7c3aed'
   };
 
+  const maturity = stats.modelMaturity || 'learning';
+  const label = maturityLabels[maturity] || 'Learning';
+  const color = maturityColors[maturity] || '#f59e0b';
+
   if (modelBadge) {
-    modelBadge.innerHTML = `<span class="model-status-dot" style="background:${maturityColors[stats.modelMaturity]}"></span> ${maturityLabels[stats.modelMaturity]}`;
+    modelBadge.innerHTML = `<span class="model-status-dot" style="background:${color}"></span> ${label}`;
   }
 
   // Update interaction count in header
@@ -441,15 +461,22 @@ async function loadAIStats() {
     ` : ''}
     ${Object.keys(stats.activityBreakdown).length > 0 ? `
       <div class="ml-stat-item" style="grid-column:1/-1;">
-        <div class="ml-stat-label" style="margin-bottom:8px;">Activity Breakdown</div>
+        <div class="ml-stat-label" style="text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; opacity: 0.6;">Activity Breakdown</div>
         <div class="activity-bars">
           ${Object.entries(stats.activityBreakdown).map(([type, count]) => {
     const maxCount = Math.max(...Object.values(stats.activityBreakdown));
     const pct = Math.round((count / maxCount) * 100);
-    const icons = { view: '👁️', click: '👆', search: '🔍', rating: '⭐', recommend_click: '🤖', dwell: '⏱️' };
+    const labels = { 
+      view: 'Movie Views', 
+      click: 'Direct Clicks', 
+      search: 'Search Queries', 
+      rating: 'Star Ratings', 
+      recommend_click: 'AI Recommendations', 
+      dwell: 'Watch Time' 
+    };
     return `
               <div class="activity-bar-row">
-                <span class="activity-bar-label">${icons[type] || '📊'} ${type}</span>
+                <span class="activity-bar-label">${labels[type] || type}</span>
                 <div class="activity-bar-track">
                   <div class="activity-bar-fill" style="width:${pct}%"></div>
                 </div>
@@ -467,11 +494,11 @@ async function loadAIRecommendations() {
   const container = document.getElementById('ai-recommendations');
   if (!container) return;
 
-  const res = await API.getRecommendations(8);
-  if (!res.ok || res.data.recommendations.length === 0) {
+  const res = await API.getRecommendations(20);
+  if (!res.ok || !res.data || !res.data.recommendations || res.data.recommendations.length === 0) {
     container.innerHTML = `
       <div class="empty-state" style="padding:40px 0;">
-        <div class="empty-icon">🤖</div>
+        <div class="empty-icon"><i class="fa-solid fa-brain" style="font-size:48px;"></i></div>
         <p style="color:var(--text-muted);">Interact with more movies to train your AI model!</p>
       </div>
     `;
@@ -482,7 +509,7 @@ async function loadAIRecommendations() {
 
   // Map recommendation data back to full movie objects
   container.innerHTML = `
-    <div class="movie-row stagger">
+    <div class="movie-row stagger" style="margin-top:20px; padding-bottom: 24px;">
       ${recs.map(rec => {
     const movie = MOVIES.find(m => m.movie_id === rec.movie_id);
     if (!movie) return '';
@@ -490,8 +517,8 @@ async function loadAIRecommendations() {
   }).join('')}
     </div>
     <div class="rl-meta-info">
-      <span>⚡ ${recs.length} recommendations</span>
-      <span>🧠 Sources: ${[...new Set(recs.map(r => r.source))].join(', ')}</span>
+      <span>${recs.length} recommendations</span>
+      <span>Sources: ${[...new Set(recs.map(r => r.source))].join(', ')}</span>
     </div>
   `;
 }
@@ -501,12 +528,19 @@ async function loadActivityFeed() {
   if (!container) return;
 
   const res = await API.getHistory(15);
-  if (!res.ok || res.data.interactions.length === 0) {
+  if (!res.ok || !res.data || !res.data.interactions || res.data.interactions.length === 0) {
     container.innerHTML = '<p style="color:var(--text-muted);padding:20px;">No activity yet. Start browsing movies!</p>';
     return;
   }
 
-  const icons = { view: '👁️', click: '👆', search: '🔍', rating: '⭐', recommend_click: '🤖', dwell: '⏱️' };
+  const icons = { 
+    view: '<i class="fa-solid fa-eye"></i>', 
+    click: '<i class="fa-solid fa-computer-mouse"></i>', 
+    search: '<i class="fa-solid fa-magnifying-glass"></i>', 
+    rating: '<i class="fa-solid fa-star"></i>', 
+    recommend_click: '<i class="fa-solid fa-wand-magic-sparkles"></i>', 
+    dwell: '<i class="fa-solid fa-hourglass-half"></i>' 
+  };
 
   container.innerHTML = `
     <div class="activity-list">
@@ -515,11 +549,11 @@ async function loadActivityFeed() {
     const title = movie ? movie.title : `Movie #${i.movie_id}`;
     const time = new Date(i.created_at).toLocaleString();
     return `
-          <div class="activity-item fade-in-up">
+          <div class="activity-item fade-in-up" onclick="Router.navigate('/movie/${i.movie_id}')" style="cursor:pointer;">
             <span class="activity-icon">${icons[i.event_type] || '📊'}</span>
             <div class="activity-info">
               <span class="activity-event">${i.event_type}</span>
-              <span class="activity-movie" onclick="Router.navigate('/movie/${i.movie_id}')">${title}</span>
+              <span class="activity-movie">${title}</span>
               ${i.event_value ? `<span class="activity-value">${i.event_value}</span>` : ''}
             </div>
             <span class="activity-time">${time}</span>
@@ -535,7 +569,7 @@ async function loadSearchHistory() {
   if (!container) return;
 
   const res = await API.getSearchHistory(10);
-  if (!res.ok || res.data.searches.length === 0) {
+  if (!res.ok || !res.data || !res.data.searches || res.data.searches.length === 0) {
     container.innerHTML = '<p style="color:var(--text-muted);padding:20px;">No searches yet.</p>';
     return;
   }
@@ -547,7 +581,7 @@ async function loadSearchHistory() {
     const movie = s.selected_movie_id ? MOVIES.find(m => m.movie_id === s.selected_movie_id) : null;
     return `
           <div class="search-item fade-in-up">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
             <div class="search-info">
               <span class="search-query">"${s.query}"</span>
               <span class="search-results">${s.result_count} results</span>
@@ -562,14 +596,88 @@ async function loadSearchHistory() {
 }
 
 // ──────────────────────────────────
-// EDIT PROFILE MODAL
+// ACTIVITY HISTORY PAGE
 // ──────────────────────────────────
+
+function renderActivityHistory() {
+  const user = API.getUser();
+  if (!user) return Router.navigate('/profile');
+
+  return `
+    <section class="section" style="padding-top:100px;">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">Interaction History</h1>
+            <p class="section-subtitle">A complete log of your views, clicks, and AI interactions</p>
+          </div>
+          <a href="#/profile" class="btn btn-sm btn-outline">← Back to Profile</a>
+        </div>
+
+        <div id="full-history-feed" style="margin-top:20px;">
+          ${renderAnalysisLoader(10)}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+async function loadFullActivityHistory() {
+  const container = document.getElementById('full-history-feed');
+  if (!container) return;
+
+  // Fetch a larger history (e.g., 100 items)
+  const res = await API.getHistory(100);
+  if (!res.ok || !res.data || !res.data.interactions || res.data.interactions.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding:100px 0;">
+        <div class="empty-icon"><i class="fa-solid fa-clock-rotate-left" style="font-size:56px;"></i></div>
+        <h3>No history found</h3>
+        <p>Your interactions will appear here as you browse movies.</p>
+        <a href="#/" class="btn btn-primary" style="margin-top:20px;">Start Browsing</a>
+      </div>
+    `;
+    return;
+  }
+
+  const icons = { 
+    view: '<i class="fa-solid fa-eye"></i>', 
+    click: '<i class="fa-solid fa-computer-mouse"></i>', 
+    search: '<i class="fa-solid fa-magnifying-glass"></i>', 
+    rating: '<i class="fa-solid fa-star"></i>', 
+    recommend_click: '<i class="fa-solid fa-wand-magic-sparkles"></i>', 
+    dwell: '<i class="fa-solid fa-hourglass-half"></i>' 
+  };
+
+  container.innerHTML = `
+    <div class="activity-history-container">
+      <div class="activity-list">
+        ${res.data.interactions.map(i => {
+    const movie = MOVIES.find(m => m.movie_id === i.movie_id);
+    const title = movie ? movie.title : `Movie #${i.movie_id}`;
+    const time = new Date(i.created_at).toLocaleString();
+    return `
+            <div class="activity-item fade-in-up" onclick="Router.navigate('/movie/${i.movie_id}')" style="cursor:pointer; margin-bottom:8px;">
+              <span class="activity-icon">${icons[i.event_type] || '📊'}</span>
+              <div class="activity-info">
+                <span class="activity-event">${i.event_type}</span>
+                <span class="activity-movie">${title}</span>
+                ${i.event_value ? `<span class="activity-value">${i.event_value}</span>` : ''}
+              </div>
+              <span class="activity-time">${time}</span>
+            </div>
+          `;
+  }).join('')}
+      </div>
+    </div>
+  `;
+}
 
 function showEditProfile() {
   const user = API.getUser();
   if (!user) return;
 
-  const avatars = ['👤', '🎬', '🍿', '🎭', '🎪', '🎯', '🦊', '🐱', '🦋', '🌟', '🔥', '💜', '🌈', '🎵', '🎮', '🚀'];
+  const avatars = ['👤', '🎬', '🍿', '🎭', '🎪', '🎯', '🦊', '🐱', '🦋', '⭐', '🔥', '💖', '🌈', '🎵', '🎮', '🚀'];
   const allGenres = getAllGenres(MOVIES);
 
   const modal = `
@@ -580,28 +688,19 @@ function showEditProfile() {
           <h2 class="auth-title">Edit Profile</h2>
         </div>
         <form id="edit-profile-form" class="auth-form" onsubmit="handleProfileUpdate(event)">
-          <div class="auth-field">
-            <label>Avatar</label>
-            <div class="avatar-picker">
-              ${avatars.map(a => `
-                <button type="button" class="avatar-option ${a === user.avatar_emoji ? 'active' : ''}" 
-                        onclick="selectAvatar(this, '${a}')">${a}</button>
-              `).join('')}
-            </div>
-            <input type="hidden" name="avatar_emoji" id="edit-avatar" value="${user.avatar_emoji || '👤'}" />
-          </div>
+          <input type="hidden" name="avatar_emoji" id="edit-avatar" value="${user.avatar_emoji || ''}" />
           <div class="auth-field-row">
             <div class="auth-field">
               <label for="edit-display-name">Display Name</label>
               <div class="auth-input-wrap">
-                <span class="auth-input-icon">✨</span>
+                <span class="auth-input-icon"><i class="fa-solid fa-user"></i></span>
                 <input type="text" id="edit-display-name" name="display_name" value="${user.display_name}" required />
               </div>
             </div>
             <div class="auth-field">
               <label for="edit-age">Age</label>
               <div class="auth-input-wrap">
-                <span class="auth-input-icon">🎂</span>
+                <span class="auth-input-icon"><i class="fa-solid fa-calendar"></i></span>
                 <input type="number" id="edit-age" name="age" value="${user.age}" min="1" max="120" required />
               </div>
             </div>
@@ -624,10 +723,10 @@ function showEditProfile() {
             <label for="edit-experience">Preferred Vibe</label>
             <select id="edit-experience" name="preferred_experience" class="rec-select" style="width:100%">
               <option value="">Any</option>
-              <option value="fun" ${user.preferred_experience === 'fun' ? 'selected' : ''}>🎉 Fun</option>
-              <option value="intense" ${user.preferred_experience === 'intense' ? 'selected' : ''}>🔥 Intense</option>
-              <option value="emotional" ${user.preferred_experience === 'emotional' ? 'selected' : ''}>💙 Emotional</option>
-              <option value="relaxing" ${user.preferred_experience === 'relaxing' ? 'selected' : ''}>🌿 Relaxing</option>
+              <option value="fun" ${user.preferred_experience === 'fun' ? 'selected' : ''}>Fun</option>
+              <option value="intense" ${user.preferred_experience === 'intense' ? 'selected' : ''}>Intense</option>
+              <option value="emotional" ${user.preferred_experience === 'emotional' ? 'selected' : ''}>Emotional</option>
+              <option value="relaxing" ${user.preferred_experience === 'relaxing' ? 'selected' : ''}>Relaxing</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary btn-block auth-submit">Save Changes</button>
@@ -675,7 +774,7 @@ async function handleProfileUpdate(event) {
     document.getElementById('edit-profile-modal').remove();
     updateAuthUI();
     Router.resolve();
-    showToast('Profile updated! 🎉', 'success');
+    showToast('Profile updated!', 'success');
   } else {
     showToast(result.error || (result.data && result.data.error) || 'Update failed', 'error');
   }
@@ -686,37 +785,32 @@ async function handleProfileUpdate(event) {
 // ──────────────────────────────────
 
 function updateAuthUI() {
-  const navLinks = document.getElementById('nav-links');
-  if (!navLinks) return;
+  const navUser = document.getElementById('navbar-user');
+  if (!navUser) return;
 
   const user = API.getUser();
-  const ageBadge = document.getElementById('nav-age-badge');
-  const existingAuthBtn = document.getElementById('nav-auth-btn');
-
-  // Remove existing auth btn
-  if (existingAuthBtn) existingAuthBtn.remove();
-
-  // Always sync and update the age-based badge
-  updateNavAgeBadge();
-
+  
   if (user) {
-    // Add profile link to nav
-    const profileLink = document.createElement('a');
-    profileLink.id = 'nav-auth-btn';
-    profileLink.className = 'nav-link';
-    profileLink.href = '#/dashboard';
-    profileLink.dataset.route = '/dashboard';
-    profileLink.textContent = '📊 Dashboard';
-    if (ageBadge) navLinks.insertBefore(profileLink, ageBadge);
-    else navLinks.appendChild(profileLink);
+    // Get initials (e.g. "Ajay Kumaar" → "AK" or just the first 2 chars)
+    let initials = 'AK'; 
+    if (user.display_name) {
+      const parts = user.display_name.split(' ');
+      initials = parts.length > 1 
+        ? (parts[0][0] + parts[1][0]).toUpperCase() 
+        : user.display_name.substring(0, 2).toUpperCase();
+    }
+
+    navUser.innerHTML = `
+      <div class="nav-profile-pill" onclick="Router.navigate('/profile')" title="View Profile">
+        <span class="nav-profile-text">Profile</span>
+      </div>
+    `;
   } else {
-    // Not logged in — show sign in button
-    const loginBtn = document.createElement('button');
-    loginBtn.id = 'nav-auth-btn';
-    loginBtn.className = 'btn btn-primary btn-sm nav-login-btn';
-    loginBtn.innerHTML = '🔐 Sign In';
-    loginBtn.onclick = () => showAuthModal('login');
-    navLinks.appendChild(loginBtn);
+    navUser.innerHTML = `
+      <button class="btn btn-primary btn-sm nav-login-btn" onclick="showAuthModal('login')">
+        Sign In
+      </button>
+    `;
   }
 }
 
@@ -771,8 +865,9 @@ function trackSearchQuery(query, resultCount) {
 // Track movie view (called when detail page loads)
 function trackMovieView(movieId, movie) {
   if (!API.isLoggedIn()) return;
+  const genre = movie ? (Array.isArray(movie.genre) ? movie.genre[0] : String(movie.genre).split('|')[0]) : '';
   API.trackInteraction(movieId, 'view', '', {
-    genre: movie ? movie.genre[0] : '',
+    genre: genre,
     experience: movie ? movie.experience_type : '',
     source: 'detail_page'
   });
@@ -781,8 +876,9 @@ function trackMovieView(movieId, movie) {
 // Track movie click (when user clicks a card)
 function trackMovieClick(movieId, movie, source = 'browse') {
   if (!API.isLoggedIn()) return;
+  const genre = movie ? (Array.isArray(movie.genre) ? movie.genre[0] : String(movie.genre).split('|')[0]) : '';
   API.trackInteraction(movieId, 'click', '', {
-    genre: movie ? movie.genre[0] : '',
+    genre: genre,
     experience: movie ? movie.experience_type : '',
     source
   });
@@ -791,8 +887,9 @@ function trackMovieClick(movieId, movie, source = 'browse') {
 // Track recommendation click
 function trackRecommendationClick(movieId, movie) {
   if (!API.isLoggedIn()) return;
+  const genre = movie ? (Array.isArray(movie.genre) ? movie.genre[0] : String(movie.genre).split('|')[0]) : '';
   API.trackInteraction(movieId, 'recommend_click', '', {
-    genre: movie ? movie.genre[0] : '',
+    genre: genre,
     experience: movie ? movie.experience_type : '',
     source: 'recommendation'
   });
@@ -802,30 +899,8 @@ function trackRecommendationClick(movieId, movie) {
 // RATING WIDGET
 // ──────────────────────────────────
 
-function renderRatingWidget(movieId) {
-  if (!API.isLoggedIn()) {
-    return `
-      <div class="rating-widget" id="rating-widget">
-        <p class="rating-prompt">🔐 <a href="#" onclick="showAuthModal('login'); return false;" style="color:var(--accent-tertiary);">Sign in</a> to rate this movie & train your AI</p>
-      </div>
-    `;
-  }
+// Redundant renderRatingWidget removed — using the one from components.js for better UI consistency.
 
-  return `
-    <div class="rating-widget" id="rating-widget">
-      <div class="rating-prompt">Rate this movie</div>
-      <div class="star-rating" id="star-rating" data-movie-id="${movieId}">
-        ${[1, 2, 3, 4, 5].map(i => `
-          <button class="star-btn" data-value="${i}" onclick="submitRating(${movieId}, ${i})" 
-                  onmouseenter="highlightStars(${i})" onmouseleave="resetStarHighlight(${movieId})">
-            ★
-          </button>
-        `).join('')}
-      </div>
-      <div class="rating-feedback" id="rating-feedback"></div>
-    </div>
-  `;
-}
 
 async function loadExistingRating(movieId) {
   if (!API.isLoggedIn()) return;
@@ -867,10 +942,10 @@ async function submitRating(movieId, rating) {
     setStarRating(rating);
     const feedback = document.getElementById('rating-feedback');
     if (feedback) {
-      feedback.textContent = `Rated ${rating}/5 — Your AI model updated! 🧠`;
+      feedback.textContent = `Rated ${rating}/5 — Your AI model updated!`;
       feedback.classList.add('fade-in');
     }
-    showToast(`Rated ${rating}/5 ⭐ — AI model learning!`, 'success');
+    showToast(`Rated ${rating}/5 — AI model learning!`, 'success');
   }
 }
 
@@ -884,27 +959,26 @@ async function toggleWatchlist(event, movieId) {
     return;
   }
 
-  const btn = event.currentTarget;
-  const isDetail = btn.id === 'watchlist-toggle-btn';
+  const btn = event.currentTarget || document.getElementById('watchlist-toggle-btn');
+  if (!btn) return;
 
-  // Check current status
-  const checkRes = await API.checkWatchlist(movieId);
-  const inWatchlist = checkRes.inWatchlist;
+  // Optimistic UI state determination (Fast!)
+  const inWatchlist = btn.classList.contains('active');
 
   if (inWatchlist) {
-    // Remove
-    const res = await API.removeFromWatchlist(movieId);
-    if (res.ok) {
-      showToast('Removed from Watch Later', 'info');
-      updateWatchlistButton(movieId, false);
-    }
+    // Optimistically update UI
+    updateWatchlistButton(movieId, false);
+    showToast('Removed from Watch Later', 'info');
+    
+    // Background removal
+    API.removeFromWatchlist(movieId);
   } else {
-    // Add
-    const res = await API.addToWatchlist(movieId);
-    if (res.ok) {
-      showToast('Added to Watch Later 🔖', 'success');
-      updateWatchlistButton(movieId, true);
-    }
+    // Optimistically update UI 
+    updateWatchlistButton(movieId, true);
+    showToast('Added to Watch Later', 'success');
+    
+    // Background addition
+    API.addToWatchlist(movieId);
   }
 }
 
@@ -921,16 +995,67 @@ async function updateWatchlistButton(movieId, forceStatus = null) {
   const detailBtn = document.getElementById('watchlist-toggle-btn');
   const currentPath = window.location.hash.split('?')[0];
   if (detailBtn && currentPath.includes(`/movie/${movieId}`)) {
-    detailBtn.innerHTML = inWatchlist ? '✅ In Watch Later' : '🔖 Add to Watch Later';
+    detailBtn.innerHTML = inWatchlist ? 'In Watch Later' : 'Add to Watch Later';
     detailBtn.classList.toggle('active', inWatchlist);
   }
 
-  // Update any grid buttons if visible
+    // Update any grid buttons if visible
   document.querySelectorAll(`.watch-later-btn[onclick*="${movieId}"]`).forEach(btn => {
-    btn.innerHTML = inWatchlist ? '✅' : '🔖';
+    btn.innerHTML = inWatchlist ? 'Saved' : 'Save';
     btn.classList.toggle('active', inWatchlist);
     btn.title = inWatchlist ? 'In Watch Later' : 'Watch Later';
   });
+}
+
+// ──────────────────────────────────
+// FAVORITE LOGIC
+// ──────────────────────────────────
+
+async function toggleFavorite(event, movieId) {
+  if (!API.isLoggedIn()) {
+    showAuthModal('login');
+    return;
+  }
+
+  const btn = event.currentTarget || document.getElementById('favorite-toggle-btn');
+  if (!btn) return;
+
+  // Optimistic UI state determination (Fast!)
+  const isFavorite = btn.classList.contains('active');
+
+  if (isFavorite) {
+    // Optimistically update UI
+    updateFavoriteButton(movieId, false);
+    showToast('Removed from Favorites', 'info');
+    
+    // Background removal
+    API.removeFromFavorites(movieId);
+  } else {
+    // Optimistically update UI
+    updateFavoriteButton(movieId, true);
+    showToast('Added to Favorites', 'success');
+    
+    // Background addition
+    API.addToFavorites(movieId);
+  }
+}
+
+async function updateFavoriteButton(movieId, forceStatus = null) {
+  if (!API.isLoggedIn()) return;
+
+  let isFavorite = forceStatus;
+  if (isFavorite === null) {
+    const res = await API.checkFavorite(movieId);
+    isFavorite = res.isFavorite;
+  }
+
+  // Update detail page button if active
+  const detailBtn = document.getElementById('favorite-toggle-btn');
+  const currentPath = window.location.hash.split('?')[0];
+  if (detailBtn && currentPath.includes(`/movie/${movieId}`)) {
+    detailBtn.innerHTML = isFavorite ? 'Favorited' : 'Favorite';
+    detailBtn.classList.toggle('active', isFavorite);
+  }
 }
 
 // Make functions globally accessible
@@ -957,3 +1082,5 @@ window.loadProfileData = loadProfileData;
 window.loadAIStats = loadAIStats;
 window.toggleWatchlist = toggleWatchlist;
 window.updateWatchlistButton = updateWatchlistButton;
+window.toggleFavorite = toggleFavorite;
+window.updateFavoriteButton = updateFavoriteButton;

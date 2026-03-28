@@ -13,6 +13,7 @@ Enhancements:
 """
 
 from fastapi import FastAPI, HTTPException, Depends, Query, Request, BackgroundTasks
+from starlette.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional, Dict
@@ -26,7 +27,7 @@ import time
 import random
 import json
 from contextlib import asynccontextmanager
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, UniqueConstraint, func
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, UniqueConstraint, func, text
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from sqlalchemy.pool import QueuePool
 
@@ -110,62 +111,83 @@ GENRE_PREF_CACHE = UserPrefCache(ttl=PREF_CACHE_TTL)  # Caches user genre prefer
 
 
 # ──────────────────────────────────────────────
-# MODEL LOADING & DATA
+# SCHEMAS (Pydantic Models)
 # ──────────────────────────────────────────────
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE_DIR, 'backend', 'data', 'univibe.db')
-MODEL_PATH = os.path.join(BASE_DIR, 'models', 'similarity.pkl')
-DATASET_PATH = os.path.join(BASE_DIR, 'ml', 'dataset.csv')
-METRICS_PATH = os.path.join(BASE_DIR, 'models', 'metrics.pkl')
-METRICS_JSON_PATH = os.path.join(BASE_DIR, 'models', 'metrics.json')
+class Movie(BaseModel):
+    movie_id: int
+    title: str
+    genre: str
+    year: int
+    rating_percent: int = 0
+    popularity_score: float = 0.0
+    synopsis: str = ""
+    director: str = "Unknown"
+    cast: str = "Unknown"
+    keywords: str = ""
+    experience_type: Optional[str] = None
+    age_limit: int = 18
+    tags: Optional[str] = None
+    poster: Optional[str] = None
+    quote: Optional[str] = None
+    trailer_yt_id: Optional[str] = None
 
-# Globals to hold our models
+class MovieRecommendation(Movie):
+    movie: Optional[str] = None
+    score: float = 0.0
+    reason: str = ""
+    similarity_score: float = 0.0
+    user_preference: float = 0.0
+    similarity: float = 0.0
+    user_pref: float = 0.0
+    explanation: Optional[Dict] = None
+
+
+# ──────────────────────────────────────────────
+# MODEL LOADING & DATA (Paths corrected to match train.py)
+# ──────────────────────────────────────────────
+MODEL_PATH = os.path.join(BASE_DIR, 'backend', 'data', 'similarity.pkl')
+DATASET_PATH = os.path.join(BASE_DIR, 'backend', 'baseMovies.json')
+METRICS_JSON_PATH = os.path.join(BASE_DIR, 'backend', 'data', 'metrics.json')
+
+# Globals
 SIM_MODEL = None
 MOVIES_DF = None
 EVAL_METRICS = None
-COLLAB_MODEL = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Load model, dataset, and metrics on startup (Immutable in memory)
-    global SIM_MODEL, MOVIES_DF, EVAL_METRICS, COLLAB_MODEL
+    global SIM_MODEL, MOVIES_DF, EVAL_METRICS
     try:
         if os.path.exists(MODEL_PATH):
             with open(MODEL_PATH, 'rb') as f:
                 SIM_MODEL = pickle.load(f)
         if os.path.exists(DATASET_PATH):
-            MOVIES_DF = pd.read_csv(DATASET_PATH)
+            MOVIES_DF = pd.read_json(DATASET_PATH).fillna('')
+            # Normalize array fields to strings so Pydantic & string-ops don't crash
+            if 'genre' in MOVIES_DF.columns:
+                MOVIES_DF['genre'] = MOVIES_DF['genre'].apply(lambda x: '|'.join(x) if isinstance(x, list) else str(x))
+            if 'tags' in MOVIES_DF.columns:
+                MOVIES_DF['tags'] = MOVIES_DF['tags'].apply(lambda x: ','.join(x) if isinstance(x, list) else str(x))
+            if 'cast' in MOVIES_DF.columns:
+                MOVIES_DF['cast'] = MOVIES_DF['cast'].apply(lambda x: ', '.join(x) if isinstance(x, list) else str(x))
             print(f"Loaded similarity model for {len(MOVIES_DF)} movies.")
         else:
             MOVIES_DF = pd.DataFrame()
-            print("Dataset not found. Initializing empty catalog.")
-        # Load evaluation metrics
+            print("Dataset not found at " + DATASET_PATH)
         if os.path.exists(METRICS_JSON_PATH):
             with open(METRICS_JSON_PATH, 'r') as f:
                 EVAL_METRICS = json.load(f)
-            print(f"Loaded evaluation metrics: Precision@{EVAL_METRICS.get('k', 5)} = {EVAL_METRICS.get('precision_k', 'N/A')}")
-        elif os.path.exists(METRICS_PATH):
-            with open(METRICS_PATH, 'rb') as f:
-                EVAL_METRICS = pickle.load(f)
-            print(f"Loaded evaluation metrics (pkl)")
-            
-        collab_path = os.path.join(BASE_DIR, 'models', 'collaborative.pkl')
-        if os.path.exists(collab_path):
-            with open(collab_path, 'rb') as f:
-                COLLAB_MODEL = pickle.load(f)
-            print("Loaded Collaborative Filtering model.")
     except Exception as e:
         print(f"Startup Error: {e}")
         MOVIES_DF = pd.DataFrame()
     yield
-    # No dynamic cleanup needed for this model size
 
-app = FastAPI(title="UniVibe ML Backend — Enhanced Engine", lifespan=lifespan)
+app = FastAPI(title="UniVibe ML Backend - Enhanced Engine", lifespan=lifespan)
 
 # CORS configurations
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -187,7 +209,7 @@ async def rate_limit_middleware(request: Request, call_next):
     RATE_LIMIT_STORE[client_ip] = [ts for ts in RATE_LIMIT_STORE[client_ip] if now - ts < 60]
     
     if len(RATE_LIMIT_STORE[client_ip]) > 100:
-        return HTTPException(status_code=429, detail="Too many requests. Peak threshold reached.")
+        return JSONResponse(status_code=429, content={"detail": "Too many requests. Peak threshold reached."})
     
     RATE_LIMIT_STORE[client_ip].append(now)
     
@@ -211,31 +233,7 @@ def get_db():
         db.close()
 
 
-# ──────────────────────────────────────────────
-# SCHEMAS (Pydantic Models)
-# ──────────────────────────────────────────────
-class Movie(BaseModel):
-    movie_id: int
-    title: str
-    genre: str
-    year: int
-    rating_percent: int
-    popularity_score: float
-    synopsis: str
-    director: str = "Unknown"
-    cast: str = "Unknown"
-    keywords: str = ""
-
-
-class MovieRecommendation(Movie):
-    movie: Optional[str] = None
-    score: float
-    reason: str
-    similarity_score: float = 0.0
-    user_preference: float = 0.0
-    similarity: float = 0.0
-    user_pref: float = 0.0
-    explanation: Optional[Dict] = None
+# Movie and MovieRecommendation schemas are consolidated at the top of the file.
 
 
 class UserProfile(BaseModel):
@@ -452,7 +450,7 @@ def build_explanation(source_movie: dict, rec_movie: dict, sim_score: float, pre
     else:
         reason = " · ".join(reason_parts)
     
-    return f"🤖 {reason.capitalize()}", explanation
+    return f"AI: {reason.capitalize()}", explanation
 
 
 def build_cold_start_explanation(movie_row: dict, quality_score: float):
@@ -499,10 +497,11 @@ def build_cold_start_explanation(movie_row: dict, quality_score: float):
             'weight': 'medium',
         })
     
-    if not reason_parts:
-        reason = "Why recommended:\n• Recommended to get you started"
+    # Build the reason string (outside the elif block)
+    if reason_parts:
+        reason = "AI: " + " · ".join(part.capitalize() for part in reason_parts)
     else:
-        reason = "Why recommended:\n" + "\n".join(f"• {part.capitalize()}" for part in reason_parts)
+        reason = "AI: Trending choice you might enjoy"
     
     return reason, explanation
 
@@ -550,6 +549,13 @@ class RLEngine:
         }
     }
     
+    @classmethod
+    def softmax(cls, q_values: np.ndarray, temperature: float = 0.5) -> np.ndarray:
+        """Boltzman/Softmax exploration strategy — converts Q-values into a probability distribution."""
+        if q_values.max() > 50: q_values = q_values / q_values.max() * 10 # Scale to avoid overflow
+        exp_q = np.exp(q_values / temperature)
+        return exp_q / np.sum(exp_q)
+
     @classmethod
     def calculate_reward(cls, event_type: str, event_value: str = '') -> float:
         if event_type == "rating":
@@ -650,7 +656,9 @@ async def track_interaction(request: Request, bg: BackgroundTasks, db: Session =
         event_value = str(data.get('eventValue') or data.get('event_value') or '')
         context = data.get('context', {})
         
-        if not uid or not m_id: return {"ok": False, "error": "Missing uid or m_id"}
+        if not uid or not m_id:
+            print(f"Track Error: Missing uid={uid} or m_id={m_id} in payload: {data}")
+            return {"ok": False, "error": "Missing uid or m_id"}
         
         # Save to SQL interactions table
         interaction = Interaction(
@@ -691,351 +699,194 @@ async def get_general_recommendations(user_id: str, db: Session = Depends(get_db
     if MOVIES_DF is None or MOVIES_DF.empty:
         raise HTTPException(status_code=500, detail="Movie catalog not loaded.")
 
-    # 1. Fetch User Preference Scores (From Cache or DB)
+    # 1. Fetch User Preference Scores (RL)
     user_pref_scores = PREF_CACHE.get(user_id)
-    
     if user_pref_scores is None:
         count_movies = len(MOVIES_DF) if MOVIES_DF is not None else 0
         user_pref_scores = np.zeros(count_movies)
-        
         if count_movies > 0:
-            q_rows = db.query(RLQTable.movie_id, RLQTable.q_value).filter(RLQTable.user_uid == user_id).all()
-            
+            q_rows = db.query(RLQTable.movie_id, RLQTable.q_value)\
+                       .filter(RLQTable.user_uid == user_id).all()
             if q_rows and SIM_MODEL:
                 for m_id, q_val in q_rows:
                     if m_id in SIM_MODEL['id_to_idx']:
                         m_idx = SIM_MODEL['id_to_idx'][m_id]
-                        if m_idx < count_movies:
-                            user_pref_scores[m_idx] = q_val * 2.5
-            
+                        user_pref_scores[m_idx] = q_val * 2.5
             PREF_CACHE.set(user_id, user_pref_scores)
-            
-    # Combine Collaborative Filtering (SVD) with RL user preference
-    if COLLAB_MODEL is not None and user_id in COLLAB_MODEL['users']:
+
+    # 2. Extract profile preferences
+    prof_genres, prof_experience, prof_age = [], "", 18
+    prof_row = db.execute(text("SELECT preferred_genres, preferred_experience, age FROM users WHERE user_uid = :uid"), {"uid": user_id}).fetchone()
+    if prof_row:
         try:
-            user_idx = COLLAB_MODEL['users'].index(user_id)
-            user_factors = COLLAB_MODEL['user_factors'][user_idx]
-            item_factors = COLLAB_MODEL['item_factors']
-            collab_preds = np.dot(user_factors, item_factors)
-            
-            collab_scores = np.zeros_like(user_pref_scores)
-            movie_ids = COLLAB_MODEL['movies']
-            for i, m_id in enumerate(movie_ids):
-                if SIM_MODEL and m_id in SIM_MODEL['id_to_idx']:
-                    m_idx = SIM_MODEL['id_to_idx'][m_id]
-                    collab_scores[m_idx] = collab_preds[i]
-                    
-            if collab_scores.max() > 0:
-                collab_scores = collab_scores / collab_scores.max()
-                
-            user_pref_scores += collab_scores * 2.5
-        except Exception as e:
-            print(f"Collab Filtering Error: {e}")
-            
-    
-    if MOVIES_DF is None or MOVIES_DF.empty:
-        raise HTTPException(status_code=500, detail="Dataframe empty")
-    
-    # 2. Build user genre preference vector from interaction history
+            prof_genres = json.loads(prof_row[0]) if prof_row[0] else []
+            prof_experience = prof_row[1] or ""
+            prof_age = prof_row[2] or 18
+        except: pass
+
+    # 3. Build history-based genre preference
     user_genre_pref = build_user_genre_pref(db, user_id)
-    has_genre_pref = len(user_genre_pref) > 0
-    top_genre = get_top_genre(user_genre_pref) if has_genre_pref else ''
+    has_history = len(user_genre_pref) > 0
+    top_genre_name = get_top_genre(user_genre_pref) if has_history else ""
     
-    # 3. Compute per-movie genre preference scores
-    genre_pref_scores = np.array([
-        genre_score(str(row.get('genre', '')), user_genre_pref)
-        for _, row in MOVIES_DF.iterrows()
-    ]) if has_genre_pref else np.zeros(len(MOVIES_DF))
-    
-    # Determine If Cold Start (no interaction history)
-    is_cold_start = np.sum(user_pref_scores) == 0 and not has_genre_pref
+    # 4. Filter candidates
+    mask = MOVIES_DF['age_limit'] <= prof_age
+    candidates_df = MOVIES_DF[mask].copy()
+    if candidates_df.empty: return []
 
-    # 4. Compute quality scores with genre preference boost
-    if is_cold_start and SIM_MODEL is not None:
-        # Cold-Start: 0.5*avg_similarity + 0.3*popularity + 0.2*rating (no genre pref yet)
-        sim_matrix = SIM_MODEL['similarity_matrix']
-        avg_sims = np.mean(sim_matrix, axis=1)
+    # 5. Hybrid Scoring
+    profile_boost = np.zeros(len(candidates_df))
+    hist_genre_scores = np.zeros(len(candidates_df))
+    c_user_pref = np.zeros(len(candidates_df))
+    
+    for i, (idx, row) in enumerate(candidates_df.iterrows()):
+        mid = row['movie_id']
+        # Profile match
+        m_genres = set(str(row.get('genre', '')).split('|'))
+        shared = m_genres.intersection(set(prof_genres))
+        if shared: profile_boost[i] += len(shared) * 0.5
+        if prof_experience and row.get('experience_type') == prof_experience:
+            profile_boost[i] += 0.8
         
-        popularity_scores = MOVIES_DF['popularity_score'].values
-        rating_scores = MOVIES_DF['rating_percent'].values / 100.0
-        
-        quality_scores = (0.5 * avg_sims) + (0.3 * popularity_scores) + (0.2 * rating_scores)
-    elif has_genre_pref and SIM_MODEL is not None:
-        # Warm user WITH genre history: blend all four signals
-        # 0.45*similarity_avg + 0.25*popularity + 0.15*rating + 0.15*genre_pref
-        sim_matrix = SIM_MODEL['similarity_matrix']
-        avg_sims = np.mean(sim_matrix, axis=1)
-        
-        popularity_scores = MOVIES_DF['popularity_score'].values
-        rating_scores = MOVIES_DF['rating_percent'].values / 100.0
-        
-        quality_scores = (
-            0.45 * avg_sims +
-            0.25 * popularity_scores +
-            0.15 * rating_scores +
-            0.15 * genre_pref_scores
-        )
+        # History match
+        if has_history:
+            hist_genre_scores[i] = genre_score(str(row.get('genre', '')), user_genre_pref)
+            
+        # RL pref
+        if SIM_MODEL and mid in SIM_MODEL['id_to_idx']:
+            c_user_pref[i] = user_pref_scores[SIM_MODEL['id_to_idx'][mid]]
+
+    popularity = candidates_df['popularity_score'].values
+    rating = candidates_df['rating_percent'].values / 100.0
+    
+    is_cold_start = not has_history and np.sum(c_user_pref) == 0
+    
+    if is_cold_start:
+        quality_scores = (0.3 * popularity) + (0.3 * rating) + (0.4 * profile_boost)
     else:
-        # Warm user without genre history
-        quality_scores = (MOVIES_DF['popularity_score'].values * 0.7) + (MOVIES_DF['rating_percent'].values / 100.0 * 0.3)
+        quality_scores = (0.2 * popularity) + (0.2 * rating) + (0.3 * hist_genre_scores) + (0.3 * profile_boost)
 
-    # 5. Final Hybrid Score = Hybrid Recommender (0.7 * Content/Similarity + 0.3 * User Preference)
-    final_scores = (0.7 * quality_scores) + (0.3 * user_pref_scores)
+    # Hybrid blend: 60% quality/profile, 40% RL/History preference
+    final_scores = (0.6 * quality_scores) + (0.4 * c_user_pref)
     
-    # Exploration strategy (epsilon-greedy)
+    # Exploration
     if not is_cold_start and random.random() < RLEngine.CONFIG["exploration_rate"]:
-        # Boost randomly selected items for exploration
-        exploration_boost = np.random.uniform(0, 0.5, size=len(final_scores))
-        final_scores += exploration_boost
+        final_scores += np.random.uniform(0, 0.3, size=len(final_scores))
 
-    # Get a pool of candidates
-    pool_size = min(len(final_scores), count * 5)
+    # Candidate Selection
+    pool_size = min(len(final_scores), count * 4)
     if pool_size > 0:
-        candidate_indices = np.argpartition(final_scores, -pool_size)[-pool_size:]
-        candidate_indices = candidate_indices[np.argsort(final_scores[candidate_indices])][::-1].tolist()
+        top_indices = np.argpartition(final_scores, -pool_size)[-pool_size:]
+        top_indices = top_indices[np.argsort(final_scores[top_indices])][::-1]
     else:
-        candidate_indices = []
+        top_indices = []
 
-    # Recommendation diversity using Maximal Marginal Relevance (MMR)
-    top_indices = []
-    diversity_weight = 0.4
-    sim_matrix = SIM_MODEL.get('similarity_matrix') if SIM_MODEL else None
-
-    while len(top_indices) < count and candidate_indices:
-        best_idx = -1
-        best_mmr_score = -float('inf')
-        
-        for idx in candidate_indices:
-            base_score = final_scores[idx]
-            diversity_penalty = 0.0
-            
-            if top_indices and sim_matrix is not None:
-                similarities = [sim_matrix[idx][s_idx] for s_idx in top_indices]
-                if similarities:
-                    diversity_penalty = max(similarities)
-                
-            mmr_score = base_score - (diversity_weight * diversity_penalty)
-            
-            if mmr_score > best_mmr_score:
-                best_mmr_score = mmr_score
-                best_idx = idx
-                
-        if best_idx == -1: break
-        candidate_indices.remove(best_idx)
-        top_indices.append(best_idx)
-
-    indices = top_indices
     recommendations = []
-    for idx in indices:
-        movie_row = MOVIES_DF.iloc[idx].to_dict()
-        pref_score = float(user_pref_scores[idx])
-        quality = float(quality_scores[idx])
-        g_boost = float(genre_pref_scores[idx]) if has_genre_pref else 0.0
+    seen = set()
+    for idx in top_indices:
+        if len(recommendations) >= count: break
+        row = candidates_df.iloc[idx]
+        if row['title'] in seen: continue
+        seen.add(row['title'])
         
-        # Explainability
+        pref_val = float(c_user_pref[idx])
+        score_val = float(final_scores[idx])
+
         if is_cold_start:
-            reason, explanation = build_cold_start_explanation(movie_row, quality)
+            reason, explanation = build_cold_start_explanation(row.to_dict(), score_val)
         else:
-            from sqlalchemy import text
-            # Fetch recent watched for UI
-            recent_watched_titles = []
-            recent_rows = db.execute(
-                text("SELECT movie_id FROM interactions WHERE user_uid = :uid ORDER BY created_at DESC LIMIT 10"),
-                {"uid": user_id}
-            ).fetchall()
-            for r in recent_rows:
-                m_id = r[0]
-                match = MOVIES_DF[MOVIES_DF['movie_id'] == m_id]
-                if not match.empty:
-                    t = match.iloc[0]['title']
-                    if t not in recent_watched_titles:
-                        recent_watched_titles.append(t)
-                if len(recent_watched_titles) >= 2:
-                    break
-            if len(recent_watched_titles) > 0:
-                similar_to = recent_watched_titles[0]
-                reason = f"Why recommended:\n• Similar to {similar_to}"
-                if top_genre:
-                    reason += f"\n• Popular among {top_genre} fans"
-            else:
-                reason = "Why recommended:\n• Matches your taste profile"
-                if top_genre:
-                    reason += f"\n• Popular among {top_genre} fans"
-            
+            # Bullet point format as requested
+            reason = f"Recommended because:\n- matches your growing movie taste profile"
+            if hist_genre_scores[idx] > 0.3 and top_genre_name:
+                reason += f"\n- matches your interest in {top_genre_name}"
+            if profile_boost[idx] > 0.6:
+                reason += f"\n- matches your preferred movie vibes"
+                
             explanation = {
-                'factors': [],
-                'similarity_score': round(float(quality), 4),
-                'user_preference': round(pref_score, 4),
-                'genre_boost': round(g_boost, 4),
-                'final_score': round(float(final_scores[idx]), 4),
-                'cold_start': False,
+                'factors': [{'type': 'hybrid', 'label': 'AI profile matching', 'weight': 'high'}],
+                'final_score': round(score_val, 3),
+                'user_pref': round(pref_val, 3)
             }
-            if pref_score > 0.5:
-                explanation['factors'].append({
-                    'type': 'user_preference',
-                    'label': f"Your RL model preference score: {pref_score:.2f}",
-                    'weight': 'high' if pref_score > 1.5 else 'medium',
-                })
-            if g_boost > 0.15 and top_genre:
-                explanation['factors'].append({
-                    'type': 'genre_preference',
-                    'label': f"Matches your preference for {top_genre}",
-                    'weight': 'high' if g_boost > 0.3 else 'medium',
-                })
-            explanation['factors'].append({
-                'type': 'quality_baseline',
-                'label': f"Quality baseline: {quality:.2f}",
-                'weight': 'medium',
-            })
 
-        rec = {
-            **movie_row,
-            "movie": movie_row.get("title", ""),
-            "score": round(float(final_scores[idx]), 4),
-            "similarity_score": 0.0,
-            "similarity": 0.0,
-            "user_preference": round(pref_score, 4),
-            "user_pref": round(pref_score, 4),
-            "reason": reason,
-            "explanation": explanation,
-        }
-        recommendations.append(MovieRecommendation(**rec))
-
+        recommendations.append(MovieRecommendation(
+            **row.to_dict(),
+            score=round(score_val, 3),
+            reason=reason,
+            explanation=explanation,
+            similarity=0.0,
+            user_pref=round(pref_val, 3)
+        ))
     return recommendations
 
 
 @app.get("/recommend/{movie_id}", response_model=List[MovieRecommendation])
 async def get_movie_recommendations(movie_id: int, user_id: str, db: Session = Depends(get_db), count: int = 5):
-    """
-    Generates similar-movie recommendations using:
-    1. Content-based similarity matrix (TF-IDF + cosine similarity)
-    2. Reinforcement learning user preferences
-    3. Genre preference boost from user history
-    
-    Hybrid Score = similarity + user_pref + genre_boost
-    
-    Each recommendation returns:
-    - movie metadata
-    - score (final hybrid score)
-    - similarity (cosine similarity)
-    - user_pref (RL preference)
-    - reason (human-readable XAI)
-    - explanation (structured XAI with per-factor breakdown)
-    """
+    """Generates similar-movie recommendations using Content-Similarity + User Bias."""
     if SIM_MODEL is None or MOVIES_DF is None:
         raise HTTPException(status_code=500, detail="Models not loaded.")
 
     if movie_id not in SIM_MODEL['id_to_idx']:
-        raise HTTPException(status_code=404, detail=f"Movie {movie_id} not in similarity model.")
+        raise HTTPException(status_code=404, detail="Movie not found in model.")
 
-    movie_idx = SIM_MODEL['id_to_idx'][movie_id]
+    m_idx = SIM_MODEL['id_to_idx'][movie_id]
+    source_title = MOVIES_DF.iloc[m_idx]['title']
+    sim_scores = SIM_MODEL['similarity_matrix'][m_idx]
     
-    # 1. Content-based Similarity (Cosine Scores)
-    sim_scores = SIM_MODEL['similarity_matrix'][movie_idx]
-    
-    # 2. Reinforcement Learning Preference Vector (Cached)
-    user_pref_scores = PREF_CACHE.get(user_id)
-    if user_pref_scores is None:
-        count_movies = len(MOVIES_DF) if MOVIES_DF is not None else 0
-        user_pref_scores = np.zeros(count_movies)
+    # Fetch user pref for bias
+    user_pref = PREF_CACHE.get(user_id)
+    if user_pref is None:
+        user_pref = np.zeros(len(MOVIES_DF))
         q_rows = db.query(RLQTable.movie_id, RLQTable.q_value).filter(RLQTable.user_uid == user_id).all()
-        if q_rows and count_movies > 0:
-            for m_id, q_val in q_rows:
-                if m_id in SIM_MODEL['id_to_idx']:
-                    m_idx = SIM_MODEL['id_to_idx'][m_id]
-                    if m_idx < count_movies:
-                        user_pref_scores[m_idx] = q_val * 0.2
-        PREF_CACHE.set(user_id, user_pref_scores)
+        for mid, q in q_rows:
+            if mid in SIM_MODEL['id_to_idx']:
+                user_pref[SIM_MODEL['id_to_idx'][mid]] = q * 0.5
+        PREF_CACHE.set(user_id, user_pref)
 
+    # Genre Preference Boost (Simple but powerful)
     user_genre_pref = build_user_genre_pref(db, user_id)
-    has_genre_pref = len(user_genre_pref) > 0
-    top_genre = get_top_genre(user_genre_pref) if has_genre_pref else ''
+    top_genre_name = get_top_genre(user_genre_pref) if user_genre_pref else ""
     
-    genre_boost_scores = np.array([
-        genre_score(str(MOVIES_DF.iloc[i].get('genre', '')), user_genre_pref) * 0.15
-        for i in range(len(MOVIES_DF))
-    ]) if has_genre_pref else np.zeros(len(sim_scores))
+    # Calculate Hybrid Score = 0.6 * similarity + 0.4 * user_preference
+    hybrid_sim = (0.6 * sim_scores) + (0.4 * user_pref)
+    
+    # Filter self and apply age-gate
+    prof_age = 18
+    p_row = db.execute(text("SELECT age FROM users WHERE user_uid = :uid"), {"uid": user_id}).fetchone()
+    if p_row: prof_age = p_row[0] or 18
+    
+    candidates = []
+    for i, score in enumerate(hybrid_sim):
+        if i == m_idx: continue
+        row = MOVIES_DF.iloc[i]
+        if row['age_limit'] > prof_age: continue
+        
+        # Powerful Genre Boost: Increase score by 20% if it matches user's top genre
+        current_genres = str(row.get('genre', '')).split('|')
+        if top_genre_name and top_genre_name in current_genres:
+            score *= 1.2
+            
+        candidates.append((i, score))
+        
+    candidates.sort(key=lambda x: x[1], reverse=True)
+    
+    recommendations = []
+    for idx, score in candidates[:count]:
+        row = MOVIES_DF.iloc[idx]
+        
+        # Explanation format as requested
+        reason = f"Recommended because:\n• similar to {source_title}"
+        if top_genre_name and top_genre_name in str(row.get('genre', '')):
+            reason += f"\n• matches your interest in {top_genre_name}"
 
-    # 4. Calculate Hybrid Score = 0.7*similarity + 0.3*user_pref (+ genre boost if relevant)
-    n = len(sim_scores)
-    pref = user_pref_scores[:n] if len(user_pref_scores) >= n else np.pad(user_pref_scores, (0, n - len(user_pref_scores)))
-    g_boost = genre_boost_scores[:n] if len(genre_boost_scores) >= n else np.pad(genre_boost_scores, (0, n - len(genre_boost_scores)))
-    
-    hybrid_scores = (0.7 * sim_scores) + (0.3 * pref) + g_boost
-    
-    # Get a pool of candidates to select diverse recommendations from
-    pool_size = min(len(hybrid_scores), count * 5)
-    if pool_size > 0:
-        candidate_indices = np.argpartition(hybrid_scores, -pool_size)[-pool_size:]
-        candidate_indices = candidate_indices[np.argsort(hybrid_scores[candidate_indices])][::-1].tolist()
-    else:
-        candidate_indices = []
-        
-    if movie_idx in candidate_indices:
-        candidate_indices.remove(movie_idx)
-    
-    top_recommendations = []
-    selected_indices = []
-    source_movie = MOVIES_DF.iloc[movie_idx].to_dict()
-    diversity_weight = 0.5
-    
-    while len(top_recommendations) < count and candidate_indices:
-        best_idx = -1
-        best_mmr_score = -float('inf')
-        
-        for idx in candidate_indices:
-            base_score = hybrid_scores[idx]
-            diversity_penalty = 0.0
-            
-            if selected_indices:
-                similarities = [SIM_MODEL['similarity_matrix'][idx][s_idx] for s_idx in selected_indices]
-                diversity_penalty = max(similarities) if similarities else 0.0
-                
-            mmr_score = base_score - (diversity_weight * diversity_penalty)
-            
-            if mmr_score > best_mmr_score:
-                best_mmr_score = mmr_score
-                best_idx = idx
-                
-        if best_idx == -1:
-            break
-            
-        candidate_indices.remove(best_idx)
-        selected_indices.append(best_idx)
-        idx = best_idx
-        
-        movie_row = MOVIES_DF.iloc[idx].to_dict()
-        score = float(hybrid_scores[idx])
-        sim_score = float(sim_scores[idx])
-        pref_score = float(pref[idx])
-        g_score_val = float(g_boost[idx])
-        
-        # Build XAI explanation with genre boost info
-        explanation_reason, explanation = build_explanation(
-            source_movie, movie_row, sim_score, pref_score,
-            genre_boost=g_score_val, user_genre_pref=user_genre_pref
-        )
-        explanation['genre_boost'] = round(g_score_val, 4)
-        
-        # Override with UI requested exact format
-        reason = f"Why recommended:\n• Similar to {source_movie.get('title', 'this movie')}"
-        if top_genre:
-            reason += f"\n• Popular among {top_genre} fans"
-            
-        rec = {
-            **movie_row,
-            "movie": movie_row.get("title", ""),
-            "score": round(best_mmr_score, 4), # using the diverse score for display
-            "similarity_score": round(sim_score, 4),
-            "similarity": round(sim_score, 4),
-            "user_preference": round(pref_score, 4),
-            "user_pref": round(pref_score, 4),
-            "reason": reason,
-            "explanation": explanation,
-        }
-        top_recommendations.append(MovieRecommendation(**rec))
-            
-    return top_recommendations
+        recommendations.append(MovieRecommendation(
+            **row.to_dict(),
+            score=round(float(score), 3),
+            reason=reason,
+            explanation={'factors': [{'type': 'content', 'label': f'Similar to {source_title}', 'weight': 'high'}]},
+            similarity=round(float(sim_scores[idx]), 3),
+            user_pref=round(float(user_pref[idx]), 3)
+        ))
+    return recommendations
 
 
 # ──────────────────────────────────────────────
@@ -1044,84 +895,43 @@ async def get_movie_recommendations(movie_id: int, user_id: str, db: Session = D
 
 @app.get("/metrics")
 async def get_metrics():
-    """
-    Returns comprehensive ML evaluation metrics.
-    
-    Response includes:
-    - precision_k: Precision at K
-    - recall_k: Recall at K
-    - hit_rate_k: Hit Rate at K
-    - mrr: Mean Reciprocal Rank
-    - ndcg_k: Normalized Discounted Cumulative Gain at K
-    - coverage: Catalog coverage ratio
-    - avg_similarity: Mean similarity of top-K recommendations
-    - k: The K value used
-    - num_movies: Number of movies in the catalog
-    - model_info: Training metadata (if available)
-    """
+    """Returns ML evaluation metrics."""
     if EVAL_METRICS:
-        response = {**EVAL_METRICS}
-        # Add model info if available
-        if SIM_MODEL and 'model_info' in SIM_MODEL:
-            response['model_info'] = SIM_MODEL['model_info']
-        return response
-    
-    # Fallback: try to load from file
-    try:
-        if os.path.exists(METRICS_JSON_PATH):
-            with open(METRICS_JSON_PATH, 'r') as f:
-                return json.load(f)
-        elif os.path.exists(METRICS_PATH):
-            with open(METRICS_PATH, 'rb') as f:
-                return pickle.load(f)
-    except:
-        pass
-    
-    return {"error": "Metrics not computed yet. Run: python -m ml.model_evaluator"}
-
+        return EVAL_METRICS
+    return {"error": "Metrics not available"}
 
 @app.get("/model-info")
 async def get_model_info():
-    """
-    Returns model training information and configuration.
-    Useful for ML transparency and debugging.
-    """
-    info = {
-        'status': 'loaded' if SIM_MODEL else 'not_loaded',
-        'catalog_size': len(MOVIES_DF) if MOVIES_DF is not None else 0,
-    }
-    
-    if SIM_MODEL:
-        if 'model_info' in SIM_MODEL:
-            info['training'] = SIM_MODEL['model_info']
-        info['matrix_shape'] = list(SIM_MODEL['similarity_matrix'].shape) if SIM_MODEL.get('similarity_matrix') is not None else None
-        info['has_metadata'] = 'metadata' in SIM_MODEL
-    
-    if EVAL_METRICS:
-        info['evaluation'] = EVAL_METRICS
-    
-    info['cold_start_weights'] = {
-        'similarity': 0.5,
-        'popularity': 0.3,
-        'rating': 0.2,
-    }
-    
-    info['warm_user_weights'] = {
+    """Returns model training metadata for the dashboard."""
+    # Map and return weights for dashboard
+    cold_start = {
         'similarity': 0.45,
         'popularity': 0.25,
         'rating': 0.15,
-        'genre_preference': 0.15,
+        'genre_boost': 0.15
+    }
+    warm_user = {
+        'similarity': 0.45,
+        'popularity': 0.25,
+        'rating': 0.15,
+        'genre_preference': 0.15
     }
     
-    info['rl_config'] = RLEngine.CONFIG
-    
-    return info
+    return {
+        'status': 'loaded' if SIM_MODEL is not None else 'not_loaded',
+        'catalog_size': len(MOVIES_DF) if MOVIES_DF is not None else 0,
+        'has_model': SIM_MODEL is not None,
+        'matrix_shape': SIM_MODEL['similarity_matrix'].shape if SIM_MODEL else [0,0],
+        'has_metadata': True if SIM_MODEL else False,
+        'training': SIM_MODEL.get('training_metadata', {}) if SIM_MODEL else {},
+        'cold_start_weights': cold_start,
+        'warm_user_weights': warm_user,
+        'config': RLEngine.CONFIG
+    }
 
 
 if __name__ == "__main__":
     # Ensure tables in database-url target exist
     Base.metadata.create_all(bind=engine)
-    # Start server with scaling-ready settings using multiple workers
-    import multiprocessing
-    workers = min(4, multiprocessing.cpu_count())
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, workers=workers, reload=False)
+    # Start server (disabling multiprocessing workers on Windows to prevent WinError 10022)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, workers=1, reload=False)

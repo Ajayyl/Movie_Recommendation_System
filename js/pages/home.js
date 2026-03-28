@@ -12,7 +12,7 @@ function renderPlatformRow(movies, platformName, icon) {
       <div class="container">
         <div class="section-header">
           <div>
-            <h2 class="section-title">${icon} On ${platformName}</h2>
+            <h2 class="section-title">On ${platformName}</h2>
             <p class="section-subtitle">Available to stream on ${platformName}</p>
           </div>
           <a href="#/platform/${encodeURIComponent(platformName)}" class="btn btn-sm btn-outline">View All →</a>
@@ -41,62 +41,75 @@ function renderHome() {
   const user = API.getUser();
 
   return `
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-badge">🎬 ${isLoggedIn ? `Welcome back, ${user.display_name}!` : 'Your Movie Discovery Hub'}</div>
-        <h1 class="hero-title">
-          Find Your Next<br>
-          <span class="gradient-text">Favourite Movie</span>
-        </h1>
-        <p class="hero-subtitle">
-          ${isLoggedIn
-      ? 'Your personal AI learns from every click, search, and rating to give you better recommendations over time.'
-      : 'Discover movies that match your vibe. Filter by genre, experience, and mood — then stream on your favourite platform.'
-    }
-        </p>
-        <div class="hero-actions">
-          <a href="#/movies" class="btn btn-primary">
-            🔍 Start Discovery
-          </a>
-          ${!isLoggedIn ? `
-            <button class="btn btn-outline" onclick="showAuthModal('register')">
-              🤖 Get AI Picks
-            </button>
-          ` : `
-            <a href="#/dashboard" class="btn btn-outline">
-              🧠 My AI Dashboard
-            </a>
-          `}
-        </div>
+    <!-- Hero Slider -->
+    <section class="home-slider-container">
+      <div class="home-slider" id="home-hero-slider">
+        ${(() => {
+          const slidesToRender = trending.slice(0, 5);
+          return slidesToRender.map((m, index) => {
+            const posterUrl = m.poster;
+            return `
+                <div class="slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+                  <div class="container slide-container">
+                    <div class="slide-content">
+                      <div class="slide-badge">Trending Now</div>
+                      <h1 class="slide-title ${m.title.length > 20 ? 'title-long' : ''}">${m.title}</h1>
+                      <div class="slide-meta">
+                        <span class="slide-rating">${m.rating_percent || 0}%</span>
+                        <span class="slide-year">${m.year}</span>
+                        <span class="slide-genre">${Array.isArray(m.genre) ? m.genre.join(', ') : m.genre}</span>
+                      </div>
+                      <p class="slide-description">${m.synopsis}</p>
+                      <div class="slide-actions">
+                        <a href="#/movie/${m.movie_id}" class="btn btn-primary">
+                          Movie Details
+                        </a>
+                      </div>
+                    </div>
+                    <div class="slide-visual">
+                      <img src="${posterUrl}" alt="${m.title}" class="hero-poster" />
+                    </div>
+                  </div>
+                </div>
+              `;
+          }).join('');
+        })()}
       </div>
+      
+      <!-- Slider Dots -->
+      <div class="slider-dots">
+        ${trending.slice(0, 5).map((_, index) => `
+          <div class="dot ${index === 0 ? 'active' : ''}" data-index="${index}" onclick="goToSlide(${index})"></div>
+        `).join('')}
+      </div>
+      
+      <!-- Slider Navigation -->
+      <button class="slider-nav prev" onclick="moveSlide(-1)">❮</button>
+      <button class="slider-nav next" onclick="moveSlide(1)">❯</button>
     </section>
 
-    <!-- AI-Powered Recommendations (logged in users) -->
-    ${isLoggedIn ? `
-    <section class="section recommend-section" style="padding-top: 0;">
+    <!-- Movies For You (Personalized Recommendation Model) -->
+    <section class="section recommend-section fade-in-up" id="home-smart-section" style="padding-top: 0; display: ${isLoggedIn ? 'block' : 'none'};">
       <div class="container">
         <div class="section-header">
           <div>
-            <h2 class="section-title">🤖 AI Picks For You</h2>
-            <p class="section-subtitle">Personalized by your AI recommendation model</p>
+            <h2 class="section-title">Movies For You</h2>
+            <p class="section-subtitle">Personalized recommendations chosen for your taste</p>
           </div>
-          <a href="#/dashboard" class="btn btn-sm btn-outline">View AI Dashboard →</a>
+          <a href="#/section/ai-picks" class="btn btn-sm btn-outline">View All →</a>
         </div>
-        <div id="home-rl-recommendations">
+        <div id="home-ai-recommendations">
           ${renderAnalysisLoader()}
         </div>
       </div>
     </section>
-    ` : ''}
-
 
     <!-- Latest Movies -->
     <section class="section" style="padding-top: 0;">
       <div class="container">
         <div class="section-header">
           <div>
-            <h2 class="section-title">🆕 Latest Movies</h2>
+            <h2 class="section-title">Latest Movies</h2>
             <p class="section-subtitle">Newest additions to our catalogue</p>
           </div>
           <a href="#/section/latest" class="btn btn-sm btn-outline">View All →</a>
@@ -107,12 +120,12 @@ function renderHome() {
       </div>
     </section>
 
-    <!-- Popular Movies -->
+    <!-- Popular Movies (Previously removed) -->
     <section class="section" style="padding-top: 0;">
       <div class="container">
         <div class="section-header">
           <div>
-            <h2 class="section-title">🔥 Popular</h2>
+            <h2 class="section-title">Popular</h2>
             <p class="section-subtitle">Most popular picks right now</p>
           </div>
           <a href="#/section/popular" class="btn btn-sm btn-outline">View All →</a>
@@ -123,12 +136,12 @@ function renderHome() {
       </div>
     </section>
 
-    <!-- Top Rated -->
+    <!-- Top Rated (Previously removed) -->
     <section class="section" style="padding-top: 0;">
       <div class="container">
         <div class="section-header">
           <div>
-            <h2 class="section-title">⭐ Top Rated</h2>
+            <h2 class="section-title">Top Rated</h2>
             <p class="section-subtitle">Highest rated by critics and audiences</p>
           </div>
           <a href="#/section/top-rated" class="btn btn-sm btn-outline">View All →</a>
@@ -156,58 +169,116 @@ function showHomeRecommendations(featuredId) {
     if (recs.length > 0) {
       container.innerHTML = `
         <div class="movie-row stagger">
-          ${recs.map(item => renderRecommendedCard(item.movie, item.reason)).join('')}
+          ${recs.map(item => renderMovieCard(item.movie)).join('')}
         </div>
       `;
     } else {
       container.innerHTML = `
         <div class="empty-state" style="padding: 40px 0;">
-          <div class="empty-icon">🔍</div>
+          <div class="empty-icon">?</div>
           <p style="color: var(--text-muted);">No similar movies found under current age filter.</p>
         </div>
       `;
     }
   }, 1500);
-
-  // Also load AI recommendations if logged in
-  if (API.isLoggedIn()) {
-    loadHomeAIRecommendations();
-  }
 }
 
 /**
- * Load AI-powered recommendations for the home page.
+ * Load Personalized AI Recommendations (RL Model)
  */
 async function loadHomeAIRecommendations() {
-  const container = document.getElementById('home-rl-recommendations');
+  const container = document.getElementById('home-ai-recommendations');
   if (!container) return;
 
-  const res = await API.getRecommendations(6);
+  const res = await API.getRecommendations(10);
+  if (!res.ok || !res.data || !res.data.recommendations || res.data.recommendations.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding:40px 0;">
+        <div class="empty-icon"><i class="fa-solid fa-brain" style="font-size:48px;"></i></div>
+        <p style="color:var(--text-muted);">Interact with more movies to train your AI model!</p>
+      </div>
+    `;
+    return;
+  }
 
-  setTimeout(() => {
-    if (res.ok && res.data.recommendations.length > 0) {
-      const recs = res.data.recommendations;
-      container.innerHTML = `
-        <div class="movie-row stagger">
-          ${recs.map(rec => {
+  const recs = res.data.recommendations;
+  container.innerHTML = `
+    <div class="movie-row stagger" style="margin-top:20px; padding-bottom: 24px;">
+      ${recs.map(rec => {
         const movie = MOVIES.find(m => m.movie_id === rec.movie_id);
         if (!movie) return '';
         return renderRecommendedCard(movie, rec.reason);
       }).join('')}
-        </div>
-        <div class="rl-meta-info">
-          <span>⚡ Powered by your personal AI model</span>
-          <span>🧠 ${[...new Set(recs.map(r => r.source))].join(', ')} signals</span>
-        </div>
-      `;
-    } else {
-      container.innerHTML = `
-        <div class="empty-state" style="padding: 40px 0;">
-          <div class="empty-icon">🤖</div>
-          <p style="color: var(--text-muted);">Browse and rate movies to train your AI model!</p>
-          <button class="btn btn-outline btn-sm" onclick="Router.navigate('/movies')" style="margin-top:12px;">Start Exploring</button>
-        </div>
-      `;
-    }
-  }, 800);
+    </div>
+  `;
 }
+
+
+
+/**
+ * Slider Logic
+ */
+let currentSlideIndex = 0;
+let slideInterval;
+
+function initHomeSlider() {
+  const slider = document.getElementById('home-hero-slider');
+  if (!slider) return;
+
+  // Reset index to match fresh render
+  currentSlideIndex = 0;
+
+  // Clear any existing interval
+  if (slideInterval) clearInterval(slideInterval);
+
+  // Set up auto-sliding
+  slideInterval = setInterval(() => {
+    moveSlide(1);
+  }, 6000);
+}
+
+window.moveSlide = function(direction) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  if (slides.length === 0) return;
+
+  slides[currentSlideIndex].classList.remove('active');
+  dots[currentSlideIndex].classList.remove('active');
+
+  currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+
+  slides[currentSlideIndex].classList.add('active');
+  dots[currentSlideIndex].classList.add('active');
+  
+  // Sync global background
+  const bg = slides[currentSlideIndex].dataset.bg;
+  if (bg && typeof updateGlobalAppBackground === 'function') {
+    updateGlobalAppBackground(bg);
+  }
+};
+
+window.goToSlide = function(index) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  if (!slides[index]) return;
+
+  slides[currentSlideIndex].classList.remove('active');
+  dots[currentSlideIndex].classList.remove('active');
+
+  currentSlideIndex = index;
+
+  slides[currentSlideIndex].classList.add('active');
+  dots[currentSlideIndex].classList.add('active');
+  
+  // Sync global background
+  const bg = slides[currentSlideIndex].dataset.bg;
+  if (bg && typeof updateGlobalAppBackground === 'function') {
+    updateGlobalAppBackground(bg);
+  }
+
+  // Reset timer on manual navigation
+  if (slideInterval) {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => moveSlide(1), 6000);
+  }
+};

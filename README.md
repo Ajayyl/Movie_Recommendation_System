@@ -1,8 +1,8 @@
-# UniVibe 2.0 🎬
+# UniVibe
 
 UniVibe is an AI-powered movie discovery platform featuring a hybrid Reinforcement Learning (RL) and Content-Based Recommendation engine.
 
-## 🚀 How to Run Locally
+## How to Run Locally
 
 If you are setting this up on a new laptop, doing an emergency restore, or collaborating, follow these steps to securely run both the Node.js Frontend App and the Python Machine Learning engine.
 
@@ -35,9 +35,9 @@ start_ml.bat
 
 ---
 
-## 📂 Backup & Models Tracking
+## Backup & Models Tracking
 This repository is configured to safely track all large metadata required for immediate deployment. The following are tracked and will restore flawlessly upon cloning:
-- ✅ `models/similarity.pkl` (Similarity Model)
-- ✅ `ml/dataset.csv` (Movie Dataset)
-- ✅ `data/baseMovies.json` (Base Catalog)
-- ✅ `requirements.txt` (ML Dependencies)
+- [x] `models/similarity.pkl` (Similarity Model)
+- [x] `ml/dataset.csv` (Movie Dataset)
+- [x] `data/baseMovies.json` (Base Catalog)
+- [x] `requirements.txt` (ML Dependencies)
