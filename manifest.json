@@ -1,0 +1,17 @@
+{
+  "name": "Movie Recommendation System",
+  "short_name": "MRS",
+  "description": "AI-powered movie discovery platform with hybrid RL recommendations",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0a1a",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "assets/logo/cinema.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

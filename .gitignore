@@ -3,6 +3,7 @@ node_modules/
 *.log
 .DS_Store
 scratch/
+__pycache__/
 *.db
 backend/data/univibe.db
 backend/data/*.sqlite
