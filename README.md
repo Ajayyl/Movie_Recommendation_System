@@ -8,8 +8,8 @@ If you are setting this up on a new laptop, doing an emergency restore, or colla
 
 ### 1. Clone Project
 ```bash
-git clone https://github.com/Ajayyl/univibe.git
-cd univibe
+git clone https://github.com/Ajayyl/Movie_Recommendation_System.git
+cd Movie_Recommendation_System
 ```
 
 ### 2. Install Frontend (Node.js)
