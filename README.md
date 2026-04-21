@@ -8,8 +8,8 @@ If you are setting this up on a new laptop, doing an emergency restore, or colla
 
 ### 1. Clone Project
 ```bash
-git clone https://github.com/Ajayyl/mrs-2.0.git
-cd mrs
+git clone https://github.com/Ajayyl/univibe.git
+cd univibe
 ```
 
 ### 2. Install Frontend (Node.js)
@@ -20,7 +20,7 @@ npm run dev
 > **Frontend runs at:** [http://localhost:3000](http://localhost:3000)
 
 ### 3. Install ML Backend (Python)
-Make sure you have Python installed, then install the required machine learning dependencies (fastapi, uvicorn, pandas, scikit-learn, etc.):
+Make sure you have Python installed, then install the required machine learning dependencies (fastapi, uvicorn, pandas, scikit-learn, numpy, sqlalchemy, etc.):
 ```bash
 pip install -r requirements.txt
 ```
