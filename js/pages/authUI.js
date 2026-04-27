@@ -1,4 +1,4 @@
-// UniVibe — Auth UI (Login, Register, Profile)
+// Movie Recommendation System — Auth UI (Login, Register, Profile)
 // Handles all authentication-related UI rendering and logic
 
 // ──────────────────────────────────
@@ -15,9 +15,9 @@ function renderAuthModal(mode = 'login') {
         
         <div class="auth-header">
           <div class="auth-logo">
-            <img src="assets/logo/v3.png" alt="UniVibe" class="logo-img" style="width:54px; height:54px;" />
+            <img src="assets/logo/cinema.png" alt="Movie Recommendation System" class="logo-img" style="width:54px; height:54px; filter: drop-shadow(0 4px 12px rgba(124, 58, 237, 0.5));" />
           </div>
-          <h2 class="auth-title">${isLogin ? 'Welcome Back' : 'Join UniVibe'}</h2>
+          <h2 class="auth-title">${isLogin ? 'Welcome Back' : 'Create Account'}</h2>
           <p class="auth-subtitle">${isLogin ? 'Sign in to get personalized recommendations' : 'Create your account for personalized movie picks'}</p>
         </div>
 
@@ -94,7 +94,7 @@ function renderRegisterForm() {
     <div class="auth-field">
       <label for="auth-username-reg">Username</label>
       <div class="auth-input-wrap">
-        <span class="auth-input-icon">User</span>
+        <span class="auth-input-icon"><i class="fa-solid fa-at"></i></span>
         <input type="text" id="auth-username-reg" name="username" placeholder="Choose a username (3-24 chars)" 
                required pattern="[a-zA-Z0-9_]+" minlength="3" maxlength="24" autocomplete="username" />
       </div>
@@ -113,6 +113,15 @@ function renderRegisterForm() {
         <span class="auth-input-icon"><i class="fa-solid fa-lock"></i></span>
         <input type="password" id="auth-password-reg" name="password" placeholder="Min 6 characters" 
                required minlength="6" autocomplete="new-password" />
+      </div>
+    </div>
+    <div class="auth-field">
+      <label>Favorite Genres (Pick up to 3)</label>
+      <p style="font-size:12px; color:rgba(255,255,255,0.5); margin: 0 0 8px 0;">Help us recommend better movies</p>
+      <div class="genre-picker" id="reg-genre-picker" style="display: flex; flex-wrap: wrap; gap: 8px;">
+        ${['Action', 'Comedy', 'Drama', 'Sci-Fi', 'Thriller', 'Romance', 'Horror', 'Adventure'].map(g => 
+          `<button type="button" class="genre-pick-btn" onclick="toggleGenrePick(this, '${g}')" style="padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; cursor: pointer; font-size: 12px;">${g}</button>`
+        ).join('')}
       </div>
     </div>
     <button type="submit" class="btn btn-primary btn-block auth-submit" id="auth-submit-btn">
@@ -158,14 +167,17 @@ async function handleAuthSubmit(event) {
   const formData = new FormData(form);
   const mode = formData.get('authMode');
   const errorEl = document.getElementById('auth-error');
-  const submitBtn = document.getElementById('auth-submit-btn');
-  const submitText = submitBtn.querySelector('.auth-submit-text');
-  const submitLoader = submitBtn.querySelector('.auth-submit-loader');
+  
+  const btn = document.getElementById('auth-submit-btn');
+  const btnText = btn.querySelector('.auth-submit-text');
+  const loader = btn.querySelector('.auth-submit-loader');
 
-  // Show loading
-  submitText.style.display = 'none';
-  submitLoader.style.display = 'inline-flex';
-  submitBtn.disabled = true;
+  // get selected genres if any (for registration)
+  const selectedGenres = Array.from(document.querySelectorAll('#reg-genre-picker .genre-pick-btn.active')).map(b => b.textContent);
+
+  btnText.style.display = 'none';
+  loader.style.display = 'inline-flex';
+  btn.disabled = true;
   errorEl.style.display = 'none';
 
   let result;
@@ -186,13 +198,18 @@ async function handleAuthSubmit(event) {
   }
 
   if (result.ok) {
+    if (mode === 'register' && selectedGenres.length > 0) {
+      // Sync onboarding genres after successful registration
+      await API.updateProfile({ preferred_genres: selectedGenres });
+    }
+
     // Success — close modal and update UI
     closeAuthModal();
 
     // Sync age with existing age gate system
     const user = API.getUser();
     if (user && user.age) {
-      localStorage.setItem('univibe_age', user.age);
+      localStorage.setItem('mrs_age', user.age);
     }
 
     updateAuthUI();
@@ -218,7 +235,7 @@ function renderProfile() {
   const user = API.getUser();
   if (!user) {
     return `
-      <div class="empty-state" style="padding-top:140px;">
+      <div class="empty-state" style="padding-top:20px;">
         <div class="empty-icon"><i class="fa-solid fa-lock" style="font-size:48px;"></i></div>
         <h3>Sign in required</h3>
         <p>Log in to view your profile and ML recommendations.</p>
@@ -228,7 +245,7 @@ function renderProfile() {
   }
 
   return `
-    <section class="section" style="padding-top:100px;">
+    <section class="section" style="padding-top:20px;">
       <div class="container">
         
         <!-- Profile Header -->
@@ -309,6 +326,23 @@ function renderProfile() {
           </div>
         </div>
 
+        <!-- Data Controls -->
+        <div class="section fade-in-up" style="padding-top:0;padding-bottom:30px;margin-top:10px;">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Data & AI Controls</h2>
+              <p class="section-subtitle">Manage your watch history and AI recommendation model</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <button class="btn btn-outline" onclick="resetAIModel()" style="display:flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-rotate-left"></i> Reset AI Recommendations
+            </button>
+            <button class="btn btn-outline" onclick="clearWatchHistory()" style="display:flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-trash-can"></i> Clear Watch History
+            </button>
+          </div>
+        </div>
         
       </div>
     </section>
@@ -604,7 +638,7 @@ function renderActivityHistory() {
   if (!user) return Router.navigate('/profile');
 
   return `
-    <section class="section" style="padding-top:100px;">
+    <section class="section" style="padding-top:20px;">
       <div class="container">
         <div class="section-header">
           <div>
@@ -770,7 +804,7 @@ async function handleProfileUpdate(event) {
 
   if (result.ok) {
     // Sync age
-    localStorage.setItem('univibe_age', formData.get('age'));
+    localStorage.setItem('mrs_age', formData.get('age'));
     document.getElementById('edit-profile-modal').remove();
     updateAuthUI();
     Router.resolve();
@@ -779,6 +813,28 @@ async function handleProfileUpdate(event) {
     showToast(result.error || (result.data && result.data.error) || 'Update failed', 'error');
   }
 }
+
+window.resetAIModel = function() {
+  if (confirm('Are you sure you want to reset your personalized AI recommendations? The model will start learning from scratch.')) {
+    localStorage.removeItem('mrs_qtable');
+    localStorage.removeItem('mrs_interactions');
+    localStorage.removeItem('mrs_likes');
+    if (typeof showToast === 'function') {
+      showToast('AI Recommendations have been reset.', 'success');
+    }
+    setTimeout(() => Router.resolve(), 1000);
+  }
+};
+
+window.clearWatchHistory = function() {
+  if (confirm('Are you sure you want to clear your recently viewed movies?')) {
+    localStorage.removeItem('mrs_recently_viewed');
+    if (typeof showToast === 'function') {
+      showToast('Watch history cleared.', 'success');
+    }
+    setTimeout(() => Router.resolve(), 1000);
+  }
+};
 
 // ──────────────────────────────────
 // NAVBAR AUTH STATE

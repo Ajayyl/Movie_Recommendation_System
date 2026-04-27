@@ -1,4 +1,4 @@
-// UniVibe — Home Page (Enhanced v65)
+// Movie Recommendation System — Home Page (Enhanced v65)
 
 /**
  * Render a horizontal movie row for a specific OTT platform.
@@ -26,7 +26,7 @@ function renderPlatformRow(movies, platformName, icon) {
 }
 
 function renderHome() {
-  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  const userAge = parseInt(localStorage.getItem('mrs_age')) || 0;
   const safeMovies = applyAgeFilter(MOVIES, userAge);
   const trending = getTrending(safeMovies);
   const latest = getLatest(safeMovies);
@@ -49,9 +49,35 @@ function renderHome() {
     <section class="home-slider-container">
       <div class="home-slider" id="home-hero-slider">
         ${(() => {
-          const slidesToRender = trending.slice(0, 5);
+          // Filter out Vijay movies manually per user preference
+          const filteredTrending = trending.filter(m => {
+            const castStr = Array.isArray(m.cast) ? m.cast.join(' ').toLowerCase() : (typeof m.cast === 'string' ? m.cast.toLowerCase() : '');
+            const dirname = (m.director || '').toLowerCase();
+            return !castStr.includes('vijay') && !dirname.includes('vijay');
+          });
+          
+          // Take the top 30 trending movies and shuffle them so it's different every time
+          const topTrendingPool = filteredTrending.slice(0, 30);
+          const shuffledTrending = topTrendingPool.sort(() => 0.5 - Math.random());
+          let slidesToRender = shuffledTrending.slice(0, 9); // Take 9 random movies
+          
+          // Explicitly add "The Dark Knight" as requested by user
+          const darkKnight = safeMovies.find(m => m.movie_id === 344 || m.title.toLowerCase() === 'the dark knight');
+          if (darkKnight && !slidesToRender.some(m => m.movie_id === darkKnight.movie_id)) {
+            slidesToRender.unshift(darkKnight); // Add to the front
+          }
           return slidesToRender.map((m, index) => {
-            const posterUrl = m.poster;
+            let posterUrl = m.poster;
+            
+            // Dynamically upgrade image resolution for the massive hero screen
+            if (posterUrl.includes('tmdb.org')) {
+              // Replace 500px width constraint with original source resolution
+              posterUrl = posterUrl.replace('/w500/', '/original/');
+            } else if (posterUrl.includes('media-amazon.com')) {
+              // Strip Amazon's low-res constraints (like _V1_SX250.jpg) to grab the raw HD image
+              posterUrl = posterUrl.replace(/_V1_.*\.jpg$/, '_V1_.jpg');
+            }
+
             return `
                 <div class="slide ${index === 0 ? 'active' : ''}" data-index="${index}">
                   <div class="container slide-container">
@@ -66,7 +92,7 @@ function renderHome() {
                       <p class="slide-description">${m.synopsis}</p>
                       <div class="slide-actions">
                         <a href="#/movie/${m.movie_id}" class="btn btn-primary">
-                          Movie Details
+                          Explore Movie
                         </a>
                       </div>
                     </div>
@@ -152,6 +178,26 @@ function renderHome() {
       </div>
     </section>
     ` : ''}
+
+    <!-- Explore Something New (Diversity & Serendipity) -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-title-row">
+              <h2 class="section-title">Explore Something New</h2>
+            </div>
+            <p class="section-subtitle">Break out of your usual tastes with these highly-rated random picks</p>
+          </div>
+        </div>
+        <div class="scroll-row-container">
+          ${renderScrollArrows('row-explore')}
+          <div class="movie-row stagger" id="row-explore">
+            ${getRandomExplorationMovies(safeMovies).map(m => renderMovieCard(m)).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Trending Now -->
     <section class="section" style="padding-top: 0;">
@@ -243,13 +289,21 @@ function getBecauseYouWatchedData(safeMovies, userAge) {
 }
 
 /**
+ * Get random exploration movies to break the filter bubble.
+ */
+function getRandomExplorationMovies(movies) {
+  const goodMovies = movies.filter(m => m.rating_percent >= 60);
+  return goodMovies.sort(() => 0.5 - Math.random()).slice(0, 12);
+}
+
+/**
  * Show content-based recommendations after simulated analysis delay.
  */
 function showHomeRecommendations(featuredId) {
   const container = document.getElementById('home-recommendations');
   if (!container) return;
 
-  const userAge = parseInt(localStorage.getItem('univibe_age')) || 99;
+  const userAge = parseInt(localStorage.getItem('mrs_age')) || 0;
   const recs = getRecommendations(MOVIES, featuredId, userAge, 6);
 
   if (recs.length > 0) {
